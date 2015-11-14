@@ -142,7 +142,7 @@ goose: created /project/db/migrations/20151111194459_CreateUsersTable.sql.sql
 &lt;p&gt;これだけでマイグレーションファイルのひな型が作成されました。&lt;br /&gt;
 早速中身を見てみましょう。&lt;/p&gt;
 
-&lt;p&gt;db/migrations/20151111194459_CreateUsersTable.sql.sql&lt;/p&gt;
+&lt;p&gt;db/migrations/20151111194459_CreateUsersTable.sql&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;-- +goose Up
 -- SQL in section &#39;Up&#39; is executed when this migration is applied

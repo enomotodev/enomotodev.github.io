@@ -54,3 +54,9 @@ body > .container {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
     cursor: text;
 }
+
+.image {
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+}

@@ -99,6 +99,53 @@
       <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
+  <h2><a href="http://enomotodev.github.io/post/install-elasticsearch/">Apache &#43; fluentd &#43; Elasticsearch &#43; Kibana を連携させてみた</a>
+</h2>
+
+  <div class="margin-10">
+    <small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2015-11-14">14 Nov, 2015</time>
+</small>
+
+    
+  <i class="fa fa-tags"></i>
+  
+  <a href="http://enomotodev.github.io/tags/elasticsearch" class="label label-primary">elasticsearch</a>
+  
+  <a href="http://enomotodev.github.io/tags/kibana" class="label label-primary">kibana</a>
+  
+  <a href="http://enomotodev.github.io/tags/fluentd" class="label label-primary">fluentd</a>
+  
+  <a href="http://enomotodev.github.io/tags/ad-agent" class="label label-primary">ad-agent</a>
+  
+  <a href="http://enomotodev.github.io/tags/centos" class="label label-primary">centos</a>
+  
+
+
+  </div>
+</div>
+
+    <p class="summary">
+  
+  
+    Elasticsearch とは Elasticsearch とは2010年に OSS としてリリースされた分散型全文検索サーバです。 実際に CentOS 6.7 にインストールしてつかってみることで Elasticsearch の基本を学んでいきたいと思います。 前回の記事で設定した内容をそのまま使用するので、まだ見てない方はぜひ参照してみてください。 Elasticsearch のインストール Elasticsearch は Java で実装されているので、まずは Java をインストールします。 $ sudo yum install -y java インストールできているか確認します $ java -version openjdk version &quot;1.8.0_65&quot; OpenJDK Runtime Environment (build 1.8.0_65-b17) OpenJDK 64-Bit Server VM (build 25.65-b01, mixed mode) Elasticsearch を yum でインストールするので、レポジトリのGPGキーをインストールします sudo rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch レポジトリを追加します。 /etc/yum.repos.d/elasticsearch.repo [elasticsearch-2.x] name=Elasticsearch repository for 2.x packages baseurl=http://packages.elastic.co/elasticsearch/2.x/centos gpgcheck=1 gpgkey=http://packages.elastic.co/GPG-KEY-elasticsearch enabled=1 yum でインストールします。 sudo
+  
+
+
+</p>
+
+
+    <p class="lead"><a href="http://enomotodev.github.io/post/install-elasticsearch/" class="btn btn-default">Read more &rarr;</a></p>
+
+
+  </div>
+</div>
+
+    
+      <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div>
   <h2><a href="http://enomotodev.github.io/post/install-fluentd/">fluentdつかってみた</a>
 </h2>
 
@@ -118,6 +165,8 @@
   <a href="http://enomotodev.github.io/tags/apache" class="label label-primary">apache</a>
   
   <a href="http://enomotodev.github.io/tags/mongodb" class="label label-primary">mongodb</a>
+  
+  <a href="http://enomotodev.github.io/tags/centos" class="label label-primary">centos</a>
   
 
 
