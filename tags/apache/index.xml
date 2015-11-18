@@ -9,8 +9,197 @@
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
     <copyright>(c) 2015 Takafumi Enomoto.</copyright>
-    <lastBuildDate>Sat, 14 Nov 2015 14:17:08 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 14 Nov 2015 18:07:46 +0900</lastBuildDate>
     <atom:link href="http://enomotodev.github.io/tags/apache/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Apache &#43; fluentd &#43; Elasticsearch &#43; Kibana を連携させてみた</title>
+      <link>http://enomotodev.github.io/post/install-elasticsearch/</link>
+      <pubDate>Sat, 14 Nov 2015 18:07:46 +0900</pubDate>
+      <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
+      <guid>http://enomotodev.github.io/post/install-elasticsearch/</guid>
+      <description>
+
+&lt;h2 id=&#34;elasticsearch-とは&#34;&gt;Elasticsearch とは&lt;/h2&gt;
+
+&lt;p&gt;Elasticsearch とは2010年に OSS としてリリースされた分散型全文検索サーバです。&lt;br /&gt;
+実際に CentOS 6.7 にインストールしてつかってみることで Elasticsearch の基本を学んでいきたいと思います。
+&lt;a href=&#34;http://enomotodev.github.io/post/install-fluentd/&#34;&gt;前回の記事&lt;/a&gt;で設定した内容をそのまま使用するので、まだ見てない方はぜひ参照してみてください。&lt;/p&gt;
+
+&lt;h2 id=&#34;elasticsearch-のインストール&#34;&gt;Elasticsearch のインストール&lt;/h2&gt;
+
+&lt;p&gt;Elasticsearch は Java で実装されているので、まずは Java をインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yum install -y java
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;インストールできているか確認します&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ java -version
+
+openjdk version &amp;quot;1.8.0_65&amp;quot;
+OpenJDK Runtime Environment (build 1.8.0_65-b17)
+OpenJDK 64-Bit Server VM (build 25.65-b01, mixed mode)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Elasticsearch を yum でインストールするので、レポジトリのGPGキーをインストールします&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;レポジトリを追加します。&lt;/p&gt;
+
+&lt;p&gt;/etc/yum.repos.d/elasticsearch.repo&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[elasticsearch-2.x]
+name=Elasticsearch repository for 2.x packages
+baseurl=http://packages.elastic.co/elasticsearch/2.x/centos
+gpgcheck=1
+gpgkey=http://packages.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;yum でインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum install -y elasticsearch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;自動起動の設定も行っておきましょう&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo chkconfig --add elasticsearch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;config を編集してコメントアウトを外します。&lt;/p&gt;
+
+&lt;p&gt;/etc/elasticsearch/elasticsearch.yml&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# http.port: 9200
+↓
+http.port: 9200
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Elasticsearch を起動させます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo /etc/init.d/elasticsearch start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;curl コマンドを利用して、Elasticsearch にアクセスして起動の確認を行います。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -X GET http://localhost:9200/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;下記のようなレスポンスが返ってきたら Elasticsearch がきちんと起動しています。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;name&amp;quot; : &amp;quot;Red Nine&amp;quot;,
+  &amp;quot;cluster_name&amp;quot; : &amp;quot;elasticsearch&amp;quot;,
+  &amp;quot;version&amp;quot; : {
+    &amp;quot;number&amp;quot; : &amp;quot;2.0.0&amp;quot;,
+    &amp;quot;build_hash&amp;quot; : &amp;quot;de54438d6af8f9340d50c5c786151783ce7d6be5&amp;quot;,
+    &amp;quot;build_timestamp&amp;quot; : &amp;quot;2015-10-22T08:09:48Z&amp;quot;,
+    &amp;quot;build_snapshot&amp;quot; : false,
+    &amp;quot;lucene_version&amp;quot; : &amp;quot;5.2.1&amp;quot;
+  },
+  &amp;quot;tagline&amp;quot; : &amp;quot;You Know, for Search&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;fluentd のプラグインをインストールしたり、事前準備を行います。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum groupinstall &#39;Development tools&#39;
+sudo /opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-elasticsearch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://enomotodev.github.io/post/install-fluentd/&#34;&gt;前回&lt;/a&gt;で設定した ad-agent の設定を変更します。&lt;/p&gt;
+
+&lt;p&gt;/etc/td-agent/td-agnet.conf&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;match apache.access&amp;gt;
+    type elasticsearch
+    type_name access_log
+    host localhost
+    port 9200
+
+    logstash_format true
+    logstash_prefix apache-log
+    logstash_dateformat %Y%m%d
+    include_tag_key true
+    tag_key @log_name
+    flush_interval 10s
+&amp;lt;/match&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;td-agent を再起動します&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo /etc/init.d/td-agent restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それでは apache のログが elasticsearch に送られているか確認します。&lt;br /&gt;
+まずは存在するインデックス情報一覧を取得してみます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -XGET http://localhost:9200/_aliases?pretty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;下記のような結果が返ってきたらOKです。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;apache-log-20151114&amp;quot; : {
+    &amp;quot;aliases&amp;quot; : { }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;次に、11月14日のログを全部取得してみます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -XGET http://localhost:9200/apache-log-20151114/_search -d &#39;
+{
+  &amp;quot;query&amp;quot;: {
+    &amp;quot;match_all&amp;quot; : {}
+  }
+}&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;実際にログを確認できたでしょうか？&lt;br /&gt;
+次はいよいよ Kibana と連携し、ログの可視化について学んでみましょう。&lt;/p&gt;
+
+&lt;h2 id=&#34;kibana-とは&#34;&gt;Kibana とは&lt;/h2&gt;
+
+&lt;p&gt;Kibana は Elasticsearch に格納されたデータを検索し、グラフなど様々な形で可視化できるツールです。&lt;br /&gt;
+単なる可視化ツールというわけではなく、データの集計・可視化・分析までを統合的にできるツールです。&lt;/p&gt;
+
+&lt;h2 id=&#34;kibana-のインストール&#34;&gt;Kibana のインストール&lt;/h2&gt;
+
+&lt;p&gt;Kibana をインストールします&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -sL https://download.elastic.co/kibana/kibana/kibana-4.2.0-linux-x64.tar.gz  | sudo tar zxf - -C /tmp
+sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;インストールが完了したので、Kibana を起動します&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/usr/share/kibana/bin/kibana
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;起動したので http://[ドメイン名]:5601 にアクセスしてみます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/start_kibana.png&#34; alt=&#34;Kibana初期画面&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;無事 Kibana の画面が表示されました&lt;/p&gt;
+
+&lt;h2 id=&#34;kibana-の設定&#34;&gt;Kibana の設定&lt;/h2&gt;
+
+&lt;p&gt;上の画像のページで『index names or pattern』を &lt;code&gt;apache-log-*&lt;/code&gt; に変更して Create ボタンを押します。&lt;/p&gt;
+
+&lt;p&gt;画面上の Discover にアクセスすると最新のログがみれるかと思います。&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;最後の方、かなり駆け足になってしまいましたが、Elasticsearch と Kibana をインストールして、Apache と fluentd と連携してみました。&lt;br /&gt;
+他にも便利な機能があり、色々とできるみたいなので、私自身もこれからこれらのツールについてさらに学んでいきたいと思います。&lt;/p&gt;
+
+&lt;hr /&gt;
+</description>
+    </item>
     
     <item>
       <title>fluentdつかってみた</title>
