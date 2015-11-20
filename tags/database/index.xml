@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Database on enomotodev</title>
+    <link>http://enomotodev.github.io/tags/database/</link>
+    <description>Recent content in Database on enomotodev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja_JP</language>
+    <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
+    <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
+    <copyright>(c) 2015 Takafumi Enomoto.</copyright>
+    <lastBuildDate>Thu, 19 Nov 2015 23:53:29 +0900</lastBuildDate>
+    <atom:link href="http://enomotodev.github.io/tags/database/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>閉包テーブル（Closure Table）を試してみた</title>
+      <link>http://enomotodev.github.io/post/closure-table/</link>
+      <pubDate>Thu, 19 Nov 2015 23:53:29 +0900</pubDate>
+      <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
+      <guid>http://enomotodev.github.io/post/closure-table/</guid>
+      <description>
+
+&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
+
+&lt;p&gt;SQLアンチパターンという本を読んでいたら、再帰的なデータに対して『閉包テーブル（Closure Table）』という考え方があっったので、MySQL 5.6 で試してみました。&lt;br /&gt;
+再帰的なデータとは、例えば上司を1人までもつことができ、部下は複数持つことができる、下記の組織図のようなツリー構造のデータのことを指します。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/soshikizu.png&#34; alt=&#34;組織図&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;テーブル作成&#34;&gt;テーブル作成&lt;/h2&gt;
+
+&lt;p&gt;それでは早速テーブルを作成してみましょう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;CREATE TABLE `Employees` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `TreePaths` (
+  `ancestor` bigint(20) NOT NULL,
+  `descendant` bigint(20) NOT NULL,
+  PRIMARY KEY (`ancestor`,`descendant`),
+  KEY `descendant` (`descendant`),
+  CONSTRAINT `TreePaths_ibfk_1` FOREIGN KEY (`ancestor`) REFERENCES `Employees` (`id`),
+  CONSTRAINT `TreePaths_ibfk_2` FOREIGN KEY (`descendant`) REFERENCES `Employees` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;閉包テーブルでは、Employees テーブルに自分自身の id を親に持つカラムを設けるのではなく、別のテーブルを用いて、ツリー構造の情報を格納します。&lt;br /&gt;
+このテーブルには親子関係の組み合わせを格納するのですが、直接の子ではない（2つ以上離れている）場合も子と見なすのと、自分自身も子と見なします。&lt;br /&gt;
+下の図の場合、１の子は１〜８の全てになり、３の子は３〜４、５の子は５〜８といった感じになります。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/soshikizu_num.png&#34; alt=&#34;組織図（番号）&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;一応、テーブルにまとめました。&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;親&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;子&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;親&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;子&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;親&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;子&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;親&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;子&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;親&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;子&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;8&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;8&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;8&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;データ作成&#34;&gt;データ作成&lt;/h2&gt;
+
+&lt;p&gt;このあと実際にクエリを発行したりするので、テストデータを INSERT しておきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;INSERT INTO `Employees` (`id`, `name`) VALUES
+(1, &amp;quot;遠藤&amp;quot;), (2, &amp;quot;田中&amp;quot;), (3, &amp;quot;佐藤&amp;quot;), (4, &amp;quot;原田&amp;quot;),
+(5, &amp;quot;吉田&amp;quot;), (6, &amp;quot;古田&amp;quot;), (7, &amp;quot;鈴木&amp;quot;), (8, &amp;quot;松井&amp;quot;);
+
+INSERT INTO `TreePaths` (`ancestor`, `descendant`) VALUES
+(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8),
+(2, 2), (3, 3), (3, 4), (4, 4), (5, 5), (5, 6), (5, 7), (5, 8),
+(6, 6), (6, 7), (7, 7), (8, 8);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;子を全取得&#34;&gt;子を全取得&lt;/h2&gt;
+
+&lt;p&gt;子を全取得するのはとても簡単にできます。&lt;br /&gt;
+例えば５の子を全部取得するには TreePaths テーブルで親が５の行を探すだけです。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; SELECT e.*
+    -&amp;gt; FROM Employees AS e
+    -&amp;gt;   INNER JOIN TreePaths AS t ON e.id = t.descendant
+    -&amp;gt; WHERE t.ancestor = 5;
++----+--------+
+| id | name   |
++----+--------+
+|  5 | 吉田   |
+|  6 | 古田   |
+|  7 | 鈴木   |
+|  8 | 松井   |
++----+--------+
+4 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;親を全取得&#34;&gt;親を全取得&lt;/h2&gt;
+
+&lt;p&gt;次に、７の親を全部取得してみます。
+先ほどとは逆に TreePaths テーブルで子が７の行を探すだけです。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; SELECT e.*
+    -&amp;gt; FROM Employees AS e
+    -&amp;gt;   INNER JOIN TreePaths AS t ON e.id = t.ancestor
+    -&amp;gt; WHERE t.descendant = 7;
++----+--------+
+| id | name   |
++----+--------+
+|  1 | 遠藤   |
+|  5 | 吉田   |
+|  6 | 古田   |
+|  7 | 鈴木   |
++----+--------+
+4 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;データを登録&#34;&gt;データを登録&lt;/h2&gt;
+
+&lt;p&gt;IDが４のデータに子をひとつ登録してみましょう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;INSERT INTO Employees (`name`) VALUES (&amp;quot;本田&amp;quot;);  // LAST_INSERT_ID() = 9
+
+INSERT INTO TreePaths (ancestor, descendant)
+  SELECT t.ancestor, 9
+  FROM TreePaths AS t
+  WHERE t.descendant = 4
+UNION ALL
+  SELECT 9, 9;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;少しわかりづらいかもしれませんが、考え方としてはIDが４の親全てに新規で追加した子のIDを持たせるといった感じです。&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;親一覧の取得、子一覧の取得、データの登録を実際にやってみましたが、どれも比較的簡単なSQLで対応できました。&lt;br /&gt;
+他のメリットとしては、どれだけ階層が深くなっても特に問題がないということです。SQLもどれだけ階層が深くなっても変わりません。&lt;/p&gt;
+
+&lt;p&gt;階層構造のデータを格納するときは、この閉包テーブル（Closure Table）を試してみてはいかがでしょうか。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

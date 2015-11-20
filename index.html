@@ -99,6 +99,47 @@
       <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
+  <h2><a href="http://enomotodev.github.io/post/closure-table/">閉包テーブル（Closure Table）を試してみた</a>
+</h2>
+
+  <div class="margin-10">
+    <small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2015-11-19">19 Nov, 2015</time>
+</small>
+
+    
+  <i class="fa fa-tags"></i>
+  
+  <a href="http://enomotodev.github.io/tags/database" class="label label-primary">database</a>
+  
+  <a href="http://enomotodev.github.io/tags/mysql" class="label label-primary">mysql</a>
+  
+
+
+  </div>
+</div>
+
+    <p class="summary">
+  
+  
+    はじめに SQLアンチパターンという本を読んでいたら、再帰的なデータに対して『閉包テーブル（Closure Table）』という考え方があっったので、MySQL 5.6 で試してみました。 再帰的なデータとは、例えば上司を1人までもつことができ、部下は複数持つことができる、下記の組織図のようなツリー構造のデータのことを指します。 テーブル作成 それでは早速テーブルを作成してみましょう。 CREATE TABLE `Employees` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, PRIMARY KEY (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; CREATE TABLE `TreePaths` ( `ancestor` bigint(20) NOT NULL, `descendant` bigint(20) NOT NULL, PRIMARY KEY (`ancestor`,`descendant`), KEY `descendant` (`descendant`), CONSTRAINT `TreePaths_ibfk_1` FOREIGN KEY (`ancestor`) REFERENCES `Employees` (`id`), CONSTRAINT `TreePaths_ibfk_2` FOREIGN KEY (`descendant`) REFERENCES `Employees` (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 閉包テーブルでは、Employees テーブルに自分自身の id を親に持つカラムを設けるのではなく、別のテーブルを用いて、ツリー構造の情報を格納します。
+  
+
+
+</p>
+
+
+    <p class="lead"><a href="http://enomotodev.github.io/post/closure-table/" class="btn btn-default">Read more &rarr;</a></p>
+
+
+  </div>
+</div>
+
+    
+      <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div>
   <h2><a href="http://enomotodev.github.io/post/install-elasticsearch/">Apache &#43; fluentd &#43; Elasticsearch &#43; Kibana を連携させてみた</a>
 </h2>
 
