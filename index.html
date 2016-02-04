@@ -34,7 +34,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://enomotodev.github.io/touch-icon-144-precomposed.png">
 <link href="http://enomotodev.github.io/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.14" />
+<meta name="generator" content="Hugo 0.15" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -99,13 +99,54 @@
       <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
+  <h2><a href="http://enomotodev.github.io/post/install-jenkins/">CentOS に Jenkins インストールしてみた</a>
+</h2>
+
+  <div class="margin-10">
+    <small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2016-02-04">4 Feb, 2016</time>
+</small>
+
+    
+  <i class="fa fa-tags"></i>
+  
+  <a href="http://enomotodev.github.io/tags/jenkins" class="label label-primary">jenkins</a>
+  
+  <a href="http://enomotodev.github.io/tags/centos" class="label label-primary">centos</a>
+  
+
+
+  </div>
+</div>
+
+    <p class="summary">
+  
+  
+    はじめに 今まで Jenkins を使う機会はたくさんあったのですが、インストールや設定周りなどをやったことがなかったので、今回 CentOS 6.7 に実際にインストールして軽く触ってみました。 Java をインストールする Jenkins は Java で書かれているので、まずは Java をインストールします。 $ sudo yum install java-1.8.0-openjdk java-1.8.0-openjdk-devel Java がちゃんとインストールできているか確認します。 $ java -version openjdk version &quot;1.8.0_71&quot; OpenJDK Runtime Environment (build 1.8.0_71-b15) OpenJDK 64-Bit Server VM (build 25.71-b15, mixed mode) Jenkins のインストール Java のインストールが確認できたので、Jenkins のインストールに入っていきます。 まずは、Jenkins のレポジトリを追加します。 $ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo $ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key Jenkins のレポジトリを追加できたので、Jenkins をインストールします。 $ sudo yum install jenkins Jenkins の起動
+  
+
+
+</p>
+
+
+    <p class="lead"><a href="http://enomotodev.github.io/post/install-jenkins/" class="btn btn-default">Read more &rarr;</a></p>
+
+
+  </div>
+</div>
+
+    
+      <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div>
   <h2><a href="http://enomotodev.github.io/post/closure-table/">閉包テーブル（Closure Table）を試してみた</a>
 </h2>
 
   <div class="margin-10">
     <small>
   <i class="fa fa-calendar"></i>
-  <time datetime="2015-11-21">21 Nov, 2015</time>
+  <time datetime="2015-11-19">19 Nov, 2015</time>
 </small>
 
     
