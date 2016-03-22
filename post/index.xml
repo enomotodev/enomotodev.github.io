@@ -310,13 +310,13 @@ UNION ALL
       <guid>http://enomotodev.github.io/post/install-elasticsearch/</guid>
       <description>
 
-&lt;h2 id=&#34;elasticsearch-とは&#34;&gt;Elasticsearch とは&lt;/h2&gt;
+&lt;h2 id=&#34;elasticsearch-とは:6c05a264b70b187ee941017a05608421&#34;&gt;Elasticsearch とは&lt;/h2&gt;
 
 &lt;p&gt;Elasticsearch とは2010年に OSS としてリリースされた分散型全文検索サーバです。&lt;br /&gt;
 実際に CentOS 6.7 にインストールしてつかってみることで Elasticsearch の基本を学んでいきたいと思います。
 &lt;a href=&#34;http://enomotodev.github.io/post/install-fluentd/&#34;&gt;前回の記事&lt;/a&gt;で設定した内容をそのまま使用するので、まだ見てない方はぜひ参照してみてください。&lt;/p&gt;
 
-&lt;h2 id=&#34;elasticsearch-のインストール&#34;&gt;Elasticsearch のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;elasticsearch-のインストール:6c05a264b70b187ee941017a05608421&#34;&gt;Elasticsearch のインストール&lt;/h2&gt;
 
 &lt;p&gt;Elasticsearch は Java で実装されているので、まずは Java をインストールします。&lt;/p&gt;
 
@@ -452,12 +452,12 @@ sudo /opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-elasticsearch
 &lt;p&gt;実際にログを確認できたでしょうか？&lt;br /&gt;
 次はいよいよ Kibana と連携し、ログの可視化について学んでみましょう。&lt;/p&gt;
 
-&lt;h2 id=&#34;kibana-とは&#34;&gt;Kibana とは&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-とは:6c05a264b70b187ee941017a05608421&#34;&gt;Kibana とは&lt;/h2&gt;
 
 &lt;p&gt;Kibana は Elasticsearch に格納されたデータを検索し、グラフなど様々な形で可視化できるツールです。&lt;br /&gt;
 単なる可視化ツールというわけではなく、データの集計・可視化・分析までを統合的にできるツールです。&lt;/p&gt;
 
-&lt;h2 id=&#34;kibana-のインストール&#34;&gt;Kibana のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-のインストール:6c05a264b70b187ee941017a05608421&#34;&gt;Kibana のインストール&lt;/h2&gt;
 
 &lt;p&gt;Kibana をインストールします&lt;/p&gt;
 
@@ -476,13 +476,13 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
 
 &lt;p&gt;無事 Kibana の画面が表示されました&lt;/p&gt;
 
-&lt;h2 id=&#34;kibana-の設定&#34;&gt;Kibana の設定&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-の設定:6c05a264b70b187ee941017a05608421&#34;&gt;Kibana の設定&lt;/h2&gt;
 
 &lt;p&gt;上の画像のページで『index names or pattern』を &lt;code&gt;apache-log-*&lt;/code&gt; に変更して Create ボタンを押します。&lt;/p&gt;
 
 &lt;p&gt;画面上の Discover にアクセスすると最新のログがみれるかと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ:6c05a264b70b187ee941017a05608421&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;最後の方、かなり駆け足になってしまいましたが、Elasticsearch と Kibana をインストールして、Apache と fluentd と連携してみました。&lt;br /&gt;
 他にも便利な機能があり、色々とできるみたいなので、私自身もこれからこれらのツールについてさらに学んでいきたいと思います。&lt;/p&gt;
@@ -696,12 +696,12 @@ switched to db fluentd
       <guid>http://enomotodev.github.io/post/use-goose/</guid>
       <description>
 
-&lt;h2 id=&#34;gooseとは:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;Gooseとは&lt;/h2&gt;
+&lt;h2 id=&#34;gooseとは&#34;&gt;Gooseとは&lt;/h2&gt;
 
 &lt;p&gt;GooseとはGo言語で作られたDBマイグレーションツールです。&lt;br /&gt;
 develop環境やproduction環境など各環境に簡単に設定を変更でき、かなり便利そうなので実際にMySQLで試してみました。&lt;/p&gt;
 
-&lt;h2 id=&#34;gooseパッケージの取得:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;Gooseパッケージの取得&lt;/h2&gt;
+&lt;h2 id=&#34;gooseパッケージの取得&#34;&gt;Gooseパッケージの取得&lt;/h2&gt;
 
 &lt;p&gt;まずは go get して Goose パッケージを取得します。&lt;br /&gt;
 ※ Goをインストールしていない人や、GOPATHを設定していない人は&lt;a href=&#34;http://golang-jp.org/doc/install#install&#34; target=&#34;_blank&#34;&gt;公式ドキュメント&lt;/a&gt;を参考に導入してみてください。&lt;/p&gt;
@@ -709,21 +709,21 @@ develop環境やproduction環境など各環境に簡単に設定を変更でき
 &lt;pre&gt;&lt;code&gt;$ go get bitbucket.org/liamstask/goose/cmd/goose
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;dbディレクトリの作成:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;dbディレクトリの作成&lt;/h2&gt;
+&lt;h2 id=&#34;dbディレクトリの作成&#34;&gt;dbディレクトリの作成&lt;/h2&gt;
 
 &lt;p&gt;プロジェクトのルート直下に db ディレクトリを作成します。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ mkdir db
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;configファイルの作成:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;configファイルの作成&lt;/h2&gt;
+&lt;h2 id=&#34;configファイルの作成&#34;&gt;configファイルの作成&lt;/h2&gt;
 
 &lt;p&gt;取得したGooseパッケージのサンプルからconfigファイルをコピーします。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ cp $GOPATH/src/bitbucket.org/liamstask/goose/db-sample/dbconf.yml db/
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;configファイルの編集:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;configファイルの編集&lt;/h2&gt;
+&lt;h2 id=&#34;configファイルの編集&#34;&gt;configファイルの編集&lt;/h2&gt;
 
 &lt;p&gt;まずは先ほどコピーしてきたconfigファイルの中身をのぞいてみます。&lt;br /&gt;
 デフォルトで test / develop / production のそれぞれの環境に PostgreSQL の driver が設定してあるのが、なんとなくわかるかと思います。&lt;/p&gt;
@@ -792,7 +792,7 @@ Port：3306&lt;br /&gt;
 
 &lt;p&gt;これでDBの設定は完了です。&lt;/p&gt;
 
-&lt;h2 id=&#34;db接続確認:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;DB接続確認&lt;/h2&gt;
+&lt;h2 id=&#34;db接続確認&#34;&gt;DB接続確認&lt;/h2&gt;
 
 &lt;p&gt;goose status コマンドでDBに問題なく接続できているか確認できます。&lt;br /&gt;
 これ以降の goose コマンドも全てプロジェクトルートで実行してください。&lt;/p&gt;
@@ -803,7 +803,7 @@ goose: status for environment &#39;development&#39;
 
 &lt;p&gt;上記のようにエラーなく表示されたらOKです。&lt;/p&gt;
 
-&lt;h2 id=&#34;マイグレーションファイルの作成:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;マイグレーションファイルの作成&lt;/h2&gt;
+&lt;h2 id=&#34;マイグレーションファイルの作成&#34;&gt;マイグレーションファイルの作成&lt;/h2&gt;
 
 &lt;p&gt;それではDB接続もOKなので、早速マイグレーションファイルを作りましょう。&lt;/p&gt;
 
@@ -845,7 +845,7 @@ DROP TABLE `users`;
 
 &lt;p&gt;これでマイグレーションファイルの準備はできたので、実際に実行してテーブルが作成されるか確認してみましょう。&lt;/p&gt;
 
-&lt;h2 id=&#34;マイグレーションの実行:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;マイグレーションの実行&lt;/h2&gt;
+&lt;h2 id=&#34;マイグレーションの実行&#34;&gt;マイグレーションの実行&lt;/h2&gt;
 
 &lt;p&gt;goose up コマンドでマイグレーションが実行されます。&lt;/p&gt;
 
@@ -917,7 +917,7 @@ mysql&amp;gt; select * from goose_db_version;
 
 &lt;p&gt;usersテーブルが削除されているのが確認できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;goose をつかうことによって、簡単にマイグレーションすることができました。&lt;br /&gt;
 最近、Go言語を使ったプロジェクトも増えてきているようなので、goose もこれからさらに活躍する場面が増えるのではないでしょうか。&lt;/p&gt;

@@ -175,13 +175,13 @@
   <div class="container content">
   
 
-<h2 id="elasticsearch-とは">Elasticsearch とは</h2>
+<h2 id="elasticsearch-とは:6c05a264b70b187ee941017a05608421">Elasticsearch とは</h2>
 
 <p>Elasticsearch とは2010年に OSS としてリリースされた分散型全文検索サーバです。<br />
 実際に CentOS 6.7 にインストールしてつかってみることで Elasticsearch の基本を学んでいきたいと思います。
 <a href="http://enomotodev.github.io/post/install-fluentd/">前回の記事</a>で設定した内容をそのまま使用するので、まだ見てない方はぜひ参照してみてください。</p>
 
-<h2 id="elasticsearch-のインストール">Elasticsearch のインストール</h2>
+<h2 id="elasticsearch-のインストール:6c05a264b70b187ee941017a05608421">Elasticsearch のインストール</h2>
 
 <p>Elasticsearch は Java で実装されているので、まずは Java をインストールします。</p>
 
@@ -317,12 +317,12 @@ sudo /opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-elasticsearch
 <p>実際にログを確認できたでしょうか？<br />
 次はいよいよ Kibana と連携し、ログの可視化について学んでみましょう。</p>
 
-<h2 id="kibana-とは">Kibana とは</h2>
+<h2 id="kibana-とは:6c05a264b70b187ee941017a05608421">Kibana とは</h2>
 
 <p>Kibana は Elasticsearch に格納されたデータを検索し、グラフなど様々な形で可視化できるツールです。<br />
 単なる可視化ツールというわけではなく、データの集計・可視化・分析までを統合的にできるツールです。</p>
 
-<h2 id="kibana-のインストール">Kibana のインストール</h2>
+<h2 id="kibana-のインストール:6c05a264b70b187ee941017a05608421">Kibana のインストール</h2>
 
 <p>Kibana をインストールします</p>
 
@@ -341,13 +341,13 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
 
 <p>無事 Kibana の画面が表示されました</p>
 
-<h2 id="kibana-の設定">Kibana の設定</h2>
+<h2 id="kibana-の設定:6c05a264b70b187ee941017a05608421">Kibana の設定</h2>
 
 <p>上の画像のページで『index names or pattern』を <code>apache-log-*</code> に変更して Create ボタンを押します。</p>
 
 <p>画面上の Discover にアクセスすると最新のログがみれるかと思います。</p>
 
-<h2 id="まとめ">まとめ</h2>
+<h2 id="まとめ:6c05a264b70b187ee941017a05608421">まとめ</h2>
 
 <p>最後の方、かなり駆け足になってしまいましたが、Elasticsearch と Kibana をインストールして、Apache と fluentd と連携してみました。<br />
 他にも便利な機能があり、色々とできるみたいなので、私自身もこれからこれらのツールについてさらに学んでいきたいと思います。</p>
