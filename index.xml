@@ -20,11 +20,11 @@
       <guid>http://enomotodev.github.io/post/install-jenkins/</guid>
       <description>
 
-&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
+&lt;h2 id=&#34;はじめに:0b8386887aeae236e1755802650affbf&#34;&gt;はじめに&lt;/h2&gt;
 
 &lt;p&gt;今まで Jenkins を使う機会はたくさんあったのですが、インストールや設定周りなどをやったことがなかったので、今回 CentOS 6.7 に実際にインストールして軽く触ってみました。&lt;/p&gt;
 
-&lt;h2 id=&#34;java-をインストールする&#34;&gt;Java をインストールする&lt;/h2&gt;
+&lt;h2 id=&#34;java-をインストールする:0b8386887aeae236e1755802650affbf&#34;&gt;Java をインストールする&lt;/h2&gt;
 
 &lt;p&gt;Jenkins は Java で書かれているので、まずは Java をインストールします。&lt;/p&gt;
 
@@ -39,7 +39,7 @@ OpenJDK Runtime Environment (build 1.8.0_71-b15)
 OpenJDK 64-Bit Server VM (build 25.71-b15, mixed mode)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;jenkins-のインストール&#34;&gt;Jenkins のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;jenkins-のインストール:0b8386887aeae236e1755802650affbf&#34;&gt;Jenkins のインストール&lt;/h2&gt;
 
 &lt;p&gt;Java のインストールが確認できたので、Jenkins のインストールに入っていきます。&lt;/p&gt;
 
@@ -54,7 +54,7 @@ $ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 &lt;pre&gt;&lt;code&gt;$ sudo yum install jenkins
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;jenkins-の起動&#34;&gt;Jenkins の起動&lt;/h2&gt;
+&lt;h2 id=&#34;jenkins-の起動:0b8386887aeae236e1755802650affbf&#34;&gt;Jenkins の起動&lt;/h2&gt;
 
 &lt;p&gt;Jenkins のインストールが完了したので、起動させます。&lt;/p&gt;
 
@@ -73,7 +73,7 @@ Starting Jenkins                                           [  OK  ]
 
 &lt;p&gt;※ アクセスできない人は、SELinux や iptables などの設定を確認してみてください。&lt;/p&gt;
 
-&lt;h2 id=&#34;ジョブの作成&#34;&gt;ジョブの作成&lt;/h2&gt;
+&lt;h2 id=&#34;ジョブの作成:0b8386887aeae236e1755802650affbf&#34;&gt;ジョブの作成&lt;/h2&gt;
 
 &lt;p&gt;インストールも無事にできたので、早速簡単なジョブを追加してみましょう。&lt;/p&gt;
 
@@ -99,7 +99,7 @@ Starting Jenkins                                           [  OK  ]
 &lt;img src=&#34;http://enomotodev.github.io/images/jenkins_new_job6.png&#34; alt=&#34;Jenkinsジョブ作成6&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ:0b8386887aeae236e1755802650affbf&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;Jenkins をインストールして、簡単なジョブをつくってみました。&lt;/p&gt;
 
@@ -310,13 +310,13 @@ UNION ALL
       <guid>http://enomotodev.github.io/post/install-elasticsearch/</guid>
       <description>
 
-&lt;h2 id=&#34;elasticsearch-とは&#34;&gt;Elasticsearch とは&lt;/h2&gt;
+&lt;h2 id=&#34;elasticsearch-とは:6c05a264b70b187ee941017a05608421&#34;&gt;Elasticsearch とは&lt;/h2&gt;
 
 &lt;p&gt;Elasticsearch とは2010年に OSS としてリリースされた分散型全文検索サーバです。&lt;br /&gt;
 実際に CentOS 6.7 にインストールしてつかってみることで Elasticsearch の基本を学んでいきたいと思います。
 &lt;a href=&#34;http://enomotodev.github.io/post/install-fluentd/&#34;&gt;前回の記事&lt;/a&gt;で設定した内容をそのまま使用するので、まだ見てない方はぜひ参照してみてください。&lt;/p&gt;
 
-&lt;h2 id=&#34;elasticsearch-のインストール&#34;&gt;Elasticsearch のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;elasticsearch-のインストール:6c05a264b70b187ee941017a05608421&#34;&gt;Elasticsearch のインストール&lt;/h2&gt;
 
 &lt;p&gt;Elasticsearch は Java で実装されているので、まずは Java をインストールします。&lt;/p&gt;
 
@@ -452,12 +452,12 @@ sudo /opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-elasticsearch
 &lt;p&gt;実際にログを確認できたでしょうか？&lt;br /&gt;
 次はいよいよ Kibana と連携し、ログの可視化について学んでみましょう。&lt;/p&gt;
 
-&lt;h2 id=&#34;kibana-とは&#34;&gt;Kibana とは&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-とは:6c05a264b70b187ee941017a05608421&#34;&gt;Kibana とは&lt;/h2&gt;
 
 &lt;p&gt;Kibana は Elasticsearch に格納されたデータを検索し、グラフなど様々な形で可視化できるツールです。&lt;br /&gt;
 単なる可視化ツールというわけではなく、データの集計・可視化・分析までを統合的にできるツールです。&lt;/p&gt;
 
-&lt;h2 id=&#34;kibana-のインストール&#34;&gt;Kibana のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-のインストール:6c05a264b70b187ee941017a05608421&#34;&gt;Kibana のインストール&lt;/h2&gt;
 
 &lt;p&gt;Kibana をインストールします&lt;/p&gt;
 
@@ -476,13 +476,13 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
 
 &lt;p&gt;無事 Kibana の画面が表示されました&lt;/p&gt;
 
-&lt;h2 id=&#34;kibana-の設定&#34;&gt;Kibana の設定&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-の設定:6c05a264b70b187ee941017a05608421&#34;&gt;Kibana の設定&lt;/h2&gt;
 
 &lt;p&gt;上の画像のページで『index names or pattern』を &lt;code&gt;apache-log-*&lt;/code&gt; に変更して Create ボタンを押します。&lt;/p&gt;
 
 &lt;p&gt;画面上の Discover にアクセスすると最新のログがみれるかと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ:6c05a264b70b187ee941017a05608421&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;最後の方、かなり駆け足になってしまいましたが、Elasticsearch と Kibana をインストールして、Apache と fluentd と連携してみました。&lt;br /&gt;
 他にも便利な機能があり、色々とできるみたいなので、私自身もこれからこれらのツールについてさらに学んでいきたいと思います。&lt;/p&gt;
@@ -595,7 +595,6 @@ name=10gen Repository
 baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/i686
 gpgcheck=0
 enabled=1
-EOF
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;yum インストールします。&lt;/p&gt;
