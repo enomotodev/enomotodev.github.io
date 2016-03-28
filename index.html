@@ -99,6 +99,45 @@
       <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
+  <h2><a href="http://enomotodev.github.io/post/install-docker-mac/">Mac に Docker インストールしてみた</a>
+</h2>
+
+  <div class="margin-10">
+    <small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2016-03-28">28 Mar, 2016</time>
+</small>
+
+    
+  <i class="fa fa-tags"></i>
+  
+  <a href="http://enomotodev.github.io/tags/docker" class="label label-primary">docker</a>
+  
+
+
+  </div>
+</div>
+
+    <p class="summary">
+  
+  
+    Docker + Docker Machine のインストール まずは、Docker 本体と Docker Machine をインストールします。 Mac だと Docker を直接的に実行できないのですが、Docker Machine を使用すると、一旦VM上で CoreOS や boot2docker を実行して、その上で簡単に Docker を実行できるようになります。 インストール自体はどちらも Homebrew で簡単にインストールすることができます。 $ brew install docker docker-machine Machine の作成 docker-machine コマンドで新しく Machine を作成します。 $ docker-machine create -d virtualbox dev-machine ・・・（省略） Setting Docker configuration on the remote daemon... Checking connection to Docker... Docker is up and running! To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env dev-machine 上記の dev-machine の部分は Machine の名前になるので、好きな名前をつけてかまいません。 出力の最終行にVM上の Docker Machine に接続するために docker-machine env dev-machine を実行してくださいと書かれているので、これを実行します。 $ docker-machine env dev-machine export DOCKER_TLS_VERIFY=&quot;1&quot; export DOCKER_HOST=&quot;tcp://192.168.99.100:2376&quot; export DOCKER_CERT_PATH=&quot;/path/to/.docker/machine/machines/dev-machine&quot; export DOCKER_MACHINE_NAME=&quot;dev-machine&quot; # Run this command to configure your shell: # eval $(docker-machine env dev-machine) docker-machine env dev-machine を実行すると、環境によって多少異なりますが、このようなかたちで色々表示されるかと思います。 これは要するに最終行の eval $(docker-machine env dev-machine) というコマンドを実行すると、Docker に接続するための環境変数が設定されるということです。 それでは、早速コマンドを実行してみましょう。 $ eval $(docker-machine env dev-machine) 特に何も出力されませんが、これで Docker Machine に接続できるようになりました。 Docker Machine に接続する Docker Machine に接続してみます。 $ docker-machine ssh dev-machine ## .
+  
+
+
+</p>
+
+
+    <p class="lead"><a href="http://enomotodev.github.io/post/install-docker-mac/" class="btn btn-default">Read more &rarr;</a></p>
+
+
+  </div>
+</div>
+
+    
+      <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div>
   <h2><a href="http://enomotodev.github.io/post/install-jenkins/">CentOS に Jenkins インストールしてみた</a>
 </h2>
 

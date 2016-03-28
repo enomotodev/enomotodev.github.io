@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://enomotodev.github.io/</loc>
-    <lastmod>2016-02-04T22:33:24+09:00</lastmod>
+    <lastmod>2016-03-28T12:48:00+09:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://enomotodev.github.io/post/install-docker-mac/</loc>
+    <lastmod>2016-03-28T12:48:00+09:00</lastmod>
   </url>
   
   <url>
