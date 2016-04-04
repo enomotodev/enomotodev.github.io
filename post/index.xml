@@ -9,8 +9,159 @@
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
     <copyright>(c) 2015 Takafumi Enomoto.</copyright>
-    <lastBuildDate>Mon, 28 Mar 2016 12:48:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 04 Apr 2016 23:33:12 +0900</lastBuildDate>
     <atom:link href="http://enomotodev.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>【 Nginx 編】Mac に Docker インストールしてみた</title>
+      <link>http://enomotodev.github.io/post/docker-mac-nginx/</link>
+      <pubDate>Mon, 04 Apr 2016 23:33:12 +0900</pubDate>
+      <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
+      <guid>http://enomotodev.github.io/post/docker-mac-nginx/</guid>
+      <description>
+
+&lt;p&gt;前回の『&lt;a href=&#34;http://enomotodev.github.io/post/install-docker-mac/&#34;&gt;Mac に Docker インストールしてみた&lt;/a&gt;』の続きです。&lt;/p&gt;
+
+&lt;p&gt;実際に Nginx + PHP + MySQL 環境を構築するにあたって、今回は Nginx コンテナを起動させて、静的コンテンツの表示までを行いたいと思います。&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-machine-の起動:ee5f04b0a2beb8064a932015afbd96b5&#34;&gt;Docker Machine の起動&lt;/h2&gt;
+
+&lt;p&gt;前回から、PC をシャットダウンしたり、再起動している場合は、もう一度 Docker Machine を起動させなければいけないので、下記のコマンドで起動させてください。（それ以外の方は次の『Nginx コンテナを起動させる』から読んでください）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine start dev-machine
+Starting &amp;quot;dev-machine&amp;quot;...
+(dev-machine) Waiting for an IP...
+Machine &amp;quot;dev-machine&amp;quot; was started.
+Waiting for SSH to be available...
+Detecting the provisioner...
+Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;前回と同じ手順を踏んで、Docker Machine に接続できるようにしていきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine env dev-machine
+export DOCKER_TLS_VERIFY=&amp;quot;1&amp;quot;
+export DOCKER_HOST=&amp;quot;tcp://192.168.99.101:2376&amp;quot;
+export DOCKER_CERT_PATH=&amp;quot;/Users/enomotodev/.docker/machine/machines/dev-machine&amp;quot;
+export DOCKER_MACHINE_NAME=&amp;quot;dev-machine&amp;quot;
+# Run this command to configure your shell:
+# eval $(docker-machine env dev-machine)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;$ eval $(docker-machine env dev-machine)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              latest              97434d46f197        2 weeks ago         188 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;無事 &lt;code&gt;docker images&lt;/code&gt; コマンドが実行できました。&lt;/p&gt;
+
+&lt;h2 id=&#34;nginx-コンテナを起動させる:ee5f04b0a2beb8064a932015afbd96b5&#34;&gt;Nginx コンテナを起動させる&lt;/h2&gt;
+
+&lt;p&gt;まずは &lt;code&gt;docker pull&lt;/code&gt; コマンドを実行して、Nginx のイメージを取得します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull nginx:latest
+latest: Pulling from library/nginx
+fdd5d7827f33: Pull complete
+a3ed95caeb02: Pull complete
+716f7a5f3082: Pull complete
+7b10f03a0309: Pull complete
+Digest: sha256:f6a001272d5d324c4c9f3f183e1b69e9e0ff12debeb7a092730d638c33e0de3e
+Status: Downloaded newer image for nginx:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;docker images&lt;/code&gt; コマンドで確認します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              latest              97434d46f197        2 weeks ago         188 MB
+nginx               latest              af4b3d7d5401        3 weeks ago         190.5 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;docker run&lt;/code&gt; コマンドで Nginx のコンテナが起動するのですが、先に Nginx の設定ファイルと Document Root に置く HTML ファイルを準備します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/docker/nginx/nginx.conf&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;server {
+    listen 8080 default_server;
+
+    root /var/www;
+    index index.html index.htm;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/docker/www/index.html&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;lt;h1&amp;gt;Hello Docker!&amp;lt;/h1&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最低限の設定ですが、必要なファイルが準備できたので、&lt;code&gt;docker run&lt;/code&gt; コマンドで Nginx コンテナを起動します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -p 9000:8080 -v /Users/enomotodev/docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf -v /Users/enomotodev/docker/www:/var/www -d nginx
+0902e290559b4a054d72b4cf2615334079cfa879df1cc35d9655d0f0e217c462
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ここで &lt;code&gt;docker run&lt;/code&gt; コマンドのオプションを少し確認したいと思います。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-p&lt;/code&gt; オプション&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;-p&lt;/code&gt; オプションでポートマッピングの設定ができます。&lt;/p&gt;
+
+&lt;p&gt;『Mac -&amp;gt; Docker Machine -&amp;gt; Nginx コンテナ』という流れで Nginx に接続していて、今回は &lt;code&gt;9000:8080&lt;/code&gt; と設定しているので、『Mac -&amp;gt; Docker Machine』の接続に &lt;code&gt;9000&lt;/code&gt; ポート、『Docker Machine -&amp;gt; Nginx コンテナ』の接続に &lt;code&gt;8080&lt;/code&gt; ポートを使用するという設定になっています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-v&lt;/code&gt; オプション&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;-v&lt;/code&gt;　オプションでは、Docker Machine と Nginx コンテナ間で共有するファイル・ディレクトリを指定できます。&lt;/p&gt;
+
+&lt;p&gt;Docker Machine には、Mac の &lt;code&gt;/Users&lt;/code&gt; ディレクトリがマウントされているので、例えば Mac 上の &lt;code&gt;/Users/enomotodev/hoge&lt;/code&gt; ディレクトリは、Docker Machine 上でも &lt;code&gt;/Users/enomotodev/hoge&lt;/code&gt; ディレクトリになります。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;-v foo:bar&lt;/code&gt; と書くと、Docker Machine の &lt;code&gt;foo&lt;/code&gt; ディレクトリを Nginx コンテナの &lt;code&gt;bar&lt;/code&gt; にマウントさせることができ、それによってファイルやディレクトリを共有できます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-d&lt;/code&gt; オプション&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;-d&lt;/code&gt; オプションを使用するとコンテナをバックグラウンドモードで起動することができます。&lt;/p&gt;
+
+&lt;h2 id=&#34;nginx-コンテナの起動確認:ee5f04b0a2beb8064a932015afbd96b5&#34;&gt;Nginx コンテナの起動確認&lt;/h2&gt;
+
+&lt;p&gt;Nginx コンテナを起動させたので Docker Machine の IP を確認して、接続してみましょう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ip dev-machine
+192.168.99.101
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Docker Machine の IP が &lt;code&gt;192.168.99.101&lt;/code&gt; とわかったので、Nginx コンテナを起動するときに指定した &lt;code&gt;9090&lt;/code&gt; ポートで接続してみます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;http://192.168.99.101:9090&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/docker-nginx.png&#34; alt=&#34;Docker Nginx ブラウザ確認&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;無事に表示されました！&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ:ee5f04b0a2beb8064a932015afbd96b5&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;Nginx コンテナを起動し、静的コンテンツの表示までできました。&lt;/p&gt;
+
+&lt;p&gt;次回は PHP と連携して、動的なコンテンツの表示も行いたいと思います。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Mac に Docker インストールしてみた</title>
@@ -128,6 +279,12 @@ ubuntu              latest              97434d46f197        3 days ago          
 &lt;p&gt;これで Mac に docker の環境を整えることができました。&lt;/p&gt;
 
 &lt;p&gt;ですが、このままでは docker をどのように使うのかイメージがつきづらいと思いますので、次回以降で PHP の開発環境を実際に構築していきたいと思います。&lt;/p&gt;
+
+&lt;h2 id=&#34;つづき:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;つづき&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-nginx/&#34;&gt;【 Nginx 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
@@ -139,11 +296,11 @@ ubuntu              latest              97434d46f197        3 days ago          
       <guid>http://enomotodev.github.io/post/install-jenkins/</guid>
       <description>
 
-&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
+&lt;h2 id=&#34;はじめに:0b8386887aeae236e1755802650affbf&#34;&gt;はじめに&lt;/h2&gt;
 
 &lt;p&gt;今まで Jenkins を使う機会はたくさんあったのですが、インストールや設定周りなどをやったことがなかったので、今回 CentOS 6.7 に実際にインストールして軽く触ってみました。&lt;/p&gt;
 
-&lt;h2 id=&#34;java-をインストールする&#34;&gt;Java をインストールする&lt;/h2&gt;
+&lt;h2 id=&#34;java-をインストールする:0b8386887aeae236e1755802650affbf&#34;&gt;Java をインストールする&lt;/h2&gt;
 
 &lt;p&gt;Jenkins は Java で書かれているので、まずは Java をインストールします。&lt;/p&gt;
 
@@ -158,7 +315,7 @@ OpenJDK Runtime Environment (build 1.8.0_71-b15)
 OpenJDK 64-Bit Server VM (build 25.71-b15, mixed mode)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;jenkins-のインストール&#34;&gt;Jenkins のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;jenkins-のインストール:0b8386887aeae236e1755802650affbf&#34;&gt;Jenkins のインストール&lt;/h2&gt;
 
 &lt;p&gt;Java のインストールが確認できたので、Jenkins のインストールに入っていきます。&lt;/p&gt;
 
@@ -173,7 +330,7 @@ $ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 &lt;pre&gt;&lt;code&gt;$ sudo yum install jenkins
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;jenkins-の起動&#34;&gt;Jenkins の起動&lt;/h2&gt;
+&lt;h2 id=&#34;jenkins-の起動:0b8386887aeae236e1755802650affbf&#34;&gt;Jenkins の起動&lt;/h2&gt;
 
 &lt;p&gt;Jenkins のインストールが完了したので、起動させます。&lt;/p&gt;
 
@@ -192,7 +349,7 @@ Starting Jenkins                                           [  OK  ]
 
 &lt;p&gt;※ アクセスできない人は、SELinux や iptables などの設定を確認してみてください。&lt;/p&gt;
 
-&lt;h2 id=&#34;ジョブの作成&#34;&gt;ジョブの作成&lt;/h2&gt;
+&lt;h2 id=&#34;ジョブの作成:0b8386887aeae236e1755802650affbf&#34;&gt;ジョブの作成&lt;/h2&gt;
 
 &lt;p&gt;インストールも無事にできたので、早速簡単なジョブを追加してみましょう。&lt;/p&gt;
 
@@ -218,7 +375,7 @@ Starting Jenkins                                           [  OK  ]
 &lt;img src=&#34;http://enomotodev.github.io/images/jenkins_new_job6.png&#34; alt=&#34;Jenkinsジョブ作成6&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ:0b8386887aeae236e1755802650affbf&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;Jenkins をインストールして、簡単なジョブをつくってみました。&lt;/p&gt;
 
@@ -429,13 +586,13 @@ UNION ALL
       <guid>http://enomotodev.github.io/post/install-elasticsearch/</guid>
       <description>
 
-&lt;h2 id=&#34;elasticsearch-とは&#34;&gt;Elasticsearch とは&lt;/h2&gt;
+&lt;h2 id=&#34;elasticsearch-とは:6c05a264b70b187ee941017a05608421&#34;&gt;Elasticsearch とは&lt;/h2&gt;
 
 &lt;p&gt;Elasticsearch とは2010年に OSS としてリリースされた分散型全文検索サーバです。&lt;br /&gt;
 実際に CentOS 6.7 にインストールしてつかってみることで Elasticsearch の基本を学んでいきたいと思います。
 &lt;a href=&#34;http://enomotodev.github.io/post/install-fluentd/&#34;&gt;前回の記事&lt;/a&gt;で設定した内容をそのまま使用するので、まだ見てない方はぜひ参照してみてください。&lt;/p&gt;
 
-&lt;h2 id=&#34;elasticsearch-のインストール&#34;&gt;Elasticsearch のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;elasticsearch-のインストール:6c05a264b70b187ee941017a05608421&#34;&gt;Elasticsearch のインストール&lt;/h2&gt;
 
 &lt;p&gt;Elasticsearch は Java で実装されているので、まずは Java をインストールします。&lt;/p&gt;
 
@@ -571,12 +728,12 @@ sudo /opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-elasticsearch
 &lt;p&gt;実際にログを確認できたでしょうか？&lt;br /&gt;
 次はいよいよ Kibana と連携し、ログの可視化について学んでみましょう。&lt;/p&gt;
 
-&lt;h2 id=&#34;kibana-とは&#34;&gt;Kibana とは&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-とは:6c05a264b70b187ee941017a05608421&#34;&gt;Kibana とは&lt;/h2&gt;
 
 &lt;p&gt;Kibana は Elasticsearch に格納されたデータを検索し、グラフなど様々な形で可視化できるツールです。&lt;br /&gt;
 単なる可視化ツールというわけではなく、データの集計・可視化・分析までを統合的にできるツールです。&lt;/p&gt;
 
-&lt;h2 id=&#34;kibana-のインストール&#34;&gt;Kibana のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-のインストール:6c05a264b70b187ee941017a05608421&#34;&gt;Kibana のインストール&lt;/h2&gt;
 
 &lt;p&gt;Kibana をインストールします&lt;/p&gt;
 
@@ -595,13 +752,13 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
 
 &lt;p&gt;無事 Kibana の画面が表示されました&lt;/p&gt;
 
-&lt;h2 id=&#34;kibana-の設定&#34;&gt;Kibana の設定&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-の設定:6c05a264b70b187ee941017a05608421&#34;&gt;Kibana の設定&lt;/h2&gt;
 
 &lt;p&gt;上の画像のページで『index names or pattern』を &lt;code&gt;apache-log-*&lt;/code&gt; に変更して Create ボタンを押します。&lt;/p&gt;
 
 &lt;p&gt;画面上の Discover にアクセスすると最新のログがみれるかと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ:6c05a264b70b187ee941017a05608421&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;最後の方、かなり駆け足になってしまいましたが、Elasticsearch と Kibana をインストールして、Apache と fluentd と連携してみました。&lt;br /&gt;
 他にも便利な機能があり、色々とできるみたいなので、私自身もこれからこれらのツールについてさらに学んでいきたいと思います。&lt;/p&gt;
@@ -618,12 +775,12 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
       <guid>http://enomotodev.github.io/post/install-fluentd/</guid>
       <description>
 
-&lt;h2 id=&#34;fluentd-とは:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;fluentd とは&lt;/h2&gt;
+&lt;h2 id=&#34;fluentd-とは&#34;&gt;fluentd とは&lt;/h2&gt;
 
 &lt;p&gt;fluentd とは&lt;a href=&#34;http://www.treasuredata.com/&#34;&gt;Treasure Data&lt;/a&gt;という会社が開発している、さまざまなログの収集手段を提供するログ管理ツールです。&lt;br /&gt;
 今回は CentOS 6.7 で実際にインストールしてつかってみることによって基本的な設定を学んでいきたいと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;td-agent-をインストール:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;td-agent をインストール&lt;/h2&gt;
+&lt;h2 id=&#34;td-agent-をインストール&#34;&gt;td-agent をインストール&lt;/h2&gt;
 
 &lt;p&gt;td-agent ？ となるかと思いますが、td-agent には以下のものが同梱されています。&lt;/p&gt;
 
@@ -645,7 +802,7 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
 &lt;pre&gt;&lt;code&gt;$ sudo /etc/init.d/td-agent start
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;設定ファイルの編集:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;設定ファイルの編集&lt;/h2&gt;
+&lt;h2 id=&#34;設定ファイルの編集&#34;&gt;設定ファイルの編集&lt;/h2&gt;
 
 &lt;p&gt;それでは設定ファイルを編集してみましょう。&lt;br /&gt;
 まずは、ログ収集の設定を行います。なお、デフォルトの設定はすべて削除してしまって問題ありません。&lt;/p&gt;
@@ -703,7 +860,7 @@ access.log.20151114.b524785e8e3b0d946
 
 &lt;p&gt;td-agent によってログが保存されたのが確認できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;ログをmongodbに保存:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;ログをMongoDBに保存&lt;/h2&gt;
+&lt;h2 id=&#34;ログをmongodbに保存&#34;&gt;ログをMongoDBに保存&lt;/h2&gt;
 
 &lt;p&gt;まずは MongoDB をインストールするのでレポジトリを追加します。&lt;/p&gt;
 
@@ -798,7 +955,7 @@ switched to db fluentd
 
 &lt;p&gt;ログが23件保存されているのが確認できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;fluentd はリモートのサーバにログを送ることもでき、本番環境ではそのような構成になりますが、今回 fluentd の最低限の知識や基本的な設定はこれである程度学ぶことができたかと思います。&lt;br /&gt;
 ここから先の細い設定などは&lt;a href=&#34;http://www.fluentd.org/&#34;&gt;公式サイト&lt;/a&gt;などでさらに学習していきましょう！&lt;/p&gt;
@@ -815,12 +972,12 @@ switched to db fluentd
       <guid>http://enomotodev.github.io/post/use-goose/</guid>
       <description>
 
-&lt;h2 id=&#34;gooseとは:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;Gooseとは&lt;/h2&gt;
+&lt;h2 id=&#34;gooseとは&#34;&gt;Gooseとは&lt;/h2&gt;
 
 &lt;p&gt;GooseとはGo言語で作られたDBマイグレーションツールです。&lt;br /&gt;
 develop環境やproduction環境など各環境に簡単に設定を変更でき、かなり便利そうなので実際にMySQLで試してみました。&lt;/p&gt;
 
-&lt;h2 id=&#34;gooseパッケージの取得:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;Gooseパッケージの取得&lt;/h2&gt;
+&lt;h2 id=&#34;gooseパッケージの取得&#34;&gt;Gooseパッケージの取得&lt;/h2&gt;
 
 &lt;p&gt;まずは go get して Goose パッケージを取得します。&lt;br /&gt;
 ※ Goをインストールしていない人や、GOPATHを設定していない人は&lt;a href=&#34;http://golang-jp.org/doc/install#install&#34; target=&#34;_blank&#34;&gt;公式ドキュメント&lt;/a&gt;を参考に導入してみてください。&lt;/p&gt;
@@ -828,21 +985,21 @@ develop環境やproduction環境など各環境に簡単に設定を変更でき
 &lt;pre&gt;&lt;code&gt;$ go get bitbucket.org/liamstask/goose/cmd/goose
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;dbディレクトリの作成:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;dbディレクトリの作成&lt;/h2&gt;
+&lt;h2 id=&#34;dbディレクトリの作成&#34;&gt;dbディレクトリの作成&lt;/h2&gt;
 
 &lt;p&gt;プロジェクトのルート直下に db ディレクトリを作成します。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ mkdir db
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;configファイルの作成:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;configファイルの作成&lt;/h2&gt;
+&lt;h2 id=&#34;configファイルの作成&#34;&gt;configファイルの作成&lt;/h2&gt;
 
 &lt;p&gt;取得したGooseパッケージのサンプルからconfigファイルをコピーします。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ cp $GOPATH/src/bitbucket.org/liamstask/goose/db-sample/dbconf.yml db/
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;configファイルの編集:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;configファイルの編集&lt;/h2&gt;
+&lt;h2 id=&#34;configファイルの編集&#34;&gt;configファイルの編集&lt;/h2&gt;
 
 &lt;p&gt;まずは先ほどコピーしてきたconfigファイルの中身をのぞいてみます。&lt;br /&gt;
 デフォルトで test / develop / production のそれぞれの環境に PostgreSQL の driver が設定してあるのが、なんとなくわかるかと思います。&lt;/p&gt;
@@ -911,7 +1068,7 @@ Port：3306&lt;br /&gt;
 
 &lt;p&gt;これでDBの設定は完了です。&lt;/p&gt;
 
-&lt;h2 id=&#34;db接続確認:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;DB接続確認&lt;/h2&gt;
+&lt;h2 id=&#34;db接続確認&#34;&gt;DB接続確認&lt;/h2&gt;
 
 &lt;p&gt;goose status コマンドでDBに問題なく接続できているか確認できます。&lt;br /&gt;
 これ以降の goose コマンドも全てプロジェクトルートで実行してください。&lt;/p&gt;
@@ -922,7 +1079,7 @@ goose: status for environment &#39;development&#39;
 
 &lt;p&gt;上記のようにエラーなく表示されたらOKです。&lt;/p&gt;
 
-&lt;h2 id=&#34;マイグレーションファイルの作成:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;マイグレーションファイルの作成&lt;/h2&gt;
+&lt;h2 id=&#34;マイグレーションファイルの作成&#34;&gt;マイグレーションファイルの作成&lt;/h2&gt;
 
 &lt;p&gt;それではDB接続もOKなので、早速マイグレーションファイルを作りましょう。&lt;/p&gt;
 
@@ -964,7 +1121,7 @@ DROP TABLE `users`;
 
 &lt;p&gt;これでマイグレーションファイルの準備はできたので、実際に実行してテーブルが作成されるか確認してみましょう。&lt;/p&gt;
 
-&lt;h2 id=&#34;マイグレーションの実行:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;マイグレーションの実行&lt;/h2&gt;
+&lt;h2 id=&#34;マイグレーションの実行&#34;&gt;マイグレーションの実行&lt;/h2&gt;
 
 &lt;p&gt;goose up コマンドでマイグレーションが実行されます。&lt;/p&gt;
 
@@ -1036,7 +1193,7 @@ mysql&amp;gt; select * from goose_db_version;
 
 &lt;p&gt;usersテーブルが削除されているのが確認できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;goose をつかうことによって、簡単にマイグレーションすることができました。&lt;br /&gt;
 最近、Go言語を使ったプロジェクトも増えてきているようなので、goose もこれからさらに活躍する場面が増えるのではないでしょうか。&lt;/p&gt;

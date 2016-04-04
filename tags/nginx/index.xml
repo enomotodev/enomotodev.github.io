@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Docker on enomotodev</title>
-    <link>http://enomotodev.github.io/tags/docker/</link>
-    <description>Recent content in Docker on enomotodev</description>
+    <title>Nginx on enomotodev</title>
+    <link>http://enomotodev.github.io/tags/nginx/</link>
+    <description>Recent content in Nginx on enomotodev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja_JP</language>
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
     <copyright>(c) 2015 Takafumi Enomoto.</copyright>
     <lastBuildDate>Mon, 04 Apr 2016 23:33:12 +0900</lastBuildDate>
-    <atom:link href="http://enomotodev.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://enomotodev.github.io/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>【 Nginx 編】Mac に Docker インストールしてみた</title>
@@ -160,131 +160,6 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
 &lt;p&gt;Nginx コンテナを起動し、静的コンテンツの表示までできました。&lt;/p&gt;
 
 &lt;p&gt;次回は PHP と連携して、動的なコンテンツの表示も行いたいと思います。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Mac に Docker インストールしてみた</title>
-      <link>http://enomotodev.github.io/post/install-docker-mac/</link>
-      <pubDate>Mon, 28 Mar 2016 12:48:00 +0900</pubDate>
-      <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
-      <guid>http://enomotodev.github.io/post/install-docker-mac/</guid>
-      <description>
-
-&lt;h2 id=&#34;docker-docker-machine-のインストール:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Docker + Docker Machine のインストール&lt;/h2&gt;
-
-&lt;p&gt;まずは、Docker 本体と Docker Machine をインストールします。&lt;/p&gt;
-
-&lt;p&gt;Mac だと Docker を直接的に実行できないのですが、Docker Machine を使用すると、一旦VM上で CoreOS や boot2docker を実行して、その上で簡単に Docker を実行できるようになります。&lt;/p&gt;
-
-&lt;p&gt;インストール自体はどちらも Homebrew で簡単にインストールすることができます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ brew install docker docker-machine
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;machine-の作成:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Machine の作成&lt;/h2&gt;
-
-&lt;p&gt;docker-machine コマンドで新しく Machine を作成します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ docker-machine create -d virtualbox dev-machine
-・・・（省略）
-Setting Docker configuration on the remote daemon...
-Checking connection to Docker...
-Docker is up and running!
-To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env dev-machine
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上記の &lt;code&gt;dev-machine&lt;/code&gt; の部分は Machine の名前になるので、好きな名前をつけてかまいません。&lt;/p&gt;
-
-&lt;p&gt;出力の最終行にVM上の Docker Machine に接続するために &lt;code&gt;docker-machine env dev-machine&lt;/code&gt; を実行してくださいと書かれているので、これを実行します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ docker-machine env dev-machine
-export DOCKER_TLS_VERIFY=&amp;quot;1&amp;quot;
-export DOCKER_HOST=&amp;quot;tcp://192.168.99.100:2376&amp;quot;
-export DOCKER_CERT_PATH=&amp;quot;/path/to/.docker/machine/machines/dev-machine&amp;quot;
-export DOCKER_MACHINE_NAME=&amp;quot;dev-machine&amp;quot;
-# Run this command to configure your shell:
-# eval $(docker-machine env dev-machine)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;docker-machine env dev-machine&lt;/code&gt; を実行すると、環境によって多少異なりますが、このようなかたちで色々表示されるかと思います。&lt;/p&gt;
-
-&lt;p&gt;これは要するに最終行の &lt;code&gt;eval $(docker-machine env dev-machine)&lt;/code&gt; というコマンドを実行すると、Docker に接続するための環境変数が設定されるということです。&lt;/p&gt;
-
-&lt;p&gt;それでは、早速コマンドを実行してみましょう。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ eval $(docker-machine env dev-machine)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;特に何も出力されませんが、これで Docker Machine に接続できるようになりました。&lt;/p&gt;
-
-&lt;h2 id=&#34;docker-machine-に接続する:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Docker Machine に接続する&lt;/h2&gt;
-
-&lt;p&gt;Docker Machine に接続してみます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ docker-machine ssh dev-machine
-                        ##         .
-                  ## ## ##        ==
-               ## ## ## ## ##    ===
-           /&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;\___/ ===
-      ~~~ {~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===- ~~~
-           \______ o           __/
-             \    \         __/
-              \____\_______/
- _                 _   ____     _            _
-| |__   ___   ___ | |_|___ \ __| | ___   ___| | _____ _ __
-| &#39;_ \ / _ \ / _ \| __| __) / _` |/ _ \ / __| |/ / _ \ &#39;__|
-| |_) | (_) | (_) | |_ / __/ (_| | (_) | (__|   &amp;lt;  __/ |
-|_.__/ \___/ \___/ \__|_____\__,_|\___/ \___|_|\_\___|_|
-Boot2Docker version 1.10.3, build master : 625117e - Thu Mar 10 22:09:02 UTC 2016
-Docker version 1.10.3, build 20f81dd
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Docker Machine に接続することができたので、&lt;code&gt;docker pull&lt;/code&gt; コマンドを実行して、Ubuntu のイメージを取得します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ docker pull ubuntu:latest
-latest: Pulling from library/ubuntu
-203137e8afd5: Pull complete
-2ff1bbbe9310: Pull complete
-933ae2486129: Pull complete
-a3ed95caeb02: Pull complete
-Digest: sha256:1bea66e185d3464fec1abda32ffaf2a11de69833cfcf81bd2b9a5be147776814
-Status: Downloaded newer image for ubuntu:latest
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;docker images&lt;/code&gt; コマンドを実行すると Docker Machine 内のイメージ一覧が見れるので、先ほど取得した Ubuntu のイメージがきちんと表示されるか確認してみましょう。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-ubuntu              latest              97434d46f197        3 days ago          188 MB
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;問題なく Ubuntu のイメージが取得できたのが確認できました。&lt;/p&gt;
-
-&lt;h2 id=&#34;mac-から-docker-コマンド実行:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Mac から Docker コマンド実行&lt;/h2&gt;
-
-&lt;p&gt;ここまでは Docker Machine 内で docker コマンドを実行していたので、exit 等して Mac に戻りましょう。&lt;/p&gt;
-
-&lt;p&gt;少し前に &lt;code&gt;eval $(docker-machine env dev-machine)&lt;/code&gt; を実行しましたが、これを実行していれば Mac からも docker コマンドが実行できるので、Docker Machine 内のイメージ一覧を表示させて、docker コマンドがきちんと実行できるか確認します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-ubuntu              latest              97434d46f197        3 days ago          188 MB
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Mac からも docker コマンドが実行できました！&lt;/p&gt;
-
-&lt;h2 id=&#34;まとめ:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;これで Mac に docker の環境を整えることができました。&lt;/p&gt;
-
-&lt;p&gt;ですが、このままでは docker をどのように使うのかイメージがつきづらいと思いますので、次回以降で PHP の開発環境を実際に構築していきたいと思います。&lt;/p&gt;
-
-&lt;h2 id=&#34;つづき:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;つづき&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-nginx/&#34;&gt;【 Nginx 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
