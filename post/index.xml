@@ -9,8 +9,101 @@
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
     <copyright>(c) 2015 Takafumi Enomoto.</copyright>
-    <lastBuildDate>Mon, 04 Apr 2016 23:33:12 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 24 Apr 2016 02:06:12 +0900</lastBuildDate>
     <atom:link href="http://enomotodev.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>【 php-fpm 編】Mac に Docker インストールしてみた</title>
+      <link>http://enomotodev.github.io/post/docker-mac-phpfpm/</link>
+      <pubDate>Sun, 24 Apr 2016 02:06:12 +0900</pubDate>
+      <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
+      <guid>http://enomotodev.github.io/post/docker-mac-phpfpm/</guid>
+      <description>
+
+&lt;p&gt;前回の『&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-nginx/&#34;&gt;【 Nginx 編】Mac に Docker インストールしてみた&lt;/a&gt;』の続きです。&lt;/p&gt;
+
+&lt;h2 id=&#34;コンテナを削除する:bf859996de724851c55a80479476f344&#34;&gt;コンテナを削除する&lt;/h2&gt;
+
+&lt;p&gt;Nginx のコンテナなどが稼働していると思うので、一旦全て削除します&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker rm -f `docker ps -a -q`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;php-fpm-のイメージを-pull-する:bf859996de724851c55a80479476f344&#34;&gt;php-fpm のイメージを pull する&lt;/h2&gt;
+
+&lt;p&gt;公式の php-fpm のイメージを pull します&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull php:fpm
+...（略）
+Status: Downloaded newer image for php:fpm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;php-fpm-のコンテナを起動する:bf859996de724851c55a80479476f344&#34;&gt;php-fpm のコンテナを起動する&lt;/h2&gt;
+
+&lt;p&gt;最初に Document Root に配置する PHP ファイルを作成します&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/docker/www/index.php&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+    phpinfo();
+?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;PHP ファイルの準備ができたら php-fpm のコンテナを起動しましょう&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --name fpm -p 9000:9000 -v /Users/enomotodev/docker/www:/var/www/html -d php:fpm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;--name&lt;/code&gt; オプションで &lt;code&gt;fpm&lt;/code&gt; と指定することによって、&lt;code&gt;fpm&lt;/code&gt; という名前でコンテナを起動しています&lt;/p&gt;
+
+&lt;p&gt;続けて、Nginx のコンテナを起動するのですが、先に前回作成した conf ファイルを編集しましょう&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/docker/nginx/nginx.conf&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;server {
+    listen 8080;
+
+    root /var/www/html;
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass fpm:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+
+        include fastcgi_params;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;conf ファイルの準備ができたので、Nginx のコンテナを起動します&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --name nginx -p 9090:8080 -v /Users/enomotodev/docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf --link fpm -d nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;--link&lt;/code&gt; オプションで &lt;code&gt;fpm&lt;/code&gt; を指定することによって、Nginx コンテナから php-fpm コンテナへの接続ができるようになります&lt;/p&gt;
+
+&lt;p&gt;つまり、conf ファイルの &lt;code&gt;fastcgi_pass fpm:9000;&lt;/code&gt; の部分は php-fpm コンテナの &lt;code&gt;9000&lt;/code&gt; 番ポートに接続するという意味になります&lt;/p&gt;
+
+&lt;p&gt;それでは、ブラウザで確認してみましょう&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/docker-phpfpm.png&#34; alt=&#34;Docker php-fpm ブラウザ確認&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;phpinfo が表示されました！&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ:bf859996de724851c55a80479476f344&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;Nginx と PHP の連携ができたので、次は Database との連携も行い、Docker で PHP 開発環境を構築したいと思います&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>【 Nginx 編】Mac に Docker インストールしてみた</title>
@@ -160,6 +253,12 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
 &lt;p&gt;Nginx コンテナを起動し、静的コンテンツの表示までできました。&lt;/p&gt;
 
 &lt;p&gt;次回は PHP と連携して、動的なコンテンツの表示も行いたいと思います。&lt;/p&gt;
+
+&lt;h2 id=&#34;つづき&#34;&gt;つづき&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-phpfpm/&#34;&gt;【 php-fpm 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
@@ -284,6 +383,7 @@ ubuntu              latest              97434d46f197        3 days ago          
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-nginx/&#34;&gt;【 Nginx 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-phpfpm/&#34;&gt;【 php-fpm 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
@@ -296,11 +396,11 @@ ubuntu              latest              97434d46f197        3 days ago          
       <guid>http://enomotodev.github.io/post/install-jenkins/</guid>
       <description>
 
-&lt;h2 id=&#34;はじめに:0b8386887aeae236e1755802650affbf&#34;&gt;はじめに&lt;/h2&gt;
+&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
 
 &lt;p&gt;今まで Jenkins を使う機会はたくさんあったのですが、インストールや設定周りなどをやったことがなかったので、今回 CentOS 6.7 に実際にインストールして軽く触ってみました。&lt;/p&gt;
 
-&lt;h2 id=&#34;java-をインストールする:0b8386887aeae236e1755802650affbf&#34;&gt;Java をインストールする&lt;/h2&gt;
+&lt;h2 id=&#34;java-をインストールする&#34;&gt;Java をインストールする&lt;/h2&gt;
 
 &lt;p&gt;Jenkins は Java で書かれているので、まずは Java をインストールします。&lt;/p&gt;
 
@@ -315,7 +415,7 @@ OpenJDK Runtime Environment (build 1.8.0_71-b15)
 OpenJDK 64-Bit Server VM (build 25.71-b15, mixed mode)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;jenkins-のインストール:0b8386887aeae236e1755802650affbf&#34;&gt;Jenkins のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;jenkins-のインストール&#34;&gt;Jenkins のインストール&lt;/h2&gt;
 
 &lt;p&gt;Java のインストールが確認できたので、Jenkins のインストールに入っていきます。&lt;/p&gt;
 
@@ -330,7 +430,7 @@ $ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 &lt;pre&gt;&lt;code&gt;$ sudo yum install jenkins
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;jenkins-の起動:0b8386887aeae236e1755802650affbf&#34;&gt;Jenkins の起動&lt;/h2&gt;
+&lt;h2 id=&#34;jenkins-の起動&#34;&gt;Jenkins の起動&lt;/h2&gt;
 
 &lt;p&gt;Jenkins のインストールが完了したので、起動させます。&lt;/p&gt;
 
@@ -349,7 +449,7 @@ Starting Jenkins                                           [  OK  ]
 
 &lt;p&gt;※ アクセスできない人は、SELinux や iptables などの設定を確認してみてください。&lt;/p&gt;
 
-&lt;h2 id=&#34;ジョブの作成:0b8386887aeae236e1755802650affbf&#34;&gt;ジョブの作成&lt;/h2&gt;
+&lt;h2 id=&#34;ジョブの作成&#34;&gt;ジョブの作成&lt;/h2&gt;
 
 &lt;p&gt;インストールも無事にできたので、早速簡単なジョブを追加してみましょう。&lt;/p&gt;
 
@@ -375,7 +475,7 @@ Starting Jenkins                                           [  OK  ]
 &lt;img src=&#34;http://enomotodev.github.io/images/jenkins_new_job6.png&#34; alt=&#34;Jenkinsジョブ作成6&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;まとめ:0b8386887aeae236e1755802650affbf&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;Jenkins をインストールして、簡単なジョブをつくってみました。&lt;/p&gt;
 
@@ -393,14 +493,14 @@ Starting Jenkins                                           [  OK  ]
       <guid>http://enomotodev.github.io/post/closure-table/</guid>
       <description>
 
-&lt;h2 id=&#34;はじめに:ef4e199aa2161f9a59c9d7605338afcb&#34;&gt;はじめに&lt;/h2&gt;
+&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
 
 &lt;p&gt;SQLアンチパターンという本を読んでいたら、再帰的なデータに対して『閉包テーブル（Closure Table）』という考え方があっったので、MySQL 5.6 で試してみました。&lt;br /&gt;
 再帰的なデータとは、例えば上司を1人までもつことができ、部下は複数持つことができる、下記の組織図のようなツリー構造のデータのことを指します。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/soshikizu.png&#34; alt=&#34;組織図&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;テーブル作成:ef4e199aa2161f9a59c9d7605338afcb&#34;&gt;テーブル作成&lt;/h2&gt;
+&lt;h2 id=&#34;テーブル作成&#34;&gt;テーブル作成&lt;/h2&gt;
 
 &lt;p&gt;それでは早速テーブルを作成してみましょう。&lt;/p&gt;
 
@@ -499,7 +599,7 @@ CREATE TABLE `TreePaths` (
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&#34;データ作成:ef4e199aa2161f9a59c9d7605338afcb&#34;&gt;データ作成&lt;/h2&gt;
+&lt;h2 id=&#34;データ作成&#34;&gt;データ作成&lt;/h2&gt;
 
 &lt;p&gt;このあと実際にクエリを発行したりするので、テストデータを INSERT しておきます。&lt;/p&gt;
 
@@ -513,7 +613,7 @@ INSERT INTO `TreePaths` (`ancestor`, `descendant`) VALUES
 (6, 6), (6, 7), (7, 7), (8, 8);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;子を全取得:ef4e199aa2161f9a59c9d7605338afcb&#34;&gt;子を全取得&lt;/h2&gt;
+&lt;h2 id=&#34;子を全取得&#34;&gt;子を全取得&lt;/h2&gt;
 
 &lt;p&gt;子を全取得するのはとても簡単にできます。&lt;br /&gt;
 例えば５の子を全部取得するには TreePaths テーブルで親が５の行を探すだけです。&lt;/p&gt;
@@ -533,7 +633,7 @@ INSERT INTO `TreePaths` (`ancestor`, `descendant`) VALUES
 4 rows in set (0.00 sec)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;親を全取得:ef4e199aa2161f9a59c9d7605338afcb&#34;&gt;親を全取得&lt;/h2&gt;
+&lt;h2 id=&#34;親を全取得&#34;&gt;親を全取得&lt;/h2&gt;
 
 &lt;p&gt;次に、７の親を全部取得してみます。
 先ほどとは逆に TreePaths テーブルで子が７の行を探すだけです。&lt;/p&gt;
@@ -553,7 +653,7 @@ INSERT INTO `TreePaths` (`ancestor`, `descendant`) VALUES
 4 rows in set (0.00 sec)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;データを登録:ef4e199aa2161f9a59c9d7605338afcb&#34;&gt;データを登録&lt;/h2&gt;
+&lt;h2 id=&#34;データを登録&#34;&gt;データを登録&lt;/h2&gt;
 
 &lt;p&gt;IDが４のデータに子をひとつ登録してみましょう。&lt;/p&gt;
 
@@ -569,7 +669,7 @@ UNION ALL
 
 &lt;p&gt;少しわかりづらいかもしれませんが、考え方としてはIDが４の親全てに新規で追加した子のIDを持たせるといった感じです。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:ef4e199aa2161f9a59c9d7605338afcb&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;親一覧の取得、子一覧の取得、データの登録を実際にやってみましたが、どれも比較的簡単なSQLで対応できました。&lt;br /&gt;
 他のメリットとしては、どれだけ階層が深くなっても特に問題がないということです。SQLもどれだけ階層が深くなっても変わりません。&lt;/p&gt;
@@ -586,13 +686,13 @@ UNION ALL
       <guid>http://enomotodev.github.io/post/install-elasticsearch/</guid>
       <description>
 
-&lt;h2 id=&#34;elasticsearch-とは:6c05a264b70b187ee941017a05608421&#34;&gt;Elasticsearch とは&lt;/h2&gt;
+&lt;h2 id=&#34;elasticsearch-とは&#34;&gt;Elasticsearch とは&lt;/h2&gt;
 
 &lt;p&gt;Elasticsearch とは2010年に OSS としてリリースされた分散型全文検索サーバです。&lt;br /&gt;
 実際に CentOS 6.7 にインストールしてつかってみることで Elasticsearch の基本を学んでいきたいと思います。
 &lt;a href=&#34;http://enomotodev.github.io/post/install-fluentd/&#34;&gt;前回の記事&lt;/a&gt;で設定した内容をそのまま使用するので、まだ見てない方はぜひ参照してみてください。&lt;/p&gt;
 
-&lt;h2 id=&#34;elasticsearch-のインストール:6c05a264b70b187ee941017a05608421&#34;&gt;Elasticsearch のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;elasticsearch-のインストール&#34;&gt;Elasticsearch のインストール&lt;/h2&gt;
 
 &lt;p&gt;Elasticsearch は Java で実装されているので、まずは Java をインストールします。&lt;/p&gt;
 
@@ -728,12 +828,12 @@ sudo /opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-elasticsearch
 &lt;p&gt;実際にログを確認できたでしょうか？&lt;br /&gt;
 次はいよいよ Kibana と連携し、ログの可視化について学んでみましょう。&lt;/p&gt;
 
-&lt;h2 id=&#34;kibana-とは:6c05a264b70b187ee941017a05608421&#34;&gt;Kibana とは&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-とは&#34;&gt;Kibana とは&lt;/h2&gt;
 
 &lt;p&gt;Kibana は Elasticsearch に格納されたデータを検索し、グラフなど様々な形で可視化できるツールです。&lt;br /&gt;
 単なる可視化ツールというわけではなく、データの集計・可視化・分析までを統合的にできるツールです。&lt;/p&gt;
 
-&lt;h2 id=&#34;kibana-のインストール:6c05a264b70b187ee941017a05608421&#34;&gt;Kibana のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-のインストール&#34;&gt;Kibana のインストール&lt;/h2&gt;
 
 &lt;p&gt;Kibana をインストールします&lt;/p&gt;
 
@@ -752,13 +852,13 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
 
 &lt;p&gt;無事 Kibana の画面が表示されました&lt;/p&gt;
 
-&lt;h2 id=&#34;kibana-の設定:6c05a264b70b187ee941017a05608421&#34;&gt;Kibana の設定&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-の設定&#34;&gt;Kibana の設定&lt;/h2&gt;
 
 &lt;p&gt;上の画像のページで『index names or pattern』を &lt;code&gt;apache-log-*&lt;/code&gt; に変更して Create ボタンを押します。&lt;/p&gt;
 
 &lt;p&gt;画面上の Discover にアクセスすると最新のログがみれるかと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:6c05a264b70b187ee941017a05608421&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;最後の方、かなり駆け足になってしまいましたが、Elasticsearch と Kibana をインストールして、Apache と fluentd と連携してみました。&lt;br /&gt;
 他にも便利な機能があり、色々とできるみたいなので、私自身もこれからこれらのツールについてさらに学んでいきたいと思います。&lt;/p&gt;
@@ -775,12 +875,12 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
       <guid>http://enomotodev.github.io/post/install-fluentd/</guid>
       <description>
 
-&lt;h2 id=&#34;fluentd-とは&#34;&gt;fluentd とは&lt;/h2&gt;
+&lt;h2 id=&#34;fluentd-とは:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;fluentd とは&lt;/h2&gt;
 
 &lt;p&gt;fluentd とは&lt;a href=&#34;http://www.treasuredata.com/&#34;&gt;Treasure Data&lt;/a&gt;という会社が開発している、さまざまなログの収集手段を提供するログ管理ツールです。&lt;br /&gt;
 今回は CentOS 6.7 で実際にインストールしてつかってみることによって基本的な設定を学んでいきたいと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;td-agent-をインストール&#34;&gt;td-agent をインストール&lt;/h2&gt;
+&lt;h2 id=&#34;td-agent-をインストール:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;td-agent をインストール&lt;/h2&gt;
 
 &lt;p&gt;td-agent ？ となるかと思いますが、td-agent には以下のものが同梱されています。&lt;/p&gt;
 
@@ -802,7 +902,7 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
 &lt;pre&gt;&lt;code&gt;$ sudo /etc/init.d/td-agent start
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;設定ファイルの編集&#34;&gt;設定ファイルの編集&lt;/h2&gt;
+&lt;h2 id=&#34;設定ファイルの編集:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;設定ファイルの編集&lt;/h2&gt;
 
 &lt;p&gt;それでは設定ファイルを編集してみましょう。&lt;br /&gt;
 まずは、ログ収集の設定を行います。なお、デフォルトの設定はすべて削除してしまって問題ありません。&lt;/p&gt;
@@ -860,7 +960,7 @@ access.log.20151114.b524785e8e3b0d946
 
 &lt;p&gt;td-agent によってログが保存されたのが確認できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;ログをmongodbに保存&#34;&gt;ログをMongoDBに保存&lt;/h2&gt;
+&lt;h2 id=&#34;ログをmongodbに保存:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;ログをMongoDBに保存&lt;/h2&gt;
 
 &lt;p&gt;まずは MongoDB をインストールするのでレポジトリを追加します。&lt;/p&gt;
 
@@ -955,7 +1055,7 @@ switched to db fluentd
 
 &lt;p&gt;ログが23件保存されているのが確認できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;fluentd はリモートのサーバにログを送ることもでき、本番環境ではそのような構成になりますが、今回 fluentd の最低限の知識や基本的な設定はこれである程度学ぶことができたかと思います。&lt;br /&gt;
 ここから先の細い設定などは&lt;a href=&#34;http://www.fluentd.org/&#34;&gt;公式サイト&lt;/a&gt;などでさらに学習していきましょう！&lt;/p&gt;

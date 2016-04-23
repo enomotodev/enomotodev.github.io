@@ -99,6 +99,49 @@
       <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
+  <h2><a href="http://enomotodev.github.io/post/docker-mac-phpfpm/">【 php-fpm 編】Mac に Docker インストールしてみた</a>
+</h2>
+
+  <div class="margin-10">
+    <small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2016-04-24">24 Apr, 2016</time>
+</small>
+
+    
+  <i class="fa fa-tags"></i>
+  
+  <a href="http://enomotodev.github.io/tags/docker" class="label label-primary">docker</a>
+  
+  <a href="http://enomotodev.github.io/tags/php-fpm" class="label label-primary">php-fpm</a>
+  
+  <a href="http://enomotodev.github.io/tags/nginx" class="label label-primary">nginx</a>
+  
+
+
+  </div>
+</div>
+
+    <p class="summary">
+  
+  
+    前回の『【 Nginx 編】Mac に Docker インストールしてみた』の続きです。 コンテナを削除する Nginx のコンテナなどが稼働していると思うので、一旦全て削除します $ docker rm -f `docker ps -a -q` php-fpm のイメージを pull する 公式の php-fpm のイメージを pull します $ docker pull php:fpm ...（略） Status: Downloaded newer image for php:fpm php-fpm のコンテナを起動する 最初に Document Root に配置する PHP ファイルを作成します ~/docker/www/index.php &lt;?php phpinfo(); ?&gt; PHP ファイルの準備ができたら php-fpm のコンテナを起動しましょう $ docker run --name fpm -p 9000:9000 -v /Users/enomotodev/docker/www:/var/www/html -d php:fpm --name オプションで fpm と指定することによって、fpm という名前でコンテナを起動しています 続けて、Nginx
+  
+
+
+</p>
+
+
+    <p class="lead"><a href="http://enomotodev.github.io/post/docker-mac-phpfpm/" class="btn btn-default">Read more &rarr;</a></p>
+
+
+  </div>
+</div>
+
+    
+      <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div>
   <h2><a href="http://enomotodev.github.io/post/docker-mac-nginx/">【 Nginx 編】Mac に Docker インストールしてみた</a>
 </h2>
 

@@ -171,12 +171,12 @@
   <div class="container content">
   
 
-<h2 id="fluentd-とは">fluentd とは</h2>
+<h2 id="fluentd-とは:e9b3c303162f7572e08a36920a0a0fa7">fluentd とは</h2>
 
 <p>fluentd とは<a href="http://www.treasuredata.com/">Treasure Data</a>という会社が開発している、さまざまなログの収集手段を提供するログ管理ツールです。<br />
 今回は CentOS 6.7 で実際にインストールしてつかってみることによって基本的な設定を学んでいきたいと思います。</p>
 
-<h2 id="td-agent-をインストール">td-agent をインストール</h2>
+<h2 id="td-agent-をインストール:e9b3c303162f7572e08a36920a0a0fa7">td-agent をインストール</h2>
 
 <p>td-agent ？ となるかと思いますが、td-agent には以下のものが同梱されています。</p>
 
@@ -198,7 +198,7 @@
 <pre><code>$ sudo /etc/init.d/td-agent start
 </code></pre>
 
-<h2 id="設定ファイルの編集">設定ファイルの編集</h2>
+<h2 id="設定ファイルの編集:e9b3c303162f7572e08a36920a0a0fa7">設定ファイルの編集</h2>
 
 <p>それでは設定ファイルを編集してみましょう。<br />
 まずは、ログ収集の設定を行います。なお、デフォルトの設定はすべて削除してしまって問題ありません。</p>
@@ -256,7 +256,7 @@ access.log.20151114.b524785e8e3b0d946
 
 <p>td-agent によってログが保存されたのが確認できました。</p>
 
-<h2 id="ログをmongodbに保存">ログをMongoDBに保存</h2>
+<h2 id="ログをmongodbに保存:e9b3c303162f7572e08a36920a0a0fa7">ログをMongoDBに保存</h2>
 
 <p>まずは MongoDB をインストールするのでレポジトリを追加します。</p>
 
@@ -351,7 +351,7 @@ switched to db fluentd
 
 <p>ログが23件保存されているのが確認できました。</p>
 
-<h2 id="まとめ">まとめ</h2>
+<h2 id="まとめ:e9b3c303162f7572e08a36920a0a0fa7">まとめ</h2>
 
 <p>fluentd はリモートのサーバにログを送ることもでき、本番環境ではそのような構成になりますが、今回 fluentd の最低限の知識や基本的な設定はこれである程度学ぶことができたかと思います。<br />
 ここから先の細い設定などは<a href="http://www.fluentd.org/">公式サイト</a>などでさらに学習していきましょう！</p>

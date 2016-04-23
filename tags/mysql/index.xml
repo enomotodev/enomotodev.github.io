@@ -20,14 +20,14 @@
       <guid>http://enomotodev.github.io/post/closure-table/</guid>
       <description>
 
-&lt;h2 id=&#34;はじめに:ef4e199aa2161f9a59c9d7605338afcb&#34;&gt;はじめに&lt;/h2&gt;
+&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
 
 &lt;p&gt;SQLアンチパターンという本を読んでいたら、再帰的なデータに対して『閉包テーブル（Closure Table）』という考え方があっったので、MySQL 5.6 で試してみました。&lt;br /&gt;
 再帰的なデータとは、例えば上司を1人までもつことができ、部下は複数持つことができる、下記の組織図のようなツリー構造のデータのことを指します。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/soshikizu.png&#34; alt=&#34;組織図&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;テーブル作成:ef4e199aa2161f9a59c9d7605338afcb&#34;&gt;テーブル作成&lt;/h2&gt;
+&lt;h2 id=&#34;テーブル作成&#34;&gt;テーブル作成&lt;/h2&gt;
 
 &lt;p&gt;それでは早速テーブルを作成してみましょう。&lt;/p&gt;
 
@@ -126,7 +126,7 @@ CREATE TABLE `TreePaths` (
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&#34;データ作成:ef4e199aa2161f9a59c9d7605338afcb&#34;&gt;データ作成&lt;/h2&gt;
+&lt;h2 id=&#34;データ作成&#34;&gt;データ作成&lt;/h2&gt;
 
 &lt;p&gt;このあと実際にクエリを発行したりするので、テストデータを INSERT しておきます。&lt;/p&gt;
 
@@ -140,7 +140,7 @@ INSERT INTO `TreePaths` (`ancestor`, `descendant`) VALUES
 (6, 6), (6, 7), (7, 7), (8, 8);
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;子を全取得:ef4e199aa2161f9a59c9d7605338afcb&#34;&gt;子を全取得&lt;/h2&gt;
+&lt;h2 id=&#34;子を全取得&#34;&gt;子を全取得&lt;/h2&gt;
 
 &lt;p&gt;子を全取得するのはとても簡単にできます。&lt;br /&gt;
 例えば５の子を全部取得するには TreePaths テーブルで親が５の行を探すだけです。&lt;/p&gt;
@@ -160,7 +160,7 @@ INSERT INTO `TreePaths` (`ancestor`, `descendant`) VALUES
 4 rows in set (0.00 sec)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;親を全取得:ef4e199aa2161f9a59c9d7605338afcb&#34;&gt;親を全取得&lt;/h2&gt;
+&lt;h2 id=&#34;親を全取得&#34;&gt;親を全取得&lt;/h2&gt;
 
 &lt;p&gt;次に、７の親を全部取得してみます。
 先ほどとは逆に TreePaths テーブルで子が７の行を探すだけです。&lt;/p&gt;
@@ -180,7 +180,7 @@ INSERT INTO `TreePaths` (`ancestor`, `descendant`) VALUES
 4 rows in set (0.00 sec)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;データを登録:ef4e199aa2161f9a59c9d7605338afcb&#34;&gt;データを登録&lt;/h2&gt;
+&lt;h2 id=&#34;データを登録&#34;&gt;データを登録&lt;/h2&gt;
 
 &lt;p&gt;IDが４のデータに子をひとつ登録してみましょう。&lt;/p&gt;
 
@@ -196,7 +196,7 @@ UNION ALL
 
 &lt;p&gt;少しわかりづらいかもしれませんが、考え方としてはIDが４の親全てに新規で追加した子のIDを持たせるといった感じです。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:ef4e199aa2161f9a59c9d7605338afcb&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;親一覧の取得、子一覧の取得、データの登録を実際にやってみましたが、どれも比較的簡単なSQLで対応できました。&lt;br /&gt;
 他のメリットとしては、どれだけ階層が深くなっても特に問題がないということです。SQLもどれだけ階層が深くなっても変わりません。&lt;/p&gt;

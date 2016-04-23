@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>CentOS に Jenkins インストールしてみた  &middot; enomotodev</title>
+  <title>【 php-fpm 編】Mac に Docker インストールしてみた  &middot; enomotodev</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -14,25 +14,27 @@
 
 <meta name="description" content="" />
 
-<meta name="keywords" content="jenkins, centos, ">
+<meta name="keywords" content="docker, php-fpm, nginx, ">
 
 
-<meta property="og:title" content="CentOS に Jenkins インストールしてみた  &middot; enomotodev ">
+<meta property="og:title" content="【 php-fpm 編】Mac に Docker インストールしてみた  &middot; enomotodev ">
 <meta property="og:site_name" content="enomotodev"/>
-<meta property="og:url" content="http://enomotodev.github.io/post/install-jenkins/" />
+<meta property="og:url" content="http://enomotodev.github.io/post/docker-mac-phpfpm/" />
 <meta property="og:locale" content="ja_JP">
 
 
 <meta property="og:type" content="article" />
 <meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2016-02-04T22:33:24&#43;09:00" />
-<meta property="og:article:modified_time" content="2016-02-04T22:33:24&#43;09:00" />
+<meta property="og:article:published_time" content="2016-04-24T02:06:12&#43;09:00" />
+<meta property="og:article:modified_time" content="2016-04-24T02:06:12&#43;09:00" />
 
   
     
-<meta property="og:article:tag" content="jenkins">
+<meta property="og:article:tag" content="docker">
     
-<meta property="og:article:tag" content="centos">
+<meta property="og:article:tag" content="php-fpm">
+    
+<meta property="og:article:tag" content="nginx">
     
   
 
@@ -42,20 +44,20 @@
   {
     "@context": "http://schema.org",
     "@type": "Article",
-    "headline": "CentOS に Jenkins インストールしてみた",
+    "headline": "【 php-fpm 編】Mac に Docker インストールしてみた",
     "author": {
       "@type": "Person",
       "name": "http://profiles.google.com/+?rel=author"
     },
-    "datePublished": "2016-02-04",
+    "datePublished": "2016-04-24",
     "description": "",
-    "wordCount":  124 
+    "wordCount":  152 
   }
 </script>
 
 
 
-<link rel="canonical" href="http://enomotodev.github.io/post/install-jenkins/" />
+<link rel="canonical" href="http://enomotodev.github.io/post/docker-mac-phpfpm/" />
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://enomotodev.github.io/touch-icon-144-precomposed.png">
 <link href="http://enomotodev.github.io/favicon.png" rel="icon">
@@ -124,28 +126,30 @@
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <div class="text-center">
 
-    <h1>CentOS に Jenkins インストールしてみた
+    <h1>【 php-fpm 編】Mac に Docker インストールしてみた
 </h1>
 
     <div class="metas">
 <small>
   <i class="fa fa-calendar"></i>
-  <time datetime="2016-02-04">4 Feb, 2016</time>
+  <time datetime="2016-04-24">24 Apr, 2016</time>
 </small>
 
 
   <small>
   &middot; Read in about 1 min
-  &middot; (124 Words)
+  &middot; (152 Words)
 </small>
 
 
 <div class="margin-10">
   <i class="fa fa-tags"></i>
   
-  <a href="http://enomotodev.github.io/tags/jenkins" class="label label-primary">jenkins</a>
+  <a href="http://enomotodev.github.io/tags/docker" class="label label-primary">docker</a>
   
-  <a href="http://enomotodev.github.io/tags/centos" class="label label-primary">centos</a>
+  <a href="http://enomotodev.github.io/tags/php-fpm" class="label label-primary">php-fpm</a>
+  
+  <a href="http://enomotodev.github.io/tags/nginx" class="label label-primary">nginx</a>
   
 
 
@@ -159,92 +163,88 @@
   <div class="container content">
   
 
-<h2 id="はじめに">はじめに</h2>
+<p>前回の『<a href="/post/docker-mac-nginx/">【 Nginx 編】Mac に Docker インストールしてみた</a>』の続きです。</p>
 
-<p>今まで Jenkins を使う機会はたくさんあったのですが、インストールや設定周りなどをやったことがなかったので、今回 CentOS 6.7 に実際にインストールして軽く触ってみました。</p>
+<h2 id="コンテナを削除する:bf859996de724851c55a80479476f344">コンテナを削除する</h2>
 
-<h2 id="java-をインストールする">Java をインストールする</h2>
+<p>Nginx のコンテナなどが稼働していると思うので、一旦全て削除します</p>
 
-<p>Jenkins は Java で書かれているので、まずは Java をインストールします。</p>
-
-<pre><code>$ sudo yum install java-1.8.0-openjdk java-1.8.0-openjdk-devel
+<pre><code>$ docker rm -f `docker ps -a -q`
 </code></pre>
 
-<p>Java がちゃんとインストールできているか確認します。</p>
+<h2 id="php-fpm-のイメージを-pull-する:bf859996de724851c55a80479476f344">php-fpm のイメージを pull する</h2>
 
-<pre><code>$ java -version
-openjdk version &quot;1.8.0_71&quot;
-OpenJDK Runtime Environment (build 1.8.0_71-b15)
-OpenJDK 64-Bit Server VM (build 25.71-b15, mixed mode)
+<p>公式の php-fpm のイメージを pull します</p>
+
+<pre><code>$ docker pull php:fpm
+...（略）
+Status: Downloaded newer image for php:fpm
 </code></pre>
 
-<h2 id="jenkins-のインストール">Jenkins のインストール</h2>
+<h2 id="php-fpm-のコンテナを起動する:bf859996de724851c55a80479476f344">php-fpm のコンテナを起動する</h2>
 
-<p>Java のインストールが確認できたので、Jenkins のインストールに入っていきます。</p>
+<p>最初に Document Root に配置する PHP ファイルを作成します</p>
 
-<p>まずは、Jenkins のレポジトリを追加します。</p>
+<ul>
+<li><code>~/docker/www/index.php</code></li>
+</ul>
 
-<pre><code>$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
-$ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+<pre><code>&lt;?php
+    phpinfo();
+?&gt;
 </code></pre>
 
-<p>Jenkins のレポジトリを追加できたので、Jenkins をインストールします。</p>
+<p>PHP ファイルの準備ができたら php-fpm のコンテナを起動しましょう</p>
 
-<pre><code>$ sudo yum install jenkins
+<pre><code>$ docker run --name fpm -p 9000:9000 -v /Users/enomotodev/docker/www:/var/www/html -d php:fpm
 </code></pre>
 
-<h2 id="jenkins-の起動">Jenkins の起動</h2>
+<p><code>--name</code> オプションで <code>fpm</code> と指定することによって、<code>fpm</code> という名前でコンテナを起動しています</p>
 
-<p>Jenkins のインストールが完了したので、起動させます。</p>
+<p>続けて、Nginx のコンテナを起動するのですが、先に前回作成した conf ファイルを編集しましょう</p>
 
-<pre><code>$ sudo /etc/init.d/jenkins start
-Starting Jenkins                                           [  OK  ]
+<ul>
+<li><code>~/docker/nginx/nginx.conf</code></li>
+</ul>
+
+<pre><code>server {
+    listen 8080;
+
+    root /var/www/html;
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass fpm:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+
+        include fastcgi_params;
+    }
+}
 </code></pre>
 
-<p>再起動時にも自動で起動するように設定しておきます。</p>
+<p>conf ファイルの準備ができたので、Nginx のコンテナを起動します</p>
 
-<pre><code>$ sudo chkconfig jenkins on
+<pre><code>$ docker run --name nginx -p 9090:8080 -v /Users/enomotodev/docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf --link fpm -d nginx
 </code></pre>
 
-<p>Jenkins はデフォルトでは 8080 ポートを使用するようなので、http://[ドメイン名]:8080 にアクセスすると、下記のような画面が表示されると思います。</p>
+<p><code>--link</code> オプションで <code>fpm</code> を指定することによって、Nginx コンテナから php-fpm コンテナへの接続ができるようになります</p>
 
-<p><img src="/images/start_jenkins.png" alt="Jenkinsスタート画面" class="image" /></p>
+<p>つまり、conf ファイルの <code>fastcgi_pass fpm:9000;</code> の部分は php-fpm コンテナの <code>9000</code> 番ポートに接続するという意味になります</p>
 
-<p>※ アクセスできない人は、SELinux や iptables などの設定を確認してみてください。</p>
+<p>それでは、ブラウザで確認してみましょう</p>
 
-<h2 id="ジョブの作成">ジョブの作成</h2>
+<p><img src="/images/docker-phpfpm.png" alt="Docker php-fpm ブラウザ確認" class="image" /></p>
 
-<p>インストールも無事にできたので、早速簡単なジョブを追加してみましょう。</p>
+<p>phpinfo が表示されました！</p>
 
-<ol>
-<li><p>画面左上の「新規ジョブ作成」をクリック。
-<img src="/images/jenkins_new_job.png" alt="Jenkinsジョブ作成" class="image" /></p></li>
+<h2 id="まとめ:bf859996de724851c55a80479476f344">まとめ</h2>
 
-<li><p>ジョブ名を「test」にして、「フリースタイル・プロジェクトのビルド」を選択して OK をクリック。
-<img src="/images/jenkins_new_job2.png" alt="Jenkinsジョブ作成2" class="image" /></p></li>
-
-<li><p>「ビルド」の「ビルド手順の追加」から「シェルの実行」を追加。
-<img src="/images/jenkins_new_job3.png" alt="Jenkinsジョブ作成3" class="image" /></p></li>
-
-<li><p>シェルスクリプトのテキストエリアに「echo &lsquo;Hello Jenkins !!&lsquo;」と入力して、保存します。</p></li>
-
-<li><p>Jenkins の TOP に戻るとジョブの一覧が表示されているので、ここから今作成した test ジョブのビルドを実行します。
-<img src="/images/jenkins_new_job4.png" alt="Jenkinsジョブ作成5" class="image" /></p></li>
-
-<li><p>すぐにビルドが完了すると思いますので、「最新の成功ビルド」から「コンソール出力」を選択します。
-<img src="/images/jenkins_new_job5.png" alt="Jenkinsジョブ作成5" class="image" /></p></li>
-
-<li><p>「Hello Jenkins !!」と出力されているのが確認できました！
-<img src="/images/jenkins_new_job6.png" alt="Jenkinsジョブ作成6" class="image" /></p></li>
-</ol>
-
-<h2 id="まとめ">まとめ</h2>
-
-<p>Jenkins をインストールして、簡単なジョブをつくってみました。</p>
-
-<p>実際にはいろんなライブラリを入れたり、ユーザーの設定を行ったりなど色々ありますが、インストール自体はそれほど難しくないのかなという印象を受けました。</p>
-
-<p>Jenkins の機能はあまり詳しくないので、これから勉強していきたいです。</p>
+<p>Nginx と PHP の連携ができたので、次は Database との連携も行い、Docker で PHP 開発環境を構築したいと思います</p>
 
 </div>
 
@@ -256,18 +256,12 @@ Starting Jenkins                                           [  OK  ]
     <nav><ul class="pager">
     
         <li class="previous">
-          <a href="http://enomotodev.github.io/post/closure-table/" title="閉包テーブル（Closure Table）を試してみた">
+          <a href="http://enomotodev.github.io/post/docker-mac-nginx/" title="【 Nginx 編】Mac に Docker インストールしてみた">
             <span aria-hidden="true">&larr;</span>Previous
           </a>
         </li>
     
 
-    
-      <li class="next">
-        <a href="http://enomotodev.github.io/post/install-docker-mac/" title="Mac に Docker インストールしてみた">
-            Next <span aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
     
     </ul> </nav>
   

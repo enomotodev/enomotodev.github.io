@@ -20,13 +20,13 @@
       <guid>http://enomotodev.github.io/post/install-elasticsearch/</guid>
       <description>
 
-&lt;h2 id=&#34;elasticsearch-とは:6c05a264b70b187ee941017a05608421&#34;&gt;Elasticsearch とは&lt;/h2&gt;
+&lt;h2 id=&#34;elasticsearch-とは&#34;&gt;Elasticsearch とは&lt;/h2&gt;
 
 &lt;p&gt;Elasticsearch とは2010年に OSS としてリリースされた分散型全文検索サーバです。&lt;br /&gt;
 実際に CentOS 6.7 にインストールしてつかってみることで Elasticsearch の基本を学んでいきたいと思います。
 &lt;a href=&#34;http://enomotodev.github.io/post/install-fluentd/&#34;&gt;前回の記事&lt;/a&gt;で設定した内容をそのまま使用するので、まだ見てない方はぜひ参照してみてください。&lt;/p&gt;
 
-&lt;h2 id=&#34;elasticsearch-のインストール:6c05a264b70b187ee941017a05608421&#34;&gt;Elasticsearch のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;elasticsearch-のインストール&#34;&gt;Elasticsearch のインストール&lt;/h2&gt;
 
 &lt;p&gt;Elasticsearch は Java で実装されているので、まずは Java をインストールします。&lt;/p&gt;
 
@@ -162,12 +162,12 @@ sudo /opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-elasticsearch
 &lt;p&gt;実際にログを確認できたでしょうか？&lt;br /&gt;
 次はいよいよ Kibana と連携し、ログの可視化について学んでみましょう。&lt;/p&gt;
 
-&lt;h2 id=&#34;kibana-とは:6c05a264b70b187ee941017a05608421&#34;&gt;Kibana とは&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-とは&#34;&gt;Kibana とは&lt;/h2&gt;
 
 &lt;p&gt;Kibana は Elasticsearch に格納されたデータを検索し、グラフなど様々な形で可視化できるツールです。&lt;br /&gt;
 単なる可視化ツールというわけではなく、データの集計・可視化・分析までを統合的にできるツールです。&lt;/p&gt;
 
-&lt;h2 id=&#34;kibana-のインストール:6c05a264b70b187ee941017a05608421&#34;&gt;Kibana のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-のインストール&#34;&gt;Kibana のインストール&lt;/h2&gt;
 
 &lt;p&gt;Kibana をインストールします&lt;/p&gt;
 
@@ -186,13 +186,13 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
 
 &lt;p&gt;無事 Kibana の画面が表示されました&lt;/p&gt;
 
-&lt;h2 id=&#34;kibana-の設定:6c05a264b70b187ee941017a05608421&#34;&gt;Kibana の設定&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-の設定&#34;&gt;Kibana の設定&lt;/h2&gt;
 
 &lt;p&gt;上の画像のページで『index names or pattern』を &lt;code&gt;apache-log-*&lt;/code&gt; に変更して Create ボタンを押します。&lt;/p&gt;
 
 &lt;p&gt;画面上の Discover にアクセスすると最新のログがみれるかと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:6c05a264b70b187ee941017a05608421&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;最後の方、かなり駆け足になってしまいましたが、Elasticsearch と Kibana をインストールして、Apache と fluentd と連携してみました。&lt;br /&gt;
 他にも便利な機能があり、色々とできるみたいなので、私自身もこれからこれらのツールについてさらに学んでいきたいと思います。&lt;/p&gt;
@@ -209,12 +209,12 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
       <guid>http://enomotodev.github.io/post/install-fluentd/</guid>
       <description>
 
-&lt;h2 id=&#34;fluentd-とは&#34;&gt;fluentd とは&lt;/h2&gt;
+&lt;h2 id=&#34;fluentd-とは:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;fluentd とは&lt;/h2&gt;
 
 &lt;p&gt;fluentd とは&lt;a href=&#34;http://www.treasuredata.com/&#34;&gt;Treasure Data&lt;/a&gt;という会社が開発している、さまざまなログの収集手段を提供するログ管理ツールです。&lt;br /&gt;
 今回は CentOS 6.7 で実際にインストールしてつかってみることによって基本的な設定を学んでいきたいと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;td-agent-をインストール&#34;&gt;td-agent をインストール&lt;/h2&gt;
+&lt;h2 id=&#34;td-agent-をインストール:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;td-agent をインストール&lt;/h2&gt;
 
 &lt;p&gt;td-agent ？ となるかと思いますが、td-agent には以下のものが同梱されています。&lt;/p&gt;
 
@@ -236,7 +236,7 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
 &lt;pre&gt;&lt;code&gt;$ sudo /etc/init.d/td-agent start
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;設定ファイルの編集&#34;&gt;設定ファイルの編集&lt;/h2&gt;
+&lt;h2 id=&#34;設定ファイルの編集:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;設定ファイルの編集&lt;/h2&gt;
 
 &lt;p&gt;それでは設定ファイルを編集してみましょう。&lt;br /&gt;
 まずは、ログ収集の設定を行います。なお、デフォルトの設定はすべて削除してしまって問題ありません。&lt;/p&gt;
@@ -294,7 +294,7 @@ access.log.20151114.b524785e8e3b0d946
 
 &lt;p&gt;td-agent によってログが保存されたのが確認できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;ログをmongodbに保存&#34;&gt;ログをMongoDBに保存&lt;/h2&gt;
+&lt;h2 id=&#34;ログをmongodbに保存:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;ログをMongoDBに保存&lt;/h2&gt;
 
 &lt;p&gt;まずは MongoDB をインストールするのでレポジトリを追加します。&lt;/p&gt;
 
@@ -389,7 +389,7 @@ switched to db fluentd
 
 &lt;p&gt;ログが23件保存されているのが確認できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;fluentd はリモートのサーバにログを送ることもでき、本番環境ではそのような構成になりますが、今回 fluentd の最低限の知識や基本的な設定はこれである程度学ぶことができたかと思います。&lt;br /&gt;
 ここから先の細い設定などは&lt;a href=&#34;http://www.fluentd.org/&#34;&gt;公式サイト&lt;/a&gt;などでさらに学習していきましょう！&lt;/p&gt;

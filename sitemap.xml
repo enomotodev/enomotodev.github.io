@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://enomotodev.github.io/</loc>
-    <lastmod>2016-04-04T23:33:12+09:00</lastmod>
+    <lastmod>2016-04-24T02:06:12+09:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://enomotodev.github.io/post/docker-mac-phpfpm/</loc>
+    <lastmod>2016-04-24T02:06:12+09:00</lastmod>
   </url>
   
   <url>
