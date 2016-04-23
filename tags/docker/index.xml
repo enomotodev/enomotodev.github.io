@@ -24,7 +24,7 @@
 
 &lt;p&gt;実際に Nginx + PHP + MySQL 環境を構築するにあたって、今回は Nginx コンテナを起動させて、静的コンテンツの表示までを行いたいと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;docker-machine-の起動:ee5f04b0a2beb8064a932015afbd96b5&#34;&gt;Docker Machine の起動&lt;/h2&gt;
+&lt;h2 id=&#34;docker-machine-の起動&#34;&gt;Docker Machine の起動&lt;/h2&gt;
 
 &lt;p&gt;前回から、PC をシャットダウンしたり、再起動している場合は、もう一度 Docker Machine を起動させなければいけないので、下記のコマンドで起動させてください。（それ以外の方は次の『Nginx コンテナを起動させる』から読んでください）&lt;/p&gt;
 
@@ -58,7 +58,7 @@ ubuntu              latest              97434d46f197        2 weeks ago         
 
 &lt;p&gt;無事 &lt;code&gt;docker images&lt;/code&gt; コマンドが実行できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;nginx-コンテナを起動させる:ee5f04b0a2beb8064a932015afbd96b5&#34;&gt;Nginx コンテナを起動させる&lt;/h2&gt;
+&lt;h2 id=&#34;nginx-コンテナを起動させる&#34;&gt;Nginx コンテナを起動させる&lt;/h2&gt;
 
 &lt;p&gt;まずは &lt;code&gt;docker pull&lt;/code&gt; コマンドを実行して、Nginx のイメージを取得します。&lt;/p&gt;
 
@@ -107,7 +107,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
 
 &lt;p&gt;最低限の設定ですが、必要なファイルが準備できたので、&lt;code&gt;docker run&lt;/code&gt; コマンドで Nginx コンテナを起動します。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ docker run -p 9000:8080 -v /Users/enomotodev/docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf -v /Users/enomotodev/docker/www:/var/www -d nginx
+&lt;pre&gt;&lt;code&gt;$ docker run -p 9090:8080 -v /Users/enomotodev/docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf -v /Users/enomotodev/docker/www:/var/www -d nginx
 0902e290559b4a054d72b4cf2615334079cfa879df1cc35d9655d0f0e217c462
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -119,7 +119,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
 
 &lt;p&gt;&lt;code&gt;-p&lt;/code&gt; オプションでポートマッピングの設定ができます。&lt;/p&gt;
 
-&lt;p&gt;『Mac -&amp;gt; Docker Machine -&amp;gt; Nginx コンテナ』という流れで Nginx に接続していて、今回は &lt;code&gt;9000:8080&lt;/code&gt; と設定しているので、『Mac -&amp;gt; Docker Machine』の接続に &lt;code&gt;9000&lt;/code&gt; ポート、『Docker Machine -&amp;gt; Nginx コンテナ』の接続に &lt;code&gt;8080&lt;/code&gt; ポートを使用するという設定になっています。&lt;/p&gt;
+&lt;p&gt;『Mac -&amp;gt; Docker Machine -&amp;gt; Nginx コンテナ』という流れで Nginx に接続していて、今回は &lt;code&gt;9090:8080&lt;/code&gt; と設定しているので、『Mac -&amp;gt; Docker Machine』の接続に &lt;code&gt;9090&lt;/code&gt; ポート、『Docker Machine -&amp;gt; Nginx コンテナ』の接続に &lt;code&gt;8080&lt;/code&gt; ポートを使用するという設定になっています。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;-v&lt;/code&gt; オプション&lt;/li&gt;
@@ -137,7 +137,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
 
 &lt;p&gt;&lt;code&gt;-d&lt;/code&gt; オプションを使用するとコンテナをバックグラウンドモードで起動することができます。&lt;/p&gt;
 
-&lt;h2 id=&#34;nginx-コンテナの起動確認:ee5f04b0a2beb8064a932015afbd96b5&#34;&gt;Nginx コンテナの起動確認&lt;/h2&gt;
+&lt;h2 id=&#34;nginx-コンテナの起動確認&#34;&gt;Nginx コンテナの起動確認&lt;/h2&gt;
 
 &lt;p&gt;Nginx コンテナを起動させたので Docker Machine の IP を確認して、接続してみましょう。&lt;/p&gt;
 
@@ -155,7 +155,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
 
 &lt;p&gt;無事に表示されました！&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:ee5f04b0a2beb8064a932015afbd96b5&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;Nginx コンテナを起動し、静的コンテンツの表示までできました。&lt;/p&gt;
 
@@ -171,7 +171,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
       <guid>http://enomotodev.github.io/post/install-docker-mac/</guid>
       <description>
 
-&lt;h2 id=&#34;docker-docker-machine-のインストール:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Docker + Docker Machine のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;docker-docker-machine-のインストール&#34;&gt;Docker + Docker Machine のインストール&lt;/h2&gt;
 
 &lt;p&gt;まずは、Docker 本体と Docker Machine をインストールします。&lt;/p&gt;
 
@@ -182,7 +182,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
 &lt;pre&gt;&lt;code&gt;$ brew install docker docker-machine
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;machine-の作成:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Machine の作成&lt;/h2&gt;
+&lt;h2 id=&#34;machine-の作成&#34;&gt;Machine の作成&lt;/h2&gt;
 
 &lt;p&gt;docker-machine コマンドで新しく Machine を作成します。&lt;/p&gt;
 
@@ -218,7 +218,7 @@ export DOCKER_MACHINE_NAME=&amp;quot;dev-machine&amp;quot;
 
 &lt;p&gt;特に何も出力されませんが、これで Docker Machine に接続できるようになりました。&lt;/p&gt;
 
-&lt;h2 id=&#34;docker-machine-に接続する:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Docker Machine に接続する&lt;/h2&gt;
+&lt;h2 id=&#34;docker-machine-に接続する&#34;&gt;Docker Machine に接続する&lt;/h2&gt;
 
 &lt;p&gt;Docker Machine に接続してみます。&lt;/p&gt;
 
@@ -261,7 +261,7 @@ ubuntu              latest              97434d46f197        3 days ago          
 
 &lt;p&gt;問題なく Ubuntu のイメージが取得できたのが確認できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;mac-から-docker-コマンド実行:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Mac から Docker コマンド実行&lt;/h2&gt;
+&lt;h2 id=&#34;mac-から-docker-コマンド実行&#34;&gt;Mac から Docker コマンド実行&lt;/h2&gt;
 
 &lt;p&gt;ここまでは Docker Machine 内で docker コマンドを実行していたので、exit 等して Mac に戻りましょう。&lt;/p&gt;
 
@@ -274,13 +274,13 @@ ubuntu              latest              97434d46f197        3 days ago          
 
 &lt;p&gt;Mac からも docker コマンドが実行できました！&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;これで Mac に docker の環境を整えることができました。&lt;/p&gt;
 
 &lt;p&gt;ですが、このままでは docker をどのように使うのかイメージがつきづらいと思いますので、次回以降で PHP の開発環境を実際に構築していきたいと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;つづき:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;つづき&lt;/h2&gt;
+&lt;h2 id=&#34;つづき&#34;&gt;つづき&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-nginx/&#34;&gt;【 Nginx 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;

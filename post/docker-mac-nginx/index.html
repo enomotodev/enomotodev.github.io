@@ -163,7 +163,7 @@
 
 <p>実際に Nginx + PHP + MySQL 環境を構築するにあたって、今回は Nginx コンテナを起動させて、静的コンテンツの表示までを行いたいと思います。</p>
 
-<h2 id="docker-machine-の起動:ee5f04b0a2beb8064a932015afbd96b5">Docker Machine の起動</h2>
+<h2 id="docker-machine-の起動">Docker Machine の起動</h2>
 
 <p>前回から、PC をシャットダウンしたり、再起動している場合は、もう一度 Docker Machine を起動させなければいけないので、下記のコマンドで起動させてください。（それ以外の方は次の『Nginx コンテナを起動させる』から読んでください）</p>
 
@@ -197,7 +197,7 @@ ubuntu              latest              97434d46f197        2 weeks ago         
 
 <p>無事 <code>docker images</code> コマンドが実行できました。</p>
 
-<h2 id="nginx-コンテナを起動させる:ee5f04b0a2beb8064a932015afbd96b5">Nginx コンテナを起動させる</h2>
+<h2 id="nginx-コンテナを起動させる">Nginx コンテナを起動させる</h2>
 
 <p>まずは <code>docker pull</code> コマンドを実行して、Nginx のイメージを取得します。</p>
 
@@ -246,7 +246,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
 
 <p>最低限の設定ですが、必要なファイルが準備できたので、<code>docker run</code> コマンドで Nginx コンテナを起動します。</p>
 
-<pre><code>$ docker run -p 9000:8080 -v /Users/enomotodev/docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf -v /Users/enomotodev/docker/www:/var/www -d nginx
+<pre><code>$ docker run -p 9090:8080 -v /Users/enomotodev/docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf -v /Users/enomotodev/docker/www:/var/www -d nginx
 0902e290559b4a054d72b4cf2615334079cfa879df1cc35d9655d0f0e217c462
 </code></pre>
 
@@ -258,7 +258,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
 
 <p><code>-p</code> オプションでポートマッピングの設定ができます。</p>
 
-<p>『Mac -&gt; Docker Machine -&gt; Nginx コンテナ』という流れで Nginx に接続していて、今回は <code>9000:8080</code> と設定しているので、『Mac -&gt; Docker Machine』の接続に <code>9000</code> ポート、『Docker Machine -&gt; Nginx コンテナ』の接続に <code>8080</code> ポートを使用するという設定になっています。</p>
+<p>『Mac -&gt; Docker Machine -&gt; Nginx コンテナ』という流れで Nginx に接続していて、今回は <code>9090:8080</code> と設定しているので、『Mac -&gt; Docker Machine』の接続に <code>9090</code> ポート、『Docker Machine -&gt; Nginx コンテナ』の接続に <code>8080</code> ポートを使用するという設定になっています。</p>
 
 <ul>
 <li><code>-v</code> オプション</li>
@@ -276,7 +276,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
 
 <p><code>-d</code> オプションを使用するとコンテナをバックグラウンドモードで起動することができます。</p>
 
-<h2 id="nginx-コンテナの起動確認:ee5f04b0a2beb8064a932015afbd96b5">Nginx コンテナの起動確認</h2>
+<h2 id="nginx-コンテナの起動確認">Nginx コンテナの起動確認</h2>
 
 <p>Nginx コンテナを起動させたので Docker Machine の IP を確認して、接続してみましょう。</p>
 
@@ -294,7 +294,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
 
 <p>無事に表示されました！</p>
 
-<h2 id="まとめ:ee5f04b0a2beb8064a932015afbd96b5">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 
 <p>Nginx コンテナを起動し、静的コンテンツの表示までできました。</p>
 

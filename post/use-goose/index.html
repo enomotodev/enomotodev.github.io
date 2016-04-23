@@ -167,12 +167,12 @@
   <div class="container content">
   
 
-<h2 id="gooseとは">Gooseとは</h2>
+<h2 id="gooseとは:8514db67a0f0851bcd6441e94b5eb4e6">Gooseとは</h2>
 
 <p>GooseとはGo言語で作られたDBマイグレーションツールです。<br />
 develop環境やproduction環境など各環境に簡単に設定を変更でき、かなり便利そうなので実際にMySQLで試してみました。</p>
 
-<h2 id="gooseパッケージの取得">Gooseパッケージの取得</h2>
+<h2 id="gooseパッケージの取得:8514db67a0f0851bcd6441e94b5eb4e6">Gooseパッケージの取得</h2>
 
 <p>まずは go get して Goose パッケージを取得します。<br />
 ※ Goをインストールしていない人や、GOPATHを設定していない人は<a href="http://golang-jp.org/doc/install#install" target="_blank">公式ドキュメント</a>を参考に導入してみてください。</p>
@@ -180,21 +180,21 @@ develop環境やproduction環境など各環境に簡単に設定を変更でき
 <pre><code>$ go get bitbucket.org/liamstask/goose/cmd/goose
 </code></pre>
 
-<h2 id="dbディレクトリの作成">dbディレクトリの作成</h2>
+<h2 id="dbディレクトリの作成:8514db67a0f0851bcd6441e94b5eb4e6">dbディレクトリの作成</h2>
 
 <p>プロジェクトのルート直下に db ディレクトリを作成します。</p>
 
 <pre><code>$ mkdir db
 </code></pre>
 
-<h2 id="configファイルの作成">configファイルの作成</h2>
+<h2 id="configファイルの作成:8514db67a0f0851bcd6441e94b5eb4e6">configファイルの作成</h2>
 
 <p>取得したGooseパッケージのサンプルからconfigファイルをコピーします。</p>
 
 <pre><code>$ cp $GOPATH/src/bitbucket.org/liamstask/goose/db-sample/dbconf.yml db/
 </code></pre>
 
-<h2 id="configファイルの編集">configファイルの編集</h2>
+<h2 id="configファイルの編集:8514db67a0f0851bcd6441e94b5eb4e6">configファイルの編集</h2>
 
 <p>まずは先ほどコピーしてきたconfigファイルの中身をのぞいてみます。<br />
 デフォルトで test / develop / production のそれぞれの環境に PostgreSQL の driver が設定してあるのが、なんとなくわかるかと思います。</p>
@@ -263,7 +263,7 @@ Port：3306<br />
 
 <p>これでDBの設定は完了です。</p>
 
-<h2 id="db接続確認">DB接続確認</h2>
+<h2 id="db接続確認:8514db67a0f0851bcd6441e94b5eb4e6">DB接続確認</h2>
 
 <p>goose status コマンドでDBに問題なく接続できているか確認できます。<br />
 これ以降の goose コマンドも全てプロジェクトルートで実行してください。</p>
@@ -274,7 +274,7 @@ goose: status for environment 'development'
 
 <p>上記のようにエラーなく表示されたらOKです。</p>
 
-<h2 id="マイグレーションファイルの作成">マイグレーションファイルの作成</h2>
+<h2 id="マイグレーションファイルの作成:8514db67a0f0851bcd6441e94b5eb4e6">マイグレーションファイルの作成</h2>
 
 <p>それではDB接続もOKなので、早速マイグレーションファイルを作りましょう。</p>
 
@@ -316,7 +316,7 @@ DROP TABLE `users`;
 
 <p>これでマイグレーションファイルの準備はできたので、実際に実行してテーブルが作成されるか確認してみましょう。</p>
 
-<h2 id="マイグレーションの実行">マイグレーションの実行</h2>
+<h2 id="マイグレーションの実行:8514db67a0f0851bcd6441e94b5eb4e6">マイグレーションの実行</h2>
 
 <p>goose up コマンドでマイグレーションが実行されます。</p>
 
@@ -388,7 +388,7 @@ mysql&gt; select * from goose_db_version;
 
 <p>usersテーブルが削除されているのが確認できました。</p>
 
-<h2 id="まとめ">まとめ</h2>
+<h2 id="まとめ:8514db67a0f0851bcd6441e94b5eb4e6">まとめ</h2>
 
 <p>goose をつかうことによって、簡単にマイグレーションすることができました。<br />
 最近、Go言語を使ったプロジェクトも増えてきているようなので、goose もこれからさらに活躍する場面が増えるのではないでしょうか。</p>
