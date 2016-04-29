@@ -99,6 +99,49 @@
       <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
+  <h2><a href="http://enomotodev.github.io/post/docker-mac-composer/">【 Composer 編】Mac に Docker インストールしてみた</a>
+</h2>
+
+  <div class="margin-10">
+    <small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2016-04-29">29 Apr, 2016</time>
+</small>
+
+    
+  <i class="fa fa-tags"></i>
+  
+  <a href="http://enomotodev.github.io/tags/docker" class="label label-primary">docker</a>
+  
+  <a href="http://enomotodev.github.io/tags/composer" class="label label-primary">composer</a>
+  
+  <a href="http://enomotodev.github.io/tags/laravel" class="label label-primary">laravel</a>
+  
+
+
+  </div>
+</div>
+
+    <p class="summary">
+  
+  
+    前回の『【 php-fpm 編】Mac に Docker インストールしてみた』の続きです Database と連携する前に、Composer と連携し、PHP フレームワークの Laravel をインストールしてみようと思います Composer のイメージを pull する $ docker pull composer/composer ...（略） Status: Downloaded newer image for composer/composer:latest Composer コンテナを起動する Composer で Laravel をインストールする前に、前回作成した index.php を削除しておきましょう cd ~/docker/www &amp;&amp; rm index.php それでは Composer で Laravel をインストールしてみます $ docker run --rm -v /Users/enomotodev/docker/www:/app composer/composer create-project --prefer-dist laravel/laravel ./ これで Laravel がインストールされました --rm オプションを使用することによって、コンテナを起動して終了するとコンテナを破棄してくれます ~/nginx/nginx.conf を下記のように編集して、Nginx のコンテナを再起動させます ~/nginx/nginx.conf root /var/www/html; ↓ root /var/www/html/public;
+  
+
+
+</p>
+
+
+    <p class="lead"><a href="http://enomotodev.github.io/post/docker-mac-composer/" class="btn btn-default">Read more &rarr;</a></p>
+
+
+  </div>
+</div>
+
+    
+      <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div>
   <h2><a href="http://enomotodev.github.io/post/docker-mac-phpfpm/">【 php-fpm 編】Mac に Docker インストールしてみた</a>
 </h2>
 

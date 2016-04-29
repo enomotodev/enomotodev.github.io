@@ -9,8 +9,82 @@
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
     <copyright>(c) 2015 Takafumi Enomoto.</copyright>
-    <lastBuildDate>Sun, 24 Apr 2016 02:06:12 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 29 Apr 2016 14:33:00 +0900</lastBuildDate>
     <atom:link href="http://enomotodev.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>【 Composer 編】Mac に Docker インストールしてみた</title>
+      <link>http://enomotodev.github.io/post/docker-mac-composer/</link>
+      <pubDate>Fri, 29 Apr 2016 14:33:00 +0900</pubDate>
+      <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
+      <guid>http://enomotodev.github.io/post/docker-mac-composer/</guid>
+      <description>
+
+&lt;p&gt;前回の『&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-phpfpm/&#34;&gt;【 php-fpm 編】Mac に Docker インストールしてみた&lt;/a&gt;』の続きです&lt;/p&gt;
+
+&lt;p&gt;Database と連携する前に、Composer と連携し、PHP フレームワークの &lt;a href=&#34;https://laravel.com/&#34; target=&#34;_blank&#34;&gt;Laravel&lt;/a&gt; をインストールしてみようと思います&lt;/p&gt;
+
+&lt;h2 id=&#34;composer-のイメージを-pull-する:9d13ad3363305a699a868251e1304687&#34;&gt;Composer のイメージを pull する&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull composer/composer
+...（略）
+Status: Downloaded newer image for composer/composer:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;composer-コンテナを起動する:9d13ad3363305a699a868251e1304687&#34;&gt;Composer コンテナを起動する&lt;/h2&gt;
+
+&lt;p&gt;Composer で Laravel をインストールする前に、前回作成した &lt;code&gt;index.php&lt;/code&gt; を削除しておきましょう&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd ~/docker/www &amp;amp;&amp;amp; rm index.php
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それでは Composer で　Laravel をインストールしてみます&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm -v /Users/enomotodev/docker/www:/app composer/composer create-project --prefer-dist laravel/laravel ./
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで Laravel がインストールされました&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;--rm&lt;/code&gt; オプションを使用することによって、コンテナを起動して終了するとコンテナを破棄してくれます&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;~/nginx/nginx.conf&lt;/code&gt; を下記のように編集して、Nginx のコンテナを再起動させます&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/nginx/nginx.conf&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;root /var/www/html;
+↓
+root /var/www/html/public;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nginx コンテナを再起動&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker restart nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;次にパーミッションを整えます&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ chmod -R 777 ~/docker/www/storage ~/docker/www/bootstrap/cache
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ブラウザで確認してみましょう&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/docker-composer.png&#34; alt=&#34;Docker Composer Laravel ブラウザ確認&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;無事 Laravel が起動できました！&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ:9d13ad3363305a699a868251e1304687&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;PHP 開発に欠かせない Composer も Docker で簡単に導入することができました&lt;/p&gt;
+
+&lt;p&gt;Composer は install や update 時にしか使わないので、&lt;code&gt;docker run&lt;/code&gt; のときに &lt;code&gt;--rm&lt;/code&gt; オプションを使用し、コンテナの終了時にコンテナを破棄するのがポイントになります&lt;/p&gt;
+
+&lt;p&gt;次回は MySQL と連携していきたいと思います&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>【 php-fpm 編】Mac に Docker インストールしてみた</title>
@@ -22,14 +96,14 @@
 
 &lt;p&gt;前回の『&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-nginx/&#34;&gt;【 Nginx 編】Mac に Docker インストールしてみた&lt;/a&gt;』の続きです。&lt;/p&gt;
 
-&lt;h2 id=&#34;コンテナを削除する:bf859996de724851c55a80479476f344&#34;&gt;コンテナを削除する&lt;/h2&gt;
+&lt;h2 id=&#34;コンテナを削除する&#34;&gt;コンテナを削除する&lt;/h2&gt;
 
 &lt;p&gt;Nginx のコンテナなどが稼働していると思うので、一旦全て削除します&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ docker rm -f `docker ps -a -q`
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;php-fpm-のイメージを-pull-する:bf859996de724851c55a80479476f344&#34;&gt;php-fpm のイメージを pull する&lt;/h2&gt;
+&lt;h2 id=&#34;php-fpm-のイメージを-pull-する&#34;&gt;php-fpm のイメージを pull する&lt;/h2&gt;
 
 &lt;p&gt;公式の php-fpm のイメージを pull します&lt;/p&gt;
 
@@ -38,7 +112,7 @@
 Status: Downloaded newer image for php:fpm
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;php-fpm-のコンテナを起動する:bf859996de724851c55a80479476f344&#34;&gt;php-fpm のコンテナを起動する&lt;/h2&gt;
+&lt;h2 id=&#34;php-fpm-のコンテナを起動する&#34;&gt;php-fpm のコンテナを起動する&lt;/h2&gt;
 
 &lt;p&gt;最初に Document Root に配置する PHP ファイルを作成します&lt;/p&gt;
 
@@ -99,9 +173,15 @@ Status: Downloaded newer image for php:fpm
 
 &lt;p&gt;phpinfo が表示されました！&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:bf859996de724851c55a80479476f344&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;Nginx と PHP の連携ができたので、次は Database との連携も行い、Docker で PHP 開発環境を構築したいと思います&lt;/p&gt;
+
+&lt;h2 id=&#34;つづき&#34;&gt;つづき&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-composer/&#34;&gt;【 Composer 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
@@ -258,6 +338,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-phpfpm/&#34;&gt;【 php-fpm 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-composer/&#34;&gt;【 Composer 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
@@ -270,7 +351,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
       <guid>http://enomotodev.github.io/post/install-docker-mac/</guid>
       <description>
 
-&lt;h2 id=&#34;docker-docker-machine-のインストール&#34;&gt;Docker + Docker Machine のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;docker-docker-machine-のインストール:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Docker + Docker Machine のインストール&lt;/h2&gt;
 
 &lt;p&gt;まずは、Docker 本体と Docker Machine をインストールします。&lt;/p&gt;
 
@@ -281,7 +362,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
 &lt;pre&gt;&lt;code&gt;$ brew install docker docker-machine
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;machine-の作成&#34;&gt;Machine の作成&lt;/h2&gt;
+&lt;h2 id=&#34;machine-の作成:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Machine の作成&lt;/h2&gt;
 
 &lt;p&gt;docker-machine コマンドで新しく Machine を作成します。&lt;/p&gt;
 
@@ -317,7 +398,7 @@ export DOCKER_MACHINE_NAME=&amp;quot;dev-machine&amp;quot;
 
 &lt;p&gt;特に何も出力されませんが、これで Docker Machine に接続できるようになりました。&lt;/p&gt;
 
-&lt;h2 id=&#34;docker-machine-に接続する&#34;&gt;Docker Machine に接続する&lt;/h2&gt;
+&lt;h2 id=&#34;docker-machine-に接続する:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Docker Machine に接続する&lt;/h2&gt;
 
 &lt;p&gt;Docker Machine に接続してみます。&lt;/p&gt;
 
@@ -360,7 +441,7 @@ ubuntu              latest              97434d46f197        3 days ago          
 
 &lt;p&gt;問題なく Ubuntu のイメージが取得できたのが確認できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;mac-から-docker-コマンド実行&#34;&gt;Mac から Docker コマンド実行&lt;/h2&gt;
+&lt;h2 id=&#34;mac-から-docker-コマンド実行:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Mac から Docker コマンド実行&lt;/h2&gt;
 
 &lt;p&gt;ここまでは Docker Machine 内で docker コマンドを実行していたので、exit 等して Mac に戻りましょう。&lt;/p&gt;
 
@@ -373,17 +454,18 @@ ubuntu              latest              97434d46f197        3 days ago          
 
 &lt;p&gt;Mac からも docker コマンドが実行できました！&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;これで Mac に docker の環境を整えることができました。&lt;/p&gt;
 
 &lt;p&gt;ですが、このままでは docker をどのように使うのかイメージがつきづらいと思いますので、次回以降で PHP の開発環境を実際に構築していきたいと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;つづき&#34;&gt;つづき&lt;/h2&gt;
+&lt;h2 id=&#34;つづき:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;つづき&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-nginx/&#34;&gt;【 Nginx 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-phpfpm/&#34;&gt;【 php-fpm 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-composer/&#34;&gt;【 Composer 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
@@ -875,12 +957,12 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
       <guid>http://enomotodev.github.io/post/install-fluentd/</guid>
       <description>
 
-&lt;h2 id=&#34;fluentd-とは:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;fluentd とは&lt;/h2&gt;
+&lt;h2 id=&#34;fluentd-とは&#34;&gt;fluentd とは&lt;/h2&gt;
 
 &lt;p&gt;fluentd とは&lt;a href=&#34;http://www.treasuredata.com/&#34;&gt;Treasure Data&lt;/a&gt;という会社が開発している、さまざまなログの収集手段を提供するログ管理ツールです。&lt;br /&gt;
 今回は CentOS 6.7 で実際にインストールしてつかってみることによって基本的な設定を学んでいきたいと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;td-agent-をインストール:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;td-agent をインストール&lt;/h2&gt;
+&lt;h2 id=&#34;td-agent-をインストール&#34;&gt;td-agent をインストール&lt;/h2&gt;
 
 &lt;p&gt;td-agent ？ となるかと思いますが、td-agent には以下のものが同梱されています。&lt;/p&gt;
 
@@ -902,7 +984,7 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
 &lt;pre&gt;&lt;code&gt;$ sudo /etc/init.d/td-agent start
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;設定ファイルの編集:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;設定ファイルの編集&lt;/h2&gt;
+&lt;h2 id=&#34;設定ファイルの編集&#34;&gt;設定ファイルの編集&lt;/h2&gt;
 
 &lt;p&gt;それでは設定ファイルを編集してみましょう。&lt;br /&gt;
 まずは、ログ収集の設定を行います。なお、デフォルトの設定はすべて削除してしまって問題ありません。&lt;/p&gt;
@@ -960,7 +1042,7 @@ access.log.20151114.b524785e8e3b0d946
 
 &lt;p&gt;td-agent によってログが保存されたのが確認できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;ログをmongodbに保存:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;ログをMongoDBに保存&lt;/h2&gt;
+&lt;h2 id=&#34;ログをmongodbに保存&#34;&gt;ログをMongoDBに保存&lt;/h2&gt;
 
 &lt;p&gt;まずは MongoDB をインストールするのでレポジトリを追加します。&lt;/p&gt;
 
@@ -1055,7 +1137,7 @@ switched to db fluentd
 
 &lt;p&gt;ログが23件保存されているのが確認できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:e9b3c303162f7572e08a36920a0a0fa7&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;fluentd はリモートのサーバにログを送ることもでき、本番環境ではそのような構成になりますが、今回 fluentd の最低限の知識や基本的な設定はこれである程度学ぶことができたかと思います。&lt;br /&gt;
 ここから先の細い設定などは&lt;a href=&#34;http://www.fluentd.org/&#34;&gt;公式サイト&lt;/a&gt;などでさらに学習していきましょう！&lt;/p&gt;
@@ -1072,12 +1154,12 @@ switched to db fluentd
       <guid>http://enomotodev.github.io/post/use-goose/</guid>
       <description>
 
-&lt;h2 id=&#34;gooseとは:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;Gooseとは&lt;/h2&gt;
+&lt;h2 id=&#34;gooseとは&#34;&gt;Gooseとは&lt;/h2&gt;
 
 &lt;p&gt;GooseとはGo言語で作られたDBマイグレーションツールです。&lt;br /&gt;
 develop環境やproduction環境など各環境に簡単に設定を変更でき、かなり便利そうなので実際にMySQLで試してみました。&lt;/p&gt;
 
-&lt;h2 id=&#34;gooseパッケージの取得:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;Gooseパッケージの取得&lt;/h2&gt;
+&lt;h2 id=&#34;gooseパッケージの取得&#34;&gt;Gooseパッケージの取得&lt;/h2&gt;
 
 &lt;p&gt;まずは go get して Goose パッケージを取得します。&lt;br /&gt;
 ※ Goをインストールしていない人や、GOPATHを設定していない人は&lt;a href=&#34;http://golang-jp.org/doc/install#install&#34; target=&#34;_blank&#34;&gt;公式ドキュメント&lt;/a&gt;を参考に導入してみてください。&lt;/p&gt;
@@ -1085,21 +1167,21 @@ develop環境やproduction環境など各環境に簡単に設定を変更でき
 &lt;pre&gt;&lt;code&gt;$ go get bitbucket.org/liamstask/goose/cmd/goose
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;dbディレクトリの作成:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;dbディレクトリの作成&lt;/h2&gt;
+&lt;h2 id=&#34;dbディレクトリの作成&#34;&gt;dbディレクトリの作成&lt;/h2&gt;
 
 &lt;p&gt;プロジェクトのルート直下に db ディレクトリを作成します。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ mkdir db
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;configファイルの作成:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;configファイルの作成&lt;/h2&gt;
+&lt;h2 id=&#34;configファイルの作成&#34;&gt;configファイルの作成&lt;/h2&gt;
 
 &lt;p&gt;取得したGooseパッケージのサンプルからconfigファイルをコピーします。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ cp $GOPATH/src/bitbucket.org/liamstask/goose/db-sample/dbconf.yml db/
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;configファイルの編集:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;configファイルの編集&lt;/h2&gt;
+&lt;h2 id=&#34;configファイルの編集&#34;&gt;configファイルの編集&lt;/h2&gt;
 
 &lt;p&gt;まずは先ほどコピーしてきたconfigファイルの中身をのぞいてみます。&lt;br /&gt;
 デフォルトで test / develop / production のそれぞれの環境に PostgreSQL の driver が設定してあるのが、なんとなくわかるかと思います。&lt;/p&gt;
@@ -1168,7 +1250,7 @@ Port：3306&lt;br /&gt;
 
 &lt;p&gt;これでDBの設定は完了です。&lt;/p&gt;
 
-&lt;h2 id=&#34;db接続確認:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;DB接続確認&lt;/h2&gt;
+&lt;h2 id=&#34;db接続確認&#34;&gt;DB接続確認&lt;/h2&gt;
 
 &lt;p&gt;goose status コマンドでDBに問題なく接続できているか確認できます。&lt;br /&gt;
 これ以降の goose コマンドも全てプロジェクトルートで実行してください。&lt;/p&gt;
@@ -1179,7 +1261,7 @@ goose: status for environment &#39;development&#39;
 
 &lt;p&gt;上記のようにエラーなく表示されたらOKです。&lt;/p&gt;
 
-&lt;h2 id=&#34;マイグレーションファイルの作成:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;マイグレーションファイルの作成&lt;/h2&gt;
+&lt;h2 id=&#34;マイグレーションファイルの作成&#34;&gt;マイグレーションファイルの作成&lt;/h2&gt;
 
 &lt;p&gt;それではDB接続もOKなので、早速マイグレーションファイルを作りましょう。&lt;/p&gt;
 
@@ -1221,7 +1303,7 @@ DROP TABLE `users`;
 
 &lt;p&gt;これでマイグレーションファイルの準備はできたので、実際に実行してテーブルが作成されるか確認してみましょう。&lt;/p&gt;
 
-&lt;h2 id=&#34;マイグレーションの実行:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;マイグレーションの実行&lt;/h2&gt;
+&lt;h2 id=&#34;マイグレーションの実行&#34;&gt;マイグレーションの実行&lt;/h2&gt;
 
 &lt;p&gt;goose up コマンドでマイグレーションが実行されます。&lt;/p&gt;
 
@@ -1293,7 +1375,7 @@ mysql&amp;gt; select * from goose_db_version;
 
 &lt;p&gt;usersテーブルが削除されているのが確認できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:8514db67a0f0851bcd6441e94b5eb4e6&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;goose をつかうことによって、簡単にマイグレーションすることができました。&lt;br /&gt;
 最近、Go言語を使ったプロジェクトも増えてきているようなので、goose もこれからさらに活躍する場面が増えるのではないでしょうか。&lt;/p&gt;

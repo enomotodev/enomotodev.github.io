@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>【 php-fpm 編】Mac に Docker インストールしてみた  &middot; enomotodev</title>
+  <title>【 Composer 編】Mac に Docker インストールしてみた  &middot; enomotodev</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -14,27 +14,27 @@
 
 <meta name="description" content="" />
 
-<meta name="keywords" content="docker, php-fpm, nginx, ">
+<meta name="keywords" content="docker, composer, laravel, ">
 
 
-<meta property="og:title" content="【 php-fpm 編】Mac に Docker インストールしてみた  &middot; enomotodev ">
+<meta property="og:title" content="【 Composer 編】Mac に Docker インストールしてみた  &middot; enomotodev ">
 <meta property="og:site_name" content="enomotodev"/>
-<meta property="og:url" content="http://enomotodev.github.io/post/docker-mac-phpfpm/" />
+<meta property="og:url" content="http://enomotodev.github.io/post/docker-mac-composer/" />
 <meta property="og:locale" content="ja_JP">
 
 
 <meta property="og:type" content="article" />
 <meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2016-04-24T02:06:12&#43;09:00" />
-<meta property="og:article:modified_time" content="2016-04-24T02:06:12&#43;09:00" />
+<meta property="og:article:published_time" content="2016-04-29T14:33:00&#43;09:00" />
+<meta property="og:article:modified_time" content="2016-04-29T14:33:00&#43;09:00" />
 
   
     
 <meta property="og:article:tag" content="docker">
     
-<meta property="og:article:tag" content="php-fpm">
+<meta property="og:article:tag" content="composer">
     
-<meta property="og:article:tag" content="nginx">
+<meta property="og:article:tag" content="laravel">
     
   
 
@@ -44,20 +44,20 @@
   {
     "@context": "http://schema.org",
     "@type": "Article",
-    "headline": "【 php-fpm 編】Mac に Docker インストールしてみた",
+    "headline": "【 Composer 編】Mac に Docker インストールしてみた",
     "author": {
       "@type": "Person",
       "name": "http://profiles.google.com/+?rel=author"
     },
-    "datePublished": "2016-04-24",
+    "datePublished": "2016-04-29",
     "description": "",
-    "wordCount":  159 
+    "wordCount":  107 
   }
 </script>
 
 
 
-<link rel="canonical" href="http://enomotodev.github.io/post/docker-mac-phpfpm/" />
+<link rel="canonical" href="http://enomotodev.github.io/post/docker-mac-composer/" />
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://enomotodev.github.io/touch-icon-144-precomposed.png">
 <link href="http://enomotodev.github.io/favicon.png" rel="icon">
@@ -126,19 +126,19 @@
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <div class="text-center">
 
-    <h1>【 php-fpm 編】Mac に Docker インストールしてみた
+    <h1>【 Composer 編】Mac に Docker インストールしてみた
 </h1>
 
     <div class="metas">
 <small>
   <i class="fa fa-calendar"></i>
-  <time datetime="2016-04-24">24 Apr, 2016</time>
+  <time datetime="2016-04-29">29 Apr, 2016</time>
 </small>
 
 
   <small>
   &middot; Read in about 1 min
-  &middot; (159 Words)
+  &middot; (107 Words)
 </small>
 
 
@@ -147,9 +147,9 @@
   
   <a href="http://enomotodev.github.io/tags/docker" class="label label-primary">docker</a>
   
-  <a href="http://enomotodev.github.io/tags/php-fpm" class="label label-primary">php-fpm</a>
+  <a href="http://enomotodev.github.io/tags/composer" class="label label-primary">composer</a>
   
-  <a href="http://enomotodev.github.io/tags/nginx" class="label label-primary">nginx</a>
+  <a href="http://enomotodev.github.io/tags/laravel" class="label label-primary">laravel</a>
   
 
 
@@ -163,94 +163,69 @@
   <div class="container content">
   
 
-<p>前回の『<a href="/post/docker-mac-nginx/">【 Nginx 編】Mac に Docker インストールしてみた</a>』の続きです。</p>
+<p>前回の『<a href="/post/docker-mac-phpfpm/">【 php-fpm 編】Mac に Docker インストールしてみた</a>』の続きです</p>
 
-<h2 id="コンテナを削除する">コンテナを削除する</h2>
+<p>Database と連携する前に、Composer と連携し、PHP フレームワークの <a href="https://laravel.com/" target="_blank">Laravel</a> をインストールしてみようと思います</p>
 
-<p>Nginx のコンテナなどが稼働していると思うので、一旦全て削除します</p>
+<h2 id="composer-のイメージを-pull-する:9d13ad3363305a699a868251e1304687">Composer のイメージを pull する</h2>
 
-<pre><code>$ docker rm -f `docker ps -a -q`
-</code></pre>
-
-<h2 id="php-fpm-のイメージを-pull-する">php-fpm のイメージを pull する</h2>
-
-<p>公式の php-fpm のイメージを pull します</p>
-
-<pre><code>$ docker pull php:fpm
+<pre><code>$ docker pull composer/composer
 ...（略）
-Status: Downloaded newer image for php:fpm
+Status: Downloaded newer image for composer/composer:latest
 </code></pre>
 
-<h2 id="php-fpm-のコンテナを起動する">php-fpm のコンテナを起動する</h2>
+<h2 id="composer-コンテナを起動する:9d13ad3363305a699a868251e1304687">Composer コンテナを起動する</h2>
 
-<p>最初に Document Root に配置する PHP ファイルを作成します</p>
+<p>Composer で Laravel をインストールする前に、前回作成した <code>index.php</code> を削除しておきましょう</p>
+
+<pre><code>cd ~/docker/www &amp;&amp; rm index.php
+</code></pre>
+
+<p>それでは Composer で　Laravel をインストールしてみます</p>
+
+<pre><code>$ docker run --rm -v /Users/enomotodev/docker/www:/app composer/composer create-project --prefer-dist laravel/laravel ./
+</code></pre>
+
+<p>これで Laravel がインストールされました</p>
+
+<p><code>--rm</code> オプションを使用することによって、コンテナを起動して終了するとコンテナを破棄してくれます</p>
+
+<p><code>~/nginx/nginx.conf</code> を下記のように編集して、Nginx のコンテナを再起動させます</p>
 
 <ul>
-<li><code>~/docker/www/index.php</code></li>
+<li><code>~/nginx/nginx.conf</code></li>
 </ul>
 
-<pre><code>&lt;?php
-    phpinfo();
-?&gt;
+<pre><code>root /var/www/html;
+↓
+root /var/www/html/public;
 </code></pre>
-
-<p>PHP ファイルの準備ができたら php-fpm のコンテナを起動しましょう</p>
-
-<pre><code>$ docker run --name fpm -p 9000:9000 -v /Users/enomotodev/docker/www:/var/www/html -d php:fpm
-</code></pre>
-
-<p><code>--name</code> オプションで <code>fpm</code> と指定することによって、<code>fpm</code> という名前でコンテナを起動しています</p>
-
-<p>続けて、Nginx のコンテナを起動するのですが、先に前回作成した conf ファイルを編集しましょう</p>
 
 <ul>
-<li><code>~/docker/nginx/nginx.conf</code></li>
+<li>Nginx コンテナを再起動</li>
 </ul>
 
-<pre><code>server {
-    listen 8080;
-
-    root /var/www/html;
-    index index.php index.html index.htm;
-
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location ~ \.php$ {
-        fastcgi_pass fpm:9000;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-
-        include fastcgi_params;
-    }
-}
+<pre><code>$ docker restart nginx
 </code></pre>
 
-<p>conf ファイルの準備ができたので、Nginx のコンテナを起動します</p>
+<p>次にパーミッションを整えます</p>
 
-<pre><code>$ docker run --name nginx -p 9090:8080 -v /Users/enomotodev/docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf --link fpm -d nginx
+<pre><code>$ chmod -R 777 ~/docker/www/storage ~/docker/www/bootstrap/cache
 </code></pre>
 
-<p><code>--link</code> オプションで <code>fpm</code> を指定することによって、Nginx コンテナから php-fpm コンテナへの接続ができるようになります</p>
+<p>ブラウザで確認してみましょう</p>
 
-<p>つまり、conf ファイルの <code>fastcgi_pass fpm:9000;</code> の部分は php-fpm コンテナの <code>9000</code> 番ポートに接続するという意味になります</p>
+<p><img src="/images/docker-composer.png" alt="Docker Composer Laravel ブラウザ確認" class="image" /></p>
 
-<p>それでは、ブラウザで確認してみましょう</p>
+<p>無事 Laravel が起動できました！</p>
 
-<p><img src="/images/docker-phpfpm.png" alt="Docker php-fpm ブラウザ確認" class="image" /></p>
+<h2 id="まとめ:9d13ad3363305a699a868251e1304687">まとめ</h2>
 
-<p>phpinfo が表示されました！</p>
+<p>PHP 開発に欠かせない Composer も Docker で簡単に導入することができました</p>
 
-<h2 id="まとめ">まとめ</h2>
+<p>Composer は install や update 時にしか使わないので、<code>docker run</code> のときに <code>--rm</code> オプションを使用し、コンテナの終了時にコンテナを破棄するのがポイントになります</p>
 
-<p>Nginx と PHP の連携ができたので、次は Database との連携も行い、Docker で PHP 開発環境を構築したいと思います</p>
-
-<h2 id="つづき">つづき</h2>
-
-<ul>
-<li><a href="/post/docker-mac-composer/">【 Composer 編】Mac に Docker インストールしてみた</a></li>
-</ul>
+<p>次回は MySQL と連携していきたいと思います</p>
 
 </div>
 
@@ -262,18 +237,12 @@ Status: Downloaded newer image for php:fpm
     <nav><ul class="pager">
     
         <li class="previous">
-          <a href="http://enomotodev.github.io/post/docker-mac-nginx/" title="【 Nginx 編】Mac に Docker インストールしてみた">
+          <a href="http://enomotodev.github.io/post/docker-mac-phpfpm/" title="【 php-fpm 編】Mac に Docker インストールしてみた">
             <span aria-hidden="true">&larr;</span>Previous
           </a>
         </li>
     
 
-    
-      <li class="next">
-        <a href="http://enomotodev.github.io/post/docker-mac-composer/" title="【 Composer 編】Mac に Docker インストールしてみた">
-            Next <span aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
     
     </ul> </nav>
   

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Laravel on enomotodev</title>
+    <link>http://enomotodev.github.io/tags/laravel/</link>
+    <description>Recent content in Laravel on enomotodev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja_JP</language>
+    <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
+    <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
+    <copyright>(c) 2015 Takafumi Enomoto.</copyright>
+    <lastBuildDate>Fri, 29 Apr 2016 14:33:00 +0900</lastBuildDate>
+    <atom:link href="http://enomotodev.github.io/tags/laravel/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>【 Composer 編】Mac に Docker インストールしてみた</title>
+      <link>http://enomotodev.github.io/post/docker-mac-composer/</link>
+      <pubDate>Fri, 29 Apr 2016 14:33:00 +0900</pubDate>
+      <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
+      <guid>http://enomotodev.github.io/post/docker-mac-composer/</guid>
+      <description>
+
+&lt;p&gt;前回の『&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-phpfpm/&#34;&gt;【 php-fpm 編】Mac に Docker インストールしてみた&lt;/a&gt;』の続きです&lt;/p&gt;
+
+&lt;p&gt;Database と連携する前に、Composer と連携し、PHP フレームワークの &lt;a href=&#34;https://laravel.com/&#34; target=&#34;_blank&#34;&gt;Laravel&lt;/a&gt; をインストールしてみようと思います&lt;/p&gt;
+
+&lt;h2 id=&#34;composer-のイメージを-pull-する:9d13ad3363305a699a868251e1304687&#34;&gt;Composer のイメージを pull する&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull composer/composer
+...（略）
+Status: Downloaded newer image for composer/composer:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;composer-コンテナを起動する:9d13ad3363305a699a868251e1304687&#34;&gt;Composer コンテナを起動する&lt;/h2&gt;
+
+&lt;p&gt;Composer で Laravel をインストールする前に、前回作成した &lt;code&gt;index.php&lt;/code&gt; を削除しておきましょう&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd ~/docker/www &amp;amp;&amp;amp; rm index.php
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それでは Composer で　Laravel をインストールしてみます&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm -v /Users/enomotodev/docker/www:/app composer/composer create-project --prefer-dist laravel/laravel ./
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで Laravel がインストールされました&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;--rm&lt;/code&gt; オプションを使用することによって、コンテナを起動して終了するとコンテナを破棄してくれます&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;~/nginx/nginx.conf&lt;/code&gt; を下記のように編集して、Nginx のコンテナを再起動させます&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/nginx/nginx.conf&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;root /var/www/html;
+↓
+root /var/www/html/public;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nginx コンテナを再起動&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker restart nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;次にパーミッションを整えます&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ chmod -R 777 ~/docker/www/storage ~/docker/www/bootstrap/cache
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ブラウザで確認してみましょう&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/docker-composer.png&#34; alt=&#34;Docker Composer Laravel ブラウザ確認&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;無事 Laravel が起動できました！&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ:9d13ad3363305a699a868251e1304687&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;PHP 開発に欠かせない Composer も Docker で簡単に導入することができました&lt;/p&gt;
+
+&lt;p&gt;Composer は install や update 時にしか使わないので、&lt;code&gt;docker run&lt;/code&gt; のときに &lt;code&gt;--rm&lt;/code&gt; オプションを使用し、コンテナの終了時にコンテナを破棄するのがポイントになります&lt;/p&gt;
+
+&lt;p&gt;次回は MySQL と連携していきたいと思います&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

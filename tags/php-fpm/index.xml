@@ -22,14 +22,14 @@
 
 &lt;p&gt;前回の『&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-nginx/&#34;&gt;【 Nginx 編】Mac に Docker インストールしてみた&lt;/a&gt;』の続きです。&lt;/p&gt;
 
-&lt;h2 id=&#34;コンテナを削除する:bf859996de724851c55a80479476f344&#34;&gt;コンテナを削除する&lt;/h2&gt;
+&lt;h2 id=&#34;コンテナを削除する&#34;&gt;コンテナを削除する&lt;/h2&gt;
 
 &lt;p&gt;Nginx のコンテナなどが稼働していると思うので、一旦全て削除します&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ docker rm -f `docker ps -a -q`
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;php-fpm-のイメージを-pull-する:bf859996de724851c55a80479476f344&#34;&gt;php-fpm のイメージを pull する&lt;/h2&gt;
+&lt;h2 id=&#34;php-fpm-のイメージを-pull-する&#34;&gt;php-fpm のイメージを pull する&lt;/h2&gt;
 
 &lt;p&gt;公式の php-fpm のイメージを pull します&lt;/p&gt;
 
@@ -38,7 +38,7 @@
 Status: Downloaded newer image for php:fpm
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;php-fpm-のコンテナを起動する:bf859996de724851c55a80479476f344&#34;&gt;php-fpm のコンテナを起動する&lt;/h2&gt;
+&lt;h2 id=&#34;php-fpm-のコンテナを起動する&#34;&gt;php-fpm のコンテナを起動する&lt;/h2&gt;
 
 &lt;p&gt;最初に Document Root に配置する PHP ファイルを作成します&lt;/p&gt;
 
@@ -99,9 +99,15 @@ Status: Downloaded newer image for php:fpm
 
 &lt;p&gt;phpinfo が表示されました！&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:bf859996de724851c55a80479476f344&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;Nginx と PHP の連携ができたので、次は Database との連携も行い、Docker で PHP 開発環境を構築したいと思います&lt;/p&gt;
+
+&lt;h2 id=&#34;つづき&#34;&gt;つづき&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-composer/&#34;&gt;【 Composer 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
