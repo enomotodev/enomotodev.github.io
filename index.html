@@ -34,16 +34,16 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://enomotodev.github.io/touch-icon-144-precomposed.png">
 <link href="http://enomotodev.github.io/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.15" />
+<meta name="generator" content="Hugo 0.16" />
 
   <!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
 
 
-    <link rel="stylesheet" href="http://enomotodev.github.io/css/theme/default.css">
+    <link rel="stylesheet" href="http://enomotodev.github.io/css/bootswatch/default/bootstrap.min.css">
 
 
 <link rel="stylesheet" href="http://enomotodev.github.io/css/font-awesome.min.css">
@@ -94,9 +94,58 @@
 
   <div class="container">
     
+    <div class="row">
+      <div class="col-sm-12">
+        
+        
+          <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div>
+  <h2><a href="http://enomotodev.github.io/post/learn-ecmascript/">ECMAScript について調べてみた</a>
+</h2>
+
+  <div class="margin-10">
+    <small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2016-08-06">6 Aug, 2016</time>
+</small>
+
     
-    
-      <div class="row">
+  <i class="fa fa-tags"></i>
+  
+  <a href="http://enomotodev.github.io/tags/javascript" class="label label-primary">javascript</a>
+  
+  <a href="http://enomotodev.github.io/tags/ecmascript" class="label label-primary">ecmascript</a>
+  
+  <a href="http://enomotodev.github.io/tags/es2015" class="label label-primary">es2015</a>
+  
+  <a href="http://enomotodev.github.io/tags/es6" class="label label-primary">es6</a>
+  
+  <a href="http://enomotodev.github.io/tags/es2016" class="label label-primary">es2016</a>
+  
+
+
+  </div>
+</div>
+
+    <p class="summary">
+  
+  
+    最近、ECMAScript2015 や ES6 などの言葉をよく聞くようになってきたので、復習も兼ねて、ECMAScript について調べてみました。 ECMAScript とは？ ECMAScript とは、標準化団体である Ecma International が策定している、JavaScript の標準規格のことです。 開発当初の JavaScript は、各ベンダーのブラウザによって独自拡張が数多く実装されており、互換性が低かったため、Ecma International が中心となり標準規格である ECMAScript が策定されました。 ECMAScript 6 / 2015 って何？ 正式名称は『ECMAScript 2015』（省略して『ES2015』とも呼ばれる）。 リリースは2015年6月。 ECMAScript の 6th Edition である為、当初は『ES6』と呼ばれていたが、正式名称を『ECMAScript 2015』とし、今後年単位のリリースとし、バージョンを年（ES2017, ES2018, &hellip;）にしていく予定のようです。 なお、最新のバージョンは2016年6月にリリースされた『ECMAScript 2016（ES2016）』になります。 公式へのリンクはこちらです。 ECMAScript 2015 Language Specification &ndash; ECMA-262 6th Edition ECMAScript® 2016 Language Specification ES2015 の新機能 ES2015 で追加された主な機能は下記になります。 let ・ const キーワードによる変数宣言 クラス構文 アロー関数 分割代入 配列展開 可変長引数 関数のデフォルト引数 テンプレート文字列 ここから1つひとつ見ていきましょう。 let ・ const キーワードによる変数宣言 これまでの var で変数を宣言した場合と違い、let ・ const で変数を宣言すると、その変数のスコープは宣言したブロック内になります。 if (1) { var foo = 'foo'; let bar = 'bar'; const baz = 'baz'; } console.log(foo); // foo console.log(bar); // エラー console.log(baz); // エラー また、const は定数を宣言したい時に使用され、const で宣言された変数は、宣言時を除いて値の代入が不可能になります。 var foo = 'foo'; let bar = 'bar'; const baz = 'baz'; foo = 'foo2'; // 代入可能 bar = 'bar2'; // 代入可能 baz = 'baz2'; // エラー クラス構文 ES2015 以前までは、prototype を利用することで、クラスのようなものを作成していました。 function Human(name) { this.name = name; } Human.prototype.hello = function () { console.log('私の名前は ' + this.name + ' です。'); }; obj = new Human('enomotodev'); obj.hello(); //=&gt; '私の名前は enomotodev です。' これをクラス構文を使用すると class Human { constructor(name) { this.name = name; } hello() { console.log('私の名前は ' + this.name + ' です。'); } } obj = new Human('enomotodev'); obj.hello(); //=&gt; '私の名前は enomotodev です。' このように書くことができます。 extends を使用してクラスの継承を行うことも可能です。 class Human { constructor(name) { this.name = name; } hello() { console.log('私の名前は ' + this.name + ' です。'); } } class Engineer extends Human { constructor(name) { super(name); this.occupation = 'エンジニア'; } hello() { super.hello(); console.log('職業は ' + this.occupation + ' です。'); } } obj = new Engineer('enomotodev'); obj.hello(); //=&gt; '私の名前は enomotodev です。' //=&gt; '職業は エンジニア です。' なお、上記のように子クラスでは super() で親クラスの constructor の実行、super.メソッド名() で親クラスのメソッドの実行ができます。 アロー関数 これまでの funciton を使った関数宣言に加えて、=&gt;（アロー）を用いた関数宣言が可能になりました。 アロー関数による関数宣言の特徴としては、 引数が1つの場合は () が省略可能 関数の中身が単一式の場合は、{} や return を省略できる というものになります。 // これまでの function を使った関数宣言 var foo = function(x, y) { return x * y; }; // アロー関数 var bar = (x, y) =&gt; { return x * y; }; // 単一式の場合は {} や return を省略可能 var baz = (x, y) =&gt; x * y; // 引数が1つの場合は () が省略可能 var qux = x =&gt; x * 2; 分割代入 複数の変数に、複数の値をまとめて代入できるようになりました。 // これまで複数にの変数に代入する場合 var foo = 'abc'; var bar = 123; // 分割代入を使用した場合 var [foo, bar] = ['abc', 123]; 配列展開 関数の呼び出し、配列への代入などに対して、...
+  
+
+
+</p>
+
+
+    <p class="lead"><a href="http://enomotodev.github.io/post/learn-ecmascript/" class="btn btn-default">Read more &rarr;</a></p>
+
+
+  </div>
+</div>
+
+        
+          <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
   <h2><a href="http://enomotodev.github.io/post/docker-mac-composer/">【 Composer 編】Mac に Docker インストールしてみた</a>
@@ -138,8 +187,8 @@
   </div>
 </div>
 
-    
-      <div class="row">
+        
+          <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
   <h2><a href="http://enomotodev.github.io/post/docker-mac-phpfpm/">【 php-fpm 編】Mac に Docker インストールしてみた</a>
@@ -181,8 +230,8 @@
   </div>
 </div>
 
-    
-      <div class="row">
+        
+          <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
   <h2><a href="http://enomotodev.github.io/post/docker-mac-nginx/">【 Nginx 編】Mac に Docker インストールしてみた</a>
@@ -222,8 +271,8 @@
   </div>
 </div>
 
-    
-      <div class="row">
+        
+          <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
   <h2><a href="http://enomotodev.github.io/post/install-docker-mac/">Mac に Docker インストールしてみた</a>
@@ -261,8 +310,8 @@
   </div>
 </div>
 
-    
-      <div class="row">
+        
+          <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
   <h2><a href="http://enomotodev.github.io/post/install-jenkins/">CentOS に Jenkins インストールしてみた</a>
@@ -302,8 +351,8 @@
   </div>
 </div>
 
-    
-      <div class="row">
+        
+          <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
   <h2><a href="http://enomotodev.github.io/post/closure-table/">閉包テーブル（Closure Table）を試してみた</a>
@@ -343,8 +392,8 @@
   </div>
 </div>
 
-    
-      <div class="row">
+        
+          <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
   <h2><a href="http://enomotodev.github.io/post/install-elasticsearch/">Apache &#43; fluentd &#43; Elasticsearch &#43; Kibana を連携させてみた</a>
@@ -392,8 +441,8 @@
   </div>
 </div>
 
-    
-      <div class="row">
+        
+          <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
   <h2><a href="http://enomotodev.github.io/post/install-fluentd/">fluentdつかってみた</a>
@@ -439,8 +488,8 @@
   </div>
 </div>
 
-    
-      <div class="row">
+        
+          <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
   <h2><a href="http://enomotodev.github.io/post/use-goose/">Gooseつかってみた</a>
@@ -484,15 +533,21 @@
   </div>
 </div>
 
-    
-    
+        
+        
+
+      </div>
+      
+    </div>
 
   </div>
 
-      <footer class="footer">
-    <div class="container hidden-print">
+      
+<footer class="footer hidden-print">
+  <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <p>
            <div class="pull-left">
   <a class="toplink" href="#">back to top</a>
 </div>
@@ -500,6 +555,7 @@
   
 </div>
 
+         </p>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
           <small>
@@ -518,12 +574,12 @@
 
           </small>
         </div>
-     </div>
     </div>
+  </div>
 </footer>
 
-    <script src="http://enomotodev.github.io/js/jquery.min-2.1.4.js"></script>
-<script src="http://enomotodev.github.io/js/bootstrap.min-3.3.5.js"></script>
+    <script src="http://enomotodev.github.io/js/jquery.min.js"></script>
+<script src="http://enomotodev.github.io/js/bootstrap.min.js"></script>
 
 
 

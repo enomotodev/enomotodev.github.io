@@ -9,8 +9,318 @@
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
     <copyright>(c) 2015 Takafumi Enomoto.</copyright>
-    <lastBuildDate>Fri, 29 Apr 2016 14:33:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 06 Aug 2016 23:28:39 +0900</lastBuildDate>
     <atom:link href="http://enomotodev.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ECMAScript について調べてみた</title>
+      <link>http://enomotodev.github.io/post/learn-ecmascript/</link>
+      <pubDate>Sat, 06 Aug 2016 23:28:39 +0900</pubDate>
+      <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
+      <guid>http://enomotodev.github.io/post/learn-ecmascript/</guid>
+      <description>
+
+&lt;p&gt;最近、ECMAScript2015 や ES6 などの言葉をよく聞くようになってきたので、復習も兼ねて、ECMAScript について調べてみました。&lt;/p&gt;
+
+&lt;h2 id=&#34;ecmascript-とは&#34;&gt;ECMAScript とは？&lt;/h2&gt;
+
+&lt;p&gt;ECMAScript とは、標準化団体である &lt;a href=&#34;http://www.ecma-international.org/&#34;&gt;Ecma International&lt;/a&gt; が策定している、JavaScript の標準規格のことです。&lt;/p&gt;
+
+&lt;p&gt;開発当初の JavaScript は、各ベンダーのブラウザによって独自拡張が数多く実装されており、互換性が低かったため、&lt;a href=&#34;http://www.ecma-international.org/&#34;&gt;Ecma International&lt;/a&gt; が中心となり標準規格である ECMAScript が策定されました。&lt;/p&gt;
+
+&lt;h2 id=&#34;ecmascript-6-2015-って何&#34;&gt;ECMAScript 6 / 2015 って何？&lt;/h2&gt;
+
+&lt;p&gt;正式名称は『ECMAScript 2015』（省略して『ES2015』とも呼ばれる）。&lt;/p&gt;
+
+&lt;p&gt;リリースは2015年6月。&lt;/p&gt;
+
+&lt;p&gt;ECMAScript の 6th Edition である為、当初は『ES6』と呼ばれていたが、正式名称を『ECMAScript 2015』とし、今後年単位のリリースとし、バージョンを年（ES2017, ES2018, &amp;hellip;）にしていく予定のようです。&lt;/p&gt;
+
+&lt;p&gt;なお、最新のバージョンは2016年6月にリリースされた『ECMAScript 2016（ES2016）』になります。&lt;/p&gt;
+
+&lt;p&gt;公式へのリンクはこちらです。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.ecma-international.org/ecma-262/6.0/&#34; target=&#34;_blank&#34;&gt;ECMAScript 2015 Language Specification &amp;ndash; ECMA-262 6th Edition&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.ecma-international.org/ecma-262/7.0/&#34; target=&#34;_blank&#34;&gt;ECMAScript® 2016 Language Specification&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;es2015-の新機能&#34;&gt;ES2015 の新機能&lt;/h2&gt;
+
+&lt;p&gt;ES2015 で追加された主な機能は下記になります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;let&lt;/code&gt; ・ &lt;code&gt;const&lt;/code&gt; キーワードによる変数宣言&lt;/li&gt;
+&lt;li&gt;クラス構文&lt;/li&gt;
+&lt;li&gt;アロー関数&lt;/li&gt;
+&lt;li&gt;分割代入&lt;/li&gt;
+&lt;li&gt;配列展開&lt;/li&gt;
+&lt;li&gt;可変長引数&lt;/li&gt;
+&lt;li&gt;関数のデフォルト引数&lt;/li&gt;
+&lt;li&gt;テンプレート文字列&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ここから1つひとつ見ていきましょう。&lt;/p&gt;
+
+&lt;h3 id=&#34;let-const-キーワードによる変数宣言&#34;&gt;&lt;code&gt;let&lt;/code&gt; ・ &lt;code&gt;const&lt;/code&gt; キーワードによる変数宣言&lt;/h3&gt;
+
+&lt;p&gt;これまでの &lt;code&gt;var&lt;/code&gt; で変数を宣言した場合と違い、&lt;code&gt;let&lt;/code&gt; ・ &lt;code&gt;const&lt;/code&gt; で変数を宣言すると、その変数のスコープは宣言したブロック内になります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (1) {
+    var foo = &#39;foo&#39;;
+    let bar = &#39;bar&#39;;
+    const baz = &#39;baz&#39;;
+}
+
+console.log(foo);  // foo
+console.log(bar);  // エラー
+console.log(baz);  // エラー
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;また、&lt;code&gt;const&lt;/code&gt; は定数を宣言したい時に使用され、&lt;code&gt;const&lt;/code&gt; で宣言された変数は、宣言時を除いて値の代入が不可能になります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var foo = &#39;foo&#39;;
+let bar = &#39;bar&#39;;
+const baz = &#39;baz&#39;;
+
+foo = &#39;foo2&#39;;  // 代入可能
+bar = &#39;bar2&#39;;  // 代入可能
+baz = &#39;baz2&#39;;  // エラー
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;クラス構文&#34;&gt;クラス構文&lt;/h3&gt;
+
+&lt;p&gt;ES2015 以前までは、&lt;code&gt;prototype&lt;/code&gt; を利用することで、クラスのようなものを作成していました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function Human(name) {
+    this.name = name;
+}
+
+Human.prototype.hello = function () {
+    console.log(&#39;私の名前は &#39; + this.name + &#39; です。&#39;);
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;obj = new Human(&#39;enomotodev&#39;);
+obj.hello();
+//=&amp;gt; &#39;私の名前は enomotodev です。&#39; 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これをクラス構文を使用すると&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Human {
+    constructor(name) {
+        this.name = name;
+    }
+    hello() {
+        console.log(&#39;私の名前は &#39; + this.name + &#39; です。&#39;);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;obj = new Human(&#39;enomotodev&#39;);
+obj.hello();
+//=&amp;gt; &#39;私の名前は enomotodev です。&#39; 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;このように書くことができます。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;extends&lt;/code&gt; を使用してクラスの継承を行うことも可能です。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Human {
+    constructor(name) {
+        this.name = name;
+    }
+    hello() {
+        console.log(&#39;私の名前は &#39; + this.name + &#39; です。&#39;);
+    }
+}
+
+class Engineer extends Human {
+    constructor(name) {
+        super(name);
+        this.occupation = &#39;エンジニア&#39;;
+    }
+    hello() {
+        super.hello();
+        console.log(&#39;職業は &#39; + this.occupation + &#39; です。&#39;);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;obj = new Engineer(&#39;enomotodev&#39;);
+obj.hello();
+//=&amp;gt; &#39;私の名前は enomotodev です。&#39; 
+//=&amp;gt; &#39;職業は エンジニア です。&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;なお、上記のように子クラスでは &lt;code&gt;super()&lt;/code&gt; で親クラスの &lt;code&gt;constructor&lt;/code&gt; の実行、&lt;code&gt;super.メソッド名()&lt;/code&gt; で親クラスのメソッドの実行ができます。&lt;/p&gt;
+
+&lt;h3 id=&#34;アロー関数&#34;&gt;アロー関数&lt;/h3&gt;
+
+&lt;p&gt;これまでの &lt;code&gt;funciton&lt;/code&gt; を使った関数宣言に加えて、&lt;code&gt;=&amp;gt;&lt;/code&gt;（アロー）を用いた関数宣言が可能になりました。&lt;/p&gt;
+
+&lt;p&gt;アロー関数による関数宣言の特徴としては、&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;引数が1つの場合は &lt;code&gt;()&lt;/code&gt; が省略可能&lt;/li&gt;
+&lt;li&gt;関数の中身が単一式の場合は、&lt;code&gt;{}&lt;/code&gt; や &lt;code&gt;return&lt;/code&gt; を省略できる&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;というものになります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// これまでの function を使った関数宣言
+var foo = function(x, y) {
+  return x * y;
+};
+
+// アロー関数
+var bar = (x, y) =&amp;gt; {
+  return x * y;
+};
+
+// 単一式の場合は {} や return を省略可能
+var baz = (x, y) =&amp;gt; x * y;
+
+// 引数が1つの場合は () が省略可能
+var qux = x =&amp;gt; x * 2;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;分割代入&#34;&gt;分割代入&lt;/h3&gt;
+
+&lt;p&gt;複数の変数に、複数の値をまとめて代入できるようになりました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// これまで複数にの変数に代入する場合
+var foo = &#39;abc&#39;;
+var bar = 123;
+
+// 分割代入を使用した場合
+var [foo, bar] = [&#39;abc&#39;, 123];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;配列展開&#34;&gt;配列展開&lt;/h3&gt;
+
+&lt;p&gt;関数の呼び出し、配列への代入などに対して、&lt;code&gt;...&lt;/code&gt; を使用することにより、配列を展開して使用する事ができるようになりました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;関数の呼び出し&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;var array = [1, 2, 3];
+var foo = function(x, y, z) {
+    console.log(x, y, z);
+}
+
+f(...array);
+//=&amp;gt; 1 2 3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;[1, 2, 3]&lt;/code&gt; という配列を展開しているので、&lt;code&gt;f(...array)&lt;/code&gt; は &lt;code&gt;foo(1, 2, 3)&lt;/code&gt; という引数での関数 &lt;code&gt;foo&lt;/code&gt; の呼び出しと同じになります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;配列への代入&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;var array = [1, 2, 3];
+var foo = [...array, 4, 5, 6];
+
+console.log(foo);
+//=&amp;gt; [1, 2, 3, 4, 5, 6]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;可変長引数&#34;&gt;可変長引数&lt;/h3&gt;
+
+&lt;p&gt;関数を定義する際に、&lt;code&gt;...&lt;/code&gt; を使用することによって、引数に可変長引数を指定することができるようになりました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var foo = function(x, ...args) {
+    console.log(x, args);
+};
+
+foo(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;);
+//=&amp;gt; a [&amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;]
+
+foo(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, 1, 2, 3);
+//=&amp;gt; a [&amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;, 1, 2, 3]
+
+foo(&#39;a&#39;);
+//=&amp;gt; a []
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;デフォルト引数&#34;&gt;デフォルト引数&lt;/h3&gt;
+
+&lt;p&gt;関数宣言時に変数に代入を行うことで、デフォルト値を設定できるようになりました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var foo = function(a, b = 1) {
+  console.log(a + b);
+};
+
+foo(10);
+//=&amp;gt; 11
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;テンプレート文字列&#34;&gt;テンプレート文字列&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;``&lt;/code&gt; で文字列を囲むことで、文字列内での変数展開が &lt;code&gt;${}&lt;/code&gt; で行うことができ、改行もそのまま反映することができるようになりました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var name = &#39;enomotodev&#39;;
+var hello = `私の名前は
+${name} です`;
+
+console.log(hello);
+//=&amp;gt; 私の名前は
+//=&amp;gt; enomotodev です
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;es2016-の新機能&#34;&gt;ES2016 の新機能&lt;/h2&gt;
+
+&lt;p&gt;ここまで ES2015 で追加された主な機能を確認してきましたが、ES2016 の新機能についても見ていきましょう。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;べき乗演算子&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Array.prototype.includes()&lt;/code&gt; メソッド&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;べき乗演算子&#34;&gt;べき乗演算子&lt;/h3&gt;
+
+&lt;p&gt;これまでべき乗の計算は、&lt;code&gt;Math.pow()&lt;/code&gt; を使用してきましたが、&lt;code&gt;**&lt;/code&gt; で簡単に記述できるようになりました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// これまでの場合（2の5乗）
+var foo = Math.pow(2, 5);
+
+console.log(foo);
+//=&amp;gt; 32
+
+// ** を使用した場合（2の5乗）
+var bar = 2 ** 5;
+
+console.log(bar);
+//=&amp;gt; 32
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;array-prototype-includes-メソッド&#34;&gt;&lt;code&gt;Array.prototype.includes()&lt;/code&gt; メソッド&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Array.prototype.includes()&lt;/code&gt; メソッドは、配列内にある要素が含まれているかどうかを調べるためのメソッドです。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var foo = [1, 2, 3, 4, 5];
+
+// 配列に 1 が含まれているかどうか
+console.log(foo.includes(1));
+//=&amp;gt; true
+
+// 配列に 6 が含まれているかどうか
+console.log(foo.includes(6));
+//=&amp;gt; false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;新機能の紹介がメインとなりましたが、ES2015（ES6）と ES2016 について改めて調べてみました。&lt;/p&gt;
+
+&lt;p&gt;もちろん他にもたくさんの新機能がありますので、改めてきちんと学び直してみるのも良いと思います。&lt;/p&gt;
+
+&lt;p&gt;一部のブラウザによっては未対応の機能もあるので、&lt;a href=&#34;https://babeljs.io/&#34; target=&#34;_blank&#34;&gt;Babel&lt;/a&gt; などを使いコンパイルする必要がありますが、それらについてはまた別の機会に記事にしたいと思います。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>【 Composer 編】Mac に Docker インストールしてみた</title>
@@ -24,14 +334,14 @@
 
 &lt;p&gt;Database と連携する前に、Composer と連携し、PHP フレームワークの &lt;a href=&#34;https://laravel.com/&#34; target=&#34;_blank&#34;&gt;Laravel&lt;/a&gt; をインストールしてみようと思います&lt;/p&gt;
 
-&lt;h2 id=&#34;composer-のイメージを-pull-する:9d13ad3363305a699a868251e1304687&#34;&gt;Composer のイメージを pull する&lt;/h2&gt;
+&lt;h2 id=&#34;composer-のイメージを-pull-する&#34;&gt;Composer のイメージを pull する&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;$ docker pull composer/composer
 ...（略）
 Status: Downloaded newer image for composer/composer:latest
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;composer-コンテナを起動する:9d13ad3363305a699a868251e1304687&#34;&gt;Composer コンテナを起動する&lt;/h2&gt;
+&lt;h2 id=&#34;composer-コンテナを起動する&#34;&gt;Composer コンテナを起動する&lt;/h2&gt;
 
 &lt;p&gt;Composer で Laravel をインストールする前に、前回作成した &lt;code&gt;index.php&lt;/code&gt; を削除しておきましょう&lt;/p&gt;
 
@@ -76,7 +386,7 @@ root /var/www/html/public;
 
 &lt;p&gt;無事 Laravel が起動できました！&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:9d13ad3363305a699a868251e1304687&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;PHP 開発に欠かせない Composer も Docker で簡単に導入することができました&lt;/p&gt;
 
@@ -351,7 +661,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
       <guid>http://enomotodev.github.io/post/install-docker-mac/</guid>
       <description>
 
-&lt;h2 id=&#34;docker-docker-machine-のインストール:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Docker + Docker Machine のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;docker-docker-machine-のインストール&#34;&gt;Docker + Docker Machine のインストール&lt;/h2&gt;
 
 &lt;p&gt;まずは、Docker 本体と Docker Machine をインストールします。&lt;/p&gt;
 
@@ -362,7 +672,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
 &lt;pre&gt;&lt;code&gt;$ brew install docker docker-machine
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;machine-の作成:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Machine の作成&lt;/h2&gt;
+&lt;h2 id=&#34;machine-の作成&#34;&gt;Machine の作成&lt;/h2&gt;
 
 &lt;p&gt;docker-machine コマンドで新しく Machine を作成します。&lt;/p&gt;
 
@@ -398,7 +708,7 @@ export DOCKER_MACHINE_NAME=&amp;quot;dev-machine&amp;quot;
 
 &lt;p&gt;特に何も出力されませんが、これで Docker Machine に接続できるようになりました。&lt;/p&gt;
 
-&lt;h2 id=&#34;docker-machine-に接続する:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Docker Machine に接続する&lt;/h2&gt;
+&lt;h2 id=&#34;docker-machine-に接続する&#34;&gt;Docker Machine に接続する&lt;/h2&gt;
 
 &lt;p&gt;Docker Machine に接続してみます。&lt;/p&gt;
 
@@ -441,7 +751,7 @@ ubuntu              latest              97434d46f197        3 days ago          
 
 &lt;p&gt;問題なく Ubuntu のイメージが取得できたのが確認できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;mac-から-docker-コマンド実行:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Mac から Docker コマンド実行&lt;/h2&gt;
+&lt;h2 id=&#34;mac-から-docker-コマンド実行&#34;&gt;Mac から Docker コマンド実行&lt;/h2&gt;
 
 &lt;p&gt;ここまでは Docker Machine 内で docker コマンドを実行していたので、exit 等して Mac に戻りましょう。&lt;/p&gt;
 
@@ -454,13 +764,13 @@ ubuntu              latest              97434d46f197        3 days ago          
 
 &lt;p&gt;Mac からも docker コマンドが実行できました！&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;これで Mac に docker の環境を整えることができました。&lt;/p&gt;
 
 &lt;p&gt;ですが、このままでは docker をどのように使うのかイメージがつきづらいと思いますので、次回以降で PHP の開発環境を実際に構築していきたいと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;つづき:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;つづき&lt;/h2&gt;
+&lt;h2 id=&#34;つづき&#34;&gt;つづき&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-nginx/&#34;&gt;【 Nginx 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;

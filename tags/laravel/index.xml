@@ -24,14 +24,14 @@
 
 &lt;p&gt;Database と連携する前に、Composer と連携し、PHP フレームワークの &lt;a href=&#34;https://laravel.com/&#34; target=&#34;_blank&#34;&gt;Laravel&lt;/a&gt; をインストールしてみようと思います&lt;/p&gt;
 
-&lt;h2 id=&#34;composer-のイメージを-pull-する:9d13ad3363305a699a868251e1304687&#34;&gt;Composer のイメージを pull する&lt;/h2&gt;
+&lt;h2 id=&#34;composer-のイメージを-pull-する&#34;&gt;Composer のイメージを pull する&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;$ docker pull composer/composer
 ...（略）
 Status: Downloaded newer image for composer/composer:latest
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;composer-コンテナを起動する:9d13ad3363305a699a868251e1304687&#34;&gt;Composer コンテナを起動する&lt;/h2&gt;
+&lt;h2 id=&#34;composer-コンテナを起動する&#34;&gt;Composer コンテナを起動する&lt;/h2&gt;
 
 &lt;p&gt;Composer で Laravel をインストールする前に、前回作成した &lt;code&gt;index.php&lt;/code&gt; を削除しておきましょう&lt;/p&gt;
 
@@ -76,7 +76,7 @@ root /var/www/html/public;
 
 &lt;p&gt;無事 Laravel が起動できました！&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:9d13ad3363305a699a868251e1304687&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;PHP 開発に欠かせない Composer も Docker で簡単に導入することができました&lt;/p&gt;
 

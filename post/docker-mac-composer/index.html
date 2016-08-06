@@ -62,16 +62,16 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://enomotodev.github.io/touch-icon-144-precomposed.png">
 <link href="http://enomotodev.github.io/favicon.png" rel="icon">
 
-<meta name="generator" content="Hugo 0.15" />
+<meta name="generator" content="Hugo 0.16" />
 
   <!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
 
 
-    <link rel="stylesheet" href="http://enomotodev.github.io/css/theme/default.css">
+    <link rel="stylesheet" href="http://enomotodev.github.io/css/bootswatch/default/bootstrap.min.css">
 
 
 <link rel="stylesheet" href="http://enomotodev.github.io/css/font-awesome.min.css">
@@ -121,9 +121,9 @@
 
 
 <div class="container">
-<div class="row">
-
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <div class="text-center">
 
     <h1>【 Composer 編】Mac に Docker インストールしてみた
@@ -160,21 +160,21 @@
   </div>
 </div>
 
-  <div class="container content">
+      <div class="content">
   
 
 <p>前回の『<a href="/post/docker-mac-phpfpm/">【 php-fpm 編】Mac に Docker インストールしてみた</a>』の続きです</p>
 
 <p>Database と連携する前に、Composer と連携し、PHP フレームワークの <a href="https://laravel.com/" target="_blank">Laravel</a> をインストールしてみようと思います</p>
 
-<h2 id="composer-のイメージを-pull-する:9d13ad3363305a699a868251e1304687">Composer のイメージを pull する</h2>
+<h2 id="composer-のイメージを-pull-する">Composer のイメージを pull する</h2>
 
 <pre><code>$ docker pull composer/composer
 ...（略）
 Status: Downloaded newer image for composer/composer:latest
 </code></pre>
 
-<h2 id="composer-コンテナを起動する:9d13ad3363305a699a868251e1304687">Composer コンテナを起動する</h2>
+<h2 id="composer-コンテナを起動する">Composer コンテナを起動する</h2>
 
 <p>Composer で Laravel をインストールする前に、前回作成した <code>index.php</code> を削除しておきましょう</p>
 
@@ -219,7 +219,7 @@ root /var/www/html/public;
 
 <p>無事 Laravel が起動できました！</p>
 
-<h2 id="まとめ:9d13ad3363305a699a868251e1304687">まとめ</h2>
+<h2 id="まとめ">まとめ</h2>
 
 <p>PHP 開発に欠かせない Composer も Docker で簡単に導入することができました</p>
 
@@ -230,7 +230,7 @@ root /var/www/html/public;
 </div>
 
 
-  <footer>
+      <footer>
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       
   
@@ -243,6 +243,12 @@ root /var/www/html/public;
         </li>
     
 
+    
+      <li class="next">
+        <a href="http://enomotodev.github.io/post/learn-ecmascript/" title="ECMAScript について調べてみた">
+            Next <span aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
     
     </ul> </nav>
   
@@ -272,13 +278,16 @@ root /var/www/html/public;
 
 </footer>
 
-
+    </div>
+    
+  </div>
 </div>
-</div>
-      <footer class="footer">
-    <div class="container hidden-print">
+      
+<footer class="footer hidden-print">
+  <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <p>
            <div class="pull-left">
   <a class="toplink" href="#">back to top</a>
 </div>
@@ -286,6 +295,7 @@ root /var/www/html/public;
   
 </div>
 
+         </p>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
           <small>
@@ -304,12 +314,12 @@ root /var/www/html/public;
 
           </small>
         </div>
-     </div>
     </div>
+  </div>
 </footer>
 
-    <script src="http://enomotodev.github.io/js/jquery.min-2.1.4.js"></script>
-<script src="http://enomotodev.github.io/js/bootstrap.min-3.3.5.js"></script>
+    <script src="http://enomotodev.github.io/js/jquery.min.js"></script>
+<script src="http://enomotodev.github.io/js/bootstrap.min.js"></script>
 
 
 

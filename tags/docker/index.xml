@@ -24,14 +24,14 @@
 
 &lt;p&gt;Database と連携する前に、Composer と連携し、PHP フレームワークの &lt;a href=&#34;https://laravel.com/&#34; target=&#34;_blank&#34;&gt;Laravel&lt;/a&gt; をインストールしてみようと思います&lt;/p&gt;
 
-&lt;h2 id=&#34;composer-のイメージを-pull-する:9d13ad3363305a699a868251e1304687&#34;&gt;Composer のイメージを pull する&lt;/h2&gt;
+&lt;h2 id=&#34;composer-のイメージを-pull-する&#34;&gt;Composer のイメージを pull する&lt;/h2&gt;
 
 &lt;pre&gt;&lt;code&gt;$ docker pull composer/composer
 ...（略）
 Status: Downloaded newer image for composer/composer:latest
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;composer-コンテナを起動する:9d13ad3363305a699a868251e1304687&#34;&gt;Composer コンテナを起動する&lt;/h2&gt;
+&lt;h2 id=&#34;composer-コンテナを起動する&#34;&gt;Composer コンテナを起動する&lt;/h2&gt;
 
 &lt;p&gt;Composer で Laravel をインストールする前に、前回作成した &lt;code&gt;index.php&lt;/code&gt; を削除しておきましょう&lt;/p&gt;
 
@@ -76,7 +76,7 @@ root /var/www/html/public;
 
 &lt;p&gt;無事 Laravel が起動できました！&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:9d13ad3363305a699a868251e1304687&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;PHP 開発に欠かせない Composer も Docker で簡単に導入することができました&lt;/p&gt;
 
@@ -351,7 +351,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
       <guid>http://enomotodev.github.io/post/install-docker-mac/</guid>
       <description>
 
-&lt;h2 id=&#34;docker-docker-machine-のインストール:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Docker + Docker Machine のインストール&lt;/h2&gt;
+&lt;h2 id=&#34;docker-docker-machine-のインストール&#34;&gt;Docker + Docker Machine のインストール&lt;/h2&gt;
 
 &lt;p&gt;まずは、Docker 本体と Docker Machine をインストールします。&lt;/p&gt;
 
@@ -362,7 +362,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
 &lt;pre&gt;&lt;code&gt;$ brew install docker docker-machine
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;machine-の作成:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Machine の作成&lt;/h2&gt;
+&lt;h2 id=&#34;machine-の作成&#34;&gt;Machine の作成&lt;/h2&gt;
 
 &lt;p&gt;docker-machine コマンドで新しく Machine を作成します。&lt;/p&gt;
 
@@ -398,7 +398,7 @@ export DOCKER_MACHINE_NAME=&amp;quot;dev-machine&amp;quot;
 
 &lt;p&gt;特に何も出力されませんが、これで Docker Machine に接続できるようになりました。&lt;/p&gt;
 
-&lt;h2 id=&#34;docker-machine-に接続する:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Docker Machine に接続する&lt;/h2&gt;
+&lt;h2 id=&#34;docker-machine-に接続する&#34;&gt;Docker Machine に接続する&lt;/h2&gt;
 
 &lt;p&gt;Docker Machine に接続してみます。&lt;/p&gt;
 
@@ -441,7 +441,7 @@ ubuntu              latest              97434d46f197        3 days ago          
 
 &lt;p&gt;問題なく Ubuntu のイメージが取得できたのが確認できました。&lt;/p&gt;
 
-&lt;h2 id=&#34;mac-から-docker-コマンド実行:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;Mac から Docker コマンド実行&lt;/h2&gt;
+&lt;h2 id=&#34;mac-から-docker-コマンド実行&#34;&gt;Mac から Docker コマンド実行&lt;/h2&gt;
 
 &lt;p&gt;ここまでは Docker Machine 内で docker コマンドを実行していたので、exit 等して Mac に戻りましょう。&lt;/p&gt;
 
@@ -454,13 +454,13 @@ ubuntu              latest              97434d46f197        3 days ago          
 
 &lt;p&gt;Mac からも docker コマンドが実行できました！&lt;/p&gt;
 
-&lt;h2 id=&#34;まとめ:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;まとめ&lt;/h2&gt;
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
 
 &lt;p&gt;これで Mac に docker の環境を整えることができました。&lt;/p&gt;
 
 &lt;p&gt;ですが、このままでは docker をどのように使うのかイメージがつきづらいと思いますので、次回以降で PHP の開発環境を実際に構築していきたいと思います。&lt;/p&gt;
 
-&lt;h2 id=&#34;つづき:3211dbcfd732b3a7b077b202cb192a88&#34;&gt;つづき&lt;/h2&gt;
+&lt;h2 id=&#34;つづき&#34;&gt;つづき&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-nginx/&#34;&gt;【 Nginx 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;
