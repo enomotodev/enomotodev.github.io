@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Centos  &middot; enomotodev</title>
+  <title>enomotodev </title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -17,9 +17,9 @@
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="Centos  &middot; enomotodev ">
+<meta property="og:title" content="enomotodev ">
 <meta property="og:site_name" content="enomotodev"/>
-<meta property="og:url" content="http://enomotodev.github.io/tags/centos/" />
+<meta property="og:url" content="http://enomotodev.github.io/" />
 <meta property="og:locale" content="ja_JP">
 
 
@@ -27,9 +27,9 @@
 
 
 
-<link href="http://enomotodev.github.io/tags/centos/index.xml" rel="alternate" type="application/rss+xml" title="Centos" />
+<link href="http://enomotodev.github.io/index.xml" rel="alternate" type="application/rss+xml" title="enomotodev" />
 
-<link rel="canonical" href="http://enomotodev.github.io/tags/centos/" />
+<link rel="canonical" href="http://enomotodev.github.io/" />
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://enomotodev.github.io/touch-icon-144-precomposed.png">
 <link href="http://enomotodev.github.io/favicon.png" rel="icon">
@@ -92,38 +92,110 @@
 </header>
 
 
-<div id="main-content" class="container">
-  <header>
-    <h1>Centos
-</h1>
-
-  </header>
-  <ul class="container content">
+  <div class="container">
     
-      <li><a href="http://enomotodev.github.io/post/centos7_mysql57/">CentOS 7 に MySQL 5.7 を yum インストールして初期設定までやってみた</a>
+    <div class="row">
+      <div class="col-sm-12">
+        
+        
+          <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div>
+  <h2 class="title"><a href="http://enomotodev.github.io/post/use-goose/">Gooseつかってみた</a>
+</h2>
 
-</li>
-
-    
-      <li><a href="http://enomotodev.github.io/post/install-jenkins/">CentOS に Jenkins インストールしてみた</a>
-
-</li>
-
-    
-      <li><a href="http://enomotodev.github.io/post/install-elasticsearch/">Apache &#43; fluentd &#43; Elasticsearch &#43; Kibana を連携させてみた</a>
-
-</li>
+  <div class="margin-10">
+    <small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2015-11-11">11 Nov, 2015</time>
+</small>
 
     
-      <li><a href="http://enomotodev.github.io/post/install-fluentd/">fluentdつかってみた</a>
-
-</li>
-
-    
-  </ul>
+  <i class="fa fa-tags"></i>
+  
+  <a href="http://enomotodev.github.io/tags/golang" class="label label-primary">golang</a>
+  
+  <a href="http://enomotodev.github.io/tags/goose" class="label label-primary">goose</a>
+  
+  <a href="http://enomotodev.github.io/tags/mysql" class="label label-primary">mysql</a>
+  
+  <a href="http://enomotodev.github.io/tags/migration" class="label label-primary">migration</a>
   
 
+
+  </div>
 </div>
+
+    <p class="summary">
+  
+  
+    Gooseとは GooseとはGo言語で作られたDBマイグレーションツールです。 develop環境やproduction環境など各環境に簡単に設定を変更でき、かなり便利そうなので実際にMySQLで試してみました。 Gooseパッケージの取得 まずは go get して Goose パッケージを取得します。 ※ Goをインストールしていない人や、GOPATHを設定していない人は公式ドキュメントを参考に導入してみてください。 $ go get bitbucket.org/liamstask/goose/cmd/goose dbディレクトリの作成 プロジェクトのルート直下に db ディレクトリを作成します。 $ mkdir db configファイルの作成 取得したGooseパッケージのサンプルからconfigファイルをコピーします。 $ cp $GOPATH/src/bitbucket.org/liamstask/goose/db-sample/dbconf.yml db/ configファイルの編集 まずは先ほどコピーしてきたconfigファイルの中身をのぞいてみます。 デフォルトで test / develop / production のそれぞれの環境に PostgreSQL の driver が設定してあるのが、なんとなくわかるかと思います。 db/dbconf.yml test: driver: postgres open: user=liam dbname=tester sslmode=disable development: driver: postgres open: user=liam dbname=tester sslmode=disable production: driver: postgres open: user=liam dbname=tester sslmode=verify-full customimport: driver: customdriver open: customdriver open
+  
+
+
+</p>
+
+
+    <p class="lead"><a href="http://enomotodev.github.io/post/use-goose/" class="btn btn-default">Read more &rarr;</a></p>
+
+
+  </div>
+</div>
+
+        
+        
+<nav>
+  <ul class="pagination">
+    
+
+
+<li >
+  <a aria-label="First" href="http://enomotodev.github.io//">
+    <span aria-hidden="true">&laquo;&laquo;</span>
+  </a>
+</li>
+
+<li >
+  <a aria-label="Previous" href="http://enomotodev.github.io//">
+    <span aria-hidden="true">&laquo;</span>
+    </a>
+</li>
+
+<li >
+  <a href="http://enomotodev.github.io//">
+    1
+    </a>
+</li>
+
+<li  class="active" >
+  <a href="http://enomotodev.github.io//page/2/">
+    2
+    </a>
+</li>
+
+
+<li  class="disabled" >
+  <a aria-label="Next" href="#">
+    <span aria-hidden="true">&raquo;</span>
+    </a>
+</li>
+<li  class="disabled" >
+  <a aria-label="Last" href="http://enomotodev.github.io//page/2/">
+    <span aria-hidden="true">&raquo;&raquo;</span>
+  </a>
+</li>
+
+
+  </ul>
+</nav>
+
+
+      </div>
+      
+    </div>
+
+  </div>
+
       
 <footer class="footer hidden-print">
   <div class="container">

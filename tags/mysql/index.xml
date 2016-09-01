@@ -9,8 +9,205 @@
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
     <copyright>(c) 2015 Takafumi Enomoto.</copyright>
-    <lastBuildDate>Thu, 19 Nov 2015 23:53:29 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 01 Sep 2016 22:52:35 +0900</lastBuildDate>
     <atom:link href="http://enomotodev.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>CentOS 7 に MySQL 5.7 を yum インストールして初期設定までやってみた</title>
+      <link>http://enomotodev.github.io/post/centos7_mysql57/</link>
+      <pubDate>Thu, 01 Sep 2016 22:52:35 +0900</pubDate>
+      <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
+      <guid>http://enomotodev.github.io/post/centos7_mysql57/</guid>
+      <description>
+
+&lt;p&gt;CentOS 7.2 上に MySQL 5.7 を yum インストールして、初期設定まで行ったので、その手順を記していきたいと思います。&lt;/p&gt;
+
+&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
+
+&lt;p&gt;CentOS 7 よりデータベースサーバの MySQL が MariaDB に置き換えられました。&lt;/p&gt;
+
+&lt;p&gt;もしすでに MariaDB がインストールされている場合はこれからインストールする MySQL と競合を起こさないように削除しましょう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo yum remove mariadb-libs
+$ sudo rm -rf /var/lib/mysql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで MariaDB 本体とデータフォルダを削除できました。&lt;/p&gt;
+
+&lt;h2 id=&#34;yum-リポジトリの追加&#34;&gt;yum リポジトリの追加&lt;/h2&gt;
+
+&lt;p&gt;CentOS 7 に &lt;a href=&#34;http://dev.mysql.com/downloads/repo/yum/&#34; target=&#34;_blank&#34;&gt;MySQL 公式の yum リポジトリ&lt;/a&gt;を追加します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo rpm -ivh http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;mysql-のインストール&#34;&gt;MySQL のインストール&lt;/h2&gt;
+
+&lt;p&gt;MySQL 公式の yum リポジトリが追加できたので、&lt;code&gt;yum install&lt;/code&gt; コマンドでインストールしましょう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo yum install mysql-community-server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;バージョンを確認します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ mysqld --version
+mysqld  Ver 5.7.14 for Linux on x86_64 (MySQL Community Server (GPL))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;無事 MySQL 5.7 がインストールできました！&lt;/p&gt;
+
+&lt;h2 id=&#34;mysql-の起動&#34;&gt;MySQL の起動&lt;/h2&gt;
+
+&lt;p&gt;MySQL がインストールできたので、早速起動させましょう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo systemctl start mysqld.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;自動起動の設定も行っておきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo systemctl enable mysqld.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;mysql-の初期パスワード確認&#34;&gt;MySQL の初期パスワード確認&lt;/h2&gt;
+
+&lt;p&gt;MySQL 5.7 では、初回起動時に初期パスワードが生成されるので、ログファイルから生成されたパスワードを確認する必要があります。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ $ sudo cat /var/log/mysqld.log | grep password
+2016-09-01T13:09:03.337119Z 1 [Note] A temporary password is generated for root@localhost: uhsd!Aid;3Zt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;今回の場合、&lt;strong&gt;uhsd!Aid;3Zt&lt;/strong&gt; の部分が初期パスワードになります。&lt;/p&gt;
+
+&lt;h2 id=&#34;mysql-のセキュリティ設定&#34;&gt;MySQL のセキュリティ設定&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;mysql_secure_installation&lt;/code&gt; コマンドを実行して、MySQL のセキュリティ設定を行っていきます。&lt;/p&gt;
+
+&lt;p&gt;対話形式なので、比較的簡単に最低限必要と考えられるセキュリティの設定ができます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mysql_secure_installation
+
+Securing the MySQL server deployment.
+
+Enter password for user root: # ログファイルから取得した初期パスワードを入力します
+
+The existing password for the user account root has expired. Please set a new password.
+
+New password: # root ユーザの新規パスワードを入力します
+
+Re-enter new password: # 確認用にもう一度入力します
+The &#39;validate_password&#39; plugin is installed on the server.
+The subsequent steps will run with the existing configuration
+of the plugin.
+Using existing password for root.
+
+Estimated strength of the password: 100
+Change the password for root ? ((Press y|Y for Yes, any other key for No) : y
+
+By default, a MySQL installation has an anonymous user,
+allowing anyone to log into MySQL without having to have
+a user account created for them. This is intended only for
+testing, and to make the installation go a bit smoother.
+You should remove them before moving into a production
+environment.
+
+Remove anonymous users? (Press y|Y for Yes, any other key for No) : y # 匿名ユーザーアカウントを削除
+Success.
+
+
+Normally, root should only be allowed to connect from
+&#39;localhost&#39;. This ensures that someone cannot guess at
+the root password from the network.
+
+Disallow root login remotely? (Press y|Y for Yes, any other key for No) : y # ローカルホスト以外からアクセス可能な root アカウントを削除
+Success.
+
+By default, MySQL comes with a database named &#39;test&#39; that
+anyone can access. This is also intended only for testing,
+and should be removed before moving into a production
+environment.
+
+
+Remove test database and access to it? (Press y|Y for Yes, any other key for No) : y # test データベースの削除
+ - Dropping test database...
+Success.
+
+ - Removing privileges on test database...
+Success.
+
+Reloading the privilege tables will ensure that all changes
+made so far will take effect immediately.
+
+Reload privilege tables now? (Press y|Y for Yes, any other key for No) : y
+Success.
+
+All done!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;mysql-へのログイン確認&#34;&gt;MySQL へのログイン確認&lt;/h2&gt;
+
+&lt;p&gt;さきほど設定した新しいパスワードでログインできるかどうか確認します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ mysql -u root -p
+Enter password: # 新しいパスワードを入力
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 5.7.14 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mysql&amp;gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;設定変更&#34;&gt;設定変更&lt;/h2&gt;
+
+&lt;p&gt;MySQL 5.7 からパスワードの有効期限がデフォルトで360日になり、360日を経過するとパスワードの変更を促されて MySQL にログインできなくなります。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;default_password_lifetime&lt;/code&gt; の値を &lt;code&gt;0&lt;/code&gt; に変更して、この有効期限の設定を無効にしたいと思います。&lt;/p&gt;
+
+&lt;p&gt;また、デフォルトの文字コードも UTF-8 に変更します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;/etc/my.cnf&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;[mysqld]
+.
+.
+.
+character-set-server = utf8
+default_password_lifetime = 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;MySQL を再起動させ、設定内容を反映させます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo systemctl restart mysqld.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上で設定は完了となります。&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;CentOS 7 に MySQL 5.7 を yum インストールし、最低限の設定を行いました。&lt;/p&gt;
+
+&lt;p&gt;本番環境で運用する際は、チューニングも含めて、さらに細かい設定が必要になってくると思いますが、サービスに合わせて適切な設定を考えていきたいと思います。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>閉包テーブル（Closure Table）を試してみた</title>

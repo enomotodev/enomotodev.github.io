@@ -101,6 +101,47 @@
           <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div>
+  <h2 class="title"><a href="http://enomotodev.github.io/post/centos7_mysql57/">CentOS 7 に MySQL 5.7 を yum インストールして初期設定までやってみた</a>
+</h2>
+
+  <div class="margin-10">
+    <small>
+  <i class="fa fa-calendar"></i>
+  <time datetime="2016-09-01">1 Sep, 2016</time>
+</small>
+
+    
+  <i class="fa fa-tags"></i>
+  
+  <a href="http://enomotodev.github.io/tags/mysql" class="label label-primary">mysql</a>
+  
+  <a href="http://enomotodev.github.io/tags/centos" class="label label-primary">centos</a>
+  
+
+
+  </div>
+</div>
+
+    <p class="summary">
+  
+  
+    CentOS 7.2 上に MySQL 5.7 を yum インストールして、初期設定まで行ったので、その手順を記していきたいと思います。 はじめに CentOS 7 よりデータベースサーバの MySQL が MariaDB に置き換えられました。 もしすでに MariaDB がインストールされている場合はこれからインストールする MySQL と競合を起こさないように削除しましょう。 $ sudo yum remove mariadb-libs $ sudo rm -rf /var/lib/mysql これで MariaDB 本体とデータフォルダを削除できました。 yum リポジトリの追加 CentOS 7 に MySQL 公式の yum リポジトリを追加します。 $ sudo rpm -ivh http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm MySQL のインストール MySQL 公式の yum リポジトリが追加できたので、yum install コマンドでインストールしましょう。 $ sudo yum install mysql-community-server バージョンを確認します。 $ mysqld --version mysqld Ver 5.7.14 for Linux on x86_64 (MySQL Community Server (GPL)) 無事 MySQL 5.7 がインストールできました！ MySQL の起動 MySQL がインストールできたので、早速起動させましょう。 $ sudo systemctl start mysqld.service 自動起動の設定も行っておきます。 $ sudo systemctl enable mysqld.service MySQL の初期パスワード確認 MySQL 5.7 では、初回起動時に初期パスワードが生成されるので、ログファイルから生成されたパスワードを確認する必要があります。 $ $ sudo cat /var/log/mysqld.log | grep password 2016-09-01T13:09:03.337119Z 1 [Note] A temporary password is generated for root@localhost: uhsd!Aid;3Zt 今回の場合、uhsd!Aid;3Zt の部分が初期パスワードになります。 MySQL のセキュリティ設定 mysql_secure_installation コマンドを実行して、MySQL のセキュリティ設定を行っていきます。 対話形式なので、比較的簡単に最低限必要と考えられるセキュリティの設定ができます。 $ mysql_secure_installation Securing the MySQL server deployment.
+  
+
+
+</p>
+
+
+    <p class="lead"><a href="http://enomotodev.github.io/post/centos7_mysql57/" class="btn btn-default">Read more &rarr;</a></p>
+
+
+  </div>
+</div>
+
+        
+          <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div>
   <h2 class="title"><a href="http://enomotodev.github.io/post/learn-ecmascript/">ECMAScript について調べてみた</a>
 </h2>
 
@@ -489,52 +530,52 @@
 </div>
 
         
-          <div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div>
-  <h2 class="title"><a href="http://enomotodev.github.io/post/use-goose/">Gooseつかってみた</a>
-</h2>
-
-  <div class="margin-10">
-    <small>
-  <i class="fa fa-calendar"></i>
-  <time datetime="2015-11-11">11 Nov, 2015</time>
-</small>
-
+        
+<nav>
+  <ul class="pagination">
     
-  <i class="fa fa-tags"></i>
-  
-  <a href="http://enomotodev.github.io/tags/golang" class="label label-primary">golang</a>
-  
-  <a href="http://enomotodev.github.io/tags/goose" class="label label-primary">goose</a>
-  
-  <a href="http://enomotodev.github.io/tags/mysql" class="label label-primary">mysql</a>
-  
-  <a href="http://enomotodev.github.io/tags/migration" class="label label-primary">migration</a>
-  
 
 
-  </div>
-</div>
+<li  class="disabled" >
+  <a aria-label="First" href="http://enomotodev.github.io//">
+    <span aria-hidden="true">&laquo;&laquo;</span>
+  </a>
+</li>
 
-    <p class="summary">
-  
-  
-    Gooseとは GooseとはGo言語で作られたDBマイグレーションツールです。 develop環境やproduction環境など各環境に簡単に設定を変更でき、かなり便利そうなので実際にMySQLで試してみました。 Gooseパッケージの取得 まずは go get して Goose パッケージを取得します。 ※ Goをインストールしていない人や、GOPATHを設定していない人は公式ドキュメントを参考に導入してみてください。 $ go get bitbucket.org/liamstask/goose/cmd/goose dbディレクトリの作成 プロジェクトのルート直下に db ディレクトリを作成します。 $ mkdir db configファイルの作成 取得したGooseパッケージのサンプルからconfigファイルをコピーします。 $ cp $GOPATH/src/bitbucket.org/liamstask/goose/db-sample/dbconf.yml db/ configファイルの編集 まずは先ほどコピーしてきたconfigファイルの中身をのぞいてみます。 デフォルトで test / develop / production のそれぞれの環境に PostgreSQL の driver が設定してあるのが、なんとなくわかるかと思います。 db/dbconf.yml test: driver: postgres open: user=liam dbname=tester sslmode=disable development: driver: postgres open: user=liam dbname=tester sslmode=disable production: driver: postgres open: user=liam dbname=tester sslmode=verify-full customimport: driver: customdriver open: customdriver open
-  
+<li  class="disabled" >
+  <a aria-label="Previous" href="#">
+    <span aria-hidden="true">&laquo;</span>
+    </a>
+</li>
+
+<li  class="active" >
+  <a href="http://enomotodev.github.io//">
+    1
+    </a>
+</li>
+
+<li >
+  <a href="http://enomotodev.github.io//page/2/">
+    2
+    </a>
+</li>
 
 
-</p>
+<li >
+  <a aria-label="Next" href="http://enomotodev.github.io//page/2/">
+    <span aria-hidden="true">&raquo;</span>
+    </a>
+</li>
+<li >
+  <a aria-label="Last" href="http://enomotodev.github.io//page/2/">
+    <span aria-hidden="true">&raquo;&raquo;</span>
+  </a>
+</li>
 
 
-    <p class="lead"><a href="http://enomotodev.github.io/post/use-goose/" class="btn btn-default">Read more &rarr;</a></p>
+  </ul>
+</nav>
 
-
-  </div>
-</div>
-
-        
-        
 
       </div>
       
