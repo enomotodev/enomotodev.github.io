@@ -1,45 +1,4 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>【 Nginx 編】Mac に Docker インストールしてみた  &middot; enomotodev</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<meta name="description" content="" />
-
-<meta name="keywords" content="docker, nginx, ">
-
-
-<meta property="og:title" content="【 Nginx 編】Mac に Docker インストールしてみた  &middot; enomotodev ">
-<meta property="og:site_name" content="enomotodev"/>
-<meta property="og:url" content="http://enomotodev.github.io/post/docker-mac-nginx/" />
-<meta property="og:locale" content="ja_JP">
-
-
-<meta property="og:type" content="article" />
-<meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2016-04-04T23:33:12&#43;09:00" />
-<meta property="og:article:modified_time" content="2016-04-04T23:33:12&#43;09:00" />
-
-  
-    
-<meta property="og:article:tag" content="docker">
-    
-<meta property="og:article:tag" content="nginx">
-    
-  
-
-  
-
-<script type="application/ld+json">
-  {
+<!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><title>【 Nginx 編】Mac に Docker インストールしてみた &middot; enomotodev</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content=""><meta name="keywords" content="docker, nginx, "><meta property="og:title" content="【 Nginx 編】Mac に Docker インストールしてみた  &middot; enomotodev "><meta property="og:site_name" content="enomotodev"><meta property="og:url" content="http://enomotodev.github.io/post/docker-mac-nginx/"><meta property="og:locale" content="ja_JP"><meta property="og:type" content="article"><meta property="og:description" content=""><meta property="og:article:published_time" content="2016-04-04T23:33:12&#43;09:00"><meta property="og:article:modified_time" content="2016-04-04T23:33:12&#43;09:00"><meta property="og:article:tag" content="docker"><meta property="og:article:tag" content="nginx"><script type="application/ld+json">{
     "@context": "http://schema.org",
     "@type": "Article",
     "headline": "【 Nginx 編】Mac に Docker インストールしてみた",
@@ -50,159 +9,28 @@
     "datePublished": "2016-04-04",
     "description": "",
     "wordCount":  339 
-  }
-</script>
-
-
-
-<link rel="canonical" href="http://enomotodev.github.io/post/docker-mac-nginx/" />
-
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
-<link href="/favicon.png" rel="icon">
-
-<meta name="generator" content="Hugo 0.16" />
-
-  <!--[if lt IE 9]>
+  }</script><link rel="canonical" href="http://enomotodev.github.io/post/docker-mac-nginx/"><link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png"><link href="/favicon.png" rel="icon"><meta name="generator" content="Hugo 0.16"><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-
-
-
-    <link rel="stylesheet" href="/css/bootswatch/default/bootstrap.min.css">
-
-
-<link rel="stylesheet" href="/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/style.css">
-
-
-  <link rel="stylesheet" href="/css/highlight/dark.css">
-
-
-</head>
-<body>
-    <header id="main-header">
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="http://enomotodev.github.io/">enomotodev</a>
-      </div>
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          
-          <li>
-
-            <a href="http://enomotodev.github.io/tags"
-            >
-
-            
-                <i class="fa fa-tags"></i>
-            
-            
-            Tags
-            </a>
-          </li>
-          
-        </ul>
-      </div>
-      
-    </div>
-  </nav>
-
-</header>
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <div class="text-center">
-
-    <h1>【 Nginx 編】Mac に Docker インストールしてみた
-</h1>
-
-    <div class="metas">
-<small>
-  <i class="fa fa-calendar"></i>
-  <time datetime="2016-04-04">4 Apr, 2016</time>
-</small>
-
-
-  <small>
-  &middot; Read in about 2 min
-  &middot; (339 Words)
-</small>
-
-
-<div class="margin-10">
-  <i class="fa fa-tags"></i>
-  
-  <a href="http://enomotodev.github.io/tags/docker" class="label label-primary">docker</a>
-  
-  <a href="http://enomotodev.github.io/tags/nginx" class="label label-primary">nginx</a>
-  
-
-
-</div>
-<br>
-</div>
-
-
-  </div>
-</div>
-
-      <div class="content">
-  
-
-<p>前回の『<a href="/post/install-docker-mac/">Mac に Docker インストールしてみた</a>』の続きです。</p>
-
-<p>実際に Nginx + PHP + MySQL 環境を構築するにあたって、今回は Nginx コンテナを起動させて、静的コンテンツの表示までを行いたいと思います。</p>
-
-<h2 id="docker-machine-の起動">Docker Machine の起動</h2>
-
-<p>前回から、PC をシャットダウンしたり、再起動している場合は、もう一度 Docker Machine を起動させなければいけないので、下記のコマンドで起動させてください。（それ以外の方は次の『Nginx コンテナを起動させる』から読んでください）</p>
-
-<pre><code>$ docker-machine start dev-machine
+<![endif]--><link rel="stylesheet" href="/css/bootswatch/default/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/highlight/dark.css"></head><body><header id="main-header"><nav class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="http://enomotodev.github.io/">enomotodev</a></div><div id="navbar" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="http://enomotodev.github.io/tags"><i class="fa fa-tags"></i> Tags</a></li></ul></div></div></nav></header><div class="container"><div class="row"><div class="col-sm-12"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="text-center"><h1>【 Nginx 編】Mac に Docker インストールしてみた</h1><div class="metas"><small><i class="fa fa-calendar"></i> <time datetime="2016-04-04">4 Apr, 2016</time> </small><small>&middot; Read in about 2 min &middot; (339 Words)</small><div class="margin-10"><i class="fa fa-tags"></i> <a href="http://enomotodev.github.io/tags/docker" class="label label-primary">docker</a> <a href="http://enomotodev.github.io/tags/nginx" class="label label-primary">nginx</a></div><br></div></div></div><div class="content"><p>前回の『<a href="/post/install-docker-mac/">Mac に Docker インストールしてみた</a>』の続きです。</p><p>実際に Nginx + PHP + MySQL 環境を構築するにあたって、今回は Nginx コンテナを起動させて、静的コンテンツの表示までを行いたいと思います。</p><h2 id="docker-machine-の起動">Docker Machine の起動</h2><p>前回から、PC をシャットダウンしたり、再起動している場合は、もう一度 Docker Machine を起動させなければいけないので、下記のコマンドで起動させてください。（それ以外の方は次の『Nginx コンテナを起動させる』から読んでください）</p><pre><code>$ docker-machine start dev-machine
 Starting &quot;dev-machine&quot;...
 (dev-machine) Waiting for an IP...
 Machine &quot;dev-machine&quot; was started.
 Waiting for SSH to be available...
 Detecting the provisioner...
 Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
-</code></pre>
-
-<p>前回と同じ手順を踏んで、Docker Machine に接続できるようにしていきます。</p>
-
-<pre><code>$ docker-machine env dev-machine
+</code></pre><p>前回と同じ手順を踏んで、Docker Machine に接続できるようにしていきます。</p><pre><code>$ docker-machine env dev-machine
 export DOCKER_TLS_VERIFY=&quot;1&quot;
 export DOCKER_HOST=&quot;tcp://192.168.99.101:2376&quot;
 export DOCKER_CERT_PATH=&quot;/Users/enomotodev/.docker/machine/machines/dev-machine&quot;
 export DOCKER_MACHINE_NAME=&quot;dev-machine&quot;
 # Run this command to configure your shell:
 # eval $(docker-machine env dev-machine)
-</code></pre>
-
-<pre><code>$ eval $(docker-machine env dev-machine)
-</code></pre>
-
-<pre><code>$ docker images
+</code></pre><pre><code>$ eval $(docker-machine env dev-machine)
+</code></pre><pre><code>$ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 ubuntu              latest              97434d46f197        2 weeks ago         188 MB
-</code></pre>
-
-<p>無事 <code>docker images</code> コマンドが実行できました。</p>
-
-<h2 id="nginx-コンテナを起動させる">Nginx コンテナを起動させる</h2>
-
-<p>まずは <code>docker pull</code> コマンドを実行して、Nginx のイメージを取得します。</p>
-
-<pre><code>$ docker pull nginx:latest
+</code></pre><p>無事 <code>docker images</code> コマンドが実行できました。</p><h2 id="nginx-コンテナを起動させる">Nginx コンテナを起動させる</h2><p>まずは <code>docker pull</code> コマンドを実行して、Nginx のイメージを取得します。</p><pre><code>$ docker pull nginx:latest
 latest: Pulling from library/nginx
 fdd5d7827f33: Pull complete
 a3ed95caeb02: Pull complete
@@ -210,161 +38,26 @@ a3ed95caeb02: Pull complete
 7b10f03a0309: Pull complete
 Digest: sha256:f6a001272d5d324c4c9f3f183e1b69e9e0ff12debeb7a092730d638c33e0de3e
 Status: Downloaded newer image for nginx:latest
-</code></pre>
-
-<p><code>docker images</code> コマンドで確認します。</p>
-
-<pre><code>$ docker images
+</code></pre><p><code>docker images</code> コマンドで確認します。</p><pre><code>$ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 ubuntu              latest              97434d46f197        2 weeks ago         188 MB
 nginx               latest              af4b3d7d5401        3 weeks ago         190.5 MB
-</code></pre>
-
-<p><code>docker run</code> コマンドで Nginx のコンテナが起動するのですが、先に Nginx の設定ファイルと Document Root に置く HTML ファイルを準備します。</p>
-
-<ul>
-<li><code>~/docker/nginx/nginx.conf</code></li>
-</ul>
-
-<pre><code>server {
+</code></pre><p><code>docker run</code> コマンドで Nginx のコンテナが起動するのですが、先に Nginx の設定ファイルと Document Root に置く HTML ファイルを準備します。</p><ul><li><code>~/docker/nginx/nginx.conf</code></li></ul><pre><code>server {
     listen 8080 default_server;
 
     root /var/www;
     index index.html index.htm;
 }
-</code></pre>
-
-<ul>
-<li><code>~/docker/www/index.html</code></li>
-</ul>
-
-<pre><code>&lt;html&gt;
+</code></pre><ul><li><code>~/docker/www/index.html</code></li></ul><pre><code>&lt;html&gt;
 &lt;body&gt;
 &lt;h1&gt;Hello Docker!&lt;/h1&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre>
-
-<p>最低限の設定ですが、必要なファイルが準備できたので、<code>docker run</code> コマンドで Nginx コンテナを起動します。</p>
-
-<pre><code>$ docker run -p 9090:8080 -v /Users/enomotodev/docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf -v /Users/enomotodev/docker/www:/var/www -d nginx
+</code></pre><p>最低限の設定ですが、必要なファイルが準備できたので、<code>docker run</code> コマンドで Nginx コンテナを起動します。</p><pre><code>$ docker run -p 9090:8080 -v /Users/enomotodev/docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf -v /Users/enomotodev/docker/www:/var/www -d nginx
 0902e290559b4a054d72b4cf2615334079cfa879df1cc35d9655d0f0e217c462
-</code></pre>
-
-<p>ここで <code>docker run</code> コマンドのオプションを少し確認したいと思います。</p>
-
-<ul>
-<li><code>-p</code> オプション</li>
-</ul>
-
-<p><code>-p</code> オプションでポートマッピングの設定ができます。</p>
-
-<p>『Mac -&gt; Docker Machine -&gt; Nginx コンテナ』という流れで Nginx に接続していて、今回は <code>9090:8080</code> と設定しているので、『Mac -&gt; Docker Machine』の接続に <code>9090</code> ポート、『Docker Machine -&gt; Nginx コンテナ』の接続に <code>8080</code> ポートを使用するという設定になっています。</p>
-
-<ul>
-<li><code>-v</code> オプション</li>
-</ul>
-
-<p><code>-v</code>　オプションでは、Docker Machine と Nginx コンテナ間で共有するファイル・ディレクトリを指定できます。</p>
-
-<p>Docker Machine には、Mac の <code>/Users</code> ディレクトリがマウントされているので、例えば Mac 上の <code>/Users/enomotodev/hoge</code> ディレクトリは、Docker Machine 上でも <code>/Users/enomotodev/hoge</code> ディレクトリになります。</p>
-
-<p><code>-v foo:bar</code> と書くと、Docker Machine の <code>foo</code> ディレクトリを Nginx コンテナの <code>bar</code> にマウントさせることができ、それによってファイルやディレクトリを共有できます。</p>
-
-<ul>
-<li><code>-d</code> オプション</li>
-</ul>
-
-<p><code>-d</code> オプションを使用するとコンテナをバックグラウンドモードで起動することができます。</p>
-
-<h2 id="nginx-コンテナの起動確認">Nginx コンテナの起動確認</h2>
-
-<p>Nginx コンテナを起動させたので Docker Machine の IP を確認して、接続してみましょう。</p>
-
-<pre><code>$ docker-machine ip dev-machine
+</code></pre><p>ここで <code>docker run</code> コマンドのオプションを少し確認したいと思います。</p><ul><li><code>-p</code> オプション</li></ul><p><code>-p</code> オプションでポートマッピングの設定ができます。</p><p>『Mac -&gt; Docker Machine -&gt; Nginx コンテナ』という流れで Nginx に接続していて、今回は <code>9090:8080</code> と設定しているので、『Mac -&gt; Docker Machine』の接続に <code>9090</code> ポート、『Docker Machine -&gt; Nginx コンテナ』の接続に <code>8080</code> ポートを使用するという設定になっています。</p><ul><li><code>-v</code> オプション</li></ul><p><code>-v</code>　オプションでは、Docker Machine と Nginx コンテナ間で共有するファイル・ディレクトリを指定できます。</p><p>Docker Machine には、Mac の <code>/Users</code> ディレクトリがマウントされているので、例えば Mac 上の <code>/Users/enomotodev/hoge</code> ディレクトリは、Docker Machine 上でも <code>/Users/enomotodev/hoge</code> ディレクトリになります。</p><p><code>-v foo:bar</code> と書くと、Docker Machine の <code>foo</code> ディレクトリを Nginx コンテナの <code>bar</code> にマウントさせることができ、それによってファイルやディレクトリを共有できます。</p><ul><li><code>-d</code> オプション</li></ul><p><code>-d</code> オプションを使用するとコンテナをバックグラウンドモードで起動することができます。</p><h2 id="nginx-コンテナの起動確認">Nginx コンテナの起動確認</h2><p>Nginx コンテナを起動させたので Docker Machine の IP を確認して、接続してみましょう。</p><pre><code>$ docker-machine ip dev-machine
 192.168.99.101
-</code></pre>
-
-<p>Docker Machine の IP が <code>192.168.99.101</code> とわかったので、Nginx コンテナを起動するときに指定した <code>9090</code> ポートで接続してみます。</p>
-
-<ul>
-<li><code>http://192.168.99.101:9090</code></li>
-</ul>
-
-<p><img src="/images/docker-nginx.png" alt="Docker Nginx ブラウザ確認" class="image" /></p>
-
-<p>無事に表示されました！</p>
-
-<h2 id="まとめ">まとめ</h2>
-
-<p>Nginx コンテナを起動し、静的コンテンツの表示までできました。</p>
-
-<p>次回は PHP と連携して、動的なコンテンツの表示も行いたいと思います。</p>
-
-<h2 id="つづき">つづき</h2>
-
-<ul>
-<li><a href="/post/docker-mac-phpfpm/">【 php-fpm 編】Mac に Docker インストールしてみた</a></li>
-<li><a href="/post/docker-mac-composer/">【 Composer 編】Mac に Docker インストールしてみた</a></li>
-</ul>
-
-</div>
-
-
-      <div id="boxArea" style="display:table;margin:2em 0 .5em;">
-  <div style="width:72px;height:22px;float:left;margin-right:16px;">
-    <a href="https://twitter.com/share" class="twitter-share-button"{count} data-lang="ja"data-dnt="true">
-      ツイート
-    </a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-  </div>
-  <div style="width:118px;height:22px;float:left;">
-    <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加">
-      <img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border:none;" />
-    </a>
-    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-  </div>
-  <div style="width:70px;height:22px;float:left;">
-    <div class="g-plusone" data-size="medium"></div>
-    <script type="text/javascript">window.___gcfg={lang: 'ja'};(function(){var po=document.createElement('script');po.type='text/javascript';po.async=true;po.src='https://apis.google.com/js/platform.js';var s=document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script>
-  </div>
-  <div style="width:90px;height:22px;float:left;">
-    <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
-  </div>
-  <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
-</div>
-
-<footer>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      
-  
-    <nav><ul class="pager">
-    
-        <li class="previous">
-          <a href="http://enomotodev.github.io/post/install-docker-mac/" title="Mac に Docker インストールしてみた">
-            <span aria-hidden="true">&larr;</span>Previous
-          </a>
-        </li>
-    
-
-    
-      <li class="next">
-        <a href="http://enomotodev.github.io/post/docker-mac-phpfpm/" title="【 php-fpm 編】Mac に Docker インストールしてみた">
-            Next <span aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-    
-    </ul> </nav>
-  
-
-
-</div>
-
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-  (function() {
+</code></pre><p>Docker Machine の IP が <code>192.168.99.101</code> とわかったので、Nginx コンテナを起動するときに指定した <code>9090</code> ポートで接続してみます。</p><ul><li><code>http://192.168.99.101:9090</code></li></ul><p><img src="/images/docker-nginx.png" alt="Docker Nginx ブラウザ確認" class="image"></p><p>無事に表示されました！</p><h2 id="まとめ">まとめ</h2><p>Nginx コンテナを起動し、静的コンテンツの表示までできました。</p><p>次回は PHP と連携して、動的なコンテンツの表示も行いたいと思います。</p><h2 id="つづき">つづき</h2><ul><li><a href="/post/docker-mac-phpfpm/">【 php-fpm 編】Mac に Docker インストールしてみた</a></li><li><a href="/post/docker-mac-composer/">【 Composer 編】Mac に Docker インストールしてみた</a></li></ul></div><div id="boxArea" style="display:table;margin:2em 0 .5em"><div style="width:72px;height:22px;float:left;margin-right:16px"><a href="https://twitter.com/share" class="twitter-share-button" {count} data-lang="ja" data-dnt="true">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div><div style="width:118px;height:22px;float:left"><a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border:none"></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script></div><div style="width:70px;height:22px;float:left"><div class="g-plusone" data-size="medium"></div><script type="text/javascript">window.___gcfg={lang: 'ja'};(function(){var po=document.createElement('script');po.type='text/javascript';po.async=true;po.src='https://apis.google.com/js/platform.js';var s=document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script></div><div style="width:90px;height:22px;float:left"><a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a></div><script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script></div><footer><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><nav><ul class="pager"><li class="previous"><a href="http://enomotodev.github.io/post/install-docker-mac/" title="Mac に Docker インストールしてみた"><span aria-hidden="true">&larr;</span>Previous</a></li><li class="next"><a href="http://enomotodev.github.io/post/docker-mac-phpfpm/" title="【 php-fpm 編】Mac に Docker インストールしてみた">Next <span aria-hidden="true">&rarr;</span></a></li></ul></nav></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div id="disqus_thread"></div><script type="text/javascript">(function() {
     
     
     if (window.location.hostname == "localhost")
@@ -373,62 +66,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
     var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
     dsq.src = '//enomotodev.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-</div>
-
-</footer>
-
-    </div>
-    
-  </div>
-</div>
-      
-<footer class="footer hidden-print">
-  <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <p>
-           <div class="pull-left">
-  <a class="toplink" href="#">back to top</a>
-</div>
-<div class="pull-right">
-  
-</div>
-
-         </p>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-          <small>
-              
-    
-
-    
-<div class="container copyright">
-  
-  &copy; 2015 Takafumi Enomoto.
-
-
-</div>
-
-
-
-          </small>
-        </div>
-    </div>
-  </div>
-</footer>
-
-    <script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-
-
-
-<script type="text/javascript">
-  (function() {
+  })();</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></footer></div></div></div><footer class="footer hidden-print"><div class="container"><div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p></p><div class="pull-left"><a class="toplink" href="#">back to top</a></div><div class="pull-right"></div><p></p></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><small><div class="container copyright">&copy; 2015 Takafumi Enomoto.</div></small></div></div></div></footer><script src="/js/jquery.min.js"></script><script src="/js/bootstrap.min.js"></script><script type="text/javascript">(function() {
     
     
     if (window.location.hostname == "localhost")
@@ -437,23 +75,7 @@ nginx               latest              af4b3d7d5401        3 weeks ago         
     var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
     dsq.src = '//enomotodev.disqus.com/count.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-
-
-<script src="/js/highlight.pack.js"></script>
-<script src="/js/site.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-<script>
-  var _gaq=[['_setAccount','UA-59438562-2'],['_trackPageview']];
+  })();</script><script src="/js/highlight.pack.js"></script><script src="/js/site.js"></script><script>hljs.initHighlightingOnLoad();</script><script>var _gaq=[['_setAccount','UA-59438562-2'],['_trackPageview']];
   (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
   g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-
-  </body>
-</html>
-
+  s.parentNode.insertBefore(g,s)}(document,'script'));</script></body></html>

@@ -1,45 +1,4 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>CentOS に Jenkins インストールしてみた  &middot; enomotodev</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<meta name="description" content="" />
-
-<meta name="keywords" content="jenkins, centos, ">
-
-
-<meta property="og:title" content="CentOS に Jenkins インストールしてみた  &middot; enomotodev ">
-<meta property="og:site_name" content="enomotodev"/>
-<meta property="og:url" content="http://enomotodev.github.io/post/install-jenkins/" />
-<meta property="og:locale" content="ja_JP">
-
-
-<meta property="og:type" content="article" />
-<meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2016-02-04T22:33:24&#43;09:00" />
-<meta property="og:article:modified_time" content="2016-02-04T22:33:24&#43;09:00" />
-
-  
-    
-<meta property="og:article:tag" content="jenkins">
-    
-<meta property="og:article:tag" content="centos">
-    
-  
-
-  
-
-<script type="application/ld+json">
-  {
+<!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><title>CentOS に Jenkins インストールしてみた &middot; enomotodev</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content=""><meta name="keywords" content="jenkins, centos, "><meta property="og:title" content="CentOS に Jenkins インストールしてみた  &middot; enomotodev "><meta property="og:site_name" content="enomotodev"><meta property="og:url" content="http://enomotodev.github.io/post/install-jenkins/"><meta property="og:locale" content="ja_JP"><meta property="og:type" content="article"><meta property="og:description" content=""><meta property="og:article:published_time" content="2016-02-04T22:33:24&#43;09:00"><meta property="og:article:modified_time" content="2016-02-04T22:33:24&#43;09:00"><meta property="og:article:tag" content="jenkins"><meta property="og:article:tag" content="centos"><script type="application/ld+json">{
     "@context": "http://schema.org",
     "@type": "Article",
     "headline": "CentOS に Jenkins インストールしてみた",
@@ -50,260 +9,21 @@
     "datePublished": "2016-02-04",
     "description": "",
     "wordCount":  124 
-  }
-</script>
-
-
-
-<link rel="canonical" href="http://enomotodev.github.io/post/install-jenkins/" />
-
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
-<link href="/favicon.png" rel="icon">
-
-<meta name="generator" content="Hugo 0.16" />
-
-  <!--[if lt IE 9]>
+  }</script><link rel="canonical" href="http://enomotodev.github.io/post/install-jenkins/"><link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png"><link href="/favicon.png" rel="icon"><meta name="generator" content="Hugo 0.16"><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-
-
-
-    <link rel="stylesheet" href="/css/bootswatch/default/bootstrap.min.css">
-
-
-<link rel="stylesheet" href="/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/style.css">
-
-
-  <link rel="stylesheet" href="/css/highlight/dark.css">
-
-
-</head>
-<body>
-    <header id="main-header">
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="http://enomotodev.github.io/">enomotodev</a>
-      </div>
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          
-          <li>
-
-            <a href="http://enomotodev.github.io/tags"
-            >
-
-            
-                <i class="fa fa-tags"></i>
-            
-            
-            Tags
-            </a>
-          </li>
-          
-        </ul>
-      </div>
-      
-    </div>
-  </nav>
-
-</header>
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <div class="text-center">
-
-    <h1>CentOS に Jenkins インストールしてみた
-</h1>
-
-    <div class="metas">
-<small>
-  <i class="fa fa-calendar"></i>
-  <time datetime="2016-02-04">4 Feb, 2016</time>
-</small>
-
-
-  <small>
-  &middot; Read in about 1 min
-  &middot; (124 Words)
-</small>
-
-
-<div class="margin-10">
-  <i class="fa fa-tags"></i>
-  
-  <a href="http://enomotodev.github.io/tags/jenkins" class="label label-primary">jenkins</a>
-  
-  <a href="http://enomotodev.github.io/tags/centos" class="label label-primary">centos</a>
-  
-
-
-</div>
-<br>
-</div>
-
-
-  </div>
-</div>
-
-      <div class="content">
-  
-
-<h2 id="はじめに">はじめに</h2>
-
-<p>今まで Jenkins を使う機会はたくさんあったのですが、インストールや設定周りなどをやったことがなかったので、今回 CentOS 6.7 に実際にインストールして軽く触ってみました。</p>
-
-<h2 id="java-をインストールする">Java をインストールする</h2>
-
-<p>Jenkins は Java で書かれているので、まずは Java をインストールします。</p>
-
-<pre><code>$ sudo yum install java-1.8.0-openjdk java-1.8.0-openjdk-devel
-</code></pre>
-
-<p>Java がちゃんとインストールできているか確認します。</p>
-
-<pre><code>$ java -version
+<![endif]--><link rel="stylesheet" href="/css/bootswatch/default/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/highlight/dark.css"></head><body><header id="main-header"><nav class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="http://enomotodev.github.io/">enomotodev</a></div><div id="navbar" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="http://enomotodev.github.io/tags"><i class="fa fa-tags"></i> Tags</a></li></ul></div></div></nav></header><div class="container"><div class="row"><div class="col-sm-12"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="text-center"><h1>CentOS に Jenkins インストールしてみた</h1><div class="metas"><small><i class="fa fa-calendar"></i> <time datetime="2016-02-04">4 Feb, 2016</time> </small><small>&middot; Read in about 1 min &middot; (124 Words)</small><div class="margin-10"><i class="fa fa-tags"></i> <a href="http://enomotodev.github.io/tags/jenkins" class="label label-primary">jenkins</a> <a href="http://enomotodev.github.io/tags/centos" class="label label-primary">centos</a></div><br></div></div></div><div class="content"><h2 id="はじめに">はじめに</h2><p>今まで Jenkins を使う機会はたくさんあったのですが、インストールや設定周りなどをやったことがなかったので、今回 CentOS 6.7 に実際にインストールして軽く触ってみました。</p><h2 id="java-をインストールする">Java をインストールする</h2><p>Jenkins は Java で書かれているので、まずは Java をインストールします。</p><pre><code>$ sudo yum install java-1.8.0-openjdk java-1.8.0-openjdk-devel
+</code></pre><p>Java がちゃんとインストールできているか確認します。</p><pre><code>$ java -version
 openjdk version &quot;1.8.0_71&quot;
 OpenJDK Runtime Environment (build 1.8.0_71-b15)
 OpenJDK 64-Bit Server VM (build 25.71-b15, mixed mode)
-</code></pre>
-
-<h2 id="jenkins-のインストール">Jenkins のインストール</h2>
-
-<p>Java のインストールが確認できたので、Jenkins のインストールに入っていきます。</p>
-
-<p>まずは、Jenkins のレポジトリを追加します。</p>
-
-<pre><code>$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+</code></pre><h2 id="jenkins-のインストール">Jenkins のインストール</h2><p>Java のインストールが確認できたので、Jenkins のインストールに入っていきます。</p><p>まずは、Jenkins のレポジトリを追加します。</p><pre><code>$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
 $ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
-</code></pre>
-
-<p>Jenkins のレポジトリを追加できたので、Jenkins をインストールします。</p>
-
-<pre><code>$ sudo yum install jenkins
-</code></pre>
-
-<h2 id="jenkins-の起動">Jenkins の起動</h2>
-
-<p>Jenkins のインストールが完了したので、起動させます。</p>
-
-<pre><code>$ sudo /etc/init.d/jenkins start
+</code></pre><p>Jenkins のレポジトリを追加できたので、Jenkins をインストールします。</p><pre><code>$ sudo yum install jenkins
+</code></pre><h2 id="jenkins-の起動">Jenkins の起動</h2><p>Jenkins のインストールが完了したので、起動させます。</p><pre><code>$ sudo /etc/init.d/jenkins start
 Starting Jenkins                                           [  OK  ]
-</code></pre>
-
-<p>再起動時にも自動で起動するように設定しておきます。</p>
-
-<pre><code>$ sudo chkconfig jenkins on
-</code></pre>
-
-<p>Jenkins はデフォルトでは 8080 ポートを使用するようなので、http://[ドメイン名]:8080 にアクセスすると、下記のような画面が表示されると思います。</p>
-
-<p><img src="/images/start_jenkins.png" alt="Jenkinsスタート画面" class="image" /></p>
-
-<p>※ アクセスできない人は、SELinux や iptables などの設定を確認してみてください。</p>
-
-<h2 id="ジョブの作成">ジョブの作成</h2>
-
-<p>インストールも無事にできたので、早速簡単なジョブを追加してみましょう。</p>
-
-<ol>
-<li><p>画面左上の「新規ジョブ作成」をクリック。
-<img src="/images/jenkins_new_job.png" alt="Jenkinsジョブ作成" class="image" /></p></li>
-
-<li><p>ジョブ名を「test」にして、「フリースタイル・プロジェクトのビルド」を選択して OK をクリック。
-<img src="/images/jenkins_new_job2.png" alt="Jenkinsジョブ作成2" class="image" /></p></li>
-
-<li><p>「ビルド」の「ビルド手順の追加」から「シェルの実行」を追加。
-<img src="/images/jenkins_new_job3.png" alt="Jenkinsジョブ作成3" class="image" /></p></li>
-
-<li><p>シェルスクリプトのテキストエリアに「echo &lsquo;Hello Jenkins !!&lsquo;」と入力して、保存します。</p></li>
-
-<li><p>Jenkins の TOP に戻るとジョブの一覧が表示されているので、ここから今作成した test ジョブのビルドを実行します。
-<img src="/images/jenkins_new_job4.png" alt="Jenkinsジョブ作成5" class="image" /></p></li>
-
-<li><p>すぐにビルドが完了すると思いますので、「最新の成功ビルド」から「コンソール出力」を選択します。
-<img src="/images/jenkins_new_job5.png" alt="Jenkinsジョブ作成5" class="image" /></p></li>
-
-<li><p>「Hello Jenkins !!」と出力されているのが確認できました！
-<img src="/images/jenkins_new_job6.png" alt="Jenkinsジョブ作成6" class="image" /></p></li>
-</ol>
-
-<h2 id="まとめ">まとめ</h2>
-
-<p>Jenkins をインストールして、簡単なジョブをつくってみました。</p>
-
-<p>実際にはいろんなライブラリを入れたり、ユーザーの設定を行ったりなど色々ありますが、インストール自体はそれほど難しくないのかなという印象を受けました。</p>
-
-<p>Jenkins の機能はあまり詳しくないので、これから勉強していきたいです。</p>
-
-</div>
-
-
-      <div id="boxArea" style="display:table;margin:2em 0 .5em;">
-  <div style="width:72px;height:22px;float:left;margin-right:16px;">
-    <a href="https://twitter.com/share" class="twitter-share-button"{count} data-lang="ja"data-dnt="true">
-      ツイート
-    </a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-  </div>
-  <div style="width:118px;height:22px;float:left;">
-    <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加">
-      <img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border:none;" />
-    </a>
-    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-  </div>
-  <div style="width:70px;height:22px;float:left;">
-    <div class="g-plusone" data-size="medium"></div>
-    <script type="text/javascript">window.___gcfg={lang: 'ja'};(function(){var po=document.createElement('script');po.type='text/javascript';po.async=true;po.src='https://apis.google.com/js/platform.js';var s=document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script>
-  </div>
-  <div style="width:90px;height:22px;float:left;">
-    <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
-  </div>
-  <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
-</div>
-
-<footer>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      
-  
-    <nav><ul class="pager">
-    
-        <li class="previous">
-          <a href="http://enomotodev.github.io/post/closure-table/" title="閉包テーブル（Closure Table）を試してみた">
-            <span aria-hidden="true">&larr;</span>Previous
-          </a>
-        </li>
-    
-
-    
-      <li class="next">
-        <a href="http://enomotodev.github.io/post/install-docker-mac/" title="Mac に Docker インストールしてみた">
-            Next <span aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-    
-    </ul> </nav>
-  
-
-
-</div>
-
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-  (function() {
+</code></pre><p>再起動時にも自動で起動するように設定しておきます。</p><pre><code>$ sudo chkconfig jenkins on
+</code></pre><p>Jenkins はデフォルトでは 8080 ポートを使用するようなので、http://[ドメイン名]:8080 にアクセスすると、下記のような画面が表示されると思います。</p><p><img src="/images/start_jenkins.png" alt="Jenkinsスタート画面" class="image"></p><p>※ アクセスできない人は、SELinux や iptables などの設定を確認してみてください。</p><h2 id="ジョブの作成">ジョブの作成</h2><p>インストールも無事にできたので、早速簡単なジョブを追加してみましょう。</p><ol><li><p>画面左上の「新規ジョブ作成」をクリック。 <img src="/images/jenkins_new_job.png" alt="Jenkinsジョブ作成" class="image"></p></li><li><p>ジョブ名を「test」にして、「フリースタイル・プロジェクトのビルド」を選択して OK をクリック。 <img src="/images/jenkins_new_job2.png" alt="Jenkinsジョブ作成2" class="image"></p></li><li><p>「ビルド」の「ビルド手順の追加」から「シェルの実行」を追加。 <img src="/images/jenkins_new_job3.png" alt="Jenkinsジョブ作成3" class="image"></p></li><li><p>シェルスクリプトのテキストエリアに「echo &lsquo;Hello Jenkins !!&lsquo;」と入力して、保存します。</p></li><li><p>Jenkins の TOP に戻るとジョブの一覧が表示されているので、ここから今作成した test ジョブのビルドを実行します。 <img src="/images/jenkins_new_job4.png" alt="Jenkinsジョブ作成5" class="image"></p></li><li><p>すぐにビルドが完了すると思いますので、「最新の成功ビルド」から「コンソール出力」を選択します。 <img src="/images/jenkins_new_job5.png" alt="Jenkinsジョブ作成5" class="image"></p></li><li><p>「Hello Jenkins !!」と出力されているのが確認できました！ <img src="/images/jenkins_new_job6.png" alt="Jenkinsジョブ作成6" class="image"></p></li></ol><h2 id="まとめ">まとめ</h2><p>Jenkins をインストールして、簡単なジョブをつくってみました。</p><p>実際にはいろんなライブラリを入れたり、ユーザーの設定を行ったりなど色々ありますが、インストール自体はそれほど難しくないのかなという印象を受けました。</p><p>Jenkins の機能はあまり詳しくないので、これから勉強していきたいです。</p></div><div id="boxArea" style="display:table;margin:2em 0 .5em"><div style="width:72px;height:22px;float:left;margin-right:16px"><a href="https://twitter.com/share" class="twitter-share-button" {count} data-lang="ja" data-dnt="true">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div><div style="width:118px;height:22px;float:left"><a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border:none"></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script></div><div style="width:70px;height:22px;float:left"><div class="g-plusone" data-size="medium"></div><script type="text/javascript">window.___gcfg={lang: 'ja'};(function(){var po=document.createElement('script');po.type='text/javascript';po.async=true;po.src='https://apis.google.com/js/platform.js';var s=document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script></div><div style="width:90px;height:22px;float:left"><a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a></div><script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script></div><footer><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><nav><ul class="pager"><li class="previous"><a href="http://enomotodev.github.io/post/closure-table/" title="閉包テーブル（Closure Table）を試してみた"><span aria-hidden="true">&larr;</span>Previous</a></li><li class="next"><a href="http://enomotodev.github.io/post/install-docker-mac/" title="Mac に Docker インストールしてみた">Next <span aria-hidden="true">&rarr;</span></a></li></ul></nav></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div id="disqus_thread"></div><script type="text/javascript">(function() {
     
     
     if (window.location.hostname == "localhost")
@@ -312,62 +32,7 @@ Starting Jenkins                                           [  OK  ]
     var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
     dsq.src = '//enomotodev.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-</div>
-
-</footer>
-
-    </div>
-    
-  </div>
-</div>
-      
-<footer class="footer hidden-print">
-  <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <p>
-           <div class="pull-left">
-  <a class="toplink" href="#">back to top</a>
-</div>
-<div class="pull-right">
-  
-</div>
-
-         </p>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-          <small>
-              
-    
-
-    
-<div class="container copyright">
-  
-  &copy; 2015 Takafumi Enomoto.
-
-
-</div>
-
-
-
-          </small>
-        </div>
-    </div>
-  </div>
-</footer>
-
-    <script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-
-
-
-<script type="text/javascript">
-  (function() {
+  })();</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></footer></div></div></div><footer class="footer hidden-print"><div class="container"><div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p></p><div class="pull-left"><a class="toplink" href="#">back to top</a></div><div class="pull-right"></div><p></p></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><small><div class="container copyright">&copy; 2015 Takafumi Enomoto.</div></small></div></div></div></footer><script src="/js/jquery.min.js"></script><script src="/js/bootstrap.min.js"></script><script type="text/javascript">(function() {
     
     
     if (window.location.hostname == "localhost")
@@ -376,23 +41,7 @@ Starting Jenkins                                           [  OK  ]
     var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
     dsq.src = '//enomotodev.disqus.com/count.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-
-
-<script src="/js/highlight.pack.js"></script>
-<script src="/js/site.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-<script>
-  var _gaq=[['_setAccount','UA-59438562-2'],['_trackPageview']];
+  })();</script><script src="/js/highlight.pack.js"></script><script src="/js/site.js"></script><script>hljs.initHighlightingOnLoad();</script><script>var _gaq=[['_setAccount','UA-59438562-2'],['_trackPageview']];
   (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
   g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-
-  </body>
-</html>
-
+  s.parentNode.insertBefore(g,s)}(document,'script'));</script></body></html>

@@ -1,51 +1,4 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>fluentdつかってみた  &middot; enomotodev</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<meta name="description" content="" />
-
-<meta name="keywords" content="fluentd, ad-agent, apache, mongodb, centos, ">
-
-
-<meta property="og:title" content="fluentdつかってみた  &middot; enomotodev ">
-<meta property="og:site_name" content="enomotodev"/>
-<meta property="og:url" content="http://enomotodev.github.io/post/install-fluentd/" />
-<meta property="og:locale" content="ja_JP">
-
-
-<meta property="og:type" content="article" />
-<meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2015-11-14T14:17:08&#43;09:00" />
-<meta property="og:article:modified_time" content="2015-11-14T14:17:08&#43;09:00" />
-
-  
-    
-<meta property="og:article:tag" content="fluentd">
-    
-<meta property="og:article:tag" content="ad-agent">
-    
-<meta property="og:article:tag" content="apache">
-    
-<meta property="og:article:tag" content="mongodb">
-    
-<meta property="og:article:tag" content="centos">
-    
-  
-
-  
-
-<script type="application/ld+json">
-  {
+<!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><title>fluentdつかってみた &middot; enomotodev</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content=""><meta name="keywords" content="fluentd, ad-agent, apache, mongodb, centos, "><meta property="og:title" content="fluentdつかってみた  &middot; enomotodev "><meta property="og:site_name" content="enomotodev"><meta property="og:url" content="http://enomotodev.github.io/post/install-fluentd/"><meta property="og:locale" content="ja_JP"><meta property="og:type" content="article"><meta property="og:description" content=""><meta property="og:article:published_time" content="2015-11-14T14:17:08&#43;09:00"><meta property="og:article:modified_time" content="2015-11-14T14:17:08&#43;09:00"><meta property="og:article:tag" content="fluentd"><meta property="og:article:tag" content="ad-agent"><meta property="og:article:tag" content="apache"><meta property="og:article:tag" content="mongodb"><meta property="og:article:tag" content="centos"><script type="application/ld+json">{
     "@context": "http://schema.org",
     "@type": "Article",
     "headline": "fluentdつかってみた",
@@ -56,157 +9,12 @@
     "datePublished": "2015-11-14",
     "description": "",
     "wordCount":  275 
-  }
-</script>
-
-
-
-<link rel="canonical" href="http://enomotodev.github.io/post/install-fluentd/" />
-
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
-<link href="/favicon.png" rel="icon">
-
-<meta name="generator" content="Hugo 0.16" />
-
-  <!--[if lt IE 9]>
+  }</script><link rel="canonical" href="http://enomotodev.github.io/post/install-fluentd/"><link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png"><link href="/favicon.png" rel="icon"><meta name="generator" content="Hugo 0.16"><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-
-
-
-    <link rel="stylesheet" href="/css/bootswatch/default/bootstrap.min.css">
-
-
-<link rel="stylesheet" href="/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/style.css">
-
-
-  <link rel="stylesheet" href="/css/highlight/dark.css">
-
-
-</head>
-<body>
-    <header id="main-header">
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="http://enomotodev.github.io/">enomotodev</a>
-      </div>
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          
-          <li>
-
-            <a href="http://enomotodev.github.io/tags"
-            >
-
-            
-                <i class="fa fa-tags"></i>
-            
-            
-            Tags
-            </a>
-          </li>
-          
-        </ul>
-      </div>
-      
-    </div>
-  </nav>
-
-</header>
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <div class="text-center">
-
-    <h1>fluentdつかってみた
-</h1>
-
-    <div class="metas">
-<small>
-  <i class="fa fa-calendar"></i>
-  <time datetime="2015-11-14">14 Nov, 2015</time>
-</small>
-
-
-  <small>
-  &middot; Read in about 2 min
-  &middot; (275 Words)
-</small>
-
-
-<div class="margin-10">
-  <i class="fa fa-tags"></i>
-  
-  <a href="http://enomotodev.github.io/tags/fluentd" class="label label-primary">fluentd</a>
-  
-  <a href="http://enomotodev.github.io/tags/ad-agent" class="label label-primary">ad-agent</a>
-  
-  <a href="http://enomotodev.github.io/tags/apache" class="label label-primary">apache</a>
-  
-  <a href="http://enomotodev.github.io/tags/mongodb" class="label label-primary">mongodb</a>
-  
-  <a href="http://enomotodev.github.io/tags/centos" class="label label-primary">centos</a>
-  
-
-
-</div>
-<br>
-</div>
-
-
-  </div>
-</div>
-
-      <div class="content">
-  
-
-<h2 id="fluentd-とは">fluentd とは</h2>
-
-<p>fluentd とは<a href="http://www.treasuredata.com/">Treasure Data</a>という会社が開発している、さまざまなログの収集手段を提供するログ管理ツールです。<br />
-今回は CentOS 6.7 で実際にインストールしてつかってみることによって基本的な設定を学んでいきたいと思います。</p>
-
-<h2 id="td-agent-をインストール">td-agent をインストール</h2>
-
-<p>td-agent ？ となるかと思いますが、td-agent には以下のものが同梱されています。</p>
-
-<ul>
-<li>Ruby</li>
-<li>コアライブラリ</li>
-<li>fluentd とプラグイン</li>
-</ul>
-
-<p>つまり、ad-agent の中に fluentd が入っていて、プラグインなども一緒に入っているので、通常は td-agent をインストールします。</p>
-
-<p>インストールにあたっては公式にインストールスクリプトが公開されているので今回はそちらをつかってインストールします。</p>
-
-<pre><code class="language-bash">$ curl -L https://toolbelt.treasuredata.com/sh/install-redhat-td-agent2.sh | sh
-</code></pre>
-
-<p>起動は次のコマンドでできます。</p>
-
-<pre><code>$ sudo /etc/init.d/td-agent start
-</code></pre>
-
-<h2 id="設定ファイルの編集">設定ファイルの編集</h2>
-
-<p>それでは設定ファイルを編集してみましょう。<br />
-まずは、ログ収集の設定を行います。なお、デフォルトの設定はすべて削除してしまって問題ありません。</p>
-
-<p>/etc/td-agent/td-agnet.conf</p>
-
-<pre><code>&lt;source&gt;
+<![endif]--><link rel="stylesheet" href="/css/bootswatch/default/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/highlight/dark.css"></head><body><header id="main-header"><nav class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="http://enomotodev.github.io/">enomotodev</a></div><div id="navbar" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="http://enomotodev.github.io/tags"><i class="fa fa-tags"></i> Tags</a></li></ul></div></div></nav></header><div class="container"><div class="row"><div class="col-sm-12"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="text-center"><h1>fluentdつかってみた</h1><div class="metas"><small><i class="fa fa-calendar"></i> <time datetime="2015-11-14">14 Nov, 2015</time> </small><small>&middot; Read in about 2 min &middot; (275 Words)</small><div class="margin-10"><i class="fa fa-tags"></i> <a href="http://enomotodev.github.io/tags/fluentd" class="label label-primary">fluentd</a> <a href="http://enomotodev.github.io/tags/ad-agent" class="label label-primary">ad-agent</a> <a href="http://enomotodev.github.io/tags/apache" class="label label-primary">apache</a> <a href="http://enomotodev.github.io/tags/mongodb" class="label label-primary">mongodb</a> <a href="http://enomotodev.github.io/tags/centos" class="label label-primary">centos</a></div><br></div></div></div><div class="content"><h2 id="fluentd-とは">fluentd とは</h2><p>fluentd とは<a href="http://www.treasuredata.com/">Treasure Data</a>という会社が開発している、さまざまなログの収集手段を提供するログ管理ツールです。<br>今回は CentOS 6.7 で実際にインストールしてつかってみることによって基本的な設定を学んでいきたいと思います。</p><h2 id="td-agent-をインストール">td-agent をインストール</h2><p>td-agent ？ となるかと思いますが、td-agent には以下のものが同梱されています。</p><ul><li>Ruby</li><li>コアライブラリ</li><li>fluentd とプラグイン</li></ul><p>つまり、ad-agent の中に fluentd が入っていて、プラグインなども一緒に入っているので、通常は td-agent をインストールします。</p><p>インストールにあたっては公式にインストールスクリプトが公開されているので今回はそちらをつかってインストールします。</p><pre><code class="language-bash">$ curl -L https://toolbelt.treasuredata.com/sh/install-redhat-td-agent2.sh | sh
+</code></pre><p>起動は次のコマンドでできます。</p><pre><code>$ sudo /etc/init.d/td-agent start
+</code></pre><h2 id="設定ファイルの編集">設定ファイルの編集</h2><p>それでは設定ファイルを編集してみましょう。<br>まずは、ログ収集の設定を行います。なお、デフォルトの設定はすべて削除してしまって問題ありません。</p><p>/etc/td-agent/td-agnet.conf</p><pre><code>&lt;source&gt;
     # 入力に in_tail プラグインを指定
     type tail
     # 監視するログファイルのパスを指定
@@ -218,13 +26,7 @@
     # ログの書式を指定
     format apache2
 &lt;/source&gt;
-</code></pre>
-
-<p>次に上記の記述の下にログ出力の設定を追記していきます。</p>
-
-<p>/etc/td-agent/td-agnet.conf</p>
-
-<pre><code># 上で指定したタグを設定
+</code></pre><p>次に上記の記述の下にログ出力の設定を追記していきます。</p><p>/etc/td-agent/td-agnet.conf</p><pre><code># 上で指定したタグを設定
 &lt;match apache.access&gt;
     # 出力に out_file プラグインを指定
     type file
@@ -237,57 +39,19 @@
     # ログをgzip形式で圧縮
     compress gzip
 &lt;/match&gt;
-</code></pre>
-
-<p>このままだと /var/log/httpd ディレクトリのパーミッションエラーになってしまうので、/var/log/httpd　ディレクトリに一般ユーザー実行権限を与えます。</p>
-
-<pre><code>sudo chmod o+x /var/log/httpd
-</code></pre>
-
-<p>設定は以上となるので、td-agent をリロードします。</p>
-
-<pre><code>$ /etc/init.d/td-agent reload
-</code></pre>
-
-<p>ブラウザで apache にアクセスした後に実際にログが保存されるか確認してみます。</p>
-
-<pre><code>$ ls /var/log/td-agent/httpd/
+</code></pre><p>このままだと /var/log/httpd ディレクトリのパーミッションエラーになってしまうので、/var/log/httpd　ディレクトリに一般ユーザー実行権限を与えます。</p><pre><code>sudo chmod o+x /var/log/httpd
+</code></pre><p>設定は以上となるので、td-agent をリロードします。</p><pre><code>$ /etc/init.d/td-agent reload
+</code></pre><p>ブラウザで apache にアクセスした後に実際にログが保存されるか確認してみます。</p><pre><code>$ ls /var/log/td-agent/httpd/
 access.log.20151114.b524785e8e3b0d946
-</code></pre>
-
-<p>td-agent によってログが保存されたのが確認できました。</p>
-
-<h2 id="ログをmongodbに保存">ログをMongoDBに保存</h2>
-
-<p>まずは MongoDB をインストールするのでレポジトリを追加します。</p>
-
-<p>/etc/yum.repos.d/10gen.repo</p>
-
-<pre><code>[10gen]
+</code></pre><p>td-agent によってログが保存されたのが確認できました。</p><h2 id="ログをmongodbに保存">ログをMongoDBに保存</h2><p>まずは MongoDB をインストールするのでレポジトリを追加します。</p><p>/etc/yum.repos.d/10gen.repo</p><pre><code>[10gen]
 name=10gen Repository
 baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/i686
 gpgcheck=0
 enabled=1
-</code></pre>
-
-<p>yum インストールします。</p>
-
-<pre><code>sudo yum install mongo-10gen mongo-10gen-server
-</code></pre>
-
-<p>MongoDB を起動します。</p>
-
-<pre><code>sudo /etc/init.d/mongod start
-</code></pre>
-
-<p>自動起動の設定もしておきます。</p>
-
-<pre><code>sudo chkconfig mongod on
-</code></pre>
-
-<p>MongoDB にアクセスして fluentd という名前のデータベースを作成します</p>
-
-<pre><code>$ mongo
+</code></pre><p>yum インストールします。</p><pre><code>sudo yum install mongo-10gen mongo-10gen-server
+</code></pre><p>MongoDB を起動します。</p><pre><code>sudo /etc/init.d/mongod start
+</code></pre><p>自動起動の設定もしておきます。</p><pre><code>sudo chkconfig mongod on
+</code></pre><p>MongoDB にアクセスして fluentd という名前のデータベースを作成します</p><pre><code>$ mongo
 
 MongoDB shell version: 2.6.11
 connecting to: test
@@ -303,13 +67,7 @@ Questions? Try the support group
 switched to db fluentd
 
 &gt; exit
-</code></pre>
-
-<p>MongoDB の設定はこれで完了したので、td-agent の設定を変更してログの出力先を MongoDBに変更しましょう。</p>
-
-<p>/etc/td-agent/td-agnet.conf</p>
-
-<pre><code>&lt;match apache.access&gt;
+</code></pre><p>MongoDB の設定はこれで完了したので、td-agent の設定を変更してログの出力先を MongoDBに変更しましょう。</p><p>/etc/td-agent/td-agnet.conf</p><pre><code>&lt;match apache.access&gt;
     # 出力に out_mongo プラグインを指定
     type mongo
     # ホスト指定
@@ -327,16 +85,8 @@ switched to db fluentd
     # 10秒おきにログを MongoDB に flush する
     flush_interval 10s
 &lt;/match&gt;
-</code></pre>
-
-<p>td-agent をリロードして設定を反映させます。</p>
-
-<pre><code>sudo /etc/init.d/td-agent reload
-</code></pre>
-
-<p>それでは MongoDB にアクセスして『/』というパスへのアクセスのログ件数を確認することで、ログが MongoDB に保存されているか確認します。</p>
-
-<pre><code>$ mongo
+</code></pre><p>td-agent をリロードして設定を反映させます。</p><pre><code>sudo /etc/init.d/td-agent reload
+</code></pre><p>それでは MongoDB にアクセスして『/』というパスへのアクセスのログ件数を確認することで、ログが MongoDB に保存されているか確認します。</p><pre><code>$ mongo
 
 MongoDB shell version: 2.6.11
 connecting to: test
@@ -348,74 +98,7 @@ switched to db fluentd
 &gt; db.apache_access.count({path: &quot;/&quot;});
 
 23
-</code></pre>
-
-<p>ログが23件保存されているのが確認できました。</p>
-
-<h2 id="まとめ">まとめ</h2>
-
-<p>fluentd はリモートのサーバにログを送ることもでき、本番環境ではそのような構成になりますが、今回 fluentd の最低限の知識や基本的な設定はこれである程度学ぶことができたかと思います。<br />
-ここから先の細い設定などは<a href="http://www.fluentd.org/">公式サイト</a>などでさらに学習していきましょう！</p>
-
-<hr />
-
-</div>
-
-
-      <div id="boxArea" style="display:table;margin:2em 0 .5em;">
-  <div style="width:72px;height:22px;float:left;margin-right:16px;">
-    <a href="https://twitter.com/share" class="twitter-share-button"{count} data-lang="ja"data-dnt="true">
-      ツイート
-    </a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-  </div>
-  <div style="width:118px;height:22px;float:left;">
-    <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加">
-      <img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border:none;" />
-    </a>
-    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-  </div>
-  <div style="width:70px;height:22px;float:left;">
-    <div class="g-plusone" data-size="medium"></div>
-    <script type="text/javascript">window.___gcfg={lang: 'ja'};(function(){var po=document.createElement('script');po.type='text/javascript';po.async=true;po.src='https://apis.google.com/js/platform.js';var s=document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script>
-  </div>
-  <div style="width:90px;height:22px;float:left;">
-    <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
-  </div>
-  <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
-</div>
-
-<footer>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      
-  
-    <nav><ul class="pager">
-    
-        <li class="previous">
-          <a href="http://enomotodev.github.io/post/use-goose/" title="Gooseつかってみた">
-            <span aria-hidden="true">&larr;</span>Previous
-          </a>
-        </li>
-    
-
-    
-      <li class="next">
-        <a href="http://enomotodev.github.io/post/install-elasticsearch/" title="Apache &#43; fluentd &#43; Elasticsearch &#43; Kibana を連携させてみた">
-            Next <span aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-    
-    </ul> </nav>
-  
-
-
-</div>
-
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-  (function() {
+</code></pre><p>ログが23件保存されているのが確認できました。</p><h2 id="まとめ">まとめ</h2><p>fluentd はリモートのサーバにログを送ることもでき、本番環境ではそのような構成になりますが、今回 fluentd の最低限の知識や基本的な設定はこれである程度学ぶことができたかと思います。<br>ここから先の細い設定などは<a href="http://www.fluentd.org/">公式サイト</a>などでさらに学習していきましょう！</p><hr></div><div id="boxArea" style="display:table;margin:2em 0 .5em"><div style="width:72px;height:22px;float:left;margin-right:16px"><a href="https://twitter.com/share" class="twitter-share-button" {count} data-lang="ja" data-dnt="true">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div><div style="width:118px;height:22px;float:left"><a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border:none"></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script></div><div style="width:70px;height:22px;float:left"><div class="g-plusone" data-size="medium"></div><script type="text/javascript">window.___gcfg={lang: 'ja'};(function(){var po=document.createElement('script');po.type='text/javascript';po.async=true;po.src='https://apis.google.com/js/platform.js';var s=document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script></div><div style="width:90px;height:22px;float:left"><a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a></div><script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script></div><footer><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><nav><ul class="pager"><li class="previous"><a href="http://enomotodev.github.io/post/use-goose/" title="Gooseつかってみた"><span aria-hidden="true">&larr;</span>Previous</a></li><li class="next"><a href="http://enomotodev.github.io/post/install-elasticsearch/" title="Apache &#43; fluentd &#43; Elasticsearch &#43; Kibana を連携させてみた">Next <span aria-hidden="true">&rarr;</span></a></li></ul></nav></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div id="disqus_thread"></div><script type="text/javascript">(function() {
     
     
     if (window.location.hostname == "localhost")
@@ -424,62 +107,7 @@ switched to db fluentd
     var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
     dsq.src = '//enomotodev.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-</div>
-
-</footer>
-
-    </div>
-    
-  </div>
-</div>
-      
-<footer class="footer hidden-print">
-  <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <p>
-           <div class="pull-left">
-  <a class="toplink" href="#">back to top</a>
-</div>
-<div class="pull-right">
-  
-</div>
-
-         </p>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-          <small>
-              
-    
-
-    
-<div class="container copyright">
-  
-  &copy; 2015 Takafumi Enomoto.
-
-
-</div>
-
-
-
-          </small>
-        </div>
-    </div>
-  </div>
-</footer>
-
-    <script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-
-
-
-<script type="text/javascript">
-  (function() {
+  })();</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></footer></div></div></div><footer class="footer hidden-print"><div class="container"><div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p></p><div class="pull-left"><a class="toplink" href="#">back to top</a></div><div class="pull-right"></div><p></p></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><small><div class="container copyright">&copy; 2015 Takafumi Enomoto.</div></small></div></div></div></footer><script src="/js/jquery.min.js"></script><script src="/js/bootstrap.min.js"></script><script type="text/javascript">(function() {
     
     
     if (window.location.hostname == "localhost")
@@ -488,23 +116,7 @@ switched to db fluentd
     var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
     dsq.src = '//enomotodev.disqus.com/count.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-
-
-<script src="/js/highlight.pack.js"></script>
-<script src="/js/site.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-<script>
-  var _gaq=[['_setAccount','UA-59438562-2'],['_trackPageview']];
+  })();</script><script src="/js/highlight.pack.js"></script><script src="/js/site.js"></script><script>hljs.initHighlightingOnLoad();</script><script>var _gaq=[['_setAccount','UA-59438562-2'],['_trackPageview']];
   (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
   g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-
-  </body>
-</html>
-
+  s.parentNode.insertBefore(g,s)}(document,'script'));</script></body></html>

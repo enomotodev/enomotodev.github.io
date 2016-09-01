@@ -1,49 +1,4 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Gooseつかってみた  &middot; enomotodev</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<meta name="description" content="" />
-
-<meta name="keywords" content="golang, goose, mysql, migration, ">
-
-
-<meta property="og:title" content="Gooseつかってみた  &middot; enomotodev ">
-<meta property="og:site_name" content="enomotodev"/>
-<meta property="og:url" content="http://enomotodev.github.io/post/use-goose/" />
-<meta property="og:locale" content="ja_JP">
-
-
-<meta property="og:type" content="article" />
-<meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2015-11-11T19:17:08&#43;09:00" />
-<meta property="og:article:modified_time" content="2015-11-11T19:17:08&#43;09:00" />
-
-  
-    
-<meta property="og:article:tag" content="golang">
-    
-<meta property="og:article:tag" content="goose">
-    
-<meta property="og:article:tag" content="mysql">
-    
-<meta property="og:article:tag" content="migration">
-    
-  
-
-  
-
-<script type="application/ld+json">
-  {
+<!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><title>Gooseつかってみた &middot; enomotodev</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content=""><meta name="keywords" content="golang, goose, mysql, migration, "><meta property="og:title" content="Gooseつかってみた  &middot; enomotodev "><meta property="og:site_name" content="enomotodev"><meta property="og:url" content="http://enomotodev.github.io/post/use-goose/"><meta property="og:locale" content="ja_JP"><meta property="og:type" content="article"><meta property="og:description" content=""><meta property="og:article:published_time" content="2015-11-11T19:17:08&#43;09:00"><meta property="og:article:modified_time" content="2015-11-11T19:17:08&#43;09:00"><meta property="og:article:tag" content="golang"><meta property="og:article:tag" content="goose"><meta property="og:article:tag" content="mysql"><meta property="og:article:tag" content="migration"><script type="application/ld+json">{
     "@context": "http://schema.org",
     "@type": "Article",
     "headline": "Gooseつかってみた",
@@ -54,155 +9,13 @@
     "datePublished": "2015-11-11",
     "description": "",
     "wordCount":  499 
-  }
-</script>
-
-
-
-<link rel="canonical" href="http://enomotodev.github.io/post/use-goose/" />
-
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
-<link href="/favicon.png" rel="icon">
-
-<meta name="generator" content="Hugo 0.16" />
-
-  <!--[if lt IE 9]>
+  }</script><link rel="canonical" href="http://enomotodev.github.io/post/use-goose/"><link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png"><link href="/favicon.png" rel="icon"><meta name="generator" content="Hugo 0.16"><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-
-
-
-    <link rel="stylesheet" href="/css/bootswatch/default/bootstrap.min.css">
-
-
-<link rel="stylesheet" href="/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/style.css">
-
-
-  <link rel="stylesheet" href="/css/highlight/dark.css">
-
-
-</head>
-<body>
-    <header id="main-header">
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="http://enomotodev.github.io/">enomotodev</a>
-      </div>
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          
-          <li>
-
-            <a href="http://enomotodev.github.io/tags"
-            >
-
-            
-                <i class="fa fa-tags"></i>
-            
-            
-            Tags
-            </a>
-          </li>
-          
-        </ul>
-      </div>
-      
-    </div>
-  </nav>
-
-</header>
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  <div class="text-center">
-
-    <h1>Gooseつかってみた
-</h1>
-
-    <div class="metas">
-<small>
-  <i class="fa fa-calendar"></i>
-  <time datetime="2015-11-11">11 Nov, 2015</time>
-</small>
-
-
-  <small>
-  &middot; Read in about 3 min
-  &middot; (499 Words)
-</small>
-
-
-<div class="margin-10">
-  <i class="fa fa-tags"></i>
-  
-  <a href="http://enomotodev.github.io/tags/golang" class="label label-primary">golang</a>
-  
-  <a href="http://enomotodev.github.io/tags/goose" class="label label-primary">goose</a>
-  
-  <a href="http://enomotodev.github.io/tags/mysql" class="label label-primary">mysql</a>
-  
-  <a href="http://enomotodev.github.io/tags/migration" class="label label-primary">migration</a>
-  
-
-
-</div>
-<br>
-</div>
-
-
-  </div>
-</div>
-
-      <div class="content">
-  
-
-<h2 id="gooseとは">Gooseとは</h2>
-
-<p>GooseとはGo言語で作られたDBマイグレーションツールです。<br />
-develop環境やproduction環境など各環境に簡単に設定を変更でき、かなり便利そうなので実際にMySQLで試してみました。</p>
-
-<h2 id="gooseパッケージの取得">Gooseパッケージの取得</h2>
-
-<p>まずは go get して Goose パッケージを取得します。<br />
-※ Goをインストールしていない人や、GOPATHを設定していない人は<a href="http://golang-jp.org/doc/install#install" target="_blank">公式ドキュメント</a>を参考に導入してみてください。</p>
-
-<pre><code>$ go get bitbucket.org/liamstask/goose/cmd/goose
-</code></pre>
-
-<h2 id="dbディレクトリの作成">dbディレクトリの作成</h2>
-
-<p>プロジェクトのルート直下に db ディレクトリを作成します。</p>
-
-<pre><code>$ mkdir db
-</code></pre>
-
-<h2 id="configファイルの作成">configファイルの作成</h2>
-
-<p>取得したGooseパッケージのサンプルからconfigファイルをコピーします。</p>
-
-<pre><code>$ cp $GOPATH/src/bitbucket.org/liamstask/goose/db-sample/dbconf.yml db/
-</code></pre>
-
-<h2 id="configファイルの編集">configファイルの編集</h2>
-
-<p>まずは先ほどコピーしてきたconfigファイルの中身をのぞいてみます。<br />
-デフォルトで test / develop / production のそれぞれの環境に PostgreSQL の driver が設定してあるのが、なんとなくわかるかと思います。</p>
-
-<p>db/dbconf.yml</p>
-
-<pre><code>test:
+<![endif]--><link rel="stylesheet" href="/css/bootswatch/default/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/highlight/dark.css"></head><body><header id="main-header"><nav class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="http://enomotodev.github.io/">enomotodev</a></div><div id="navbar" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="http://enomotodev.github.io/tags"><i class="fa fa-tags"></i> Tags</a></li></ul></div></div></nav></header><div class="container"><div class="row"><div class="col-sm-12"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="text-center"><h1>Gooseつかってみた</h1><div class="metas"><small><i class="fa fa-calendar"></i> <time datetime="2015-11-11">11 Nov, 2015</time> </small><small>&middot; Read in about 3 min &middot; (499 Words)</small><div class="margin-10"><i class="fa fa-tags"></i> <a href="http://enomotodev.github.io/tags/golang" class="label label-primary">golang</a> <a href="http://enomotodev.github.io/tags/goose" class="label label-primary">goose</a> <a href="http://enomotodev.github.io/tags/mysql" class="label label-primary">mysql</a> <a href="http://enomotodev.github.io/tags/migration" class="label label-primary">migration</a></div><br></div></div></div><div class="content"><h2 id="gooseとは">Gooseとは</h2><p>GooseとはGo言語で作られたDBマイグレーションツールです。<br>develop環境やproduction環境など各環境に簡単に設定を変更でき、かなり便利そうなので実際にMySQLで試してみました。</p><h2 id="gooseパッケージの取得">Gooseパッケージの取得</h2><p>まずは go get して Goose パッケージを取得します。<br>※ Goをインストールしていない人や、GOPATHを設定していない人は<a href="http://golang-jp.org/doc/install#install" target="_blank">公式ドキュメント</a>を参考に導入してみてください。</p><pre><code>$ go get bitbucket.org/liamstask/goose/cmd/goose
+</code></pre><h2 id="dbディレクトリの作成">dbディレクトリの作成</h2><p>プロジェクトのルート直下に db ディレクトリを作成します。</p><pre><code>$ mkdir db
+</code></pre><h2 id="configファイルの作成">configファイルの作成</h2><p>取得したGooseパッケージのサンプルからconfigファイルをコピーします。</p><pre><code>$ cp $GOPATH/src/bitbucket.org/liamstask/goose/db-sample/dbconf.yml db/
+</code></pre><h2 id="configファイルの編集">configファイルの編集</h2><p>まずは先ほどコピーしてきたconfigファイルの中身をのぞいてみます。<br>デフォルトで test / develop / production のそれぞれの環境に PostgreSQL の driver が設定してあるのが、なんとなくわかるかと思います。</p><p>db/dbconf.yml</p><pre><code>test:
     driver: postgres
     open: user=liam dbname=tester sslmode=disable
 
@@ -223,86 +36,23 @@ customimport:
 environment_variable_config:
     driver: $DB_DRIVER
     open: $DATABASE_URL
-</code></pre>
-
-<p>今回は試すだけなので、developの部分のみ編集してみます。<br />
-MySQL のdriverは mymysql とのことなので、 driver には mymysql を設定します。</p>
-
-<pre><code>development:
+</code></pre><p>今回は試すだけなので、developの部分のみ編集してみます。<br>MySQL のdriverは mymysql とのことなので、 driver には mymysql を設定します。</p><pre><code>development:
     driver: mymysql
     open: user=liam dbname=tester sslmode=disable
-</code></pre>
-
-<p>次に DB に接続するために open の箇所にユーザ名やデータベース名を設定します。<br />
-何種類か設定の仕方があるようなので下記を参考にしてみてください。</p>
-
-<ul>
-<li>DBNAME/USER/PASSWD</li>
-<li>unix:SOCKPATH*DBNAME/USER/PASSWD</li>
-<li>unix:SOCKPATH,OPTIONS*DBNAME/USER/PASSWD</li>
-<li>tcp:ADDR*DBNAME/USER/PASSWD</li>
-<li>tcp:ADDR,OPTIONS*DBNAME/USER/PASSWD</li>
-<li>cloudsql:INSTANCE*DBNAME/USER/PASSWD</li>
-</ul>
-
-<p>参考までに下記のような場合の設定を載せておきます。</p>
-
-<hr />
-
-<p>Host：localhost<br />
-Port：3306<br />
-データベース：test<br />
-ユーザ：root<br />
-パスワード：pass</p>
-
-<hr />
-
-<pre><code>development:
+</code></pre><p>次に DB に接続するために open の箇所にユーザ名やデータベース名を設定します。<br>何種類か設定の仕方があるようなので下記を参考にしてみてください。</p><ul><li>DBNAME/USER/PASSWD</li><li>unix:SOCKPATH*DBNAME/USER/PASSWD</li><li>unix:SOCKPATH,OPTIONS*DBNAME/USER/PASSWD</li><li>tcp:ADDR*DBNAME/USER/PASSWD</li><li>tcp:ADDR,OPTIONS*DBNAME/USER/PASSWD</li><li>cloudsql:INSTANCE*DBNAME/USER/PASSWD</li></ul><p>参考までに下記のような場合の設定を載せておきます。</p><hr><p>Host：localhost<br>Port：3306<br>データベース：test<br>ユーザ：root<br>パスワード：pass</p><hr><pre><code>development:
     driver: mymysql
     open: tcp:localhost:3306*test/root/pass
-</code></pre>
-
-<p>これでDBの設定は完了です。</p>
-
-<h2 id="db接続確認">DB接続確認</h2>
-
-<p>goose status コマンドでDBに問題なく接続できているか確認できます。<br />
-これ以降の goose コマンドも全てプロジェクトルートで実行してください。</p>
-
-<pre><code>$ goose status
+</code></pre><p>これでDBの設定は完了です。</p><h2 id="db接続確認">DB接続確認</h2><p>goose status コマンドでDBに問題なく接続できているか確認できます。<br>これ以降の goose コマンドも全てプロジェクトルートで実行してください。</p><pre><code>$ goose status
 goose: status for environment 'development'
-</code></pre>
-
-<p>上記のようにエラーなく表示されたらOKです。</p>
-
-<h2 id="マイグレーションファイルの作成">マイグレーションファイルの作成</h2>
-
-<p>それではDB接続もOKなので、早速マイグレーションファイルを作りましょう。</p>
-
-<p>マイグレーションファイルは Go または SQL で書けるようなので、今回は簡単なSQLで書いてみます。</p>
-
-<p>それでは、goose create コマンドでマイグレーションファイルを作成します。</p>
-
-<pre><code>$ goose create CreateUsersTable sql
+</code></pre><p>上記のようにエラーなく表示されたらOKです。</p><h2 id="マイグレーションファイルの作成">マイグレーションファイルの作成</h2><p>それではDB接続もOKなので、早速マイグレーションファイルを作りましょう。</p><p>マイグレーションファイルは Go または SQL で書けるようなので、今回は簡単なSQLで書いてみます。</p><p>それでは、goose create コマンドでマイグレーションファイルを作成します。</p><pre><code>$ goose create CreateUsersTable sql
 goose: created /project/db/migrations/20151111194459_CreateUsersTable.sql.sql
-</code></pre>
-
-<p>これだけでマイグレーションファイルのひな型が作成されました。<br />
-早速中身を見てみましょう。</p>
-
-<p>db/migrations/20151111194459_CreateUsersTable.sql</p>
-
-<pre><code>-- +goose Up
+</code></pre><p>これだけでマイグレーションファイルのひな型が作成されました。<br>早速中身を見てみましょう。</p><p>db/migrations/20151111194459_CreateUsersTable.sql</p><pre><code>-- +goose Up
 -- SQL in section 'Up' is executed when this migration is applied
 
 
 -- +goose Down
 -- SQL section 'Down' is executed when this migration is rolled back
-</code></pre>
-
-<p>このファイルにCREATE文とDROP文をそれぞれ書きます。</p>
-
-<pre><code>-- +goose Up
+</code></pre><p>このファイルにCREATE文とDROP文をそれぞれ書きます。</p><pre><code>-- +goose Up
 -- SQL in section 'Up' is executed when this migration is applied
 CREATE TABLE IF NOT EXISTS `users` (
     `id` INT NOT NULL AUTO_INCREMENT,
@@ -313,22 +63,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- +goose Down
 -- SQL section 'Down' is executed when this migration is rolled back
 DROP TABLE `users`;
-</code></pre>
-
-<p>これでマイグレーションファイルの準備はできたので、実際に実行してテーブルが作成されるか確認してみましょう。</p>
-
-<h2 id="マイグレーションの実行">マイグレーションの実行</h2>
-
-<p>goose up コマンドでマイグレーションが実行されます。</p>
-
-<pre><code>$ goose up
+</code></pre><p>これでマイグレーションファイルの準備はできたので、実際に実行してテーブルが作成されるか確認してみましょう。</p><h2 id="マイグレーションの実行">マイグレーションの実行</h2><p>goose up コマンドでマイグレーションが実行されます。</p><pre><code>$ goose up
 goose: migrating db environment 'development', current version: 0, target: 20151111194459
 OK    20151111194459_CreateUsersTable.sql.sql
-</code></pre>
-
-<p>テーブルが作成されているか確認してみます。</p>
-
-<pre><code>mysql&gt; show tables;
+</code></pre><p>テーブルが作成されているか確認してみます。</p><pre><code>mysql&gt; show tables;
 +------------------+
 | Tables_in_test   |
 +------------------+
@@ -356,19 +94,10 @@ mysql&gt; select * from goose_db_version;
 |  2 | 20151111194459 |          1 | 2015-11-11 19:49:59 |
 +----+----------------+------------+---------------------+
 2 rows in set (0.00 sec)
-</code></pre>
-
-<p>usersテーブルが作成されているのと、マイグレーションのバージョン管理用の goose_db_version テーブルが作成されているのが確認できました。<br />
-次に今実行したマイグレーションをロールバックしてみます。</p>
-
-<pre><code>$ goose down
+</code></pre><p>usersテーブルが作成されているのと、マイグレーションのバージョン管理用の goose_db_version テーブルが作成されているのが確認できました。<br>次に今実行したマイグレーションをロールバックしてみます。</p><pre><code>$ goose down
 goose: migrating db environment 'development', current version: 20151111194459, target: 0
 OK    20151111194459_CreateUsersTable.sql
-</code></pre>
-
-<p>確認してみます。</p>
-
-<pre><code>mysql&gt; show tables;
+</code></pre><p>確認してみます。</p><pre><code>mysql&gt; show tables;
 +------------------+
 | Tables_in_test   |
 +------------------+
@@ -385,68 +114,7 @@ mysql&gt; select * from goose_db_version;
 |  3 | 20151111194459 |          0 | 2015-11-11 19:53:28 |
 +----+----------------+------------+---------------------+
 3 rows in set (0.00 sec)
-</code></pre>
-
-<p>usersテーブルが削除されているのが確認できました。</p>
-
-<h2 id="まとめ">まとめ</h2>
-
-<p>goose をつかうことによって、簡単にマイグレーションすることができました。<br />
-最近、Go言語を使ったプロジェクトも増えてきているようなので、goose もこれからさらに活躍する場面が増えるのではないでしょうか。</p>
-
-<hr />
-
-</div>
-
-
-      <div id="boxArea" style="display:table;margin:2em 0 .5em;">
-  <div style="width:72px;height:22px;float:left;margin-right:16px;">
-    <a href="https://twitter.com/share" class="twitter-share-button"{count} data-lang="ja"data-dnt="true">
-      ツイート
-    </a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-  </div>
-  <div style="width:118px;height:22px;float:left;">
-    <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加">
-      <img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border:none;" />
-    </a>
-    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-  </div>
-  <div style="width:70px;height:22px;float:left;">
-    <div class="g-plusone" data-size="medium"></div>
-    <script type="text/javascript">window.___gcfg={lang: 'ja'};(function(){var po=document.createElement('script');po.type='text/javascript';po.async=true;po.src='https://apis.google.com/js/platform.js';var s=document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script>
-  </div>
-  <div style="width:90px;height:22px;float:left;">
-    <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
-  </div>
-  <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
-</div>
-
-<footer>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      
-  
-    <nav><ul class="pager">
-    
-
-    
-      <li class="next">
-        <a href="http://enomotodev.github.io/post/install-fluentd/" title="fluentdつかってみた">
-            Next <span aria-hidden="true">&rarr;</span>
-        </a>
-      </li>
-    
-    </ul> </nav>
-  
-
-
-</div>
-
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-  (function() {
+</code></pre><p>usersテーブルが削除されているのが確認できました。</p><h2 id="まとめ">まとめ</h2><p>goose をつかうことによって、簡単にマイグレーションすることができました。<br>最近、Go言語を使ったプロジェクトも増えてきているようなので、goose もこれからさらに活躍する場面が増えるのではないでしょうか。</p><hr></div><div id="boxArea" style="display:table;margin:2em 0 .5em"><div style="width:72px;height:22px;float:left;margin-right:16px"><a href="https://twitter.com/share" class="twitter-share-button" {count} data-lang="ja" data-dnt="true">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div><div style="width:118px;height:22px;float:left"><a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border:none"></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script></div><div style="width:70px;height:22px;float:left"><div class="g-plusone" data-size="medium"></div><script type="text/javascript">window.___gcfg={lang: 'ja'};(function(){var po=document.createElement('script');po.type='text/javascript';po.async=true;po.src='https://apis.google.com/js/platform.js';var s=document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script></div><div style="width:90px;height:22px;float:left"><a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a></div><script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script></div><footer><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><nav><ul class="pager"><li class="next"><a href="http://enomotodev.github.io/post/install-fluentd/" title="fluentdつかってみた">Next <span aria-hidden="true">&rarr;</span></a></li></ul></nav></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div id="disqus_thread"></div><script type="text/javascript">(function() {
     
     
     if (window.location.hostname == "localhost")
@@ -455,62 +123,7 @@ mysql&gt; select * from goose_db_version;
     var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
     dsq.src = '//enomotodev.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-</div>
-
-</footer>
-
-    </div>
-    
-  </div>
-</div>
-      
-<footer class="footer hidden-print">
-  <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <p>
-           <div class="pull-left">
-  <a class="toplink" href="#">back to top</a>
-</div>
-<div class="pull-right">
-  
-</div>
-
-         </p>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-          <small>
-              
-    
-
-    
-<div class="container copyright">
-  
-  &copy; 2015 Takafumi Enomoto.
-
-
-</div>
-
-
-
-          </small>
-        </div>
-    </div>
-  </div>
-</footer>
-
-    <script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-
-
-
-<script type="text/javascript">
-  (function() {
+  })();</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></footer></div></div></div><footer class="footer hidden-print"><div class="container"><div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p></p><div class="pull-left"><a class="toplink" href="#">back to top</a></div><div class="pull-right"></div><p></p></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><small><div class="container copyright">&copy; 2015 Takafumi Enomoto.</div></small></div></div></div></footer><script src="/js/jquery.min.js"></script><script src="/js/bootstrap.min.js"></script><script type="text/javascript">(function() {
     
     
     if (window.location.hostname == "localhost")
@@ -519,23 +132,7 @@ mysql&gt; select * from goose_db_version;
     var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
     dsq.src = '//enomotodev.disqus.com/count.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-
-
-<script src="/js/highlight.pack.js"></script>
-<script src="/js/site.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-<script>
-  var _gaq=[['_setAccount','UA-59438562-2'],['_trackPageview']];
+  })();</script><script src="/js/highlight.pack.js"></script><script src="/js/site.js"></script><script>hljs.initHighlightingOnLoad();</script><script>var _gaq=[['_setAccount','UA-59438562-2'],['_trackPageview']];
   (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
   g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));
-</script>
-
-
-  </body>
-</html>
-
+  s.parentNode.insertBefore(g,s)}(document,'script'));</script></body></html>
