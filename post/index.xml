@@ -9,8 +9,313 @@
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
     <copyright>(c) 2015 Takafumi Enomoto.</copyright>
-    <lastBuildDate>Thu, 01 Sep 2016 22:52:35 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 06 Sep 2016 23:19:17 +0900</lastBuildDate>
     <atom:link href="http://enomotodev.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Embulk を使って CSV から MySQL へデータ投入してみた</title>
+      <link>http://enomotodev.github.io/post/embulk_csv_mysql/</link>
+      <pubDate>Tue, 06 Sep 2016 23:19:17 +0900</pubDate>
+      <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
+      <guid>http://enomotodev.github.io/post/embulk_csv_mysql/</guid>
+      <description>
+
+&lt;p&gt;今回は Embulk を使って、CSV から MySQL にデータを投入してみたいと思います。&lt;/p&gt;
+
+&lt;h2 id=&#34;embulk-とは&#34;&gt;Embulk とは&lt;/h2&gt;
+
+&lt;p&gt;Embulk とはバルクデータローダーと呼ばれる、データ転送ツールです。&lt;/p&gt;
+
+&lt;p&gt;Fluentd を開発した Tresure Data によって開発され、Fluentd を知っている方は、Fluentd のバッチ版だと考えると理解しやすいと思います。&lt;/p&gt;
+
+&lt;p&gt;（Fluentd については&lt;a href=&#34;http://enomotodev.github.io/post/install-fluentd/&#34;&gt;こちら&lt;/a&gt;で記事にしています）&lt;/p&gt;
+
+&lt;p&gt;Fluentd のように入力・出力のプラグインは多数公開されており、例えば、MySQL の入力プラグインと、ElasticSearch の出力プラグインを組み合わせることによって、MySQL のデータを ElasticSearch に移したりなど、異なるデータストア間でのデータの交換が容易に行うことができます。&lt;/p&gt;
+
+&lt;h2 id=&#34;作業環境&#34;&gt;作業環境&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;CentOS 7.2&lt;/li&gt;
+&lt;li&gt;Java 1.8.0_101&lt;/li&gt;
+&lt;li&gt;MySQL 5.7.14&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;※ Embulk の実行には Java が必須となるので、事前にインストールしておきましょう。&lt;/p&gt;
+
+&lt;h2 id=&#34;embulk-のインストール&#34;&gt;Embulk のインストール&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/embulk/embulk#linux--mac--bsd&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt; に記載されている通りにコマンドを叩いていきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ curl --create-dirs -o ~/.embulk/bin/embulk -L &amp;quot;http://dl.embulk.org/embulk-latest.jar&amp;quot;
+$ chmod +x ~/.embulk/bin/embulk
+$ echo &#39;export PATH=&amp;quot;$HOME/.embulk/bin:$PATH&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bashrc
+$ source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上で完了となるので、バージョンを確認してみます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ embulk --version
+embulk 0.8.13
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;seed-yml-から設定ファイルを自動生成する&#34;&gt;seed.yml から設定ファイルを自動生成する&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/livedoor/datasets&#34; target=&#34;_blank&#34;&gt;livedoor グルメの研究用データセット&lt;/a&gt;を使い、口コミのデータを MySQL に投入したいと思います。&lt;/p&gt;
+
+&lt;p&gt;まずは、口コミデータ CSV をダウンロードしてきます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ wget -O test.tar.gz https://github.com/livedoor/datasets/blob/master/ldgourmet.tar.gz?raw=true
+$ tar xfvz test.tar.gz
+areas.csv
+categories.csv
+prefs.csv
+ratings.csv
+rating_votes.csv
+restaurants.csv
+stations.csv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;何個か CSV ファイルがありますが、この中から &lt;code&gt;ratings.csv&lt;/code&gt; のみ使用していきます。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;ratings.csv&lt;/code&gt; は次のような内容になっています。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ratings.csv&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-csv&#34;&gt;id,restaurant_id,user_id,total,food,service,atmosphere,cost_performance,title,body,purpose,created_on
+156445,310595,ee02f26a,5,0,0,0,0,,&amp;quot;...&amp;quot;,0,&amp;quot;2006-10-07 05:06:09&amp;quot;
+3842,10237,fcc21401,1,0,0,0,0,,&amp;quot;...&amp;quot;,0,&amp;quot;2004-10-20 00:34:28&amp;quot;
+144379,3334,06412af7,2,0,0,0,0,,&amp;quot;...&amp;quot;,0,&amp;quot;2006-06-03 16:07:43&amp;quot;
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Embulk は &lt;code&gt;config.yml&lt;/code&gt; ファイルを元にデータの移行を行うのですが、ゼロから記述する場合、CSV ファイルの文字コード、改行コード、デリミタなどをいちいち指定していくのは大変なので、設定ファイルを自動生成してくれる &lt;code&gt;embulk guess&lt;/code&gt; コマンドを使って、&lt;code&gt;config.yml&lt;/code&gt; ファイルを作成したいと思います。&lt;/p&gt;
+
+&lt;p&gt;自動生成するにしても最低限の情報がなければいけないので、&lt;code&gt;seed.yml&lt;/code&gt; ファイルに次のように記述します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;seed.yml&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;in:
+  type: file
+  path_prefix: &amp;quot;./ratings.csv&amp;quot;
+out:
+  type: stdout
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;出力ファイル名に &lt;code&gt;config.yml&lt;/code&gt; を指定して &lt;code&gt;embulk guess&lt;/code&gt; コマンドを実行します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ embulk guess seed.yml -o config.yml
+2016-09-05 16:30:57.386 +0000: Embulk v0.8.13
+2016-09-05 16:30:58.470 +0000 [INFO] (0001:guess): Listing local files at directory &#39;.&#39; filtering filename by prefix &#39;ratings.csv&#39;
+2016-09-05 16:30:58.474 +0000 [INFO] (0001:guess): Loading files [ratings.csv]
+2016-09-05 16:30:58.620 +0000 [INFO] (0001:guess): Loaded plugin embulk/guess/gzip from a load path
+2016-09-05 16:30:58.630 +0000 [INFO] (0001:guess): Loaded plugin embulk/guess/bzip2 from a load path
+2016-09-05 16:30:58.645 +0000 [INFO] (0001:guess): Loaded plugin embulk/guess/json from a load path
+2016-09-05 16:30:58.653 +0000 [INFO] (0001:guess): Loaded plugin embulk/guess/csv from a load path
+in:
+  type: file
+  path_prefix: ./ratings.csv
+  parser:
+    charset: UTF-8
+    newline: CRLF
+    type: csv
+    delimiter: &#39;,&#39;
+    quote: &#39;&amp;quot;&#39;
+    escape: &#39;&amp;quot;&#39;
+    trim_if_not_quoted: false
+    skip_header_lines: 1
+    allow_extra_columns: false
+    allow_optional_columns: false
+    columns:
+    - {name: id, type: long}
+    - {name: restaurant_id, type: long}
+    - {name: user_id, type: string}
+    - {name: total, type: long}
+    - {name: food, type: long}
+    - {name: service, type: long}
+    - {name: atmosphere, type: long}
+    - {name: cost_performance, type: long}
+    - {name: title, type: string}
+    - {name: body, type: string}
+    - {name: purpose, type: long}
+    - {name: created_on, type: timestamp, format: &#39;%Y-%m-%d %H:%M:%S&#39;}
+out: {type: stdout}
+Created &#39;config.yml&#39; file.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで次のような &lt;code&gt;config.yml&lt;/code&gt; が生成されました。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;config.yml&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;in:
+  type: file
+  path_prefix: ./ratings.csv
+  parser:
+    charset: UTF-8
+    newline: CRLF
+    type: csv
+    delimiter: &#39;,&#39;
+    quote: &#39;&amp;quot;&#39;
+    escape: &#39;&amp;quot;&#39;
+    trim_if_not_quoted: false
+    skip_header_lines: 1
+    allow_extra_columns: false
+    allow_optional_columns: false
+    columns:
+    - {name: id, type: long}
+    - {name: restaurant_id, type: long}
+    - {name: user_id, type: string}
+    - {name: total, type: long}
+    - {name: food, type: long}
+    - {name: service, type: long}
+    - {name: atmosphere, type: long}
+    - {name: cost_performance, type: long}
+    - {name: title, type: string}
+    - {name: body, type: string}
+    - {name: purpose, type: long}
+    - {name: created_on, type: timestamp, format: &#39;%Y-%m-%d %H:%M:%S&#39;}
+out: {type: stdout}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;embulk-filter-column-プラグイン&#34;&gt;&lt;code&gt;embulk-filter-column&lt;/code&gt; プラグイン&lt;/h2&gt;
+
+&lt;p&gt;このまま MySQL にデータを取り込んでも良いのですが、今回は必要なカラムを絞り、&lt;code&gt;id&lt;/code&gt;, &lt;code&gt;restaurant_id&lt;/code&gt;, &lt;code&gt;user_id&lt;/code&gt;, &lt;code&gt;total&lt;/code&gt;, &lt;code&gt;created_on&lt;/code&gt; の5つのみのデータを扱うことにしたいと思います。&lt;/p&gt;
+
+&lt;p&gt;カラムの絞り込みには &lt;code&gt;embulk-filter-column&lt;/code&gt; という便利なプラグインがあるので、これを使ってみたいと思います。&lt;/p&gt;
+
+&lt;p&gt;まずは &lt;code&gt;embulk gem install&lt;/code&gt; コマンドでインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ embulk gem install embulk-filter-column
+2016-09-05 16:37:50.601 +0000: Embulk v0.8.13
+Fetching: embulk-filter-column-0.5.4.gem (100%)
+Successfully installed embulk-filter-column-0.5.4
+1 gem installed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;インストールが終わったら &lt;code&gt;config.yml&lt;/code&gt; の &lt;code&gt;in&lt;/code&gt; と &lt;code&gt;out&lt;/code&gt; の間に、次のように必要なカラムのみ記述します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;config.yml&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;in:
+（略）
+filters:
+  - type: column
+    columns:
+      - {name: &#39;id&#39;}
+      - {name: &#39;restaurant_id&#39;}
+      - {name: &#39;user_id&#39;}
+      - {name: &#39;total&#39;}
+      - {name: &#39;created_on&#39;}
+out: {type: stdout}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;mysql-にデータを取り込む&#34;&gt;MySQL にデータを取り込む&lt;/h2&gt;
+
+&lt;p&gt;いよいよ MySQL にデータを取り込んでみたいと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;embulk-filter-column&lt;/code&gt; プラグインの時と同じように、今度は MySQL の出力用のプラグインの &lt;code&gt;embulk-output-mysql&lt;/code&gt; をインストールします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ embulk gem install embulk-output-mysql
+2016-09-05 16:50:54.513 +0000: Embulk v0.8.13
+Fetching: embulk-output-mysql-0.6.3.gem (100%)
+Successfully installed embulk-output-mysql-0.6.3
+1 gem installed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;プラグインのインストールが完了したら &lt;code&gt;config.yml&lt;/code&gt; の &lt;code&gt;out&lt;/code&gt; に &lt;code&gt;embulk-output-mysql&lt;/code&gt; プラグイン用の設定を記述していきます。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;config.yml&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;out:
+  type: mysql
+  host: localhost
+  user: root
+  password: uhsd!Aid;3Zt
+  database: testdb
+  table: ratings
+  mode: replace
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;mode&lt;/code&gt; という部分は &lt;code&gt;insert&lt;/code&gt; も選択することができ、Embulk を繰り返した時に、&lt;code&gt;insert&lt;/code&gt; だと追記、&lt;code&gt;replace&lt;/code&gt; だと置き換えになります。今回は &lt;code&gt;replace&lt;/code&gt; を選択しました。&lt;/p&gt;
+
+&lt;p&gt;データベースは事前に作成しておく必要がありますが、テーブルやスキーマの作成は Embulk 側で自動で作成してくれるので、事前に作成する必要はありません。&lt;/p&gt;
+
+&lt;p&gt;それでは &lt;code&gt;embulk run&lt;/code&gt; コマンドでデータの取り込みを開始したいと思います。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ embulk run config.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;20万件以上のデータなので、少し時間がかかると思います。&lt;/p&gt;
+
+&lt;p&gt;※ 私の環境では完了するまで 5 分ほどかかりました。&lt;/p&gt;
+
+&lt;p&gt;データの取り込みが完了したので、MySQL のデータを確認してます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;mysql&amp;gt; select count(*) from ratings;
++----------+
+| count(*) |
++----------+
+|   205805 |
++----------+
+1 row in set (0.04 sec)
+
+mysql&amp;gt; select * from ratings limit 20;
++--------+---------------+----------+-------+---------------------+
+| id     | restaurant_id | user_id  | total | created_on          |
++--------+---------------+----------+-------+---------------------+
+| 156445 |        310595 | ee02f26a |     5 | 2006-10-07 05:06:09 |
+|   3842 |         10237 | fcc21401 |     1 | 2004-10-20 00:34:28 |
+| 144379 |          3334 | 06412af7 |     2 | 2006-06-03 16:07:43 |
+| 144377 |         15163 | 06412af7 |     5 | 2006-06-03 15:14:45 |
+|  75967 |           567 | 4ceec99d |     3 | 2004-12-01 23:12:29 |
+| 104898 |          1026 | 4ceec99d |     5 | 2005-01-04 03:57:02 |
+|  86073 |          1058 | 4ceec99d |     5 | 2004-11-09 00:34:17 |
+|  13968 |          2569 | 4ceec99d |     3 | 2004-09-22 23:29:57 |
+|  97833 |          3309 | 4ceec99d |     4 | 2005-05-28 23:17:16 |
+|  13991 |          3648 | 4ceec99d |     4 | 2004-09-27 11:14:50 |
+|  69284 |          4226 | 4ceec99d |     5 | 2004-10-31 16:32:43 |
+|   5658 |          4659 | 4ceec99d |     4 | 2004-09-22 23:04:12 |
+|  89226 |          5075 | 4ceec99d |     5 | 2005-03-21 22:56:45 |
+|  15001 |          5099 | 4ceec99d |     3 | 2004-09-24 11:42:10 |
+| 116898 |          5219 | 4ceec99d |     5 | 2005-09-20 00:53:40 |
+|  21991 |          5449 | 4ceec99d |     5 | 2004-11-10 00:13:09 |
+|  68974 |          6033 | 4ceec99d |     4 | 2004-11-03 23:45:02 |
+|  15434 |          6899 | 4ceec99d |     5 | 2004-09-22 22:29:51 |
+| 116890 |          8638 | 4ceec99d |     4 | 2005-09-20 00:34:25 |
+|  13997 |          8895 | 4ceec99d |     5 | 2004-09-27 10:54:32 |
++--------+---------------+----------+-------+---------------------+
+20 rows in set (0.00 sec)
+
+mysql&amp;gt; select total, count(*) from ratings group by total;
++-------+----------+
+| total | count(*) |
++-------+----------+
+|     0 |     7159 |
+|     1 |     4975 |
+|     2 |    14565 |
+|     3 |    64743 |
+|     4 |    79593 |
+|     5 |    34770 |
++-------+----------+
+6 rows in set (0.10 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;Embulk を使って CSV から MySQL へデータを投入してみました。&lt;/p&gt;
+
+&lt;p&gt;もう一度 Embulk を使うことによって、今度は MySQL から ElasticSearch などにデータを投入することもできるので、いろいろな使い方を考えていきたいと思います。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>CentOS 7 に MySQL 5.7 を yum インストールして初期設定までやってみた</title>
