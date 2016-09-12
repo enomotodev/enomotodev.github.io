@@ -9,8 +9,167 @@
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
     <copyright>(c) 2015 Takafumi Enomoto.</copyright>
-    <lastBuildDate>Fri, 29 Apr 2016 14:33:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 12 Sep 2016 23:23:16 +0900</lastBuildDate>
     <atom:link href="http://enomotodev.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>CentOS 7 に Re:dash インストールして MySQL のデータをグラフ表示してみた</title>
+      <link>http://enomotodev.github.io/post/install-redash/</link>
+      <pubDate>Mon, 12 Sep 2016 23:23:16 +0900</pubDate>
+      <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
+      <guid>http://enomotodev.github.io/post/install-redash/</guid>
+      <description>
+
+&lt;h2 id=&#34;作業環境&#34;&gt;作業環境&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;CentOS 7.2&lt;/li&gt;
+&lt;li&gt;Java 1.8.0_101&lt;/li&gt;
+&lt;li&gt;MySQL 5.7.14&lt;/li&gt;
+&lt;li&gt;Git 1.8.3.1&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;docker-docker-compose-のインストール&#34;&gt;Docker + Docker Compose のインストール&lt;/h2&gt;
+
+&lt;p&gt;Re:dash は CentOS では Docker のコンテナ上で起動させるので、まずは Docker をインストールします。&lt;/p&gt;
+
+&lt;h3 id=&#34;kernel-のバージョンを確認する&#34;&gt;Kernel のバージョンを確認する&lt;/h3&gt;
+
+&lt;p&gt;CentOS 7 に Docker をインストールするには Kernel が 3.10 以上ではないといけないようなので Kernel のバージョンを確認します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ uname -r
+3.10.0-327.el7.x86_64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;3.10 以上なので、Docker のインストールを進めていきます。&lt;/p&gt;
+
+&lt;h3 id=&#34;docker-のインストール&#34;&gt;Docker のインストール&lt;/h3&gt;
+
+&lt;p&gt;まずは root ユーザに変更します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo su -
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ここからは root ユーザでの作業にになります。&lt;/p&gt;
+
+&lt;p&gt;次のコマンドで Docker のインストールができます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# curl -fsSL https://get.docker.com/ | sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;インストールが完了したので、バージョンを確認します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# docker --version
+Docker version 1.12.1, build 23cf638
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Docker を起動させます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# service docker start
+Redirecting to /bin/systemctl start  docker.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;自動起動の設定も行っておきましょう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# chkconfig docker on
+Note: Forwarding request to &#39;systemctl enable docker.service&#39;.
+Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで Docker のインストールは完了です。&lt;/p&gt;
+
+&lt;h3 id=&#34;docker-compose-のインストール&#34;&gt;Docker Compose のインストール&lt;/h3&gt;
+
+&lt;p&gt;Re:dash は Docker コンテナの管理を Docker Compose で行っているので、Docker Compose もインストールします。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/docker/compose/releases&#34; target=&#34;_blank&#34;&gt;GitHub のリリースページ&lt;/a&gt; から最新のコマンドをコピーして、実行します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` &amp;gt; /usr/local/bin/docker-compose
+# chmod +x /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで Docker Compose のインストールが完了となりますので、バージョンを確認してみます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# docker-compose --version
+docker-compose version 1.8.0, build f3628c7
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;re-dash-のインストール&#34;&gt;Re:dash のインストール&lt;/h2&gt;
+
+&lt;p&gt;Docker + Docker Compose のインストールが完了したので、いよいよ Re:dash のインストールをしたいと思います。&lt;/p&gt;
+
+&lt;p&gt;まずは、&lt;code&gt;git clone&lt;/code&gt; して、サンプルの設定ファイルを元に設定ファイルを作成します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# git clone https://github.com/getredash/redash.git
+# cd redash/
+# cp docker-compose-example.yml docker-compose.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;まずは PostgreSQL のコンテナを起動します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# docker-compose up postgres
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;PostgreSQL のコンテナが起動したら、次のコマンドを実行していきます。&lt;/p&gt;
+
+&lt;p&gt;なお、PostgreSQL のコンテナ起動後、端末は操作できなくなるので、別タブを開いたりして、再度アクセスし、root ユーザに変更してください。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# ./setup/docker/create_database.sh
+# docker-compose up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで Re:dash が起動したので、ブラウザからアクセスしてみましょう。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/redash_login.png&#34; alt=&#34;Re:dash ログイン画面&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;無事ログインできました！&lt;/p&gt;
+
+&lt;p&gt;ログイン画面が表示されたので、ログインしてみましょう。&lt;/p&gt;
+
+&lt;p&gt;初期の Email、Password はこちらになります。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Email：admin&lt;/li&gt;
+&lt;li&gt;Password：admin&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/redash_top.png&#34; alt=&#34;Re:dash TOP画面&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;mysql-への接続&#34;&gt;MySQL への接続&lt;/h2&gt;
+
+&lt;p&gt;画面右上の『Data Sources』 → 『New Data Source』をクリックし、MySQL の設定を行っていきます。&lt;/p&gt;
+
+&lt;p&gt;ここで注意するのは、MySQL はコンテナのホスト側にあるので、MySQL の Host は Re:dash への接続元 IP になります。&lt;/p&gt;
+
+&lt;p&gt;Re:dash への接続元 IP はコンソールに出力されている Re:dash のアクセスログから判断することができます。&lt;/p&gt;
+
+&lt;h2 id=&#34;グラフ表示する&#34;&gt;グラフ表示する&lt;/h2&gt;
+
+&lt;p&gt;まず、画面上部の『Queries』 → 『New Query』から Query 入力画面に移動し、『Data Source』に先ほど登録した Data Source がきちんと設定されていることを確認します。&lt;/p&gt;
+
+&lt;p&gt;次に、入力フォームに SQL を記述し、『Execute』ボタンを押します。&lt;/p&gt;
+
+&lt;p&gt;そうすると下記のように結果が出力されます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/redash_output.png&#34; alt=&#34;Re:dash SQL 結果画面&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;結果に問題ないようであれば、『Save』ボタンで今回の SQL を保存することができます。&lt;/p&gt;
+
+&lt;p&gt;結果をグラフ化するには『+ NEW VISUALIZATION』ボタンを押して、Visualization Editor に移動します。&lt;/p&gt;
+
+&lt;p&gt;画面に従って、グラフの種類や、縦軸・横軸に表示するカラムを設定していくと次のようなグラフが完成します。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/redash_graph.png&#34; alt=&#34;Re:dash グラフ表示&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;Re:dash を使うことによって、SQL の結果を簡単にグラフ化することができました。&lt;/p&gt;
+
+&lt;p&gt;Re:dash は一つひとつの SQL やグラフに固定の URL が割り振られるので、URL さえあれば、SQL での分析結果をみんなで共有することができ、分析結果の属人化を防ぐことができます。&lt;/p&gt;
+
+&lt;p&gt;導入自体もそれほど難しくはないので、今後積極的に活用していきたいと思います。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>【 Composer 編】Mac に Docker インストールしてみた</title>
