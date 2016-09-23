@@ -14,10 +14,10 @@
     
     <item>
       <title>systemd を使って自作スクリプトをサービス化してみた</title>
-      <link>http://enomotodev.github.io/post/systemd-original-service.md/</link>
+      <link>http://enomotodev.github.io/post/systemd-original-service/</link>
       <pubDate>Sat, 24 Sep 2016 01:42:59 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
-      <guid>http://enomotodev.github.io/post/systemd-original-service.md/</guid>
+      <guid>http://enomotodev.github.io/post/systemd-original-service/</guid>
       <description>
 
 &lt;h2 id=&#34;作業環境&#34;&gt;作業環境&lt;/h2&gt;
