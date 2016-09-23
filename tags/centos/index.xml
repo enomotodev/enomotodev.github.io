@@ -9,8 +9,140 @@
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
     <copyright>(c) 2015 Takafumi Enomoto.</copyright>
-    <lastBuildDate>Mon, 12 Sep 2016 23:23:16 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 24 Sep 2016 01:42:59 +0900</lastBuildDate>
     <atom:link href="http://enomotodev.github.io/tags/centos/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>systemd を使って自作スクリプトをサービス化してみた</title>
+      <link>http://enomotodev.github.io/post/systemd-original-service.md/</link>
+      <pubDate>Sat, 24 Sep 2016 01:42:59 +0900</pubDate>
+      <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
+      <guid>http://enomotodev.github.io/post/systemd-original-service.md/</guid>
+      <description>
+
+&lt;h2 id=&#34;作業環境&#34;&gt;作業環境&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;CentOS 7.2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;systemd-とは&#34;&gt;systemd とは&lt;/h2&gt;
+
+&lt;p&gt;systemd とは、&lt;a href=&#34;https://en.wikipedia.org/wiki/Lennart_Poettering&#34; target=&#34;_blank&#34;&gt;Lennart Poettering&lt;/a&gt; と &lt;a href=&#34;https://en.wikipedia.org/wiki/Kay_Sievers&#34; target=&#34;_blank&#34;&gt;Kay Sievers&lt;/a&gt; を中心に開発された、Linux の起動処理やシステム管理を行う仕組みのことです。&lt;/p&gt;
+
+&lt;p&gt;2011年5月にメジャー Linux ディストリビューションの Fedora に採用され、2014年12月にリリースされた CentOS 7 にも採用されました。&lt;/p&gt;
+
+&lt;p&gt;systemd はこれまで使われてきたデーモンごとの起動シェルスクリプトに代わり、『ユニットファイル』と呼ばれる設定ファイルに各デーモン用の初期化命令を記述します。&lt;/p&gt;
+
+&lt;h2 id=&#34;コマンドを作る&#34;&gt;コマンドを作る&lt;/h2&gt;
+
+&lt;p&gt;まずは systemd に登録して動作させるスクリプトを用意します。&lt;/p&gt;
+
+&lt;p&gt;今回は1秒ごとに現在時刻をログに追記していくスクリプトで試してみたいと思います。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;/opt/date.sh&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+
+while true
+do
+   date &amp;gt;&amp;gt; /tmp/date.log
+   sleep 1
+done
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;実行権限を与えます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo chmod 0755 /opt/date.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;ユニットファイルを作成する&#34;&gt;ユニットファイルを作成する&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;/etc/systemd/system/date.service&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;[Unit]
+Description = date log daemon
+
+[Service]
+ExecStart = /opt/date.sh
+Restart = always
+Type = simple
+
+[Install]
+WantedBy = multi-user.target
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Service セクションの ExecStart に実行したいコマンドを記述します。&lt;/p&gt;
+
+&lt;p&gt;Restart はサービスのメインプロセスが停止した際の動作を指定することができ、always を指定することによって、常に再起動を試みます。&lt;/p&gt;
+
+&lt;h2 id=&#34;サービスとして認識されているか確認する&#34;&gt;サービスとして認識されているか確認する&lt;/h2&gt;
+
+&lt;p&gt;それでは、作成したユニットファイルがサービスとして認識されているか確かめます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl list-unit-files --type=service | grep date.service
+date.service                                disabled
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Service として認識されているのが確認できました！&lt;/p&gt;
+
+&lt;h2 id=&#34;サービスを起動する&#34;&gt;サービスを起動する&lt;/h2&gt;
+
+&lt;p&gt;それではサービスを起動しましょう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl start date
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;自動起動の設定も行っておきましょう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl enable date
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ステータスの確認を行ってみます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl status date
+● date.service - date daemon
+   Loaded: loaded (/etc/systemd/system/date.service; enabled; vendor preset: disabled)
+   Active: active (running) since 金 2016-09-23 14:45:09 UTC; 1h 49min ago
+ Main PID: 4168 (date.sh)
+   CGroup: /system.slice/date.service
+           ├─ 4168 /bin/bash /opt/date.sh
+           └─14162 sleep 1
+
+ 9月 23 14:45:09 localhost.localdomain systemd[1]: Started date daemon.
+ 9月 23 14:45:09 localhost.localdomain systemd[1]: Starting date daemon...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;サービス起動の確認がとれたので、ログファイルへの書き込みがきちんと行われているかも確認してみます&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ tail -f /tmp/date.log
+Fri Sep 23 16:37:31 UTC 2016
+Fri Sep 23 16:37:32 UTC 2016
+Fri Sep 23 16:37:33 UTC 2016
+Fri Sep 23 16:37:34 UTC 2016
+Fri Sep 23 16:37:35 UTC 2016
+Fri Sep 23 16:37:36 UTC 2016
+Fri Sep 23 16:37:37 UTC 2016
+Fri Sep 23 16:37:38 UTC 2016
+Fri Sep 23 16:37:39 UTC 2016
+Fri Sep 23 16:37:40 UTC 2016
+Fri Sep 23 16:37:41 UTC 2016
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ログファイルにもきちんと書き込みが行われているのが確認できました。&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;systemd を使うことによって簡単に自作スクリプトをサービス化して起動することができました。&lt;/p&gt;
+
+&lt;p&gt;これから、ユニットファイルの書き方であったり、systemd の概念的なところをもう少し詳しく勉強していきたいと思います。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>CentOS 7 に Re:dash インストールして MySQL のデータをグラフ表示してみた</title>
