@@ -1,16 +1,235 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on enomotodev</title>
-    <link>http://enomotodev.github.io/post/</link>
-    <description>Recent content in Posts on enomotodev</description>
+    <title>Post-rsses on enomotodev</title>
+    <link>http://enomotodev.github.io/post/index.xml</link>
+    <description>Recent content in Post-rsses on enomotodev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja_JP</language>
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
-    <copyright>(c) 2015 Takafumi Enomoto.</copyright>
-    <lastBuildDate>Sat, 24 Sep 2016 01:42:59 +0900</lastBuildDate>
+    <copyright>(c) 2016 enomotodev</copyright>
+    <lastBuildDate>Sun, 09 Oct 2016 01:49:06 +0900</lastBuildDate>
     <atom:link href="http://enomotodev.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Hologram を使ってスタイルガイドを作成してみた</title>
+      <link>http://enomotodev.github.io/post/install-hologram/</link>
+      <pubDate>Sun, 09 Oct 2016 01:49:06 +0900</pubDate>
+      <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
+      <guid>http://enomotodev.github.io/post/install-hologram/</guid>
+      <description>
+
+&lt;h2 id=&#34;hologram-とは&#34;&gt;Hologram とは&lt;/h2&gt;
+
+&lt;p&gt;Hologram は Ruby 環境で動くスタイルガイドジェネレータです。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;.css&lt;/code&gt;、&lt;code&gt;.scss&lt;/code&gt;、&lt;code&gt;.sass&lt;/code&gt;、&lt;code&gt;.less&lt;/code&gt;、&lt;code&gt;.styl&lt;/code&gt; などの多様な形式のファイルに書かれたコメントから、自動でスタイルガイドを作ってくれます。&lt;/p&gt;
+
+&lt;p&gt;スタイルガイドは、静的な HTML ファイルとして出力され、独自のテンプレートを使ってスタイルガイドをカスタマイズすることもできます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/hologram_site_top.png&#34; alt=&#34;Hologram 公式サイト TOP&#34; class=&#34;image&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;作業環境&#34;&gt;作業環境&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;CentOS 7.2&lt;/li&gt;
+&lt;li&gt;Ruby 2.3.1&lt;/li&gt;
+&lt;li&gt;Bundler 1.13.2&lt;/li&gt;
+&lt;li&gt;Sass 3.4.22&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;hologram-のインストール&#34;&gt;Hologram のインストール&lt;/h2&gt;
+
+&lt;p&gt;プロジェクトの &lt;code&gt;Gemfile&lt;/code&gt; に &lt;code&gt;gem &amp;quot;hologram&amp;quot;&lt;/code&gt; を追記します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;source &amp;quot;https://rubygems.org&amp;quot;
+
+gem &amp;quot;sass&amp;quot;
+gem &amp;quot;hologram&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;追記したら &lt;code&gt;bundle install&lt;/code&gt; しましょう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ bundle install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;インストールが完了したので、バージョンを確認してみましょう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ hologram -v
+hologram 1.4.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;hologram-の始め方&#34;&gt;Hologram の始め方&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;hologram init&lt;/code&gt; コマンドで hologram の設定ファイルなどが作成されるので、&lt;code&gt;hologram init&lt;/code&gt; を実行してみます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ hologram init
+Created the following files and directories:
+  hologram_config.yml
+  doc_assets/
+  doc_assets/_header.html
+  doc_assets/_footer.html
+  code_example_templates/
+  code_example_templates/markdown_example_template.html.erb
+  code_example_templates/markdown_table_template.html.erb
+  code_example_templates/js_example_template.html.erb
+  code_example_templates/jsx_example_template.html.erb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;色々とファイルが作成されましたが、&lt;code&gt;hologram_config.yml&lt;/code&gt; の中身を見てみましょう。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;hologram_config.yml&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;# Hologram will run from same directory where this config file resides
+# All paths should be relative to there
+
+# The directory containing the source files to parse recursively
+source: ./sass
+
+# The directory that hologram will build to
+destination: ./docs
+
+# The assets needed to build the docs (includes header.html,
+# footer.html, etc)
+# You may put doc related assets here too: images, css, etc.
+documentation_assets: ./doc_assets
+
+# The folder that contains templates for rendering code examples.
+# If you want to change the way code examples appear in the styleguide,
+# modify the files in this folder
+code_example_templates: ./code_example_templates
+
+# The folder that contains custom code example renderers.
+# If you want to create additional renderers that are not provided
+# by Hologram (i.e. coffeescript renderer, jade renderer, etc)
+# place them in this folder
+code_example_renderers: ./code_example_renderers
+
+# Any other asset folders that need to be copied to the destination
+# folder. Typically this will include the css that you are trying to
+# document. May also include additional folders as needed.
+dependencies:
+  - ./build
+
+# Mark which category should be the index page
+# Alternatively, you may have an index.md in the documentation assets
+# folder instead of specifying this config.
+index: basics
+
+# To additionally output navigation for top level sections, set the value to
+# &#39;section&#39;. To output navigation for sub-sections,
+# set the value to `all`
+nav_level: all
+
+# Hologram displays warnings when there are issues with your docs
+# (e.g. if a component&#39;s parent is not found, if the _header.html and/or
+#  _footer.html files aren&#39;t found)
+# If you want Hologram to exit on these warnings, set the value to &#39;true&#39;
+# (Default value is &#39;false&#39;)
+exit_on_warnings: false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;source&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;.css&lt;/code&gt;、&lt;code&gt;.scss&lt;/code&gt;、&lt;code&gt;.sass&lt;/code&gt;、&lt;code&gt;.less&lt;/code&gt;、&lt;code&gt;.styl&lt;/code&gt; などのスタイルガイドを作成する元になるファイルが置かれているディレクトリを指定します。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;destination&lt;/code&gt;&lt;br /&gt;
+作成されたスタイルガイド（HTML ファイル）を出力するディレクトリを指定します。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;documentation_assets&lt;/code&gt;&lt;br /&gt;
+出力されるスタイルガイドのテンプレートを置くディレクトリを指定します。ここで指定したディレクトに置かれた &lt;code&gt;_header.html&lt;/code&gt; と &lt;code&gt;_footer.html&lt;/code&gt; を使用して HTML ファイルが作成されるので、独自のテンプレートを作成したい場合は、&lt;code&gt;_header.html&lt;/code&gt; と &lt;code&gt;_footer.html&lt;/code&gt; を編集するようなかたちになります。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;code_example_templates&lt;/code&gt;&lt;br /&gt;
+CSS などでスタイルガイド用にコードを記述する時にフォーマットを指定できるのですが、例えば &lt;code&gt;markup_example&lt;/code&gt; と指定した場合はここで指定したディレクトリの &lt;code&gt;markup_example_template.html.erb&lt;/code&gt; を元にスタイルガイドを出力します。&lt;br /&gt;
+指定したファーマットのファイルが存在しない場合はデフォルトのテンプレートが使用されます。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;code_example_renderers&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;coffee_example&lt;/code&gt; など &lt;code&gt;code_example_templates&lt;/code&gt; で指定できるフォーマット以外のフォーマットを使用したい場合は、ここで指定したディレクトリに &lt;code&gt;coffee_example_template.html.erb&lt;/code&gt; などというかたちでファイルを作成します。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dependencies&lt;/code&gt;&lt;br /&gt;
+ここで指定したディレクトリのファイルはスタイルガイドを作成する際に &lt;code&gt;documentation_assets&lt;/code&gt; で指定したディレクトリにコピーされます。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;index&lt;/code&gt;&lt;br /&gt;
+スタイルガイドの TOP に表示するカテゴリーを指定することができます。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;nav_level&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;section&lt;/code&gt; または &lt;code&gt;all&lt;/code&gt; を指定することでナビゲーションのレベルを変更することができます。&lt;code&gt;all&lt;/code&gt; を指定すると sub-section まで表示することができます。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;exit_on_warnings&lt;/code&gt;&lt;br /&gt;
+documentation_assets で指定したディレクトリに &lt;code&gt;_header.html&lt;/code&gt; がない時など、エラーが発生して Hologram が終了する時に Warning を表示したい場合は true を指定します。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;hologram-のサンプルを動かしてみる&#34;&gt;Hologram のサンプルを動かしてみる&lt;/h2&gt;
+
+&lt;p&gt;Hologram には&lt;a href=&#34;https://github.com/trulia/hologram-example&#34; target=&#34;_blank&#34;&gt;公式のサンプル&lt;/a&gt;があるので、今回はそちらを動かしてみます。&lt;/p&gt;
+
+&lt;p&gt;まずは先ほどの &lt;code&gt;hologram init&lt;/code&gt; コマンドで自動生成されたファイルを削除します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rm -rf ./*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;公式のサンプルを git clone します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone git@github.com:trulia/hologram-example.git .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ビルドします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ hologram config.yml
+Adding renderer for haml examples
+Adding renderer for html examples
+Adding renderer for js examples
+Adding renderer for jsx examples
+Adding renderer for react examples
+Adding renderer for slim examples
+Build completed. (-:
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで &lt;code&gt;docs&lt;/code&gt; ディレクトリに HTML 形式でスタイルガイドが出力されたのでブラウザから確認してみます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/hologram_example.png&#34; alt=&#34;Hologram TOP（index.md あり）&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;スタイルガイドの-top-を変更する&#34;&gt;スタイルガイドの TOP を変更する&lt;/h2&gt;
+
+&lt;p&gt;Hologram では &lt;code&gt;source&lt;/code&gt; で指定したディレクトリ（&lt;code&gt;.css&lt;/code&gt; や &lt;code&gt;.scss&lt;/code&gt; ファイルなどが置いてあるディレクトリ）直下に &lt;code&gt;index.md&lt;/code&gt; を置くと、それをスタイルガイドの TOP として表示するようです。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;index.md&lt;/code&gt; を削除して、Base CSS カテゴリーを TOP に設定してみましょう。&lt;/p&gt;
+
+&lt;p&gt;まずは &lt;code&gt;index.md&lt;/code&gt; と先ほど作成した &lt;code&gt;docs&lt;/code&gt; ディレクトリを削除します。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rm -rf components/index.md docs/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;次に &lt;code&gt;config.yml&lt;/code&gt; に追記して、『Base CSS』カテゴリーを TOP にするよう宣言します。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;config.yml&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;...（略）
+index: base_css
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再度、ビルドします。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ hologram config.yml
+Adding renderer for haml examples
+Adding renderer for html examples
+Adding renderer for js examples
+Adding renderer for jsx examples
+Adding renderer for react examples
+Adding renderer for slim examples
+Build completed. (-:
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ブラウザから確認してみます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/hologram_example_base_css_top.png&#34; alt=&#34;Hologram TOP（index.md なし）&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;TOP にアクセスすると『Base CSS』カテゴリーがきちんと表示されました。&lt;/p&gt;
+
+&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;Hologram はテンプレートを編集することによってスタイルガイドを自由にカスタマイズすることが可能です。&lt;/p&gt;
+
+&lt;p&gt;Hologram は &lt;code&gt;.css&lt;/code&gt;、&lt;code&gt;.scss&lt;/code&gt; ファイル内のコメントから自動で HTML を出力するので、wiki でよく見られる更新が滞りがちになるといったことも回避できるのではないかと思います。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>systemd を使って自作スクリプトをサービス化してみた</title>

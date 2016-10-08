@@ -1,0 +1,122 @@
+<!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><title>Hologram を使ってスタイルガイドを作成してみた &middot; enomotodev</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content=""><meta name="keywords" content="hologram, style guide, css, sass, "><meta property="og:title" content="Hologram を使ってスタイルガイドを作成してみた  &middot; enomotodev "><meta property="og:site_name" content="enomotodev"><meta property="og:url" content="http://enomotodev.github.io/post/install-hologram/"><meta property="og:locale" content="ja_JP"><meta property="og:type" content="article"><meta property="og:description" content=""><meta property="og:article:published_time" content="2016-10-09T01:49:06&#43;09:00"><meta property="og:article:modified_time" content="2016-10-09T01:49:06&#43;09:00"><meta property="og:article:tag" content="hologram"><meta property="og:article:tag" content="style guide"><meta property="og:article:tag" content="css"><meta property="og:article:tag" content="sass"><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Hologram を使ってスタイルガイドを作成してみた",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2016-10-09",
+    "description": "",
+    "wordCount":  576 
+  }</script><link rel="canonical" href="http://enomotodev.github.io/post/install-hologram/"><link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://enomotodev.github.io/touch-icon-144-precomposed.png"><link href="http://enomotodev.github.io/favicon.png" rel="icon"><meta name="generator" content="Hugo 0.17"><!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]--><link rel="stylesheet" href="/css/bootswatch/default/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/highlight/dark.css"></head><body><header id="main-header"><nav class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="http://enomotodev.github.io/">enomotodev</a></div><div id="navbar" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="http://enomotodev.github.io/tags"><i class="fa fa-tags"></i> Tags</a></li></ul></div></div></nav></header><div class="container"><div class="row"><div class="col-sm-12"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="text-center"><h1>Hologram を使ってスタイルガイドを作成してみた</h1><div class="metas"><small><i class="fa fa-calendar"></i> <time datetime="2016-10-09">9 Oct, 2016</time> </small><small>&middot; Read in about 3 min &middot; (576 Words)</small><div class="margin-10"><i class="fa fa-tags"></i> <a href="http://enomotodev.github.io/tags/hologram" class="label label-primary">hologram</a> <a href="http://enomotodev.github.io/tags/style-guide" class="label label-primary">style guide</a> <a href="http://enomotodev.github.io/tags/css" class="label label-primary">css</a> <a href="http://enomotodev.github.io/tags/sass" class="label label-primary">sass</a></div><br></div></div></div><div class="content"><h2 id="hologram-とは">Hologram とは</h2><p>Hologram は Ruby 環境で動くスタイルガイドジェネレータです。</p><p><code>.css</code>、<code>.scss</code>、<code>.sass</code>、<code>.less</code>、<code>.styl</code> などの多様な形式のファイルに書かれたコメントから、自動でスタイルガイドを作ってくれます。</p><p>スタイルガイドは、静的な HTML ファイルとして出力され、独自のテンプレートを使ってスタイルガイドをカスタマイズすることもできます。</p><p><img src="/images/hologram_site_top.png" alt="Hologram 公式サイト TOP" class="image"></p><h2 id="作業環境">作業環境</h2><ul><li>CentOS 7.2</li><li>Ruby 2.3.1</li><li>Bundler 1.13.2</li><li>Sass 3.4.22</li></ul><h2 id="hologram-のインストール">Hologram のインストール</h2><p>プロジェクトの <code>Gemfile</code> に <code>gem &quot;hologram&quot;</code> を追記します。</p><pre><code>source &quot;https://rubygems.org&quot;
+
+gem &quot;sass&quot;
+gem &quot;hologram&quot;
+</code></pre><p>追記したら <code>bundle install</code> しましょう。</p><pre><code class="language-bash">$ bundle install
+</code></pre><p>インストールが完了したので、バージョンを確認してみましょう。</p><pre><code class="language-bash">$ hologram -v
+hologram 1.4.0
+</code></pre><h2 id="hologram-の始め方">Hologram の始め方</h2><p><code>hologram init</code> コマンドで hologram の設定ファイルなどが作成されるので、<code>hologram init</code> を実行してみます。</p><pre><code class="language-bash">$ hologram init
+Created the following files and directories:
+  hologram_config.yml
+  doc_assets/
+  doc_assets/_header.html
+  doc_assets/_footer.html
+  code_example_templates/
+  code_example_templates/markdown_example_template.html.erb
+  code_example_templates/markdown_table_template.html.erb
+  code_example_templates/js_example_template.html.erb
+  code_example_templates/jsx_example_template.html.erb
+</code></pre><p>色々とファイルが作成されましたが、<code>hologram_config.yml</code> の中身を見てみましょう。</p><ul><li>hologram_config.yml</li></ul><pre><code class="language-yml"># Hologram will run from same directory where this config file resides
+# All paths should be relative to there
+
+# The directory containing the source files to parse recursively
+source: ./sass
+
+# The directory that hologram will build to
+destination: ./docs
+
+# The assets needed to build the docs (includes header.html,
+# footer.html, etc)
+# You may put doc related assets here too: images, css, etc.
+documentation_assets: ./doc_assets
+
+# The folder that contains templates for rendering code examples.
+# If you want to change the way code examples appear in the styleguide,
+# modify the files in this folder
+code_example_templates: ./code_example_templates
+
+# The folder that contains custom code example renderers.
+# If you want to create additional renderers that are not provided
+# by Hologram (i.e. coffeescript renderer, jade renderer, etc)
+# place them in this folder
+code_example_renderers: ./code_example_renderers
+
+# Any other asset folders that need to be copied to the destination
+# folder. Typically this will include the css that you are trying to
+# document. May also include additional folders as needed.
+dependencies:
+  - ./build
+
+# Mark which category should be the index page
+# Alternatively, you may have an index.md in the documentation assets
+# folder instead of specifying this config.
+index: basics
+
+# To additionally output navigation for top level sections, set the value to
+# 'section'. To output navigation for sub-sections,
+# set the value to `all`
+nav_level: all
+
+# Hologram displays warnings when there are issues with your docs
+# (e.g. if a component's parent is not found, if the _header.html and/or
+#  _footer.html files aren't found)
+# If you want Hologram to exit on these warnings, set the value to 'true'
+# (Default value is 'false')
+exit_on_warnings: false
+</code></pre><ul><li><code>source</code><br><code>.css</code>、<code>.scss</code>、<code>.sass</code>、<code>.less</code>、<code>.styl</code> などのスタイルガイドを作成する元になるファイルが置かれているディレクトリを指定します。</li><li><code>destination</code><br>作成されたスタイルガイド（HTML ファイル）を出力するディレクトリを指定します。</li><li><code>documentation_assets</code><br>出力されるスタイルガイドのテンプレートを置くディレクトリを指定します。ここで指定したディレクトに置かれた <code>_header.html</code> と <code>_footer.html</code> を使用して HTML ファイルが作成されるので、独自のテンプレートを作成したい場合は、<code>_header.html</code> と <code>_footer.html</code> を編集するようなかたちになります。</li><li><code>code_example_templates</code><br>CSS などでスタイルガイド用にコードを記述する時にフォーマットを指定できるのですが、例えば <code>markup_example</code> と指定した場合はここで指定したディレクトリの <code>markup_example_template.html.erb</code> を元にスタイルガイドを出力します。<br>指定したファーマットのファイルが存在しない場合はデフォルトのテンプレートが使用されます。</li><li><code>code_example_renderers</code><br><code>coffee_example</code> など <code>code_example_templates</code> で指定できるフォーマット以外のフォーマットを使用したい場合は、ここで指定したディレクトリに <code>coffee_example_template.html.erb</code> などというかたちでファイルを作成します。</li><li><code>dependencies</code><br>ここで指定したディレクトリのファイルはスタイルガイドを作成する際に <code>documentation_assets</code> で指定したディレクトリにコピーされます。</li><li><code>index</code><br>スタイルガイドの TOP に表示するカテゴリーを指定することができます。</li><li><code>nav_level</code><br><code>section</code> または <code>all</code> を指定することでナビゲーションのレベルを変更することができます。<code>all</code> を指定すると sub-section まで表示することができます。</li><li><code>exit_on_warnings</code><br>documentation_assets で指定したディレクトリに <code>_header.html</code> がない時など、エラーが発生して Hologram が終了する時に Warning を表示したい場合は true を指定します。</li></ul><h2 id="hologram-のサンプルを動かしてみる">Hologram のサンプルを動かしてみる</h2><p>Hologram には<a href="https://github.com/trulia/hologram-example" target="_blank">公式のサンプル</a>があるので、今回はそちらを動かしてみます。</p><p>まずは先ほどの <code>hologram init</code> コマンドで自動生成されたファイルを削除します。</p><pre><code>$ rm -rf ./*
+</code></pre><p>公式のサンプルを git clone します。</p><pre><code>$ git clone git@github.com:trulia/hologram-example.git .
+</code></pre><p>ビルドします。</p><pre><code>$ hologram config.yml
+Adding renderer for haml examples
+Adding renderer for html examples
+Adding renderer for js examples
+Adding renderer for jsx examples
+Adding renderer for react examples
+Adding renderer for slim examples
+Build completed. (-:
+</code></pre><p>これで <code>docs</code> ディレクトリに HTML 形式でスタイルガイドが出力されたのでブラウザから確認してみます。</p><p><img src="/images/hologram_example.png" alt="Hologram TOP（index.md あり）" class="image"></p><h2 id="スタイルガイドの-top-を変更する">スタイルガイドの TOP を変更する</h2><p>Hologram では <code>source</code> で指定したディレクトリ（<code>.css</code> や <code>.scss</code> ファイルなどが置いてあるディレクトリ）直下に <code>index.md</code> を置くと、それをスタイルガイドの TOP として表示するようです。</p><p><code>index.md</code> を削除して、Base CSS カテゴリーを TOP に設定してみましょう。</p><p>まずは <code>index.md</code> と先ほど作成した <code>docs</code> ディレクトリを削除します。</p><pre><code>$ rm -rf components/index.md docs/
+</code></pre><p>次に <code>config.yml</code> に追記して、『Base CSS』カテゴリーを TOP にするよう宣言します。</p><ul><li>config.yml</li></ul><pre><code>...（略）
+index: base_css
+</code></pre><p>再度、ビルドします。</p><pre><code>$ hologram config.yml
+Adding renderer for haml examples
+Adding renderer for html examples
+Adding renderer for js examples
+Adding renderer for jsx examples
+Adding renderer for react examples
+Adding renderer for slim examples
+Build completed. (-:
+</code></pre><p>ブラウザから確認してみます。</p><p><img src="/images/hologram_example_base_css_top.png" alt="Hologram TOP（index.md なし）" class="image"></p><p>TOP にアクセスすると『Base CSS』カテゴリーがきちんと表示されました。</p><h2 id="まとめ">まとめ</h2><p>Hologram はテンプレートを編集することによってスタイルガイドを自由にカスタマイズすることが可能です。</p><p>Hologram は <code>.css</code>、<code>.scss</code> ファイル内のコメントから自動で HTML を出力するので、wiki でよく見られる更新が滞りがちになるといったことも回避できるのではないかと思います。</p></div><div id="boxArea" style="display:table;margin:2em 0 .5em"><div style="width:72px;height:22px;float:left;margin-right:16px"><a href="https://twitter.com/share" class="twitter-share-button" {count} data-lang="ja" data-dnt="true">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div><div style="width:118px;height:22px;float:left"><a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border:none"></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script></div><div style="width:70px;height:22px;float:left"><div class="g-plusone" data-size="medium"></div><script type="text/javascript">window.___gcfg={lang: 'ja'};(function(){var po=document.createElement('script');po.type='text/javascript';po.async=true;po.src='https://apis.google.com/js/platform.js';var s=document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script></div><div style="width:90px;height:22px;float:left"><a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a></div><script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script></div><footer><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><nav><ul class="pager"><li class="previous"><a href="http://enomotodev.github.io/post/systemd-original-service/" title="systemd を使って自作スクリプトをサービス化してみた"><span aria-hidden="true">&larr;</span>Previous</a></li></ul></nav></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div id="disqus_thread"></div><script type="text/javascript">(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//enomotodev.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></footer></div></div></div><footer class="footer hidden-print"><div class="container"><div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p></p><div class="pull-left"><a class="toplink" href="#">back to top</a></div><div class="pull-right"></div><p></p></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><small><div class="container copyright">&copy; 2016 enomotodev</div></small></div></div></div></footer><script src="/js/jquery.min.js"></script><script src="/js/bootstrap.min.js"></script><script type="text/javascript">(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//enomotodev.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();</script><script src="/js/highlight.pack.js"></script><script src="/js/site.js"></script><script>hljs.initHighlightingOnLoad();</script><script>var _gaq=[['_setAccount','UA-59438562-2'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));</script></body></html>
