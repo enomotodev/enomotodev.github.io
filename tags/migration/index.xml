@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>enomotodev</title>
+    <title>Migration on enomotodev</title>
     <link>http://enomotodev.github.io/tags/migration/index.xml</link>
-    <description>Recent content on enomotodev</description>
+    <description>Recent content in Migration on enomotodev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja_JP</language>
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
@@ -245,7 +245,41 @@ mysql&amp;gt; select * from goose_db_version;
 &lt;p&gt;goose をつかうことによって、簡単にマイグレーションすることができました。&lt;br /&gt;
 最近、Go言語を使ったプロジェクトも増えてきているようなので、goose もこれからさらに活躍する場面が増えるのではないでしょうか。&lt;/p&gt;
 
-&lt;hr /&gt;
+
+
+
+&lt;div class=&#34;amazon-shortcode-box&#34;&gt;
+  &lt;div class=&#34;amazon-shortcode-image&#34;&gt;
+    &lt;a href=&#34;https://www.amazon.co.jp/%E6%94%B9%E8%A8%822%E7%89%88-%E5%9F%BA%E7%A4%8E%E3%81%8B%E3%82%89%E3%82%8F%E3%81%8B%E3%82%8B-Go%E8%A8%80%E8%AA%9E-%E5%8F%A4%E5%B7%9D-%E6%98%87/dp/4863541783%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4863541783&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://images-fe.ssl-images-amazon.com/images/I/511AaCXdmsL._SL160_.jpg&#34; alt=&#34;改訂2版 基礎からわかる Go言語&#34; /&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;amazon-shortcode-info&#34;&gt;
+    &lt;p class=&#34;amazon-shortcode-title&#34;&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/%E6%94%B9%E8%A8%822%E7%89%88-%E5%9F%BA%E7%A4%8E%E3%81%8B%E3%82%89%E3%82%8F%E3%81%8B%E3%82%8B-Go%E8%A8%80%E8%AA%9E-%E5%8F%A4%E5%B7%9D-%E6%98%87/dp/4863541783%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4863541783&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+        改訂2版 基礎からわかる Go言語
+      &lt;/a&gt;
+    &lt;/p&gt;
+    
+      &lt;p class=&#34;amazon-shortcode-author&#34;&gt;古川 昇&lt;/p&gt;
+    
+    &lt;div class=&#34;amazon-shortcode-detail&#34;&gt;
+      
+        &lt;p&gt;出版社：シーアンドアール研究所&lt;/p&gt;
+      
+      
+        &lt;p&gt;発売日：2015-07-17&lt;/p&gt;
+      
+    &lt;/div&gt;
+    &lt;p&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/%E6%94%B9%E8%A8%822%E7%89%88-%E5%9F%BA%E7%A4%8E%E3%81%8B%E3%82%89%E3%82%8F%E3%81%8B%E3%82%8B-Go%E8%A8%80%E8%AA%9E-%E5%8F%A4%E5%B7%9D-%E6%98%87/dp/4863541783%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4863541783&#34; name=&#34;backport&#34; target=&#34;_blank&#34;&gt;
+        &lt;i class=&#34;fa fa-amazon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&amp;nbsp;Amazonで詳細を見る
+      &lt;/a&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;br style=&#34;clear: both;&#34;/&gt;
+&lt;/div&gt;
+
 </description>
     </item>
     

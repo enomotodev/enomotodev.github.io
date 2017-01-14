@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>enomotodev</title>
+    <title>Fluentd on enomotodev</title>
     <link>http://enomotodev.github.io/tags/fluentd/index.xml</link>
-    <description>Recent content on enomotodev</description>
+    <description>Recent content in Fluentd on enomotodev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja_JP</language>
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
@@ -196,7 +196,41 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
 &lt;p&gt;最後の方、かなり駆け足になってしまいましたが、Elasticsearch と Kibana をインストールして、Apache と fluentd と連携してみました。&lt;br /&gt;
 他にも便利な機能があり、色々とできるみたいなので、私自身もこれからこれらのツールについてさらに学んでいきたいと思います。&lt;/p&gt;
 
-&lt;hr /&gt;
+
+
+
+&lt;div class=&#34;amazon-shortcode-box&#34;&gt;
+  &lt;div class=&#34;amazon-shortcode-image&#34;&gt;
+    &lt;a href=&#34;https://www.amazon.co.jp/Elasticsearch-Definitive-Guide-Clinton-Gormley/dp/1449358543%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D1449358543&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://images-fe.ssl-images-amazon.com/images/I/51V-yC0%2BY2L._SL160_.jpg&#34; alt=&#34;Elasticsearch: The Definitive Guide&#34; /&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;amazon-shortcode-info&#34;&gt;
+    &lt;p class=&#34;amazon-shortcode-title&#34;&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/Elasticsearch-Definitive-Guide-Clinton-Gormley/dp/1449358543%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D1449358543&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+        Elasticsearch: The Definitive Guide
+      &lt;/a&gt;
+    &lt;/p&gt;
+    
+      &lt;p class=&#34;amazon-shortcode-author&#34;&gt;Clinton Gormley&lt;/p&gt;
+    
+    &lt;div class=&#34;amazon-shortcode-detail&#34;&gt;
+      
+        &lt;p&gt;出版社：Oreilly &amp;amp; Associates Inc&lt;/p&gt;
+      
+      
+        &lt;p&gt;発売日：2015-02-07&lt;/p&gt;
+      
+    &lt;/div&gt;
+    &lt;p&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/Elasticsearch-Definitive-Guide-Clinton-Gormley/dp/1449358543%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D1449358543&#34; name=&#34;backport&#34; target=&#34;_blank&#34;&gt;
+        &lt;i class=&#34;fa fa-amazon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&amp;nbsp;Amazonで詳細を見る
+      &lt;/a&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;br style=&#34;clear: both;&#34;/&gt;
+&lt;/div&gt;
+
 </description>
     </item>
     
@@ -393,7 +427,41 @@ switched to db fluentd
 &lt;p&gt;fluentd はリモートのサーバにログを送ることもでき、本番環境ではそのような構成になりますが、今回 fluentd の最低限の知識や基本的な設定はこれである程度学ぶことができたかと思います。&lt;br /&gt;
 ここから先の細い設定などは&lt;a href=&#34;http://www.fluentd.org/&#34;&gt;公式サイト&lt;/a&gt;などでさらに学習していきましょう！&lt;/p&gt;
 
-&lt;hr /&gt;
+
+
+
+&lt;div class=&#34;amazon-shortcode-box&#34;&gt;
+  &lt;div class=&#34;amazon-shortcode-image&#34;&gt;
+    &lt;a href=&#34;https://www.amazon.co.jp/%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E9%A4%8A%E6%88%90%E8%AA%AD%E6%9C%AC-%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86%7E%E5%8F%AF%E8%A6%96%E5%8C%96%E7%B7%A8-%E7%8F%BE%E5%A0%B4%E4%B8%BB%E5%B0%8E%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89-Software-Design/dp/4774169838%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4774169838&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://images-fe.ssl-images-amazon.com/images/I/51lSb2Ie7WL._SL160_.jpg&#34; alt=&#34;サーバ/インフラエンジニア養成読本 ログ収集~可視化編 [現場主導のデータ分析環境を構築!] (Software Design plus)&#34; /&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;amazon-shortcode-info&#34;&gt;
+    &lt;p class=&#34;amazon-shortcode-title&#34;&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E9%A4%8A%E6%88%90%E8%AA%AD%E6%9C%AC-%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86%7E%E5%8F%AF%E8%A6%96%E5%8C%96%E7%B7%A8-%E7%8F%BE%E5%A0%B4%E4%B8%BB%E5%B0%8E%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89-Software-Design/dp/4774169838%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4774169838&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+        サーバ/インフラエンジニア養成読本 ログ収集~可視化編 [現場主導のデータ分析環境を構築!] (Software Design plus)
+      &lt;/a&gt;
+    &lt;/p&gt;
+    
+      &lt;p class=&#34;amazon-shortcode-author&#34;&gt;鈴木 健太&lt;/p&gt;
+    
+    &lt;div class=&#34;amazon-shortcode-detail&#34;&gt;
+      
+        &lt;p&gt;出版社：技術評論社&lt;/p&gt;
+      
+      
+        &lt;p&gt;発売日：2014-08-08&lt;/p&gt;
+      
+    &lt;/div&gt;
+    &lt;p&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E9%A4%8A%E6%88%90%E8%AA%AD%E6%9C%AC-%E3%83%AD%E3%82%B0%E5%8F%8E%E9%9B%86%7E%E5%8F%AF%E8%A6%96%E5%8C%96%E7%B7%A8-%E7%8F%BE%E5%A0%B4%E4%B8%BB%E5%B0%8E%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89-Software-Design/dp/4774169838%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4774169838&#34; name=&#34;backport&#34; target=&#34;_blank&#34;&gt;
+        &lt;i class=&#34;fa fa-amazon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&amp;nbsp;Amazonで詳細を見る
+      &lt;/a&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;br style=&#34;clear: both;&#34;/&gt;
+&lt;/div&gt;
+
 </description>
     </item>
     

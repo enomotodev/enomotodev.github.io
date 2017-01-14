@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>enomotodev</title>
+    <title>Javascript on enomotodev</title>
     <link>http://enomotodev.github.io/tags/javascript/index.xml</link>
-    <description>Recent content on enomotodev</description>
+    <description>Recent content in Javascript on enomotodev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja_JP</language>
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
@@ -318,6 +318,42 @@ console.log(foo.includes(6));
 &lt;p&gt;もちろん他にもたくさんの新機能がありますので、改めてきちんと学び直してみるのも良いと思います。&lt;/p&gt;
 
 &lt;p&gt;一部のブラウザによっては未対応の機能もあるので、&lt;a href=&#34;https://babeljs.io/&#34; target=&#34;_blank&#34;&gt;Babel&lt;/a&gt; などを使いコンパイルする必要がありますが、それらについてはまた別の機会に記事にしたいと思います。&lt;/p&gt;
+
+
+
+
+&lt;div class=&#34;amazon-shortcode-box&#34;&gt;
+  &lt;div class=&#34;amazon-shortcode-image&#34;&gt;
+    &lt;a href=&#34;https://www.amazon.co.jp/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%83%89%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E7%8F%BE%E5%9C%A8%E3%81%A8%E3%81%93%E3%82%8C%E3%81%8B%E3%82%89%E3%81%AE%E5%BF%85%E9%A0%88%E7%9F%A5%E8%AD%98-%E6%96%89%E8%97%A4-%E7%A5%90%E4%B9%9F/dp/4839956758%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4839956758&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://images-fe.ssl-images-amazon.com/images/I/51iaxDyyhgL._SL160_.jpg&#34; alt=&#34;フロントエンドエンジニアのための現在とこれからの必須知識&#34; /&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;amazon-shortcode-info&#34;&gt;
+    &lt;p class=&#34;amazon-shortcode-title&#34;&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%83%89%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E7%8F%BE%E5%9C%A8%E3%81%A8%E3%81%93%E3%82%8C%E3%81%8B%E3%82%89%E3%81%AE%E5%BF%85%E9%A0%88%E7%9F%A5%E8%AD%98-%E6%96%89%E8%97%A4-%E7%A5%90%E4%B9%9F/dp/4839956758%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4839956758&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+        フロントエンドエンジニアのための現在とこれからの必須知識
+      &lt;/a&gt;
+    &lt;/p&gt;
+    
+      &lt;p class=&#34;amazon-shortcode-author&#34;&gt;斉藤 祐也&lt;/p&gt;
+    
+    &lt;div class=&#34;amazon-shortcode-detail&#34;&gt;
+      
+        &lt;p&gt;出版社：マイナビ出版&lt;/p&gt;
+      
+      
+        &lt;p&gt;発売日：2016-01-28&lt;/p&gt;
+      
+    &lt;/div&gt;
+    &lt;p&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%83%89%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E7%8F%BE%E5%9C%A8%E3%81%A8%E3%81%93%E3%82%8C%E3%81%8B%E3%82%89%E3%81%AE%E5%BF%85%E9%A0%88%E7%9F%A5%E8%AD%98-%E6%96%89%E8%97%A4-%E7%A5%90%E4%B9%9F/dp/4839956758%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4839956758&#34; name=&#34;backport&#34; target=&#34;_blank&#34;&gt;
+        &lt;i class=&#34;fa fa-amazon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&amp;nbsp;Amazonで詳細を見る
+      &lt;/a&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;br style=&#34;clear: both;&#34;/&gt;
+&lt;/div&gt;
+
 </description>
     </item>
     

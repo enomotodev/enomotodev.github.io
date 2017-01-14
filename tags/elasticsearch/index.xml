@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>enomotodev</title>
+    <title>Elasticsearch on enomotodev</title>
     <link>http://enomotodev.github.io/tags/elasticsearch/index.xml</link>
-    <description>Recent content on enomotodev</description>
+    <description>Recent content in Elasticsearch on enomotodev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja_JP</language>
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
@@ -196,7 +196,41 @@ sudo mv /tmp/kibana-4.2.0-linux-x64 /usr/share/kibana
 &lt;p&gt;最後の方、かなり駆け足になってしまいましたが、Elasticsearch と Kibana をインストールして、Apache と fluentd と連携してみました。&lt;br /&gt;
 他にも便利な機能があり、色々とできるみたいなので、私自身もこれからこれらのツールについてさらに学んでいきたいと思います。&lt;/p&gt;
 
-&lt;hr /&gt;
+
+
+
+&lt;div class=&#34;amazon-shortcode-box&#34;&gt;
+  &lt;div class=&#34;amazon-shortcode-image&#34;&gt;
+    &lt;a href=&#34;https://www.amazon.co.jp/Elasticsearch-Definitive-Guide-Clinton-Gormley/dp/1449358543%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D1449358543&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://images-fe.ssl-images-amazon.com/images/I/51V-yC0%2BY2L._SL160_.jpg&#34; alt=&#34;Elasticsearch: The Definitive Guide&#34; /&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;amazon-shortcode-info&#34;&gt;
+    &lt;p class=&#34;amazon-shortcode-title&#34;&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/Elasticsearch-Definitive-Guide-Clinton-Gormley/dp/1449358543%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D1449358543&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+        Elasticsearch: The Definitive Guide
+      &lt;/a&gt;
+    &lt;/p&gt;
+    
+      &lt;p class=&#34;amazon-shortcode-author&#34;&gt;Clinton Gormley&lt;/p&gt;
+    
+    &lt;div class=&#34;amazon-shortcode-detail&#34;&gt;
+      
+        &lt;p&gt;出版社：Oreilly &amp;amp; Associates Inc&lt;/p&gt;
+      
+      
+        &lt;p&gt;発売日：2015-02-07&lt;/p&gt;
+      
+    &lt;/div&gt;
+    &lt;p&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/Elasticsearch-Definitive-Guide-Clinton-Gormley/dp/1449358543%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D1449358543&#34; name=&#34;backport&#34; target=&#34;_blank&#34;&gt;
+        &lt;i class=&#34;fa fa-amazon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&amp;nbsp;Amazonで詳細を見る
+      &lt;/a&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;br style=&#34;clear: both;&#34;/&gt;
+&lt;/div&gt;
+
 </description>
     </item>
     

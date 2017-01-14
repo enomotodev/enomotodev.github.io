@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>enomotodev</title>
+    <title>Systemd on enomotodev</title>
     <link>http://enomotodev.github.io/tags/systemd/index.xml</link>
-    <description>Recent content on enomotodev</description>
+    <description>Recent content in Systemd on enomotodev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja_JP</language>
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
@@ -140,6 +140,42 @@ Fri Sep 23 16:37:41 UTC 2016
 &lt;p&gt;systemd を使うことによって簡単に自作スクリプトをサービス化して起動することができました。&lt;/p&gt;
 
 &lt;p&gt;これから、ユニットファイルの書き方であったり、systemd の概念的なところをもう少し詳しく勉強していきたいと思います。&lt;/p&gt;
+
+
+
+
+&lt;div class=&#34;amazon-shortcode-box&#34;&gt;
+  &lt;div class=&#34;amazon-shortcode-image&#34;&gt;
+    &lt;a href=&#34;https://www.amazon.co.jp/%E5%AE%9F%E8%B7%B5-CentOS-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E5%BE%B9%E5%BA%95%E6%A7%8B%E7%AF%89-%E7%A6%8F%E7%94%B0-%E5%92%8C%E5%AE%8F/dp/4800711258%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4800711258&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://images-fe.ssl-images-amazon.com/images/I/51pzI73oAdL._SL160_.jpg&#34; alt=&#34;実践!  CentOS 7 サーバー徹底構築&#34; /&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;amazon-shortcode-info&#34;&gt;
+    &lt;p class=&#34;amazon-shortcode-title&#34;&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/%E5%AE%9F%E8%B7%B5-CentOS-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E5%BE%B9%E5%BA%95%E6%A7%8B%E7%AF%89-%E7%A6%8F%E7%94%B0-%E5%92%8C%E5%AE%8F/dp/4800711258%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4800711258&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+        実践!  CentOS 7 サーバー徹底構築
+      &lt;/a&gt;
+    &lt;/p&gt;
+    
+      &lt;p class=&#34;amazon-shortcode-author&#34;&gt;福田 和宏&lt;/p&gt;
+    
+    &lt;div class=&#34;amazon-shortcode-detail&#34;&gt;
+      
+        &lt;p&gt;出版社：ソーテック社&lt;/p&gt;
+      
+      
+        &lt;p&gt;発売日：2016-03-31&lt;/p&gt;
+      
+    &lt;/div&gt;
+    &lt;p&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/%E5%AE%9F%E8%B7%B5-CentOS-%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E5%BE%B9%E5%BA%95%E6%A7%8B%E7%AF%89-%E7%A6%8F%E7%94%B0-%E5%92%8C%E5%AE%8F/dp/4800711258%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4800711258&#34; name=&#34;backport&#34; target=&#34;_blank&#34;&gt;
+        &lt;i class=&#34;fa fa-amazon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&amp;nbsp;Amazonで詳細を見る
+      &lt;/a&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;br style=&#34;clear: both;&#34;/&gt;
+&lt;/div&gt;
+
 </description>
     </item>
     

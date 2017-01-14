@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>enomotodev</title>
+    <title>Composer on enomotodev</title>
     <link>http://enomotodev.github.io/tags/composer/index.xml</link>
-    <description>Recent content on enomotodev</description>
+    <description>Recent content in Composer on enomotodev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja_JP</language>
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
@@ -82,6 +82,77 @@ root /var/www/html/public;
 &lt;p&gt;Composer は install や update 時にしか使わないので、&lt;code&gt;docker run&lt;/code&gt; のときに &lt;code&gt;--rm&lt;/code&gt; オプションを使用し、コンテナの終了時にコンテナを破棄するのがポイントになります&lt;/p&gt;
 
 &lt;p&gt;次回は MySQL と連携していきたいと思います&lt;/p&gt;
+
+&lt;p&gt;
+
+
+&lt;div class=&#34;amazon-shortcode-box&#34;&gt;
+  &lt;div class=&#34;amazon-shortcode-image&#34;&gt;
+    &lt;a href=&#34;https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEDocker%E6%95%99%E7%A7%91%E6%9B%B8-%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AB%E3%82%88%E3%82%8B%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%81%AE%E8%87%AA%E5%8B%95%E5%8C%96-%E9%98%BF%E4%BD%90-%E5%BF%97%E4%BF%9D/dp/479814102X%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D479814102X&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://images-fe.ssl-images-amazon.com/images/I/51G1TiUZprL._SL160_.jpg&#34; alt=&#34;プログラマのためのDocker教科書 インフラの基礎知識&amp;amp;コードによる環境構築の自動化&#34; /&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;amazon-shortcode-info&#34;&gt;
+    &lt;p class=&#34;amazon-shortcode-title&#34;&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEDocker%E6%95%99%E7%A7%91%E6%9B%B8-%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AB%E3%82%88%E3%82%8B%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%81%AE%E8%87%AA%E5%8B%95%E5%8C%96-%E9%98%BF%E4%BD%90-%E5%BF%97%E4%BF%9D/dp/479814102X%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D479814102X&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+        プログラマのためのDocker教科書 インフラの基礎知識&amp;amp;コードによる環境構築の自動化
+      &lt;/a&gt;
+    &lt;/p&gt;
+    
+      &lt;p class=&#34;amazon-shortcode-author&#34;&gt;阿佐 志保&lt;/p&gt;
+    
+    &lt;div class=&#34;amazon-shortcode-detail&#34;&gt;
+      
+        &lt;p&gt;出版社：翔泳社&lt;/p&gt;
+      
+      
+        &lt;p&gt;発売日：2015-11-20&lt;/p&gt;
+      
+    &lt;/div&gt;
+    &lt;p&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEDocker%E6%95%99%E7%A7%91%E6%9B%B8-%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AB%E3%82%88%E3%82%8B%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%81%AE%E8%87%AA%E5%8B%95%E5%8C%96-%E9%98%BF%E4%BD%90-%E5%BF%97%E4%BF%9D/dp/479814102X%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D479814102X&#34; name=&#34;backport&#34; target=&#34;_blank&#34;&gt;
+        &lt;i class=&#34;fa fa-amazon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&amp;nbsp;Amazonで詳細を見る
+      &lt;/a&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;br style=&#34;clear: both;&#34;/&gt;
+&lt;/div&gt;
+
+
+
+
+&lt;div class=&#34;amazon-shortcode-box&#34;&gt;
+  &lt;div class=&#34;amazon-shortcode-image&#34;&gt;
+    &lt;a href=&#34;https://www.amazon.co.jp/Docker%E3%82%A8%E3%82%AD%E3%82%B9%E3%83%91%E3%83%BC%E3%83%88%E9%A4%8A%E6%88%90%E8%AA%AD%E6%9C%AC%EF%BC%BB%E6%B4%BB%E7%94%A8%E3%81%AE%E5%9F%BA%E7%A4%8E%E3%81%A8%E5%AE%9F%E8%B7%B5%E3%83%8E%E3%82%A6%E3%83%8F%E3%82%A6%E6%BA%80%E8%BC%89%EF%BC%81%EF%BC%BD-Software-Design-plus-%E6%9D%89%E5%B1%B1/dp/4774174416%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4774174416&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;https://images-fe.ssl-images-amazon.com/images/I/51gFcibBx-L._SL160_.jpg&#34; alt=&#34;Dockerエキスパート養成読本［活用の基礎と実践ノウハウ満載！］ (Software Design plus)&#34; /&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;amazon-shortcode-info&#34;&gt;
+    &lt;p class=&#34;amazon-shortcode-title&#34;&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/Docker%E3%82%A8%E3%82%AD%E3%82%B9%E3%83%91%E3%83%BC%E3%83%88%E9%A4%8A%E6%88%90%E8%AA%AD%E6%9C%AC%EF%BC%BB%E6%B4%BB%E7%94%A8%E3%81%AE%E5%9F%BA%E7%A4%8E%E3%81%A8%E5%AE%9F%E8%B7%B5%E3%83%8E%E3%82%A6%E3%83%8F%E3%82%A6%E6%BA%80%E8%BC%89%EF%BC%81%EF%BC%BD-Software-Design-plus-%E6%9D%89%E5%B1%B1/dp/4774174416%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4774174416&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
+        Dockerエキスパート養成読本［活用の基礎と実践ノウハウ満載！］ (Software Design plus)
+      &lt;/a&gt;
+    &lt;/p&gt;
+    
+      &lt;p class=&#34;amazon-shortcode-author&#34;&gt;杉山 貴章&lt;/p&gt;
+    
+    &lt;div class=&#34;amazon-shortcode-detail&#34;&gt;
+      
+        &lt;p&gt;出版社：技術評論社&lt;/p&gt;
+      
+      
+        &lt;p&gt;発売日：2015-06-18&lt;/p&gt;
+      
+    &lt;/div&gt;
+    &lt;p&gt;
+      &lt;a href=&#34;https://www.amazon.co.jp/Docker%E3%82%A8%E3%82%AD%E3%82%B9%E3%83%91%E3%83%BC%E3%83%88%E9%A4%8A%E6%88%90%E8%AA%AD%E6%9C%AC%EF%BC%BB%E6%B4%BB%E7%94%A8%E3%81%AE%E5%9F%BA%E7%A4%8E%E3%81%A8%E5%AE%9F%E8%B7%B5%E3%83%8E%E3%82%A6%E3%83%8F%E3%82%A6%E6%BA%80%E8%BC%89%EF%BC%81%EF%BC%BD-Software-Design-plus-%E6%9D%89%E5%B1%B1/dp/4774174416%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4774174416&#34; name=&#34;backport&#34; target=&#34;_blank&#34;&gt;
+        &lt;i class=&#34;fa fa-amazon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&amp;nbsp;Amazonで詳細を見る
+      &lt;/a&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;br style=&#34;clear: both;&#34;/&gt;
+&lt;/div&gt;
+&lt;/p&gt;
 </description>
     </item>
     
