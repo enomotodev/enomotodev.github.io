@@ -314,76 +314,29 @@ mysql&amp;gt; select total, count(*) from ratings group by total;
 
 &lt;p&gt;もう一度 Embulk を使うことによって、今度は MySQL から ElasticSearch などにデータを投入することもできるので、いろいろな使い方を考えていきたいと思います。&lt;/p&gt;
 
-&lt;p&gt;
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;col-sm-9&#34;&gt;
+    &lt;div style=&#34;text-align: center;&#34;&gt;
+      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
+      &lt;ins class=&#34;adsbygoogle&#34;
+           style=&#34;display:inline-block;width:300px;height:250px&#34;
+           data-ad-client=&#34;ca-pub-8451558329170757&#34;
+           data-ad-slot=&#34;6607037827&#34;&gt;&lt;/ins&gt;
+      &lt;script&gt;
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      &lt;/script&gt;
 
-
-&lt;div class=&#34;amazon-shortcode-box&#34;&gt;
-  &lt;div class=&#34;amazon-shortcode-image&#34;&gt;
-    &lt;a href=&#34;https://www.amazon.co.jp/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep-Learning-%E2%80%95Python%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AE%E7%90%86%E8%AB%96%E3%81%A8%E5%AE%9F%E8%A3%85-%E6%96%8E%E8%97%A4-%E5%BA%B7%E6%AF%85/dp/4873117585%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4873117585&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://images-fe.ssl-images-amazon.com/images/I/512ru2i5gyL._SL160_.jpg&#34; alt=&#34;ゼロから作るDeep Learning ―Pythonで学ぶディープラーニングの理論と実装&#34; /&gt;
-    &lt;/a&gt;
-  &lt;/div&gt;
-  &lt;div class=&#34;amazon-shortcode-info&#34;&gt;
-    &lt;p class=&#34;amazon-shortcode-title&#34;&gt;
-      &lt;a href=&#34;https://www.amazon.co.jp/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep-Learning-%E2%80%95Python%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AE%E7%90%86%E8%AB%96%E3%81%A8%E5%AE%9F%E8%A3%85-%E6%96%8E%E8%97%A4-%E5%BA%B7%E6%AF%85/dp/4873117585%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4873117585&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
-        ゼロから作るDeep Learning ―Pythonで学ぶディープラーニングの理論と実装
-      &lt;/a&gt;
-    &lt;/p&gt;
-    
-      &lt;p class=&#34;amazon-shortcode-author&#34;&gt;斎藤 康毅&lt;/p&gt;
-    
-    &lt;div class=&#34;amazon-shortcode-detail&#34;&gt;
-      
-        &lt;p&gt;出版社：オライリージャパン&lt;/p&gt;
-      
-      
-        &lt;p&gt;発売日：2016-09-24&lt;/p&gt;
-      
+      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
+      &lt;ins class=&#34;adsbygoogle&#34;
+           style=&#34;display:inline-block;width:300px;height:250px&#34;
+           data-ad-client=&#34;ca-pub-8451558329170757&#34;
+           data-ad-slot=&#34;8083771024&#34;&gt;&lt;/ins&gt;
+      &lt;script&gt;
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      &lt;/script&gt;
     &lt;/div&gt;
-    &lt;p&gt;
-      &lt;a href=&#34;https://www.amazon.co.jp/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep-Learning-%E2%80%95Python%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AE%E7%90%86%E8%AB%96%E3%81%A8%E5%AE%9F%E8%A3%85-%E6%96%8E%E8%97%A4-%E5%BA%B7%E6%AF%85/dp/4873117585%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4873117585&#34; name=&#34;backport&#34; target=&#34;_blank&#34;&gt;
-        &lt;i class=&#34;fa fa-amazon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&amp;nbsp;Amazonで詳細を見る
-      &lt;/a&gt;
-    &lt;/p&gt;
   &lt;/div&gt;
-  &lt;br style=&#34;clear: both;&#34;/&gt;
 &lt;/div&gt;
-
-
-
-
-&lt;div class=&#34;amazon-shortcode-box&#34;&gt;
-  &lt;div class=&#34;amazon-shortcode-image&#34;&gt;
-    &lt;a href=&#34;https://www.amazon.co.jp/%E3%81%BE%E3%81%A4%E3%82%82%E3%81%A8%E3%82%86%E3%81%8D%E3%81%B2%E3%82%8D-%E8%A8%80%E8%AA%9E%E3%81%AE%E3%81%97%E3%81%8F%E3%81%BF/dp/4822239179%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4822239179&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://images-fe.ssl-images-amazon.com/images/I/51vGKhInMkL._SL160_.jpg&#34; alt=&#34;まつもとゆきひろ 言語のしくみ&#34; /&gt;
-    &lt;/a&gt;
-  &lt;/div&gt;
-  &lt;div class=&#34;amazon-shortcode-info&#34;&gt;
-    &lt;p class=&#34;amazon-shortcode-title&#34;&gt;
-      &lt;a href=&#34;https://www.amazon.co.jp/%E3%81%BE%E3%81%A4%E3%82%82%E3%81%A8%E3%82%86%E3%81%8D%E3%81%B2%E3%82%8D-%E8%A8%80%E8%AA%9E%E3%81%AE%E3%81%97%E3%81%8F%E3%81%BF/dp/4822239179%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4822239179&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
-        まつもとゆきひろ 言語のしくみ
-      &lt;/a&gt;
-    &lt;/p&gt;
-    
-      &lt;p class=&#34;amazon-shortcode-author&#34;&gt;まつもとゆきひろ&lt;/p&gt;
-    
-    &lt;div class=&#34;amazon-shortcode-detail&#34;&gt;
-      
-        &lt;p&gt;出版社：日経BP社&lt;/p&gt;
-      
-      
-        &lt;p&gt;発売日：2016-12-22&lt;/p&gt;
-      
-    &lt;/div&gt;
-    &lt;p&gt;
-      &lt;a href=&#34;https://www.amazon.co.jp/%E3%81%BE%E3%81%A4%E3%82%82%E3%81%A8%E3%82%86%E3%81%8D%E3%81%B2%E3%82%8D-%E8%A8%80%E8%AA%9E%E3%81%AE%E3%81%97%E3%81%8F%E3%81%BF/dp/4822239179%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4822239179&#34; name=&#34;backport&#34; target=&#34;_blank&#34;&gt;
-        &lt;i class=&#34;fa fa-amazon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&amp;nbsp;Amazonで詳細を見る
-      &lt;/a&gt;
-    &lt;/p&gt;
-  &lt;/div&gt;
-  &lt;br style=&#34;clear: both;&#34;/&gt;
-&lt;/div&gt;
-&lt;/p&gt;
 </description>
     </item>
     

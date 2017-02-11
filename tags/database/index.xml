@@ -202,41 +202,29 @@ UNION ALL
 
 &lt;p&gt;階層構造のデータを格納するときは、この閉包テーブル（Closure Table）を試してみてはいかがでしょうか。&lt;/p&gt;
 
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;col-sm-9&#34;&gt;
+    &lt;div style=&#34;text-align: center;&#34;&gt;
+      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
+      &lt;ins class=&#34;adsbygoogle&#34;
+           style=&#34;display:inline-block;width:300px;height:250px&#34;
+           data-ad-client=&#34;ca-pub-8451558329170757&#34;
+           data-ad-slot=&#34;6607037827&#34;&gt;&lt;/ins&gt;
+      &lt;script&gt;
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      &lt;/script&gt;
 
-
-
-&lt;div class=&#34;amazon-shortcode-box&#34;&gt;
-  &lt;div class=&#34;amazon-shortcode-image&#34;&gt;
-    &lt;a href=&#34;https://www.amazon.co.jp/SQL%E3%82%A2%E3%83%B3%E3%83%81%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3-Bill-Karwin/dp/4873115892%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4873115892&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://images-fe.ssl-images-amazon.com/images/I/41qHKrFZi0L._SL160_.jpg&#34; alt=&#34;SQLアンチパターン&#34; /&gt;
-    &lt;/a&gt;
-  &lt;/div&gt;
-  &lt;div class=&#34;amazon-shortcode-info&#34;&gt;
-    &lt;p class=&#34;amazon-shortcode-title&#34;&gt;
-      &lt;a href=&#34;https://www.amazon.co.jp/SQL%E3%82%A2%E3%83%B3%E3%83%81%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3-Bill-Karwin/dp/4873115892%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4873115892&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
-        SQLアンチパターン
-      &lt;/a&gt;
-    &lt;/p&gt;
-    
-      &lt;p class=&#34;amazon-shortcode-author&#34;&gt;Bill Karwin&lt;/p&gt;
-    
-    &lt;div class=&#34;amazon-shortcode-detail&#34;&gt;
-      
-        &lt;p&gt;出版社：オライリージャパン&lt;/p&gt;
-      
-      
-        &lt;p&gt;発売日：2013-01-26&lt;/p&gt;
-      
+      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
+      &lt;ins class=&#34;adsbygoogle&#34;
+           style=&#34;display:inline-block;width:300px;height:250px&#34;
+           data-ad-client=&#34;ca-pub-8451558329170757&#34;
+           data-ad-slot=&#34;8083771024&#34;&gt;&lt;/ins&gt;
+      &lt;script&gt;
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      &lt;/script&gt;
     &lt;/div&gt;
-    &lt;p&gt;
-      &lt;a href=&#34;https://www.amazon.co.jp/SQL%E3%82%A2%E3%83%B3%E3%83%81%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3-Bill-Karwin/dp/4873115892%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4873115892&#34; name=&#34;backport&#34; target=&#34;_blank&#34;&gt;
-        &lt;i class=&#34;fa fa-amazon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&amp;nbsp;Amazonで詳細を見る
-      &lt;/a&gt;
-    &lt;/p&gt;
   &lt;/div&gt;
-  &lt;br style=&#34;clear: both;&#34;/&gt;
 &lt;/div&gt;
-
 </description>
     </item>
     

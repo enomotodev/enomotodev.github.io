@@ -228,76 +228,29 @@ Build completed. (-:
 
 &lt;p&gt;Hologram は &lt;code&gt;.css&lt;/code&gt;、&lt;code&gt;.scss&lt;/code&gt; ファイル内のコメントから自動で HTML を出力するので、wiki でよく見られる更新が滞りがちになるといったことも回避できるのではないかと思います。&lt;/p&gt;
 
-&lt;p&gt;
+&lt;div class=&#34;row&#34;&gt;
+  &lt;div class=&#34;col-sm-9&#34;&gt;
+    &lt;div style=&#34;text-align: center;&#34;&gt;
+      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
+      &lt;ins class=&#34;adsbygoogle&#34;
+           style=&#34;display:inline-block;width:300px;height:250px&#34;
+           data-ad-client=&#34;ca-pub-8451558329170757&#34;
+           data-ad-slot=&#34;6607037827&#34;&gt;&lt;/ins&gt;
+      &lt;script&gt;
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      &lt;/script&gt;
 
-
-&lt;div class=&#34;amazon-shortcode-box&#34;&gt;
-  &lt;div class=&#34;amazon-shortcode-image&#34;&gt;
-    &lt;a href=&#34;https://www.amazon.co.jp/HTML5-CSS3%E3%83%A2%E3%83%80%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0-%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%83%89%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B3%E3%81%A4%E3%81%AE%E6%9C%AC%E6%A0%BC%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%BB%E3%82%B0%E3%83%AA%E3%83%83%E3%83%89%E3%83%BB%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%AB%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88%E3%81%AE%E4%BD%9C%E3%82%8A%E6%96%B9-Engineer%E2%80%99s/dp/4798141577%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4798141577&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://images-fe.ssl-images-amazon.com/images/I/51R4sqEpwAL._SL160_.jpg&#34; alt=&#34;HTML5/CSS3モダンコーディング フロントエンドエンジニアが教える3つの本格レイアウト スタンダード・グリッド・シングルページレイアウトの作り方 (WEB Engineer’s Books)&#34; /&gt;
-    &lt;/a&gt;
-  &lt;/div&gt;
-  &lt;div class=&#34;amazon-shortcode-info&#34;&gt;
-    &lt;p class=&#34;amazon-shortcode-title&#34;&gt;
-      &lt;a href=&#34;https://www.amazon.co.jp/HTML5-CSS3%E3%83%A2%E3%83%80%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0-%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%83%89%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B3%E3%81%A4%E3%81%AE%E6%9C%AC%E6%A0%BC%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%BB%E3%82%B0%E3%83%AA%E3%83%83%E3%83%89%E3%83%BB%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%AB%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88%E3%81%AE%E4%BD%9C%E3%82%8A%E6%96%B9-Engineer%E2%80%99s/dp/4798141577%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4798141577&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
-        HTML5/CSS3モダンコーディング フロントエンドエンジニアが教える3つの本格レイアウト スタンダード・グリッド・シングルページレイアウトの作り方 (WEB Engineer’s Books)
-      &lt;/a&gt;
-    &lt;/p&gt;
-    
-      &lt;p class=&#34;amazon-shortcode-author&#34;&gt;吉田 真麻&lt;/p&gt;
-    
-    &lt;div class=&#34;amazon-shortcode-detail&#34;&gt;
-      
-        &lt;p&gt;出版社：翔泳社&lt;/p&gt;
-      
-      
-        &lt;p&gt;発売日：2015-11-03&lt;/p&gt;
-      
+      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
+      &lt;ins class=&#34;adsbygoogle&#34;
+           style=&#34;display:inline-block;width:300px;height:250px&#34;
+           data-ad-client=&#34;ca-pub-8451558329170757&#34;
+           data-ad-slot=&#34;8083771024&#34;&gt;&lt;/ins&gt;
+      &lt;script&gt;
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      &lt;/script&gt;
     &lt;/div&gt;
-    &lt;p&gt;
-      &lt;a href=&#34;https://www.amazon.co.jp/HTML5-CSS3%E3%83%A2%E3%83%80%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0-%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%83%89%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%8C%E6%95%99%E3%81%88%E3%82%8B3%E3%81%A4%E3%81%AE%E6%9C%AC%E6%A0%BC%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%80%E3%83%BC%E3%83%89%E3%83%BB%E3%82%B0%E3%83%AA%E3%83%83%E3%83%89%E3%83%BB%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%AB%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88%E3%81%AE%E4%BD%9C%E3%82%8A%E6%96%B9-Engineer%E2%80%99s/dp/4798141577%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4798141577&#34; name=&#34;backport&#34; target=&#34;_blank&#34;&gt;
-        &lt;i class=&#34;fa fa-amazon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&amp;nbsp;Amazonで詳細を見る
-      &lt;/a&gt;
-    &lt;/p&gt;
   &lt;/div&gt;
-  &lt;br style=&#34;clear: both;&#34;/&gt;
 &lt;/div&gt;
-
-
-
-
-&lt;div class=&#34;amazon-shortcode-box&#34;&gt;
-  &lt;div class=&#34;amazon-shortcode-image&#34;&gt;
-    &lt;a href=&#34;https://www.amazon.co.jp/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%83%89%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E7%8F%BE%E5%9C%A8%E3%81%A8%E3%81%93%E3%82%8C%E3%81%8B%E3%82%89%E3%81%AE%E5%BF%85%E9%A0%88%E7%9F%A5%E8%AD%98-%E6%96%89%E8%97%A4-%E7%A5%90%E4%B9%9F/dp/4839956758%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4839956758&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://images-fe.ssl-images-amazon.com/images/I/51iaxDyyhgL._SL160_.jpg&#34; alt=&#34;フロントエンドエンジニアのための現在とこれからの必須知識&#34; /&gt;
-    &lt;/a&gt;
-  &lt;/div&gt;
-  &lt;div class=&#34;amazon-shortcode-info&#34;&gt;
-    &lt;p class=&#34;amazon-shortcode-title&#34;&gt;
-      &lt;a href=&#34;https://www.amazon.co.jp/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%83%89%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E7%8F%BE%E5%9C%A8%E3%81%A8%E3%81%93%E3%82%8C%E3%81%8B%E3%82%89%E3%81%AE%E5%BF%85%E9%A0%88%E7%9F%A5%E8%AD%98-%E6%96%89%E8%97%A4-%E7%A5%90%E4%B9%9F/dp/4839956758%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4839956758&#34; name=&#34;amazon-shortcode&#34; target=&#34;_blank&#34;&gt;
-        フロントエンドエンジニアのための現在とこれからの必須知識
-      &lt;/a&gt;
-    &lt;/p&gt;
-    
-      &lt;p class=&#34;amazon-shortcode-author&#34;&gt;斉藤 祐也&lt;/p&gt;
-    
-    &lt;div class=&#34;amazon-shortcode-detail&#34;&gt;
-      
-        &lt;p&gt;出版社：マイナビ出版&lt;/p&gt;
-      
-      
-        &lt;p&gt;発売日：2016-01-28&lt;/p&gt;
-      
-    &lt;/div&gt;
-    &lt;p&gt;
-      &lt;a href=&#34;https://www.amazon.co.jp/%E3%83%95%E3%83%AD%E3%83%B3%E3%83%88%E3%82%A8%E3%83%B3%E3%83%89%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E7%8F%BE%E5%9C%A8%E3%81%A8%E3%81%93%E3%82%8C%E3%81%8B%E3%82%89%E3%81%AE%E5%BF%85%E9%A0%88%E7%9F%A5%E8%AD%98-%E6%96%89%E8%97%A4-%E7%A5%90%E4%B9%9F/dp/4839956758%3FSubscriptionId%3DAKIAJCAHSSNNKIXIAI2Q%26tag%3Denomotodev-22%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4839956758&#34; name=&#34;backport&#34; target=&#34;_blank&#34;&gt;
-        &lt;i class=&#34;fa fa-amazon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&amp;nbsp;Amazonで詳細を見る
-      &lt;/a&gt;
-    &lt;/p&gt;
-  &lt;/div&gt;
-  &lt;br style=&#34;clear: both;&#34;/&gt;
-&lt;/div&gt;
-&lt;/p&gt;
 </description>
     </item>
     
