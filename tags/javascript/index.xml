@@ -320,7 +320,7 @@ console.log(foo.includes(6));
 &lt;p&gt;一部のブラウザによっては未対応の機能もあるので、&lt;a href=&#34;https://babeljs.io/&#34; target=&#34;_blank&#34;&gt;Babel&lt;/a&gt; などを使いコンパイルする必要がありますが、それらについてはまた別の機会に記事にしたいと思います。&lt;/p&gt;
 
 &lt;div class=&#34;row&#34;&gt;
-  &lt;div class=&#34;col-sm-9&#34;&gt;
+  &lt;div class=&#34;col-sm-12&#34;&gt;
     &lt;div style=&#34;text-align: center;&#34;&gt;
       &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
       &lt;ins class=&#34;adsbygoogle&#34;

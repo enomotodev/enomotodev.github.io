@@ -229,7 +229,7 @@ Build completed. (-:
 &lt;p&gt;Hologram は &lt;code&gt;.css&lt;/code&gt;、&lt;code&gt;.scss&lt;/code&gt; ファイル内のコメントから自動で HTML を出力するので、wiki でよく見られる更新が滞りがちになるといったことも回避できるのではないかと思います。&lt;/p&gt;
 
 &lt;div class=&#34;row&#34;&gt;
-  &lt;div class=&#34;col-sm-9&#34;&gt;
+  &lt;div class=&#34;col-sm-12&#34;&gt;
     &lt;div style=&#34;text-align: center;&#34;&gt;
       &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
       &lt;ins class=&#34;adsbygoogle&#34;

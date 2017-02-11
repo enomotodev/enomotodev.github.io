@@ -169,7 +169,7 @@ docker-compose version 1.8.0, build f3628c7
 &lt;p&gt;導入自体もそれほど難しくはないので、今後積極的に活用していきたいと思います。&lt;/p&gt;
 
 &lt;div class=&#34;row&#34;&gt;
-  &lt;div class=&#34;col-sm-9&#34;&gt;
+  &lt;div class=&#34;col-sm-12&#34;&gt;
     &lt;div style=&#34;text-align: center;&#34;&gt;
       &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
       &lt;ins class=&#34;adsbygoogle&#34;
@@ -498,7 +498,7 @@ mysql&amp;gt; select total, count(*) from ratings group by total;
 &lt;p&gt;もう一度 Embulk を使うことによって、今度は MySQL から ElasticSearch などにデータを投入することもできるので、いろいろな使い方を考えていきたいと思います。&lt;/p&gt;
 
 &lt;div class=&#34;row&#34;&gt;
-  &lt;div class=&#34;col-sm-9&#34;&gt;
+  &lt;div class=&#34;col-sm-12&#34;&gt;
     &lt;div style=&#34;text-align: center;&#34;&gt;
       &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
       &lt;ins class=&#34;adsbygoogle&#34;
@@ -719,7 +719,7 @@ default_password_lifetime = 0
 &lt;p&gt;本番環境で運用する際は、チューニングも含めて、さらに細かい設定が必要になってくると思いますが、サービスに合わせて適切な設定を考えていきたいと思います。&lt;/p&gt;
 
 &lt;div class=&#34;row&#34;&gt;
-  &lt;div class=&#34;col-sm-9&#34;&gt;
+  &lt;div class=&#34;col-sm-12&#34;&gt;
     &lt;div style=&#34;text-align: center;&#34;&gt;
       &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
       &lt;ins class=&#34;adsbygoogle&#34;
@@ -936,7 +936,7 @@ UNION ALL
 &lt;p&gt;階層構造のデータを格納するときは、この閉包テーブル（Closure Table）を試してみてはいかがでしょうか。&lt;/p&gt;
 
 &lt;div class=&#34;row&#34;&gt;
-  &lt;div class=&#34;col-sm-9&#34;&gt;
+  &lt;div class=&#34;col-sm-12&#34;&gt;
     &lt;div style=&#34;text-align: center;&#34;&gt;
       &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
       &lt;ins class=&#34;adsbygoogle&#34;
@@ -1196,7 +1196,7 @@ mysql&amp;gt; select * from goose_db_version;
 最近、Go言語を使ったプロジェクトも増えてきているようなので、goose もこれからさらに活躍する場面が増えるのではないでしょうか。&lt;/p&gt;
 
 &lt;div class=&#34;row&#34;&gt;
-  &lt;div class=&#34;col-sm-9&#34;&gt;
+  &lt;div class=&#34;col-sm-12&#34;&gt;
     &lt;div style=&#34;text-align: center;&#34;&gt;
       &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
       &lt;ins class=&#34;adsbygoogle&#34;
