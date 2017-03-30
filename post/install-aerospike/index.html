@@ -1,0 +1,84 @@
+<!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><title>CentOS に Aerospike インストールしてみた &middot; enomotodev</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content=""><meta name="keywords" content="aerospike, amc, centos, "><meta property="og:title" content="CentOS に Aerospike インストールしてみた  &middot; enomotodev "><meta property="og:site_name" content="enomotodev"><meta property="og:url" content="http://enomotodev.github.io/post/install-aerospike/"><meta property="og:locale" content="ja_JP"><meta property="og:type" content="article"><meta property="og:description" content=""><meta property="og:article:published_time" content="2017-03-30T22:21:54&#43;09:00"><meta property="og:article:modified_time" content="2017-03-30T22:21:54&#43;09:00"><meta property="og:article:tag" content="aerospike"><meta property="og:article:tag" content="amc"><meta property="og:article:tag" content="centos"><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "CentOS に Aerospike インストールしてみた",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2017-03-30",
+    "description": "",
+    "wordCount":  461 
+  }</script><link rel="canonical" href="http://enomotodev.github.io/post/install-aerospike/"><link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://enomotodev.github.io/touch-icon-144-precomposed.png"><link href="http://enomotodev.github.io/favicon.png" rel="icon"><meta name="generator" content="Hugo 0.18.1"><!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]--><link rel="stylesheet" href="/css/bootswatch/default/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/highlight/dark.css"></head><body><header id="main-header"><nav class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="http://enomotodev.github.io/">enomotodev</a></div><div id="navbar" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="http://enomotodev.github.io/tags"><i class="fa fa-tags"></i> Tags</a></li></ul></div></div></nav></header><div class="container"><div class="row"><div class="col-sm-12"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="text-center"><h1>CentOS に Aerospike インストールしてみた</h1><div class="metas"><small><i class="fa fa-calendar"></i> <time datetime="2017-03-30">30 Mar, 2017</time> </small><small>&middot; Read in about 3 min &middot; (461 Words)</small><div class="margin-10"><i class="fa fa-tags"></i> <a href="http://enomotodev.github.io/tags/aerospike" class="label label-primary">aerospike</a> <a href="http://enomotodev.github.io/tags/amc" class="label label-primary">amc</a> <a href="http://enomotodev.github.io/tags/centos" class="label label-primary">centos</a></div><br></div></div></div><div class="content"><h2 id="aerospike-とは">Aerospike とは</h2><p>Aerospike（エアロスパイク）とは、米 Aerospike 社によって開発されている NoSQL データベースです</p><p>とにかく高速であると言われており、最近では日本の企業でも採用事例が増えてきています</p><p>今回は OSS 版を CentOS 上に構築してみたいと思います</p><h2 id="作業環境">作業環境</h2><ul><li>CentOS 7.3</li></ul><h2 id="aerospike-のインストール">Aerospike のインストール</h2><p><a href="http://www.aerospike.com/docs/operations/install/linux/el6" target="_blank">公式ドキュメント</a>を参考に Aerospike をインストールします</p><pre><code>$ wget -O aerospike.tgz 'http://aerospike.com/download/server/latest/artifact/el7'
+$ tar -xvf aerospike.tgz
+$ cd aerospike-server-community-3.12.0-el7/
+$ sudo ./asinstall
+</code></pre><p>自動起動設定をして、Aerospike を起動します</p><pre><code>$ sudo systemctl enable aerospike
+$ sudo systemctl start aerospike
+</code></pre><p>Aerospike が起動したのでステータスを確認してみましょう</p><pre><code>$ sudo systemctl status aerospike
+● aerospike.service - Aerospike Server
+   Loaded: loaded (/usr/lib/systemd/system/aerospike.service; enabled; vendor preset: disabled)
+  Drop-In: /etc/systemd/system/aerospike.service.d
+           └─aerospike.conf
+   Active: active (running) since 月 2017-03-27 13:33:10 UTC; 4s ago
+  Process: 3559 ExecStartPre=/bin/systemctl start aerospike_telemetry (code=exited, status=0/SUCCESS)
+  Process: 3554 ExecStartPre=/usr/bin/asd-systemd-helper (code=exited, status=0/SUCCESS)
+ Main PID: 3563 (asd)
+   CGroup: /system.slice/aerospike.service
+           └─3563 /usr/bin/asd --config-file /etc/aerospike/aerospike.conf --fgdaemon
+
+ 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (paxos): (paxos.c:3730) ... no other nodes detected - node will operate a...e cluster
+ 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (partition): (partition_balance.c:285) {test} 4096 absent partitions prom...to master
+ 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (partition): (partition_balance.c:285) {bar} 4096 absent partitions promo...to master
+ 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (paxos): (paxos.c:3740) starting paxos threads
+ 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (nsup): (thr_nsup.c:1421) starting namespace supervisor threads
+ 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (demarshal): (thr_demarshal.c:863) starting 1 demarshal threads
+ 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (demarshal): (socket.c:709) Started client endpoint 0.0.0.0:3000
+ 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (info-port): (thr_info_port.c:307) starting info port thread
+ 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (info-port): (socket.c:709) Started info endpoint 0.0.0.0:3003
+ 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (as): (as.c:449) service ready: soon there will be cake!
+Hint: Some lines were ellipsized, use -l to show in full.
+</code></pre><p>Aerospike の起動が確認できました！</p><h2 id="amc-aerospike-management-console-のインストール">AMC（Aerospike Management Console）のインストール</h2><p>AMC は Aerospike の管理ツールです</p><p>複数の node をブラウザ上から一度に管理できるそうなので、こちらもインストールしていきたいと思います</p><p>まずは、依存パッケージをインストールします</p><pre><code>$ sudo yum install gcc python python-devel
+</code></pre><p>こちらも<a href="http://www.aerospike.com/docs/operations/install/linux/el6" target="_blank">公式ドキュメント</a>を参考にインストールします</p><pre><code>$ wget http://aerospike.com/download/amc/latest/artifact/el7
+$ sudo rpm -ivh el7
+</code></pre><p>自動起動設定をしてから起動します</p><pre><code>$ sudo systemctl enable amc
+$ sudo systemctl start amc
+</code></pre><p>ステータスを確認してみます</p><pre><code>$ sudo systemctl status amc
+● amc.service - LSB: Aerospike's Management Console
+   Loaded: loaded (/etc/rc.d/init.d/amc; bad; vendor preset: disabled)
+   Active: active (running) since 月 2017-03-27 13:48:04 UTC; 45s ago
+     Docs: man:systemd-sysv-generator(8)
+  Process: 3819 ExecStart=/etc/rc.d/init.d/amc start (code=exited, status=0/SUCCESS)
+ Main PID: 3824 (amc)
+   CGroup: /system.slice/amc.service
+           └─3824 /opt/amc/amc -config-file=/etc/amc/amc.conf -config-dir=/etc/amc
+
+ 3月 27 13:48:04 localhost.localdomain systemd[1]: Starting LSB: Aerospike's Management Console...
+ 3月 27 13:48:04 localhost.localdomain runuser[3822]: pam_unix(runuser:session): session opened for user root by (uid=0)
+ 3月 27 13:48:04 localhost.localdomain amc[3819]: Starting amc: [  OK  ]
+ 3月 27 13:48:04 localhost.localdomain systemd[1]: Started LSB: Aerospike's Management Console.
+</code></pre><p>AMC の起動も確認することができました！</p><p>AMC はデフォルトでは 8081 ポートで起動するので、ブラウザからアクセスしてみます</p><p><img src="/images/aerospike_01.png" alt="Aerospike_01" class="image"></p><p>Aerospike の IP アドレスとポートを入力する画面が表示されるので、それぞれ localhost, 3000 と設定し、『Connect』ボタンを押下します</p><p>特に問題なければ次のような画面が表示されます</p><p><img src="/images/aerospike_02.png" alt="Aerospike_02" class="image"></p><h2 id="まとめ">まとめ</h2><p>Aerospike をインストールするところまで学習しました</p><p>実際にレコードを insert, select, update, delete するなど、今後色々と触って試していきたいと思います</p><div class="row"><div class="col-sm-12"><div style="text-align: center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-8451558329170757" data-ad-slot="6607037827"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-8451558329170757" data-ad-slot="8083771024"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><div id="boxArea" style="display:table;margin:2em 0 .5em"><div style="width:72px;height:22px;float:left;margin-right:16px"><a href="https://twitter.com/share" class="twitter-share-button" {count} data-lang="ja" data-dnt="true">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div><div style="width:118px;height:22px;float:left"><a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border:none"></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script></div><div style="width:70px;height:22px;float:left"><div class="g-plusone" data-size="medium"></div><script type="text/javascript">window.___gcfg={lang: 'ja'};(function(){var po=document.createElement('script');po.type='text/javascript';po.async=true;po.src='https://apis.google.com/js/platform.js';var s=document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script></div><div style="width:90px;height:22px;float:left"><a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a></div><script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script></div><footer><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><nav><ul class="pager"><li class="previous"><a href="http://enomotodev.github.io/post/install-pyenv/" title="CentOS に pyenv で Python インストールしてみた"><span aria-hidden="true">&larr;</span>Previous</a></li></ul></nav></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div id="disqus_thread"></div><script type="text/javascript">(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//enomotodev.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></footer></div></div></div><footer class="footer hidden-print"><div class="container"><div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p></p><div class="pull-left"><a class="toplink" href="#">back to top</a></div><div class="pull-right"></div><p></p></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><small><div class="container copyright">&copy; 2016 enomotodev</div></small></div></div></div></footer><script src="/js/jquery.min.js"></script><script src="/js/bootstrap.min.js"></script><script type="text/javascript">(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//enomotodev.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();</script><script src="/js/highlight.pack.js"></script><script src="/js/site.js"></script><script>hljs.initHighlightingOnLoad();</script><script>var _gaq=[['_setAccount','UA-59438562-2'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));</script></body></html>
