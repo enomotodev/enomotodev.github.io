@@ -2,14 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Golang on enomotodev</title>
-    <link>http://enomotodev.github.io/tags/golang/index.xml</link>
+    <link>http://enomotodev.github.io/tags/golang/</link>
     <description>Recent content in Golang on enomotodev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja_JP</language>
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
     <copyright>(c) 2016 enomotodev</copyright>
-    <atom:link href="http://enomotodev.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 Nov 2015 19:17:08 +0900</lastBuildDate>
+    
+	<atom:link href="http://enomotodev.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Gooseつかってみた</title>
@@ -17,258 +20,16 @@
       <pubDate>Wed, 11 Nov 2015 19:17:08 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
       <guid>http://enomotodev.github.io/post/use-goose/</guid>
-      <description>
-
-&lt;h2 id=&#34;gooseとは&#34;&gt;Gooseとは&lt;/h2&gt;
-
-&lt;p&gt;GooseとはGo言語で作られたDBマイグレーションツールです。&lt;br /&gt;
-develop環境やproduction環境など各環境に簡単に設定を変更でき、かなり便利そうなので実際にMySQLで試してみました。&lt;/p&gt;
-
-&lt;h2 id=&#34;gooseパッケージの取得&#34;&gt;Gooseパッケージの取得&lt;/h2&gt;
-
-&lt;p&gt;まずは go get して Goose パッケージを取得します。&lt;br /&gt;
-※ Goをインストールしていない人や、GOPATHを設定していない人は&lt;a href=&#34;http://golang-jp.org/doc/install#install&#34; target=&#34;_blank&#34;&gt;公式ドキュメント&lt;/a&gt;を参考に導入してみてください。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ go get bitbucket.org/liamstask/goose/cmd/goose
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;dbディレクトリの作成&#34;&gt;dbディレクトリの作成&lt;/h2&gt;
-
-&lt;p&gt;プロジェクトのルート直下に db ディレクトリを作成します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ mkdir db
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;configファイルの作成&#34;&gt;configファイルの作成&lt;/h2&gt;
-
-&lt;p&gt;取得したGooseパッケージのサンプルからconfigファイルをコピーします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ cp $GOPATH/src/bitbucket.org/liamstask/goose/db-sample/dbconf.yml db/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;configファイルの編集&#34;&gt;configファイルの編集&lt;/h2&gt;
-
-&lt;p&gt;まずは先ほどコピーしてきたconfigファイルの中身をのぞいてみます。&lt;br /&gt;
-デフォルトで test / develop / production のそれぞれの環境に PostgreSQL の driver が設定してあるのが、なんとなくわかるかと思います。&lt;/p&gt;
-
-&lt;p&gt;db/dbconf.yml&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;test:
-    driver: postgres
-    open: user=liam dbname=tester sslmode=disable
-
-development:
-    driver: postgres
-    open: user=liam dbname=tester sslmode=disable
-
-production:
-    driver: postgres
-    open: user=liam dbname=tester sslmode=verify-full
-
-customimport:
-    driver: customdriver
-    open: customdriver open
-    import: github.com/custom/driver
-    dialect: mysql
-
-environment_variable_config:
-    driver: $DB_DRIVER
-    open: $DATABASE_URL
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;今回は試すだけなので、developの部分のみ編集してみます。&lt;br /&gt;
-MySQL のdriverは mymysql とのことなので、 driver には mymysql を設定します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;development:
-    driver: mymysql
-    open: user=liam dbname=tester sslmode=disable
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;次に DB に接続するために open の箇所にユーザ名やデータベース名を設定します。&lt;br /&gt;
-何種類か設定の仕方があるようなので下記を参考にしてみてください。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;DBNAME/USER/PASSWD&lt;/li&gt;
-&lt;li&gt;unix:SOCKPATH*DBNAME/USER/PASSWD&lt;/li&gt;
-&lt;li&gt;unix:SOCKPATH,OPTIONS*DBNAME/USER/PASSWD&lt;/li&gt;
-&lt;li&gt;tcp:ADDR*DBNAME/USER/PASSWD&lt;/li&gt;
-&lt;li&gt;tcp:ADDR,OPTIONS*DBNAME/USER/PASSWD&lt;/li&gt;
-&lt;li&gt;cloudsql:INSTANCE*DBNAME/USER/PASSWD&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;参考までに下記のような場合の設定を載せておきます。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Host：localhost&lt;br /&gt;
-Port：3306&lt;br /&gt;
-データベース：test&lt;br /&gt;
-ユーザ：root&lt;br /&gt;
-パスワード：pass&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;pre&gt;&lt;code&gt;development:
-    driver: mymysql
-    open: tcp:localhost:3306*test/root/pass
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これでDBの設定は完了です。&lt;/p&gt;
-
-&lt;h2 id=&#34;db接続確認&#34;&gt;DB接続確認&lt;/h2&gt;
-
-&lt;p&gt;goose status コマンドでDBに問題なく接続できているか確認できます。&lt;br /&gt;
-これ以降の goose コマンドも全てプロジェクトルートで実行してください。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ goose status
-goose: status for environment &#39;development&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上記のようにエラーなく表示されたらOKです。&lt;/p&gt;
-
-&lt;h2 id=&#34;マイグレーションファイルの作成&#34;&gt;マイグレーションファイルの作成&lt;/h2&gt;
-
-&lt;p&gt;それではDB接続もOKなので、早速マイグレーションファイルを作りましょう。&lt;/p&gt;
-
-&lt;p&gt;マイグレーションファイルは Go または SQL で書けるようなので、今回は簡単なSQLで書いてみます。&lt;/p&gt;
-
-&lt;p&gt;それでは、goose create コマンドでマイグレーションファイルを作成します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ goose create CreateUsersTable sql
-goose: created /project/db/migrations/20151111194459_CreateUsersTable.sql.sql
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これだけでマイグレーションファイルのひな型が作成されました。&lt;br /&gt;
-早速中身を見てみましょう。&lt;/p&gt;
-
-&lt;p&gt;db/migrations/20151111194459_CreateUsersTable.sql&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;-- +goose Up
--- SQL in section &#39;Up&#39; is executed when this migration is applied
-
-
--- +goose Down
--- SQL section &#39;Down&#39; is executed when this migration is rolled back
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;このファイルにCREATE文とDROP文をそれぞれ書きます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;-- +goose Up
--- SQL in section &#39;Up&#39; is executed when this migration is applied
-CREATE TABLE IF NOT EXISTS `users` (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(255) NOT NULL COMMENT &#39;ユーザ名&#39;,
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB;
-
--- +goose Down
--- SQL section &#39;Down&#39; is executed when this migration is rolled back
-DROP TABLE `users`;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これでマイグレーションファイルの準備はできたので、実際に実行してテーブルが作成されるか確認してみましょう。&lt;/p&gt;
-
-&lt;h2 id=&#34;マイグレーションの実行&#34;&gt;マイグレーションの実行&lt;/h2&gt;
-
-&lt;p&gt;goose up コマンドでマイグレーションが実行されます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ goose up
-goose: migrating db environment &#39;development&#39;, current version: 0, target: 20151111194459
-OK    20151111194459_CreateUsersTable.sql.sql
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;テーブルが作成されているか確認してみます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; show tables;
-+------------------+
-| Tables_in_test   |
-+------------------+
-| goose_db_version |
-| users            |
-+------------------+
-1 row in set (0.00 sec)
-
-mysql&amp;gt; desc goose_db_version;
-+------------+---------------------+------+-----+-------------------+----------------+
-| Field      | Type                | Null | Key | Default           | Extra          |
-+------------+---------------------+------+-----+-------------------+----------------+
-| id         | bigint(20) unsigned | NO   | PRI | NULL              | auto_increment |
-| version_id | bigint(20)          | NO   |     | NULL              |                |
-| is_applied | tinyint(1)          | NO   |     | NULL              |                |
-| tstamp     | timestamp           | YES  |     | CURRENT_TIMESTAMP |                |
-+------------+---------------------+------+-----+-------------------+----------------+
-4 rows in set (0.00 sec)
-
-mysql&amp;gt; select * from goose_db_version;
-+----+----------------+------------+---------------------+
-| id | version_id     | is_applied | tstamp              |
-+----+----------------+------------+---------------------+
-|  1 |              0 |          1 | 2015-11-11 19:49:59 |
-|  2 | 20151111194459 |          1 | 2015-11-11 19:49:59 |
-+----+----------------+------------+---------------------+
-2 rows in set (0.00 sec)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;usersテーブルが作成されているのと、マイグレーションのバージョン管理用の goose_db_version テーブルが作成されているのが確認できました。&lt;br /&gt;
-次に今実行したマイグレーションをロールバックしてみます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ goose down
-goose: migrating db environment &#39;development&#39;, current version: 20151111194459, target: 0
-OK    20151111194459_CreateUsersTable.sql
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;確認してみます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; show tables;
-+------------------+
-| Tables_in_test   |
-+------------------+
-| goose_db_version |
-+------------------+
-1 row in set (0.00 sec)
-
-mysql&amp;gt; select * from goose_db_version;
-+----+----------------+------------+---------------------+
-| id | version_id     | is_applied | tstamp              |
-+----+----------------+------------+---------------------+
-|  1 |              0 |          1 | 2015-11-11 19:49:59 |
-|  2 | 20151111194459 |          1 | 2015-11-11 19:49:59 |
-|  3 | 20151111194459 |          0 | 2015-11-11 19:53:28 |
-+----+----------------+------------+---------------------+
-3 rows in set (0.00 sec)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;usersテーブルが削除されているのが確認できました。&lt;/p&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;goose をつかうことによって、簡単にマイグレーションすることができました。&lt;br /&gt;
-最近、Go言語を使ったプロジェクトも増えてきているようなので、goose もこれからさらに活躍する場面が増えるのではないでしょうか。&lt;/p&gt;
-
-&lt;div class=&#34;row&#34;&gt;
-  &lt;div class=&#34;col-sm-12&#34;&gt;
-    &lt;div style=&#34;text-align: center;&#34;&gt;
-      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
-      &lt;ins class=&#34;adsbygoogle&#34;
-           style=&#34;display:inline-block;width:300px;height:250px&#34;
-           data-ad-client=&#34;ca-pub-8451558329170757&#34;
-           data-ad-slot=&#34;6607037827&#34;&gt;&lt;/ins&gt;
-      &lt;script&gt;
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      &lt;/script&gt;
-
-      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
-      &lt;ins class=&#34;adsbygoogle&#34;
-           style=&#34;display:inline-block;width:300px;height:250px&#34;
-           data-ad-client=&#34;ca-pub-8451558329170757&#34;
-           data-ad-slot=&#34;8083771024&#34;&gt;&lt;/ins&gt;
-      &lt;script&gt;
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      &lt;/script&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</description>
+      <description>Gooseとは GooseとはGo言語で作られたDBマイグレーションツールです。
+develop環境やproduction環境など各環境に簡単に設定を変更でき、かなり便利そうなので実際にMySQLで試してみました。
+Gooseパッケージの取得 まずは go get して Goose パッケージを取得します。
+※ Goをインストールしていない人や、GOPATHを設定していない人は公式ドキュメントを参考に導入してみてください。
+$ go get bitbucket.org/liamstask/goose/cmd/goose  dbディレクトリの作成 プロジェクトのルート直下に db ディレクトリを作成します。
+$ mkdir db  configファイルの作成 取得したGooseパッケージのサンプルからconfigファイルをコピーします。
+$ cp $GOPATH/src/bitbucket.org/liamstask/goose/db-sample/dbconf.yml db/  configファイルの編集 まずは先ほどコピーしてきたconfigファイルの中身をのぞいてみます。
+デフォルトで test / develop / production のそれぞれの環境に PostgreSQL の driver が設定してあるのが、なんとなくわかるかと思います。
+db/dbconf.yml
+test: driver: postgres open: user=liam dbname=tester sslmode=disable development: driver: postgres open: user=liam dbname=tester sslmode=disable production: driver: postgres open: user=liam dbname=tester sslmode=verify-full customimport: driver: customdriver open: customdriver open import: github.</description>
     </item>
     
   </channel>

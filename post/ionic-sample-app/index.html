@@ -1,0 +1,98 @@
+<!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><title>Ionic2 で簡易カウンターアプリ作ってみた &middot; enomotodev</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content=""><meta name="keywords" content="ionic2, ionic, "><meta property="og:title" content="Ionic2 で簡易カウンターアプリ作ってみた  &middot; enomotodev "><meta property="og:site_name" content="enomotodev"><meta property="og:url" content="http://enomotodev.github.io/post/ionic-sample-app/"><meta property="og:locale" content="ja_JP"><meta property="og:type" content="article"><meta property="og:description" content=""><meta property="og:article:published_time" content="2017-04-26T21:43:58&#43;09:00"><meta property="og:article:modified_time" content="2017-04-26T21:43:58&#43;09:00"><meta property="og:article:tag" content="ionic2"><meta property="og:article:tag" content="ionic"><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Ionic2 で簡易カウンターアプリ作ってみた",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2017-04-26",
+    "description": "",
+    "wordCount": 190
+  }</script><link rel="canonical" href="http://enomotodev.github.io/post/ionic-sample-app/"><link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://enomotodev.github.io/touch-icon-144-precomposed.png"><link href="http://enomotodev.github.io/favicon.png" rel="icon"><meta name="generator" content="Hugo 0.20"><!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]--><link rel="stylesheet" href="/css/bootswatch/default/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/highlight/dark.css"></head><body><header id="main-header"><nav class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="http://enomotodev.github.io/">enomotodev</a></div><div id="navbar" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="http://enomotodev.github.io/tags"><i class="fa fa-tags"></i> Tags</a></li></ul></div></div></nav></header><div class="container"><div class="row"><div class="col-sm-12"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="text-center"><h1>Ionic2 で簡易カウンターアプリ作ってみた</h1><div class="metas"><small><i class="fa fa-calendar"></i> <time datetime="2017-04-26">26 Apr, 2017</time> </small><small>&middot; Read in about 1 min &middot; (190 Words)</small><div class="margin-10"><i class="fa fa-tags"></i> <a href="http://enomotodev.github.io/tags/ionic2" class="label label-primary">ionic2</a> <a href="http://enomotodev.github.io/tags/ionic" class="label label-primary">ionic</a></div><br></div></div></div><div class="content"><h2 id="開発環境">開発環境</h2><ul><li>macOS 10.12.4</li><li>Node.js 7.9.0</li></ul><h2 id="ionic-のインストール-プロジェクト作成">ionic のインストール・プロジェクト作成</h2><p>Ionic2 で簡単なカウンターアプリを作成したので、まとめてみました。</p><p>まずは <code>npm install</code> で <code>cordova</code> と <code>ionic</code> をグローバルインストールします。</p><pre><code>$ npm install -g cordova ionic
+</code></pre><p><code>ionic</code> がインストールできたので、<code>ionic start</code> コマンドでプロジェクトを作成してみます。</p><pre><code>$ ionic start SampleApp blank --v2
+</code></pre><p><code>blank</code> の部分はテンプレートの種類で、他にも <code>tabs</code> や <code>sidemenu</code> などが指定できるようです。</p><p><img src="/images/ionic_templates.png" alt="Ionic2 テンプレート" class="image"></p><p>それでは <code>ionic serve</code> コマンドでプロジェクトを起動してみます。</p><pre><code>$ cd SampleApp
+$ ionic serve
+</code></pre><p><code>http://localhost:8100/ionic-lab</code> を開くと、各モバイル端末でどのように表示されるかが見れるので、こちらを確認しながら開発していきたいと思います。</p><p><img src="/images/ionic_sample1.png" alt="ionic サンプルアプリ画像1" class="image"></p><p>コードが変更されると自動で更新されるので、タイトルを変更してみます。</p><ul><li>src/pages/home/home.html</li></ul><pre><code>&lt;ion-title&gt;
+  Ionic Blank
+&lt;/ion-title&gt;
+↓
+&lt;ion-title&gt;
+  サンプルアプリ
+&lt;/ion-title&gt;
+</code></pre><p><img src="/images/ionic_sample2.png" alt="ionic サンプルアプリ画像2" class="image"></p><p>ブラウザが自動で更新され、タイトル部分が更新されたのがわかるかと思います。</p><p>カウンターアプリなので、『数値表示部分』『プラスボタン』『マイナスボタン』『リセットボタン』を配置していきます。</p><ul><li>src/pages/home/home.html</li></ul><pre><code>&lt;ion-content padding&gt;
+  The world is your oyster.
+  &lt;p&gt;
+    If you get lost, the &lt;a href=&quot;http://ionicframework.com/docs/v2&quot;&gt;docs&lt;/a&gt; will be your guide.
+  &lt;/p&gt;
+&lt;/ion-content&gt;
+↓
+&lt;ion-content padding&gt;
+  &lt;div&gt;
+    &lt;p align=&quot;center&quot;&gt;0&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;ion-buttons&gt;
+    &lt;button ion-button block round&gt;プラス&lt;/button&gt;
+    &lt;button ion-button block round&gt;マイナス&lt;/button&gt;
+    &lt;button ion-button block round color=&quot;danger&quot;&gt;リセット&lt;/button&gt;
+  &lt;/ion-buttons&gt;
+&lt;/ion-content&gt;
+</code></pre><p><img src="/images/ionic_sample3.png" alt="ionic サンプルアプリ画像3" class="image"></p><p>これでとりあえずデザインは OK なので、ロジックの部分を実装していきます。</p><ul><li>src/pages/home/home.ts</li></ul><pre><code>// ...
+
+export class HomePage {
+
+  public num: number = 0;
+
+  constructor(public navCtrl: NavController) {
+
+  }
+
+}
+</code></pre><ul><li>src/pages/home/home.html</li></ul><pre><code>  &lt;div&gt;
+    &lt;p align=&quot;center&quot;&gt;{{num}}&lt;/p&gt;
+  &lt;/div&gt;
+</code></pre><p>これで見た目は変わりませんが、数字の表示部分が変数の値を表示するようになりました。</p><p>最後にそれぞれのボタンを押した時の動作を実装しましょう。</p><ul><li>src/pages/home/home.ts</li></ul><pre><code>export class HomePage {
+
+  // ...
+
+  plus() {
+    this.num++;
+  }
+
+  minus() {
+    this.num--;
+  }
+
+  reset() {
+    this.num = 0;
+  }
+
+}
+</code></pre><ul><li>src/pages/home/home.html</li></ul><pre><code>    &lt;button ion-button block round (click)=&quot;plus()&quot;&gt;プラス&lt;/button&gt;
+    &lt;button ion-button block round (click)=&quot;minus()&quot;&gt;マイナス&lt;/button&gt;
+    &lt;button ion-button block round color=&quot;danger&quot; (click)=&quot;reset()&quot;&gt;リセット&lt;/button&gt;
+</code></pre><p>ほとんどコードは書いていないですが、これで完成です！</p><h2 id="まとめ">まとめ</h2><p>Ionic2 を使って簡単なカウンターアプリを作ってみました。</p><p>簡単なアプリであれば、Webエンジニアでも比較的容易にアプリを作成することができるようなので、色々と試してみたいと思います。</p><div class="row"><div class="col-sm-12"><div style="text-align: center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-8451558329170757" data-ad-slot="6607037827"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-8451558329170757" data-ad-slot="8083771024"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><div id="boxArea" style="display:table;margin:2em 0 .5em"><div style="width:72px;height:22px;float:left;margin-right:16px"><a href="https://twitter.com/share" class="twitter-share-button" {count} data-lang="ja" data-dnt="true">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div><div style="width:118px;height:22px;float:left"><a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border:none"></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script></div><div style="width:70px;height:22px;float:left"><div class="g-plusone" data-size="medium"></div><script type="text/javascript">window.___gcfg={lang: 'ja'};(function(){var po=document.createElement('script');po.type='text/javascript';po.async=true;po.src='https://apis.google.com/js/platform.js';var s=document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script></div><div style="width:90px;height:22px;float:left"><a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a></div><script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script></div><footer><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><nav><ul class="pager"><li class="previous"><a href="http://enomotodev.github.io/post/install-aerospike/" title="CentOS に Aerospike インストールしてみた"><span aria-hidden="true">&larr;</span>Previous</a></li></ul></nav></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div id="disqus_thread"></div><script type="text/javascript">(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//enomotodev.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></footer></div></div></div><footer class="footer hidden-print"><div class="container"><div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p></p><div class="pull-left"><a class="toplink" href="#">back to top</a></div><div class="pull-right"></div><p></p></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><small><div class="container copyright">&copy; 2016 enomotodev</div></small></div></div></div></footer><script src="/js/jquery.min.js"></script><script src="/js/bootstrap.min.js"></script><script type="text/javascript">(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//enomotodev.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();</script><script src="/js/highlight.pack.js"></script><script src="/js/site.js"></script><script>hljs.initHighlightingOnLoad();</script><script>var _gaq=[['_setAccount','UA-59438562-2'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));</script></body></html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ionic on enomotodev</title>
+    <link>http://enomotodev.github.io/tags/ionic/</link>
+    <description>Recent content in Ionic on enomotodev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja_JP</language>
+    <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
+    <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
+    <copyright>(c) 2016 enomotodev</copyright>
+    <lastBuildDate>Wed, 26 Apr 2017 21:43:58 +0900</lastBuildDate>
+    
+	<atom:link href="http://enomotodev.github.io/tags/ionic/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ionic2 で簡易カウンターアプリ作ってみた</title>
+      <link>http://enomotodev.github.io/post/ionic-sample-app/</link>
+      <pubDate>Wed, 26 Apr 2017 21:43:58 +0900</pubDate>
+      <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
+      <guid>http://enomotodev.github.io/post/ionic-sample-app/</guid>
+      <description>開発環境  macOS 10.12.4 Node.js 7.9.0  ionic のインストール・プロジェクト作成 Ionic2 で簡単なカウンターアプリを作成したので、まとめてみました。
+まずは npm install で cordova と ionic をグローバルインストールします。
+$ npm install -g cordova ionic  ionic がインストールできたので、ionic start コマンドでプロジェクトを作成してみます。
+$ ionic start SampleApp blank --v2  blank の部分はテンプレートの種類で、他にも tabs や sidemenu などが指定できるようです。
+それでは ionic serve コマンドでプロジェクトを起動してみます。
+$ cd SampleApp $ ionic serve  http://localhost:8100/ionic-lab を開くと、各モバイル端末でどのように表示されるかが見れるので、こちらを確認しながら開発していきたいと思います。
+コードが変更されると自動で更新されるので、タイトルを変更してみます。
+ src/pages/home/home.html  &amp;lt;ion-title&amp;gt; Ionic Blank &amp;lt;/ion-title&amp;gt; ↓ &amp;lt;ion-title&amp;gt; サンプルアプリ &amp;lt;/ion-title&amp;gt;  ブラウザが自動で更新され、タイトル部分が更新されたのがわかるかと思います。</description>
+    </item>
+    
+  </channel>
+</rss>

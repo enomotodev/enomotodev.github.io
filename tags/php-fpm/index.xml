@@ -2,14 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Php Fpm on enomotodev</title>
-    <link>http://enomotodev.github.io/tags/php-fpm/index.xml</link>
+    <link>http://enomotodev.github.io/tags/php-fpm/</link>
     <description>Recent content in Php Fpm on enomotodev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja_JP</language>
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
     <copyright>(c) 2016 enomotodev</copyright>
-    <atom:link href="http://enomotodev.github.io/tags/php-fpm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Apr 2016 02:06:12 +0900</lastBuildDate>
+    
+	<atom:link href="http://enomotodev.github.io/tags/php-fpm/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>【 php-fpm 編】Mac に Docker インストールしてみた</title>
@@ -17,121 +20,12 @@
       <pubDate>Sun, 24 Apr 2016 02:06:12 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
       <guid>http://enomotodev.github.io/post/docker-mac-phpfpm/</guid>
-      <description>
-
-&lt;p&gt;前回の『&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-nginx/&#34;&gt;【 Nginx 編】Mac に Docker インストールしてみた&lt;/a&gt;』の続きです。&lt;/p&gt;
-
-&lt;h2 id=&#34;コンテナを削除する&#34;&gt;コンテナを削除する&lt;/h2&gt;
-
-&lt;p&gt;Nginx のコンテナなどが稼働していると思うので、一旦全て削除します&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ docker rm -f `docker ps -a -q`
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;php-fpm-のイメージを-pull-する&#34;&gt;php-fpm のイメージを pull する&lt;/h2&gt;
-
-&lt;p&gt;公式の php-fpm のイメージを pull します&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ docker pull php:fpm
-...（略）
-Status: Downloaded newer image for php:fpm
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;php-fpm-のコンテナを起動する&#34;&gt;php-fpm のコンテナを起動する&lt;/h2&gt;
-
-&lt;p&gt;最初に Document Root に配置する PHP ファイルを作成します&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;~/docker/www/index.php&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;?php
-    phpinfo();
-?&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;PHP ファイルの準備ができたら php-fpm のコンテナを起動しましょう&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ docker run --name fpm -p 9000:9000 -v /Users/enomotodev/docker/www:/var/www/html -d php:fpm
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;--name&lt;/code&gt; オプションで &lt;code&gt;fpm&lt;/code&gt; と指定することによって、&lt;code&gt;fpm&lt;/code&gt; という名前でコンテナを起動しています&lt;/p&gt;
-
-&lt;p&gt;続けて、Nginx のコンテナを起動するのですが、先に前回作成した conf ファイルを編集しましょう&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;~/docker/nginx/nginx.conf&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;server {
-    listen 8080;
-
-    root /var/www/html;
-    index index.php index.html index.htm;
-
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location ~ \.php$ {
-        fastcgi_pass fpm:9000;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-
-        include fastcgi_params;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;conf ファイルの準備ができたので、Nginx のコンテナを起動します&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ docker run --name nginx -p 9090:8080 -v /Users/enomotodev/docker/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf --link fpm -d nginx
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;--link&lt;/code&gt; オプションで &lt;code&gt;fpm&lt;/code&gt; を指定することによって、Nginx コンテナから php-fpm コンテナへの接続ができるようになります&lt;/p&gt;
-
-&lt;p&gt;つまり、conf ファイルの &lt;code&gt;fastcgi_pass fpm:9000;&lt;/code&gt; の部分は php-fpm コンテナの &lt;code&gt;9000&lt;/code&gt; 番ポートに接続するという意味になります&lt;/p&gt;
-
-&lt;p&gt;それでは、ブラウザで確認してみましょう&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/docker-phpfpm.png&#34; alt=&#34;Docker php-fpm ブラウザ確認&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;phpinfo が表示されました！&lt;/p&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;Nginx と PHP の連携ができたので、次は Database との連携も行い、Docker で PHP 開発環境を構築したいと思います&lt;/p&gt;
-
-&lt;h2 id=&#34;つづき&#34;&gt;つづき&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://enomotodev.github.io/post/docker-mac-composer/&#34;&gt;【 Composer 編】Mac に Docker インストールしてみた&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&#34;row&#34;&gt;
-  &lt;div class=&#34;col-sm-12&#34;&gt;
-    &lt;div style=&#34;text-align: center;&#34;&gt;
-      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
-      &lt;ins class=&#34;adsbygoogle&#34;
-           style=&#34;display:inline-block;width:300px;height:250px&#34;
-           data-ad-client=&#34;ca-pub-8451558329170757&#34;
-           data-ad-slot=&#34;6607037827&#34;&gt;&lt;/ins&gt;
-      &lt;script&gt;
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      &lt;/script&gt;
-
-      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
-      &lt;ins class=&#34;adsbygoogle&#34;
-           style=&#34;display:inline-block;width:300px;height:250px&#34;
-           data-ad-client=&#34;ca-pub-8451558329170757&#34;
-           data-ad-slot=&#34;8083771024&#34;&gt;&lt;/ins&gt;
-      &lt;script&gt;
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      &lt;/script&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</description>
+      <description>前回の『【 Nginx 編】Mac に Docker インストールしてみた』の続きです。
+コンテナを削除する Nginx のコンテナなどが稼働していると思うので、一旦全て削除します
+$ docker rm -f `docker ps -a -q`  php-fpm のイメージを pull する 公式の php-fpm のイメージを pull します
+$ docker pull php:fpm ...（略） Status: Downloaded newer image for php:fpm  php-fpm のコンテナを起動する 最初に Document Root に配置する PHP ファイルを作成します
+ ~/docker/www/index.php  &amp;lt;?php phpinfo(); ?&amp;gt;  PHP ファイルの準備ができたら php-fpm のコンテナを起動しましょう
+$ docker run --name fpm -p 9000:9000 -v /Users/enomotodev/docker/www:/var/www/html -d php:fpm  --name オプションで fpm と指定することによって、fpm という名前でコンテナを起動しています</description>
     </item>
     
   </channel>

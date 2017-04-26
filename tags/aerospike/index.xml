@@ -2,14 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Aerospike on enomotodev</title>
-    <link>http://enomotodev.github.io/tags/aerospike/index.xml</link>
+    <link>http://enomotodev.github.io/tags/aerospike/</link>
     <description>Recent content in Aerospike on enomotodev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja_JP</language>
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
     <copyright>(c) 2016 enomotodev</copyright>
-    <atom:link href="http://enomotodev.github.io/tags/aerospike/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 30 Mar 2017 22:21:54 +0900</lastBuildDate>
+    
+	<atom:link href="http://enomotodev.github.io/tags/aerospike/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>CentOS に Aerospike インストールしてみた</title>
@@ -17,150 +20,13 @@
       <pubDate>Thu, 30 Mar 2017 22:21:54 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
       <guid>http://enomotodev.github.io/post/install-aerospike/</guid>
-      <description>
-
-&lt;h2 id=&#34;aerospike-とは&#34;&gt;Aerospike とは&lt;/h2&gt;
-
-&lt;p&gt;Aerospike（エアロスパイク）とは、米 Aerospike 社によって開発されている NoSQL データベースです&lt;/p&gt;
-
-&lt;p&gt;とにかく高速であると言われており、最近では日本の企業でも採用事例が増えてきています&lt;/p&gt;
-
-&lt;p&gt;今回は OSS 版を CentOS 上に構築してみたいと思います&lt;/p&gt;
-
-&lt;h2 id=&#34;作業環境&#34;&gt;作業環境&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;CentOS 7.3&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;aerospike-のインストール&#34;&gt;Aerospike のインストール&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://www.aerospike.com/docs/operations/install/linux/el6&#34; target=&#34;_blank&#34;&gt;公式ドキュメント&lt;/a&gt;を参考に Aerospike をインストールします&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ wget -O aerospike.tgz &#39;http://aerospike.com/download/server/latest/artifact/el7&#39;
-$ tar -xvf aerospike.tgz
-$ cd aerospike-server-community-3.12.0-el7/
-$ sudo ./asinstall
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;自動起動設定をして、Aerospike を起動します&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo systemctl enable aerospike
-$ sudo systemctl start aerospike
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Aerospike が起動したのでステータスを確認してみましょう&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo systemctl status aerospike
-● aerospike.service - Aerospike Server
-   Loaded: loaded (/usr/lib/systemd/system/aerospike.service; enabled; vendor preset: disabled)
-  Drop-In: /etc/systemd/system/aerospike.service.d
-           └─aerospike.conf
-   Active: active (running) since 月 2017-03-27 13:33:10 UTC; 4s ago
-  Process: 3559 ExecStartPre=/bin/systemctl start aerospike_telemetry (code=exited, status=0/SUCCESS)
-  Process: 3554 ExecStartPre=/usr/bin/asd-systemd-helper (code=exited, status=0/SUCCESS)
- Main PID: 3563 (asd)
-   CGroup: /system.slice/aerospike.service
-           └─3563 /usr/bin/asd --config-file /etc/aerospike/aerospike.conf --fgdaemon
-
- 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (paxos): (paxos.c:3730) ... no other nodes detected - node will operate a...e cluster
- 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (partition): (partition_balance.c:285) {test} 4096 absent partitions prom...to master
- 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (partition): (partition_balance.c:285) {bar} 4096 absent partitions promo...to master
- 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (paxos): (paxos.c:3740) starting paxos threads
- 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (nsup): (thr_nsup.c:1421) starting namespace supervisor threads
- 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (demarshal): (thr_demarshal.c:863) starting 1 demarshal threads
- 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (demarshal): (socket.c:709) Started client endpoint 0.0.0.0:3000
- 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (info-port): (thr_info_port.c:307) starting info port thread
- 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (info-port): (socket.c:709) Started info endpoint 0.0.0.0:3003
- 3月 27 13:33:14 localhost.localdomain asd[3563]: Mar 27 2017 13:33:14 GMT: INFO (as): (as.c:449) service ready: soon there will be cake!
-Hint: Some lines were ellipsized, use -l to show in full.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Aerospike の起動が確認できました！&lt;/p&gt;
-
-&lt;h2 id=&#34;amc-aerospike-management-console-のインストール&#34;&gt;AMC（Aerospike Management Console）のインストール&lt;/h2&gt;
-
-&lt;p&gt;AMC は Aerospike の管理ツールです&lt;/p&gt;
-
-&lt;p&gt;複数の node をブラウザ上から一度に管理できるそうなので、こちらもインストールしていきたいと思います&lt;/p&gt;
-
-&lt;p&gt;まずは、依存パッケージをインストールします&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo yum install gcc python python-devel
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;こちらも&lt;a href=&#34;http://www.aerospike.com/docs/operations/install/linux/el6&#34; target=&#34;_blank&#34;&gt;公式ドキュメント&lt;/a&gt;を参考にインストールします&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ wget http://aerospike.com/download/amc/latest/artifact/el7
-$ sudo rpm -ivh el7
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;自動起動設定をしてから起動します&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo systemctl enable amc
-$ sudo systemctl start amc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ステータスを確認してみます&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo systemctl status amc
-● amc.service - LSB: Aerospike&#39;s Management Console
-   Loaded: loaded (/etc/rc.d/init.d/amc; bad; vendor preset: disabled)
-   Active: active (running) since 月 2017-03-27 13:48:04 UTC; 45s ago
-     Docs: man:systemd-sysv-generator(8)
-  Process: 3819 ExecStart=/etc/rc.d/init.d/amc start (code=exited, status=0/SUCCESS)
- Main PID: 3824 (amc)
-   CGroup: /system.slice/amc.service
-           └─3824 /opt/amc/amc -config-file=/etc/amc/amc.conf -config-dir=/etc/amc
-
- 3月 27 13:48:04 localhost.localdomain systemd[1]: Starting LSB: Aerospike&#39;s Management Console...
- 3月 27 13:48:04 localhost.localdomain runuser[3822]: pam_unix(runuser:session): session opened for user root by (uid=0)
- 3月 27 13:48:04 localhost.localdomain amc[3819]: Starting amc: [  OK  ]
- 3月 27 13:48:04 localhost.localdomain systemd[1]: Started LSB: Aerospike&#39;s Management Console.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;AMC の起動も確認することができました！&lt;/p&gt;
-
-&lt;p&gt;AMC はデフォルトでは 8081 ポートで起動するので、ブラウザからアクセスしてみます&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/aerospike_01.png&#34; alt=&#34;Aerospike_01&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Aerospike の IP アドレスとポートを入力する画面が表示されるので、それぞれ localhost, 3000 と設定し、『Connect』ボタンを押下します&lt;/p&gt;
-
-&lt;p&gt;特に問題なければ次のような画面が表示されます&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/aerospike_02.png&#34; alt=&#34;Aerospike_02&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;Aerospike をインストールするところまで学習しました&lt;/p&gt;
-
-&lt;p&gt;実際にレコードを insert, select, update, delete するなど、今後色々と触って試していきたいと思います&lt;/p&gt;
-
-&lt;div class=&#34;row&#34;&gt;
-  &lt;div class=&#34;col-sm-12&#34;&gt;
-    &lt;div style=&#34;text-align: center;&#34;&gt;
-      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
-      &lt;ins class=&#34;adsbygoogle&#34;
-           style=&#34;display:inline-block;width:300px;height:250px&#34;
-           data-ad-client=&#34;ca-pub-8451558329170757&#34;
-           data-ad-slot=&#34;6607037827&#34;&gt;&lt;/ins&gt;
-      &lt;script&gt;
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      &lt;/script&gt;
-
-      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
-      &lt;ins class=&#34;adsbygoogle&#34;
-           style=&#34;display:inline-block;width:300px;height:250px&#34;
-           data-ad-client=&#34;ca-pub-8451558329170757&#34;
-           data-ad-slot=&#34;8083771024&#34;&gt;&lt;/ins&gt;
-      &lt;script&gt;
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      &lt;/script&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</description>
+      <description>Aerospike とは Aerospike（エアロスパイク）とは、米 Aerospike 社によって開発されている NoSQL データベースです
+とにかく高速であると言われており、最近では日本の企業でも採用事例が増えてきています
+今回は OSS 版を CentOS 上に構築してみたいと思います
+作業環境  CentOS 7.3  Aerospike のインストール 公式ドキュメントを参考に Aerospike をインストールします
+$ wget -O aerospike.tgz &#39;http://aerospike.com/download/server/latest/artifact/el7&#39; $ tar -xvf aerospike.tgz $ cd aerospike-server-community-3.12.0-el7/ $ sudo ./asinstall  自動起動設定をして、Aerospike を起動します
+$ sudo systemctl enable aerospike $ sudo systemctl start aerospike  Aerospike が起動したのでステータスを確認してみましょう
+$ sudo systemctl status aerospike ● aerospike.service - Aerospike Server Loaded: loaded (/usr/lib/systemd/system/aerospike.service; enabled; vendor preset: disabled) Drop-In: /etc/systemd/system/aerospike.</description>
     </item>
     
   </channel>

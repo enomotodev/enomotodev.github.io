@@ -2,14 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jenkins on enomotodev</title>
-    <link>http://enomotodev.github.io/tags/jenkins/index.xml</link>
+    <link>http://enomotodev.github.io/tags/jenkins/</link>
     <description>Recent content in Jenkins on enomotodev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja_JP</language>
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
     <copyright>(c) 2016 enomotodev</copyright>
-    <atom:link href="http://enomotodev.github.io/tags/jenkins/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Feb 2016 22:33:24 +0900</lastBuildDate>
+    
+	<atom:link href="http://enomotodev.github.io/tags/jenkins/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>CentOS に Jenkins インストールしてみた</title>
@@ -17,119 +20,13 @@
       <pubDate>Thu, 04 Feb 2016 22:33:24 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
       <guid>http://enomotodev.github.io/post/install-jenkins/</guid>
-      <description>
-
-&lt;h2 id=&#34;はじめに&#34;&gt;はじめに&lt;/h2&gt;
-
-&lt;p&gt;今まで Jenkins を使う機会はたくさんあったのですが、インストールや設定周りなどをやったことがなかったので、今回 CentOS 6.7 に実際にインストールして軽く触ってみました。&lt;/p&gt;
-
-&lt;h2 id=&#34;java-をインストールする&#34;&gt;Java をインストールする&lt;/h2&gt;
-
-&lt;p&gt;Jenkins は Java で書かれているので、まずは Java をインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo yum install java-1.8.0-openjdk java-1.8.0-openjdk-devel
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Java がちゃんとインストールできているか確認します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ java -version
-openjdk version &amp;quot;1.8.0_71&amp;quot;
-OpenJDK Runtime Environment (build 1.8.0_71-b15)
-OpenJDK 64-Bit Server VM (build 25.71-b15, mixed mode)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;jenkins-のインストール&#34;&gt;Jenkins のインストール&lt;/h2&gt;
-
-&lt;p&gt;Java のインストールが確認できたので、Jenkins のインストールに入っていきます。&lt;/p&gt;
-
-&lt;p&gt;まずは、Jenkins のレポジトリを追加します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
-$ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Jenkins のレポジトリを追加できたので、Jenkins をインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo yum install jenkins
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;jenkins-の起動&#34;&gt;Jenkins の起動&lt;/h2&gt;
-
-&lt;p&gt;Jenkins のインストールが完了したので、起動させます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo /etc/init.d/jenkins start
-Starting Jenkins                                           [  OK  ]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;再起動時にも自動で起動するように設定しておきます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo chkconfig jenkins on
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Jenkins はデフォルトでは 8080 ポートを使用するようなので、http://[ドメイン名]:8080 にアクセスすると、下記のような画面が表示されると思います。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://enomotodev.github.io/images/start_jenkins.png&#34; alt=&#34;Jenkinsスタート画面&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;※ アクセスできない人は、SELinux や iptables などの設定を確認してみてください。&lt;/p&gt;
-
-&lt;h2 id=&#34;ジョブの作成&#34;&gt;ジョブの作成&lt;/h2&gt;
-
-&lt;p&gt;インストールも無事にできたので、早速簡単なジョブを追加してみましょう。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;画面左上の「新規ジョブ作成」をクリック。
-&lt;img src=&#34;http://enomotodev.github.io/images/jenkins_new_job.png&#34; alt=&#34;Jenkinsジョブ作成&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;ジョブ名を「test」にして、「フリースタイル・プロジェクトのビルド」を選択して OK をクリック。
-&lt;img src=&#34;http://enomotodev.github.io/images/jenkins_new_job2.png&#34; alt=&#34;Jenkinsジョブ作成2&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;「ビルド」の「ビルド手順の追加」から「シェルの実行」を追加。
-&lt;img src=&#34;http://enomotodev.github.io/images/jenkins_new_job3.png&#34; alt=&#34;Jenkinsジョブ作成3&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;シェルスクリプトのテキストエリアに「echo &amp;lsquo;Hello Jenkins !!&amp;lsquo;」と入力して、保存します。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Jenkins の TOP に戻るとジョブの一覧が表示されているので、ここから今作成した test ジョブのビルドを実行します。
-&lt;img src=&#34;http://enomotodev.github.io/images/jenkins_new_job4.png&#34; alt=&#34;Jenkinsジョブ作成5&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;すぐにビルドが完了すると思いますので、「最新の成功ビルド」から「コンソール出力」を選択します。
-&lt;img src=&#34;http://enomotodev.github.io/images/jenkins_new_job5.png&#34; alt=&#34;Jenkinsジョブ作成5&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;「Hello Jenkins !!」と出力されているのが確認できました！
-&lt;img src=&#34;http://enomotodev.github.io/images/jenkins_new_job6.png&#34; alt=&#34;Jenkinsジョブ作成6&#34; class=&#34;image&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;まとめ&#34;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;Jenkins をインストールして、簡単なジョブをつくってみました。&lt;/p&gt;
-
-&lt;p&gt;実際にはいろんなライブラリを入れたり、ユーザーの設定を行ったりなど色々ありますが、インストール自体はそれほど難しくないのかなという印象を受けました。&lt;/p&gt;
-
-&lt;p&gt;Jenkins の機能はあまり詳しくないので、これから勉強していきたいです。&lt;/p&gt;
-
-&lt;div class=&#34;row&#34;&gt;
-  &lt;div class=&#34;col-sm-12&#34;&gt;
-    &lt;div style=&#34;text-align: center;&#34;&gt;
-      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
-      &lt;ins class=&#34;adsbygoogle&#34;
-           style=&#34;display:inline-block;width:300px;height:250px&#34;
-           data-ad-client=&#34;ca-pub-8451558329170757&#34;
-           data-ad-slot=&#34;6607037827&#34;&gt;&lt;/ins&gt;
-      &lt;script&gt;
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      &lt;/script&gt;
-
-      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
-      &lt;ins class=&#34;adsbygoogle&#34;
-           style=&#34;display:inline-block;width:300px;height:250px&#34;
-           data-ad-client=&#34;ca-pub-8451558329170757&#34;
-           data-ad-slot=&#34;8083771024&#34;&gt;&lt;/ins&gt;
-      &lt;script&gt;
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      &lt;/script&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</description>
+      <description>はじめに 今まで Jenkins を使う機会はたくさんあったのですが、インストールや設定周りなどをやったことがなかったので、今回 CentOS 6.7 に実際にインストールして軽く触ってみました。
+Java をインストールする Jenkins は Java で書かれているので、まずは Java をインストールします。
+$ sudo yum install java-1.8.0-openjdk java-1.8.0-openjdk-devel  Java がちゃんとインストールできているか確認します。
+$ java -version openjdk version &amp;quot;1.8.0_71&amp;quot; OpenJDK Runtime Environment (build 1.8.0_71-b15) OpenJDK 64-Bit Server VM (build 25.71-b15, mixed mode)  Jenkins のインストール Java のインストールが確認できたので、Jenkins のインストールに入っていきます。
+まずは、Jenkins のレポジトリを追加します。
+$ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo $ sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key  Jenkins のレポジトリを追加できたので、Jenkins をインストールします。
+$ sudo yum install jenkins  Jenkins の起動 Jenkins のインストールが完了したので、起動させます。</description>
     </item>
     
   </channel>

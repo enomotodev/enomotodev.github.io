@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://enomotodev.github.io/post/ionic-sample-app/</loc>
+    <lastmod>2017-04-26T21:43:58+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://enomotodev.github.io/post/install-aerospike/</loc>
     <lastmod>2017-03-30T22:21:54+09:00</lastmod>
   </url>
@@ -207,6 +212,18 @@
   </url>
   
   <url>
+    <loc>http://enomotodev.github.io/tags/ionic/</loc>
+    <lastmod>2017-04-26T21:43:58+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://enomotodev.github.io/tags/ionic2/</loc>
+    <lastmod>2017-04-26T21:43:58+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://enomotodev.github.io/tags/javascript/</loc>
     <lastmod>2016-08-06T23:28:39+09:00</lastmod>
     <priority>0</priority>
@@ -262,7 +279,7 @@
   
   <url>
     <loc>http://enomotodev.github.io/post/</loc>
-    <lastmod>2017-03-30T22:21:54+09:00</lastmod>
+    <lastmod>2017-04-26T21:43:58+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -304,12 +321,18 @@
   
   <url>
     <loc>http://enomotodev.github.io/tags/</loc>
+    <lastmod>2015-11-14T18:07:46+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://enomotodev.github.io/topics/</loc>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://enomotodev.github.io/</loc>
-    <lastmod>2017-03-30T22:21:54+09:00</lastmod>
+    <lastmod>2017-04-26T21:43:58+09:00</lastmod>
     <priority>0</priority>
   </url>
   

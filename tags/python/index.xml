@@ -2,14 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on enomotodev</title>
-    <link>http://enomotodev.github.io/tags/python/index.xml</link>
+    <link>http://enomotodev.github.io/tags/python/</link>
     <description>Recent content in Python on enomotodev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja_JP</language>
     <managingEditor>enomoto.dev@gmail.com (Takafumi Enomoto)</managingEditor>
     <webMaster>enomoto.dev@gmail.com (Takafumi Enomoto)</webMaster>
     <copyright>(c) 2016 enomotodev</copyright>
-    <atom:link href="http://enomotodev.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Dec 2016 14:29:02 +0900</lastBuildDate>
+    
+	<atom:link href="http://enomotodev.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>CentOS に pyenv で Python インストールしてみた</title>
@@ -17,151 +20,12 @@
       <pubDate>Thu, 29 Dec 2016 14:29:02 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
       <guid>http://enomotodev.github.io/post/install-pyenv/</guid>
-      <description>
-
-&lt;h2 id=&#34;pyenv-とは&#34;&gt;pyenv とは&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/yyuu/pyenv&#34; target=&#34;_blank&#34;&gt;pyenv&lt;/a&gt; とは Python のバージョン管理を行なうコマンドラインツールで、複数のバージョンの Python のインストールや、インストールしたバージョンの変更を簡単に行うことができます。&lt;/p&gt;
-
-&lt;p&gt;Ruby では &lt;a href=&#34;https://github.com/rbenv/rbenv&#34; target=&#34;_blank&#34;&gt;rbenv&lt;/a&gt; + &lt;a href=&#34;https://github.com/rbenv/ruby-build&#34; target=&#34;_blank&#34;&gt;ruby-build&lt;/a&gt; が有名ですが、それの Python 版だと考えていただけたらと思います。&lt;/p&gt;
-
-&lt;h2 id=&#34;作業環境&#34;&gt;作業環境&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;CentOS 7.3&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;pyenv-のインストール&#34;&gt;pyenv のインストール&lt;/h2&gt;
-
-&lt;p&gt;まずは依存パッケージを yum でインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo yum install gcc zlib-devel bzip2 bzip2-devel readline readline-devel sqlite sqlite-devel openssl openssl-devel git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;pyenv を &lt;code&gt;~/.pyenv&lt;/code&gt; に &lt;code&gt;git clone&lt;/code&gt; します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/yyuu/pyenv.git ~/.pyenv
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;~/.bash_profile&lt;/code&gt; に環境変数などを設定します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ echo &#39;export PYENV_ROOT=&amp;quot;$HOME/.pyenv&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bash_profile
-$ echo &#39;export PATH=&amp;quot;$PYENV_ROOT/bin:$PATH&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bash_profile
-$ echo &#39;eval &amp;quot;$(pyenv init -)&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bash_profile
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;先ほど設定した環境変数を反映します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ source ~/.bash_profile
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで pyenv のインストールは完了となりますので、問題なくインストールできているか、pyenv のバージョンを確認してみましょう。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ pyenv --version
-pyenv 1.0.6-1-g0256ff0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;pyenv-で-python-をインストールする&#34;&gt;pyenv で Python をインストールする&lt;/h2&gt;
-
-&lt;p&gt;pyenv で別バージョンの Python をインストールする前に、まずは現在の Python のバージョンを確認してみます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ python --version
-Python 2.7.5
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;次に、インストールできる Python のバージョンを一覧表示してみます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ pyenv install --list
-Available versions:
-  2.1.3
-  2.2.3
-  2.3.7
-  2.4
-  2.4.1
-  2.4.2
-  2.4.3
-  2.4.4
-  2.4.5
-  2.4.6
-  2.5
-  2.5.1
-  2.5.2
-  2.5.3
-  2.5.4
-  2.5.5
-  2.5.6
-...（略）
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;今回は Python 3.6.0 をインストールします。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ pyenv install 3.6.0
-Downloading Python-3.6.0.tar.xz...
--&amp;gt; https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tar.xz
-Installing Python-3.6.0...
-Installed Python-3.6.0 to /home/vagrant/.pyenv/versions/3.6.0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;使用する Python のバージョンを 3.6.0 に変更します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ pyenv global 3.6.0
-$ pyenv rehash
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Python のバージョンがきちんと 3.6.0 に変更されているか、Python のバージョンを再度確認してみます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ python --version
-Python 3.6.0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Python 3.6.0 がインストールできました！&lt;/p&gt;
-
-&lt;h2 id=&#34;python-のバージョンを元に戻す&#34;&gt;Python のバージョンを元に戻す&lt;/h2&gt;
-
-&lt;p&gt;Python のバージョンを元に戻したいこともあると思うので、バージョンを元に戻す方法も確認しておきましょう。&lt;/p&gt;
-
-&lt;p&gt;まずは、pyenv でインストールしたバージョンの一覧を表示します。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ pyenv versions
-  system
-* 3.6.0 (set by /home/enomotodev/.pyenv/version)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;先ほどインストールした 3.6.0 以外に &lt;code&gt;system&lt;/code&gt; というバージョンがあるのがわかるかと思います。&lt;/p&gt;
-
-&lt;p&gt;Python のバージョンを元に戻したいときは、&lt;code&gt;system&lt;/code&gt; にバージョンを設定してあげれば OK です。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ pyenv global system
-$ python --version
-Python 2.7.5
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで Python のバージョンが元に戻りました！&lt;/p&gt;
-
-&lt;div class=&#34;row&#34;&gt;
-  &lt;div class=&#34;col-sm-12&#34;&gt;
-    &lt;div style=&#34;text-align: center;&#34;&gt;
-      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
-      &lt;ins class=&#34;adsbygoogle&#34;
-           style=&#34;display:inline-block;width:300px;height:250px&#34;
-           data-ad-client=&#34;ca-pub-8451558329170757&#34;
-           data-ad-slot=&#34;6607037827&#34;&gt;&lt;/ins&gt;
-      &lt;script&gt;
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      &lt;/script&gt;
-
-      &lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
-      &lt;ins class=&#34;adsbygoogle&#34;
-           style=&#34;display:inline-block;width:300px;height:250px&#34;
-           data-ad-client=&#34;ca-pub-8451558329170757&#34;
-           data-ad-slot=&#34;8083771024&#34;&gt;&lt;/ins&gt;
-      &lt;script&gt;
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      &lt;/script&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</description>
+      <description>pyenv とは pyenv とは Python のバージョン管理を行なうコマンドラインツールで、複数のバージョンの Python のインストールや、インストールしたバージョンの変更を簡単に行うことができます。
+Ruby では rbenv + ruby-build が有名ですが、それの Python 版だと考えていただけたらと思います。
+作業環境  CentOS 7.3  pyenv のインストール まずは依存パッケージを yum でインストールします。
+$ sudo yum install gcc zlib-devel bzip2 bzip2-devel readline readline-devel sqlite sqlite-devel openssl openssl-devel git  pyenv を ~/.pyenv に git clone します。
+$ git clone https://github.com/yyuu/pyenv.git ~/.pyenv  ~/.bash_profile に環境変数などを設定します。
+$ echo &#39;export PYENV_ROOT=&amp;quot;$HOME/.pyenv&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bash_profile $ echo &#39;export PATH=&amp;quot;$PYENV_ROOT/bin:$PATH&amp;quot;&#39; &amp;gt;&amp;gt; ~/.bash_profile $ echo &#39;eval &amp;quot;$(pyenv init -)&amp;quot;&#39; &amp;gt;&amp;gt; ~/.</description>
     </item>
     
   </channel>
