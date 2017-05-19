@@ -1,4 +1,4 @@
-<!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><title>Mac に Docker インストールしてみた &middot; enomotodev</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content=""><meta name="keywords" content="docker, "><meta property="og:title" content="Mac に Docker インストールしてみた  &middot; enomotodev "><meta property="og:site_name" content="enomotodev"><meta property="og:url" content="http://enomotodev.github.io/post/install-docker-mac/"><meta property="og:locale" content="ja_JP"><meta property="og:type" content="article"><meta property="og:description" content=""><meta property="og:article:published_time" content="2016-03-28T12:48:00&#43;09:00"><meta property="og:article:modified_time" content="2016-03-28T12:48:00&#43;09:00"><meta property="og:article:tag" content="docker"><script type="application/ld+json">{
+<!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta http-equiv="refresh" content="0; url=http://enomotodev.hatenablog.com/entry/2016/03/28/124800"><meta http-equiv="content-type" content="text/html; charset=utf-8"><title>Mac に Docker インストールしてみた &middot; enomotodev</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="HandheldFriendly" content="True"><meta name="MobileOptimized" content="320"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content=""><meta name="keywords" content="docker, "><meta property="og:title" content="Mac に Docker インストールしてみた  &middot; enomotodev "><meta property="og:site_name" content="enomotodev"><meta property="og:url" content="http://enomotodev.github.io/post/install-docker-mac/"><meta property="og:locale" content="ja_JP"><meta property="og:type" content="article"><meta property="og:description" content=""><meta property="og:article:published_time" content="2016-03-28T12:48:00&#43;09:00"><meta property="og:article:modified_time" content="2016-03-28T12:48:00&#43;09:00"><meta property="og:article:tag" content="docker"><script type="application/ld+json">{
     "@context": "http://schema.org",
     "@type": "Article",
     "headline": "Mac に Docker インストールしてみた",
@@ -10,72 +10,6 @@
     "description": "",
     "wordCount": 414
   }</script><link rel="canonical" href="http://enomotodev.github.io/post/install-docker-mac/"><link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://enomotodev.github.io/touch-icon-144-precomposed.png"><link href="http://enomotodev.github.io/favicon.png" rel="icon"><meta name="generator" content="Hugo 0.20"><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]--><link rel="stylesheet" href="/css/bootswatch/default/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/highlight/dark.css"></head><body><header id="main-header"><nav class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="http://enomotodev.github.io/">enomotodev</a></div><div id="navbar" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="http://enomotodev.github.io/tags"><i class="fa fa-tags"></i> Tags</a></li></ul></div></div></nav></header><div class="container"><div class="row"><div class="col-sm-12"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="text-center"><h1>Mac に Docker インストールしてみた</h1><div class="metas"><small><i class="fa fa-calendar"></i> <time datetime="2016-03-28">28 Mar, 2016</time> </small><small>&middot; Read in about 2 min &middot; (414 Words)</small><div class="margin-10"><i class="fa fa-tags"></i> <a href="http://enomotodev.github.io/tags/docker" class="label label-primary">docker</a></div><br></div></div></div><div class="content"><h2 id="docker-docker-machine-のインストール">Docker + Docker Machine のインストール</h2><p>まずは、Docker 本体と Docker Machine をインストールします。</p><p>Mac だと Docker を直接的に実行できないのですが、Docker Machine を使用すると、一旦VM上で CoreOS や boot2docker を実行して、その上で簡単に Docker を実行できるようになります。</p><p>インストール自体はどちらも Homebrew で簡単にインストールすることができます。</p><pre><code>$ brew install docker docker-machine
-</code></pre><h2 id="machine-の作成">Machine の作成</h2><p>docker-machine コマンドで新しく Machine を作成します。</p><pre><code>$ docker-machine create -d virtualbox dev-machine
-・・・（省略）
-Setting Docker configuration on the remote daemon...
-Checking connection to Docker...
-Docker is up and running!
-To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env dev-machine
-</code></pre><p>上記の <code>dev-machine</code> の部分は Machine の名前になるので、好きな名前をつけてかまいません。</p><p>出力の最終行にVM上の Docker Machine に接続するために <code>docker-machine env dev-machine</code> を実行してくださいと書かれているので、これを実行します。</p><pre><code>$ docker-machine env dev-machine
-export DOCKER_TLS_VERIFY=&quot;1&quot;
-export DOCKER_HOST=&quot;tcp://192.168.99.100:2376&quot;
-export DOCKER_CERT_PATH=&quot;/path/to/.docker/machine/machines/dev-machine&quot;
-export DOCKER_MACHINE_NAME=&quot;dev-machine&quot;
-# Run this command to configure your shell:
-# eval $(docker-machine env dev-machine)
-</code></pre><p><code>docker-machine env dev-machine</code> を実行すると、環境によって多少異なりますが、このようなかたちで色々表示されるかと思います。</p><p>これは要するに最終行の <code>eval $(docker-machine env dev-machine)</code> というコマンドを実行すると、Docker に接続するための環境変数が設定されるということです。</p><p>それでは、早速コマンドを実行してみましょう。</p><pre><code>$ eval $(docker-machine env dev-machine)
-</code></pre><p>特に何も出力されませんが、これで Docker Machine に接続できるようになりました。</p><h2 id="docker-machine-に接続する">Docker Machine に接続する</h2><p>Docker Machine に接続してみます。</p><pre><code>$ docker-machine ssh dev-machine
-                        ##         .
-                  ## ## ##        ==
-               ## ## ## ## ##    ===
-           /&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;\___/ ===
-      ~~~ {~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===- ~~~
-           \______ o           __/
-             \    \         __/
-              \____\_______/
- _                 _   ____     _            _
-| |__   ___   ___ | |_|___ \ __| | ___   ___| | _____ _ __
-| '_ \ / _ \ / _ \| __| __) / _` |/ _ \ / __| |/ / _ \ '__|
-| |_) | (_) | (_) | |_ / __/ (_| | (_) | (__|   &lt;  __/ |
-|_.__/ \___/ \___/ \__|_____\__,_|\___/ \___|_|\_\___|_|
-Boot2Docker version 1.10.3, build master : 625117e - Thu Mar 10 22:09:02 UTC 2016
-Docker version 1.10.3, build 20f81dd
-</code></pre><p>Docker Machine に接続することができたので、<code>docker pull</code> コマンドを実行して、Ubuntu のイメージを取得します。</p><pre><code>$ docker pull ubuntu:latest
-latest: Pulling from library/ubuntu
-203137e8afd5: Pull complete
-2ff1bbbe9310: Pull complete
-933ae2486129: Pull complete
-a3ed95caeb02: Pull complete
-Digest: sha256:1bea66e185d3464fec1abda32ffaf2a11de69833cfcf81bd2b9a5be147776814
-Status: Downloaded newer image for ubuntu:latest
-</code></pre><p><code>docker images</code> コマンドを実行すると Docker Machine 内のイメージ一覧が見れるので、先ほど取得した Ubuntu のイメージがきちんと表示されるか確認してみましょう。</p><pre><code>$ docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-ubuntu              latest              97434d46f197        3 days ago          188 MB
-</code></pre><p>問題なく Ubuntu のイメージが取得できたのが確認できました。</p><h2 id="mac-から-docker-コマンド実行">Mac から Docker コマンド実行</h2><p>ここまでは Docker Machine 内で docker コマンドを実行していたので、exit 等して Mac に戻りましょう。</p><p>少し前に <code>eval $(docker-machine env dev-machine)</code> を実行しましたが、これを実行していれば Mac からも docker コマンドが実行できるので、Docker Machine 内のイメージ一覧を表示させて、docker コマンドがきちんと実行できるか確認します。</p><pre><code>$ docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-ubuntu              latest              97434d46f197        3 days ago          188 MB
-</code></pre><p>Mac からも docker コマンドが実行できました！</p><h2 id="まとめ">まとめ</h2><p>これで Mac に docker の環境を整えることができました。</p><p>ですが、このままでは docker をどのように使うのかイメージがつきづらいと思いますので、次回以降で PHP の開発環境を実際に構築していきたいと思います。</p><h2 id="つづき">つづき</h2><ul><li><a href="/post/docker-mac-nginx/">【 Nginx 編】Mac に Docker インストールしてみた</a></li><li><a href="/post/docker-mac-phpfpm/">【 php-fpm 編】Mac に Docker インストールしてみた</a></li><li><a href="/post/docker-mac-composer/">【 Composer 編】Mac に Docker インストールしてみた</a></li></ul><div class="row"><div class="col-sm-12"><div style="text-align: center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-8451558329170757" data-ad-slot="6607037827"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-8451558329170757" data-ad-slot="8083771024"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><div id="boxArea" style="display:table;margin:2em 0 .5em"><div style="width:72px;height:22px;float:left;margin-right:16px"><a href="https://twitter.com/share" class="twitter-share-button" {count} data-lang="ja" data-dnt="true">ツイート</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div><div style="width:118px;height:22px;float:left"><a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border:none"></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script></div><div style="width:70px;height:22px;float:left"><div class="g-plusone" data-size="medium"></div><script type="text/javascript">window.___gcfg={lang: 'ja'};(function(){var po=document.createElement('script');po.type='text/javascript';po.async=true;po.src='https://apis.google.com/js/platform.js';var s=document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script></div><div style="width:90px;height:22px;float:left"><a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a></div><script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script></div><footer><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><nav><ul class="pager"><li class="previous"><a href="http://enomotodev.github.io/post/install-jenkins/" title="CentOS に Jenkins インストールしてみた"><span aria-hidden="true">&larr;</span>Previous</a></li><li class="next"><a href="http://enomotodev.github.io/post/docker-mac-nginx/" title="【 Nginx 編】Mac に Docker インストールしてみた">Next <span aria-hidden="true">&rarr;</span></a></li></ul></nav></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div id="disqus_thread"></div><script type="text/javascript">(function() {
-    
-    
-    if (window.location.hostname == "localhost")
-      return;
 
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//enomotodev.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div></footer></div></div></div><footer class="footer hidden-print"><div class="container"><div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p></p><div class="pull-left"><a class="toplink" href="#">back to top</a></div><div class="pull-right"></div><p></p></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><small><div class="container copyright">&copy; 2016 enomotodev</div></small></div></div></div></footer><script src="/js/jquery.min.js"></script><script src="/js/bootstrap.min.js"></script><script type="text/javascript">(function() {
-    
-    
-    if (window.location.hostname == "localhost")
-      return;
 
-    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
-    dsq.src = '//enomotodev.disqus.com/count.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();</script><script src="/js/highlight.pack.js"></script><script src="/js/site.js"></script><script>hljs.initHighlightingOnLoad();</script><script>var _gaq=[['_setAccount','UA-59438562-2'],['_trackPageview']];
-  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-  s.parentNode.insertBefore(g,s)}(document,'script'));</script></body></html>
+<![endif]--><link rel="stylesheet" href="/css/bootswatch/default/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/highlight/dark.css"></head><body></body></html>
