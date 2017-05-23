@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on enomotodev</title>
+
     <link>http://enomotodev.github.io/post/</link>
     <description>Recent content in Posts on enomotodev</description>
     <generator>Hugo -- gohugo.io</generator>
@@ -15,7 +15,7 @@
     
     
     <item>
-      <title>Ionic2 で簡易カウンターアプリ作ってみた</title>
+
       <link>http://enomotodev.github.io/post/ionic-sample-app/</link>
       <pubDate>Wed, 26 Apr 2017 21:43:58 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -31,7 +31,7 @@ $ cd SampleApp $ ionic serve  http://localhost:8100/ionic-lab を開くと、各
     </item>
     
     <item>
-      <title>CentOS に Aerospike インストールしてみた</title>
+
       <link>http://enomotodev.github.io/post/install-aerospike/</link>
       <pubDate>Thu, 30 Mar 2017 22:21:54 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -46,7 +46,7 @@ $ sudo systemctl status aerospike ● aerospike.service - Aerospike Server Loade
     </item>
     
     <item>
-      <title>CentOS に pyenv で Python インストールしてみた</title>
+
       <link>http://enomotodev.github.io/post/install-pyenv/</link>
       <pubDate>Thu, 29 Dec 2016 14:29:02 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -60,7 +60,7 @@ $ echo &#39;export PYENV_ROOT=&amp;quot;$HOME/.pyenv&amp;quot;&#39; &amp;gt;&amp
     </item>
     
     <item>
-      <title>Hologram を使ってスタイルガイドを作成してみた</title>
+
       <link>http://enomotodev.github.io/post/install-hologram/</link>
       <pubDate>Sun, 09 Oct 2016 01:49:06 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -76,7 +76,7 @@ $ hologram init Created the following files and directories: hologram_config.</d
     </item>
     
     <item>
-      <title>systemd を使って自作スクリプトをサービス化してみた</title>
+
       <link>http://enomotodev.github.io/post/systemd-original-service/</link>
       <pubDate>Sat, 24 Sep 2016 01:42:59 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -91,7 +91,7 @@ sudo chmod 0755 /opt/date.sh  ユニットファイルを作成する  /etc/syst
     </item>
     
     <item>
-      <title>CentOS 7 に Re:dash インストールして MySQL のデータをグラフ表示してみた</title>
+
       <link>http://enomotodev.github.io/post/install-redash/</link>
       <pubDate>Mon, 12 Sep 2016 23:23:16 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -106,7 +106,7 @@ $ sudo su -  ここからは root ユーザでの作業にになります。
     </item>
     
     <item>
-      <title>Embulk を使って CSV から MySQL へデータ投入してみた</title>
+
       <link>http://enomotodev.github.io/post/embulk_csv_mysql/</link>
       <pubDate>Tue, 06 Sep 2016 23:19:17 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -123,7 +123,7 @@ $ embulk --version embulk 0.</description>
     </item>
     
     <item>
-      <title>CentOS 7 に MySQL 5.7 を yum インストールして初期設定までやってみた</title>
+
       <link>http://enomotodev.github.io/post/centos7_mysql57/</link>
       <pubDate>Thu, 01 Sep 2016 22:52:35 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -139,7 +139,7 @@ $ mysqld --version mysqld Ver 5.</description>
     </item>
     
     <item>
-      <title>ECMAScript について調べてみた</title>
+
       <link>http://enomotodev.github.io/post/learn-ecmascript/</link>
       <pubDate>Sat, 06 Aug 2016 23:28:39 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -157,7 +157,7 @@ ECMAScript の 6th Edition である為、当初は『ES6』と呼ばれてい�
     </item>
     
     <item>
-      <title>【 Composer 編】Mac に Docker インストールしてみた</title>
+
       <link>http://enomotodev.github.io/post/docker-mac-composer/</link>
       <pubDate>Fri, 29 Apr 2016 14:33:00 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -173,7 +173,7 @@ $ docker run --rm -v /Users/enomotodev/docker/www:/app composer/composer create-
     </item>
     
     <item>
-      <title>【 php-fpm 編】Mac に Docker インストールしてみた</title>
+
       <link>http://enomotodev.github.io/post/docker-mac-phpfpm/</link>
       <pubDate>Sun, 24 Apr 2016 02:06:12 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -187,7 +187,7 @@ $ docker run --name fpm -p 9000:9000 -v /Users/enomotodev/docker/www:/var/www/ht
     </item>
     
     <item>
-      <title>【 Nginx 編】Mac に Docker インストールしてみた</title>
+
       <link>http://enomotodev.github.io/post/docker-mac-nginx/</link>
       <pubDate>Mon, 04 Apr 2016 23:33:12 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -200,7 +200,7 @@ $ docker-machine env dev-machine export DOCKER_TLS_VERIFY=&amp;quot;1&amp;quot; 
     </item>
     
     <item>
-      <title>Mac に Docker インストールしてみた</title>
+
       <link>http://enomotodev.github.io/post/install-docker-mac/</link>
       <pubDate>Mon, 28 Mar 2016 12:48:00 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -213,7 +213,7 @@ $ docker-machine create -d virtualbox dev-machine ・・・（省略） Setting 
     </item>
     
     <item>
-      <title>CentOS に Jenkins インストールしてみた</title>
+
       <link>http://enomotodev.github.io/post/install-jenkins/</link>
       <pubDate>Thu, 04 Feb 2016 22:33:24 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -228,7 +228,7 @@ $ sudo yum install jenkins  Jenkins の起動 Jenkins のインストールが�
     </item>
     
     <item>
-      <title>閉包テーブル（Closure Table）を試してみた</title>
+
       <link>http://enomotodev.github.io/post/closure-table/</link>
       <pubDate>Thu, 19 Nov 2015 23:53:29 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -240,7 +240,7 @@ CREATE TABLE `Employees` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `name` varch
     </item>
     
     <item>
-      <title>Apache &#43; fluentd &#43; Elasticsearch &#43; Kibana を連携させてみた</title>
+
       <link>http://enomotodev.github.io/post/install-elasticsearch/</link>
       <pubDate>Sat, 14 Nov 2015 18:07:46 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -256,7 +256,7 @@ sudo rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch  レポジ�
     </item>
     
     <item>
-      <title>fluentdつかってみた</title>
+
       <link>http://enomotodev.github.io/post/install-fluentd/</link>
       <pubDate>Sat, 14 Nov 2015 14:17:08 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
@@ -274,7 +274,7 @@ $ sudo /etc/init.d/td-agent start  設定ファイルの編集 それでは設�
     </item>
     
     <item>
-      <title>Gooseつかってみた</title>
+
       <link>http://enomotodev.github.io/post/use-goose/</link>
       <pubDate>Wed, 11 Nov 2015 19:17:08 +0900</pubDate>
       <author>enomoto.dev@gmail.com (Takafumi Enomoto)</author>
